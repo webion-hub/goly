@@ -43,14 +43,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(Constants.appName),
       ),
-      body: const Center(
-        child: Text("Hello", style: TextStyle(color: Colors.green),),
+      body: Center(
+        child: Text(
+          "Hello ${user.email!}",
+          style: TextStyle(color: Colors.green),
+        ),
       ),
     );
   }
