@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goly/pages/introduction_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: const Color.fromARGB(255, 20, 195, 142),
+        secondaryHeaderColor: const Color.fromARGB(255, 0, 255, 171),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const IntroductionPage(),
     );
   }
 }
