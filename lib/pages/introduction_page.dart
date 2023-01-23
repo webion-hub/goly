@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/pages/login_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -41,7 +43,8 @@ class IntroductionPage extends StatelessWidget {
       done: const Text("Done"),
       onDone: () {
         // On button pressed
-        Navigator.of(context).pushReplacementNamed('/');
+        Navigator.of(context)
+            .pushReplacement(CupertinoPageRoute(builder: (_) => const LoginPage()));
       },
     );
   }
