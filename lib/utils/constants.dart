@@ -46,6 +46,7 @@ class Constants {
     ),
 
     colorScheme: ColorScheme.fromSwatch().copyWith(
+      primary: lightPrimary,
       secondary: lightAccent,
     ),
   );
@@ -56,13 +57,14 @@ class Constants {
     colorScheme: ColorScheme.fromSwatch(
       accentColor: darkAccent,
     ).copyWith(
+      primary: lightPrimary,
       secondary: darkAccent,
       brightness: Brightness.dark,
     ),
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
     scaffoldBackgroundColor: darkBG,
-    
+
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: darkAccent,
     ),
