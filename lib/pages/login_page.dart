@@ -58,7 +58,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const MyHomePage(title: 'Goly')));
+                          builder: (_) => const MyHomePage()));
                 },
                 child: const Text(
                   'Login',
@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
+            const Text('New User? Create Account')
           ],
         ),
       ),

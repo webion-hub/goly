@@ -7,7 +7,7 @@ class Constants {
 
   static Color lightAccent = const Color(0xff00ffab);
 
-  static Color darkAccent = Color(0xff00ffab);
+  static Color darkAccent = const Color(0xff00ffab);
 
   static Color lightBG = const Color(0xffffffff);
   static Color darkBG = const Color(0xff000000);
@@ -39,6 +39,41 @@ class Constants {
     ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: lightAccent,
+    ),
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    iconTheme: const IconThemeData(color: Colors.white),
+    colorScheme: ColorScheme.fromSwatch(
+      accentColor: darkAccent,
+    ).copyWith(
+      secondary: darkAccent,
+      brightness: Brightness.dark,
+    ),
+    backgroundColor: darkBG,
+    primaryColor: darkPrimary,
+    scaffoldBackgroundColor: darkBG,
+    textSelectionTheme: TextSelectionThemeData(
+      cursorColor: darkAccent,
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      elevation: 0,
+      color: darkBG,
+    ),
+    appBarTheme: AppBarTheme(
+      elevation: 0.0,
+      backgroundColor: darkBG,
+      iconTheme: const IconThemeData(color: Colors.white),
+      toolbarTextStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.w700,
+      ),
+      titleTextStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.w700,
+      ),
     ),
   );
 

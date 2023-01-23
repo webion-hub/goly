@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/pages/introduction_page.dart';
+import 'package:goly/pages/login_page.dart';
+import 'package:goly/utils/config.dart';
+import 'package:goly/utils/constants.dart';
 
 void main() {
+  //await Config.initFirebase();
   runApp(const MyApp());
 }
 
@@ -12,20 +16,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 20, 195, 142),
-        secondaryHeaderColor: const Color.fromARGB(255, 0, 255, 171),
-      ),
-      home: const IntroductionPage(),
+      title: Constants.appName,
+      debugShowCheckedModeBanner: false,
+
+      theme: (false ? Constants.darkTheme : Constants.lightTheme),
+      home: const MyHomePage(),
+      // StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),
+      // builder: ((BuildContext context, snapshot) {
+      //           if (snapshot.hasData) {
+      //             return const MyHomePage();
+      //           } else {
+      //             return const LoginPage();
+      //           }
+      //         }),
+      // ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -36,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(Constants.appName),
       ),
       body: const Center(
         child: Text("Hello"),
