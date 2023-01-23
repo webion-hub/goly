@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/pages/login_page.dart';
 import 'package:goly/utils/constants.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   //await Config.initFirebase();
   runApp(const MyApp());
 }
@@ -16,18 +20,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: Constants.appName,
       debugShowCheckedModeBanner: false,
-
       theme: (false ? Constants.darkTheme : Constants.lightTheme),
-      home: const LoginPage(),
-      // StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),
-      // builder: ((BuildContext context, snapshot) {
-      //           if (snapshot.hasData) {
-      //             return const MyHomePage();
-      //           } else {
-      //             return const LoginPage();
-      //           }
-      //         }),
-      // ),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: ((BuildContext context, snapshot) {
+          if (snapshot.hasData) {
+            return const MyHomePage();
+          } else {
+            return const LoginPage();
+          }
+        }),
+      ),
     );
   }
 }
@@ -47,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(Constants.appName),
       ),
       body: const Center(
-        child: Text("Hello"),
+        child: Text("Hello", style: TextStyle(color: Colors.green),),
       ),
     );
   }

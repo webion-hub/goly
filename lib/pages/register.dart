@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/components/password_form_builder.dart';
-import 'package:goly/components/text_form_builder.dart';
 import 'package:goly/utils/constants.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -50,17 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Form(
             child: Column(
               children: const [
-                TextFormBuilder(
-                  hintText: "Email",
-                  textInputAction: TextInputAction.next,
-                ),
-                SizedBox(height: 10.0),
-                PasswordFormBuilder(
-                  suffix: Icons.visibility,
-                  hintText: "Password",
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                ),
+                
               ],
             ),
           ),

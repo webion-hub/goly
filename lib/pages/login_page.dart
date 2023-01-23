@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/components/password_form_builder.dart';
-import 'package:goly/components/text_form_builder.dart';
+import 'package:goly/components/fields/email_field.dart';
+import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/pages/register.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -13,6 +14,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailController = TextEditingController(text: '');
+  final _passwordController = TextEditingController(text: '');
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,18 +61,12 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 25.0),
           Form(
             child: Column(
-              children: const [
-                TextFormBuilder(
-                  hintText: "Email",
-                  textInputAction: TextInputAction.next,
+              children: [
+                EmailField(
+                  controller: _emailController,
                 ),
-                SizedBox(height: 10.0),
-                PasswordFormBuilder(
-                  suffix: Icons.visibility,
-                  hintText: "Password",
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
-                ),
+                const SizedBox(height: 10.0),
+               PasswordField(controller: _passwordController)
               ],
             ),
           ),
@@ -80,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   Theme.of(context).colorScheme.primary,
                 ),
               ),
+              onPressed: logIn,
               // highlightElevation: 4.0,
               child: Text(
                 'Log in'.toUpperCase(),
@@ -89,12 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              onPressed: () {},
             ),
           ),
           const SizedBox(
             height: 20,
           ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -120,6 +126,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Future logIn() async {
+    // if(_emailController == null || _emailController == null) {
+    //   return;
+    // }
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
     );
   }
 }
