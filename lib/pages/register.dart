@@ -2,17 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/password_form_builder.dart';
 import 'package:goly/components/text_form_builder.dart';
-import 'package:goly/pages/register.dart';
 import 'package:goly/utils/constants.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20.0),
           const Center(
             child: Text(
-              'Welcome back!',
+              'Welcome!',
               style: TextStyle(
                 fontSize: 23.0,
                 fontWeight: FontWeight.w900,
@@ -40,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const Center(
             child: Text(
-              'Log into your account and get started!',
+              'Create a new account and get started!',
               style: TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w300,
@@ -82,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               // highlightElevation: 4.0,
               child: Text(
-                'Log in'.toUpperCase(),
+                'Sign up'.toUpperCase(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12.0,
@@ -98,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Don\'t have an account?'),
+              const Text('Already have an account?'),
               const SizedBox(width: 5.0),
               GestureDetector(
                 onTap: () {
@@ -109,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
                 child: Text(
-                  'Sign Up',
+                  'Log in',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.secondary,
