@@ -7,7 +7,6 @@ import 'package:goly/utils/constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await Config.initFirebase();
   runApp(const MyApp());
 }
 
@@ -53,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Text(
           "Hello ${user.email!}",
-          style: TextStyle(color: Colors.green),
+          style: const TextStyle(color: Colors.green),
         ),
       ),
     );
