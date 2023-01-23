@@ -43,8 +43,11 @@ class IntroductionPage extends StatelessWidget {
       done: const Text("Done"),
       onDone: () {
         // On button pressed
-        Navigator.of(context)
-            .pushReplacement(CupertinoPageRoute(builder: (_) => const LoginPage()));
+        Navigator.of(context).pushReplacement(
+          CupertinoPageRoute(
+            builder: (_) => const LoginPage(),
+          ),
+        );
       },
     );
   }
