@@ -13,12 +13,12 @@ class PasswordFormBuilder extends StatefulWidget {
   final bool obscureText;
   final FormFieldValidator<String>? validateFunction;
   final void Function(String)? onSaved, onChange;
-  final Key? key;
+
   final IconData? prefix;
   final IconData? suffix;
 
-  PasswordFormBuilder(
-      {this.prefix,
+  const PasswordFormBuilder(
+      {super.key, this.prefix,
       this.suffix,
       this.initialValue,
       this.enabled,
@@ -33,7 +33,7 @@ class PasswordFormBuilder extends StatefulWidget {
       this.validateFunction,
       this.onSaved,
       this.onChange,
-      this.key});
+      });
 
   @override
   _PasswordFormBuilderState createState() => _PasswordFormBuilderState();
@@ -41,7 +41,7 @@ class PasswordFormBuilder extends StatefulWidget {
 
 class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
   String? error;
-  bool obscureText = false;
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +52,14 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
         children: [
           CustomCard(
             onTap: () {
-              print('clicked');
             },
             borderRadius: BorderRadius.circular(40.0),
             child: Theme(
               data: ThemeData(
-                primaryColor: Theme.of(context).colorScheme.secondary,
-                colorScheme: ColorScheme.fromSwatch().copyWith(
-                    secondary: Theme.of(context).colorScheme.secondary),
-              ),
+                  primaryColor: Theme.of(context).colorScheme.secondary,
+                  colorScheme: ColorScheme.fromSwatch().copyWith(
+                      secondary: Theme.of(context).colorScheme.secondary),
+                ),
               child: TextFormField(
                 cursorColor: Theme.of(context).colorScheme.secondary,
                 initialValue: widget.initialValue,
@@ -98,7 +97,6 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
                   prefixIcon: Icon(
                     widget.prefix,
                     size: 15.0,
-                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -107,7 +105,6 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
                     child: Icon(
                       obscureText ? widget.suffix : Icons.visibility_off,
                       size: 15.0,
-                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                   // fillColor: Colors.white,
@@ -116,16 +113,16 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
                   hintStyle: TextStyle(
                     color: Colors.grey[400],
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
                   border: border(context),
                   enabledBorder: border(context),
                   focusedBorder: focusBorder(context),
-                  errorStyle: TextStyle(height: 0.0, fontSize: 0.0),
+                  errorStyle: const TextStyle(height: 0.0, fontSize: 0.0),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 5.0),
+          const SizedBox(height: 5.0),
           Visibility(
             visible: error != null,
             child: Padding(
@@ -145,7 +142,7 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
   }
 
   border(BuildContext context) {
-    return OutlineInputBorder(
+    return const OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(30.0),
       ),
@@ -158,7 +155,7 @@ class _PasswordFormBuilderState extends State<PasswordFormBuilder> {
 
   focusBorder(BuildContext context) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(
+      borderRadius: const BorderRadius.all(
         Radius.circular(30.0),
       ),
       borderSide: BorderSide(

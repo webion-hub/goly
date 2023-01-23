@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/pages/login_page.dart';
-import 'package:goly/utils/config.dart';
 import 'package:goly/utils/constants.dart';
 
 void main() {
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: Constants.appName,
       debugShowCheckedModeBanner: false,
 
-      theme: (true ? Constants.darkTheme : Constants.lightTheme),
+      theme: (false ? Constants.darkTheme : Constants.lightTheme),
       home: const LoginPage(),
       // StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),
       // builder: ((BuildContext context, snapshot) {

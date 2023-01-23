@@ -6,8 +6,7 @@ class CustomCard extends StatelessWidget {
   final BorderRadius? borderRadius;
   final bool elevated;
 
-  const CustomCard({
-    Key? key,
+  const CustomCard({super.key, 
     required this.child,
     required this.onTap,
     this.borderRadius,

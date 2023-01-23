@@ -13,38 +13,39 @@ class Constants {
   static Color darkBG = const Color(0xff000000);
 
   static ThemeData lightTheme = ThemeData(
+    primarySwatch: Colors.green,
+    iconTheme: const IconThemeData(color: Colors.black),
     backgroundColor: lightBG,
-
+    inputDecorationTheme: InputDecorationTheme(
+        focusColor: darkBG,
+        fillColor: darkBG,
+        iconColor: Colors.black,
+        suffixIconColor: Colors.black,
+        prefixIconColor: Colors.black),
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: lightAccent,
     ),
-
     primaryColor: Colors.black,
     scaffoldBackgroundColor: lightBG,
-
     bottomAppBarTheme: BottomAppBarTheme(
       elevation: 0,
       color: lightBG,
     ),
-
     appBarTheme: AppBarTheme(
       elevation: 0.0,
       backgroundColor: lightBG,
       iconTheme: const IconThemeData(color: Colors.black),
-
       toolbarTextStyle: const TextStyle(
         color: Colors.black,
         fontSize: 20.0,
         fontWeight: FontWeight.w700,
       ),
-
       titleTextStyle: const TextStyle(
         color: Colors.black,
         fontSize: 20.0,
         fontWeight: FontWeight.w700,
       ),
     ),
-
     colorScheme: ColorScheme.fromSwatch().copyWith(
       primary: lightPrimary,
       secondary: lightAccent,
@@ -53,7 +54,6 @@ class Constants {
 
   static ThemeData darkTheme = ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
-
     colorScheme: ColorScheme.fromSwatch(
       accentColor: darkAccent,
     ).copyWith(
@@ -61,14 +61,16 @@ class Constants {
       secondary: darkAccent,
       brightness: Brightness.dark,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      focusColor: lightBG,
+      fillColor: lightBG,
+    ),
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
     scaffoldBackgroundColor: darkBG,
-
     textSelectionTheme: TextSelectionThemeData(
       cursorColor: darkAccent,
     ),
-
     bottomAppBarTheme: BottomAppBarTheme(
       elevation: 0,
       color: darkBG,
