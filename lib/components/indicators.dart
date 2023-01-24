@@ -10,7 +10,10 @@ Center circularProgress(context) {
 
 LinearProgressIndicator linearProgress(context) {
   return LinearProgressIndicator(
-    valueColor:
-        AlwaysStoppedAnimation(Theme.of(context).colorScheme.secondary),
+    valueColor: AlwaysStoppedAnimation(
+      Theme.of(context)
+        .colorScheme
+        .secondary
+    ),
   );
 }

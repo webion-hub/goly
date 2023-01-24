@@ -3,7 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
+import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/main.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -30,32 +32,26 @@ class _SignUpState extends State<SignUp> {
       final isValid = formKey.currentState!.validate();
       if(!isValid) return;
 
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      loadingDialog(context);
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
       } on FirebaseAuthException catch (e) {
-        print(e.message);
         Utils.showSnackbBar(e.message);
-        
       }
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
+
+
 
   @override
   Widget build(BuildContext context) {
 
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: Constants.pagePadding,
       child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height / 10),

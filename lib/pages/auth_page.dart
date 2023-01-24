@@ -18,8 +18,12 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(isLogin ? "Login" : "Signup")),
-      body: isLogin ? LogIn(onClickedSignup: toggle,) : SignUp(onClickedSignup: toggle),
+      appBar: AppBar(
+        title: Text(isLogin ? "Login" : "Signup")
+      ),
+      body: isLogin
+        ? LogIn(onClickedSignup: toggle)
+        : SignUp(onClickedSignup: toggle),
     );
-  } 
+  }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class Constants {
   static String appName = "Goly";
-
+  static const pagePadding = EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0);
+  
   static Color lightPrimary = const Color.fromARGB(255, 14, 14, 14);
   static Color darkPrimary = const Color.fromARGB(255, 150, 150, 150);
 
@@ -13,6 +14,7 @@ class Constants {
   static Color darkBG = const Color(0xff000000);
 
   static ThemeData lightTheme = ThemeData(
+    
     primarySwatch: Colors.green,
     iconTheme: const IconThemeData(color: Colors.black),
     backgroundColor: lightBG,

@@ -23,18 +23,17 @@ class MyApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       scaffoldMessengerKey: Utils.messangerKey,
       debugShowCheckedModeBanner: false,
-      theme: (false ? Constants.darkTheme : Constants.lightTheme),
+      theme: (Constants.lightTheme),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((BuildContext context, snapshot) {
           if(snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           }
-          if (snapshot.hasData) {
-            return const MyHomePage();
-          } else {
-            return const AuthPage();
-          }
+
+          return snapshot.hasData
+            ? const MyHomePage()
+            : const AuthPage();
         }),
       ),
     );

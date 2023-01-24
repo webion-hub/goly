@@ -3,7 +3,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
+import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/main.dart';
+import 'package:goly/pages/forgot_password_page.dart';
+import 'package:goly/utils/constants.dart';
+import 'package:goly/utils/utils.dart';
 
 class LogIn extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -16,6 +20,7 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   final _emailController = TextEditingController(text: '');
   final _passwordController = TextEditingController(text: '');
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -27,29 +32,26 @@ class _LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     Future logIn() async {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      final isValid = formKey.currentState!.validate();
+      if(!isValid) return;
+      loadingDialog(context);
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _emailController.text,
           password: _passwordController.text,
         );
       } on FirebaseAuthException catch (e) {
-        print(e);
+        Utils.showSnackbBar(e.message);
+
       }
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: Constants.pagePadding,
       child: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height / 10),
+          SizedBox(height: MediaQuery.of(context).size.height / 25),
           SizedBox(
             height: 170.0,
             width: MediaQuery.of(context).size.width,
@@ -76,6 +78,7 @@ class _LogInState extends State<LogIn> {
           ),
           const SizedBox(height: 25.0),
           Form(
+            key: formKey,
             child: Column(
               children: [
                 EmailField(
@@ -84,6 +87,34 @@ class _LogInState extends State<LogIn> {
                 const SizedBox(height: 10.0),
                 PasswordField(controller: _passwordController)
               ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: InkWell(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const ForgotPasswordPage(),
+                  ),
+                ),
+                child: const SizedBox(
+                  child: SizedBox(
+                    width: 130,
+                    height: 40,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 20.0),
@@ -118,7 +149,7 @@ class _LogInState extends State<LogIn> {
           RichText(
             text: TextSpan(
               text: 'Don\'t have an account?',
-               style: TextStyle(color: Theme.of(context).primaryColor),
+              style: TextStyle(color: Theme.of(context).primaryColor),
               children: [
                 const WidgetSpan(
                   child: Padding(

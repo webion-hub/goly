@@ -21,7 +21,6 @@ class IntroductionPage extends StatelessWidget {
       skip: const Text("Skip"),
       done: const Text("Done"),
       onDone: () {
-        // On button pressed
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(
             builder: (_) => const MyHomePage(),
