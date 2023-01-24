@@ -30,7 +30,7 @@ class _AppState extends State<App> {
         actions: [
           IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => const SettingsPage(),
-            )), icon: Icon(Icons.settings))
+            )), icon: const Icon(Icons.settings))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
