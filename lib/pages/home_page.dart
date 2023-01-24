@@ -17,6 +17,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(Constants.appName),
       ),
+      bottomNavigationBar: BottomNavigationBar(items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "Home"),
+        BottomNavigationBarItem(icon: Icon(Icons.tips_and_updates), label: "Discover"),
+        BottomNavigationBarItem(icon: Icon(Icons.person_rounded), label: "User")
+      ]),
       body: Column(
         children: [
           Center(
