@@ -4,6 +4,7 @@ import 'package:goly/components/page_view_models/step_2.dart';
 import 'package:goly/components/page_view_models/step_3.dart';
 import 'package:goly/pages/home_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroductionPage extends StatelessWidget {
   const IntroductionPage({super.key});
@@ -20,7 +21,9 @@ class IntroductionPage extends StatelessWidget {
       showNextButton: false,
       skip: const Text("Skip"),
       done: const Text("Done"),
-      onDone: () {
+      onDone: () async {
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setBool('introductionDone', true);
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(
             builder: (_) => const MyHomePage(),

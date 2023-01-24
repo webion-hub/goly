@@ -66,7 +66,7 @@ class _LogInState extends State<LogIn> {
               ],
             ),
           ),
-          ForgotPassword(),
+          const ForgotPassword(),
           const SizedBox(height: 20.0),
           MainButton(onPressed: logIn),
           const SizedBox(
