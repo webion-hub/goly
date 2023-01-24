@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/pages/login_page.dart';
+import 'package:goly/pages/home_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class IntroductionPage extends StatelessWidget {
@@ -45,7 +45,7 @@ class IntroductionPage extends StatelessWidget {
         // On button pressed
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(
-            builder: (_) => const LoginPage(),
+            builder: (_) => const MyHomePage(),
           ),
         );
       },

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class Constants {
   static String appName = "Goly";
 
-  static Color lightPrimary = const Color(0xff14c38f);
-  static Color darkPrimary = const Color(0xff2B2B2B);
+  static Color lightPrimary = Color.fromARGB(255, 14, 14, 14);
+  static Color darkPrimary = Color.fromARGB(255, 150, 150, 150);
 
   static Color lightAccent = const Color(0xff00ffab);
   static Color darkAccent = const Color(0xff00ffab);

@@ -1,20 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/main.dart';
-import 'package:goly/pages/register.dart';
-import 'package:goly/utils/constants.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUp extends StatefulWidget {
+  final VoidCallback onClickedSignup;
+  const SignUp({super.key, required this.onClickedSignup});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController(text: '');
   final _passwordController = TextEditingController(text: '');
 
@@ -27,12 +26,28 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(Constants.appName),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+    Future signUp() async {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+      } on FirebaseAuthException catch (e) {
+        print(e);
+      }
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    }
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Column(
         children: [
           SizedBox(height: MediaQuery.of(context).size.height / 10),
           SizedBox(
@@ -43,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(height: 20.0),
           const Center(
             child: Text(
-              'Welcome back!',
+              'Welcome!',
               style: TextStyle(
                 fontSize: 23.0,
                 fontWeight: FontWeight.w900,
@@ -52,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const Center(
             child: Text(
-              'Log into your account and get started!',
+              'Sign up and get started!',
               style: TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w300,
@@ -86,10 +101,9 @@ class _LoginPageState extends State<LoginPage> {
                   Theme.of(context).colorScheme.primary,
                 ),
               ),
-              onPressed: logIn,
-              // highlightElevation: 4.0,
+              onPressed: signUp,
               child: Text(
-                'Log in'.toUpperCase(),
+                'Sign up'.toUpperCase(),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 12.0,
@@ -101,50 +115,30 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Don\'t have an account?'),
-              const SizedBox(width: 5.0),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                    CupertinoPageRoute(
-                      builder: (_) => const RegisterPage(),
-                    ),
-                  );
-                },
-                child: Text(
-                  'Sign Up',
+          RichText(
+            text: TextSpan(
+              text: 'Already have an account?',
+              style: TextStyle(color: Theme.of(context).primaryColor),
+              children: [
+                const WidgetSpan(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                  ),
+                ),
+                TextSpan(
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = widget.onClickedSignup,
+                  text: 'Log in',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
-                ),
-              ),
-            ],
+                )
+              ],
+            ),
           ),
         ],
       ),
     );
-  }
-
-  Future logIn() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      print(e);
-    }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
