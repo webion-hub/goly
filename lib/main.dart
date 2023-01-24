@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/pages/auth_page.dart';
 import 'package:goly/pages/home_page.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:goly/utils/utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,18 +13,17 @@ void main() async {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.appName,
       navigatorKey: navigatorKey,
+      scaffoldMessengerKey: Utils.messangerKey,
       debugShowCheckedModeBanner: false,
-      theme: (true ? Constants.darkTheme : Constants.lightTheme),
+      theme: (false ? Constants.darkTheme : Constants.lightTheme),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((BuildContext context, snapshot) {

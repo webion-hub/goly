@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class EmailField extends StatelessWidget {
@@ -11,12 +12,9 @@ class EmailField extends StatelessWidget {
       decoration: const InputDecoration(labelText: 'E-Mail'),
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.emailAddress,
-      // validator: (value) {
-      //   if (value!.isEmpty || !value.contains('@')) {
-      //     return 'Invalid email!';
-      //   }
-      //   return null;
-      // },
+      validator: (email) => email != null && !EmailValidator.validate(email)
+          ? 'Enter a valid email'
+          : null,
     );
   }
 }

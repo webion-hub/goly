@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/main.dart';
+import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -16,6 +17,7 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController(text: '');
   final _passwordController = TextEditingController(text: '');
+  final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -24,9 +26,10 @@ class _SignUpState extends State<SignUp> {
     _passwordController.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
     Future signUp() async {
+      final isValid = formKey.currentState!.validate();
+      if(!isValid) return;
+
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -40,10 +43,16 @@ class _SignUpState extends State<SignUp> {
           password: _passwordController.text.trim(),
         );
       } on FirebaseAuthException catch (e) {
-        print(e);
+        print(e.message);
+        Utils.showSnackbBar(e.message);
+        
       }
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
+
+  @override
+  Widget build(BuildContext context) {
+
 
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -76,6 +85,7 @@ class _SignUpState extends State<SignUp> {
           ),
           const SizedBox(height: 25.0),
           Form(
+            key: formKey,
             child: Column(
               children: [
                 EmailField(

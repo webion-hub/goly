@@ -7,17 +7,12 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      decoration: const InputDecoration(labelText: 'Password'),
-      textInputAction: TextInputAction.next,
-      keyboardType: TextInputType.visiblePassword,
-      obscureText: true,
-      // validator: (value) {
-      //   if (value!.isEmpty || !value.contains('@')) {
-      //     return 'Invalid email!';
-      //   }
-      //   return null;
-      // },
-    );
+        controller: controller,
+        decoration: const InputDecoration(labelText: 'Password'),
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.visiblePassword,
+        obscureText: true,
+        validator: (pwd) =>
+            pwd != null && pwd.length <= 6 ? 'Enter min. 6 characters' : null);
   }
 }
