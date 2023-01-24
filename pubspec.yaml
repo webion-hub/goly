@@ -40,6 +40,12 @@ dependencies:
   firebase_core: ^2.4.1
   cloud_firestore: ^4.3.1
   email_validator: ^2.1.17
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo-black.png"
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +72,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - ./assets/images/logo.png
+    - ./assets/images/logo-black.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
