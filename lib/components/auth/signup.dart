@@ -35,9 +35,9 @@ class _SignUpState extends State<SignUp> {
         ),
       );
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
         );
       } on FirebaseAuthException catch (e) {
         print(e);

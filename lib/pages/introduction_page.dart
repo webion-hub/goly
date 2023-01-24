@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:goly/components/page_view_models/step_1.dart';
 import 'package:goly/components/page_view_models/step_2.dart';
 import 'package:goly/components/page_view_models/step_3.dart';
