@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/pages/auth_page.dart';
-import 'package:goly/pages/home_page.dart';
-import 'package:goly/pages/introduction_page.dart';
+import 'package:goly/pages/auth/auth_page.dart';
+import 'package:goly/pages/app.dart';
+import 'package:goly/pages/introductions/introduction_page.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    final  home = introductionDone  ? const MyHomePage() : const IntroductionPage();
+    final  home = introductionDone  ? const App() : const IntroductionPage();
 
     return MaterialApp(
       title: Constants.appName,
