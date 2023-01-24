@@ -49,11 +49,19 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(Constants.appName),
       ),
-      body: Center(
-        child: Text(
-          "Hello ${user.email!}",
-          style: const TextStyle(color: Colors.green),
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: Text(
+              "Hello ${user.email!}",
+              style: const TextStyle(color: Colors.green),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => FirebaseAuth.instance.signOut(),
+            child: Text('logout'),
+          ),
+        ],
       ),
     );
   }
