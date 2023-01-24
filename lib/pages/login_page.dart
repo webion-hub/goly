@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
+import 'package:goly/main.dart';
 import 'package:goly/pages/register.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _emailController,
                 ),
                 const SizedBox(height: 10.0),
-               PasswordField(controller: _passwordController)
+                PasswordField(controller: _passwordController)
               ],
             ),
           ),
@@ -100,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
           const SizedBox(
             height: 20,
           ),
-          
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -130,12 +130,21 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future logIn() async {
-    // if(_emailController == null || _emailController == null) {
-    //   return;
-    // }
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text,
-      password: _passwordController.text,
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e);
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

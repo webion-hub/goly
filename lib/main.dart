@@ -10,6 +10,8 @@ void main() async {
   runApp(const MyApp());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,11 +20,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.appName,
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: (false ? Constants.darkTheme : Constants.lightTheme),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((BuildContext context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
           if (snapshot.hasData) {
             return const MyHomePage();
           } else {
