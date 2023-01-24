@@ -10,19 +10,8 @@ class HomePage extends StatefulWidget {
 class _MainPageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          // Center(
-          //   child: Text(
-          //     "Hello ${user.email!}",
-          //     style: const TextStyle(color: Colors.green),
-          //   ),
-          // ),
-          // ElevatedButton(
-          //   onPressed: () => FirebaseAuth.instance.signOut(),
-          //   child: const Text('logout'),
-          // ),
-        ],
-      );
+    return const Scaffold(
+      body: Center(child: Text('home'),),
+    );
   }
 }

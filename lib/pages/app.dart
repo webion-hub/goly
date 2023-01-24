@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/pages/introductions/introduction_page.dart';
+import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/home_page.dart';
-import 'package:goly/pages/settings/settings.dart';
+import 'package:goly/pages/main/profile_page.dart';
+import 'package:goly/pages/main/settings_page.dart';
 import 'package:goly/utils/constants.dart';
 
 class App extends StatefulWidget {
@@ -17,16 +18,15 @@ class _AppState extends State<App> {
   int pageIndex = 0;
   List<Widget> pageList = const <Widget>[
     HomePage(),
-    IntroductionPage(),
-    SettingsPage(),
+    DiscoverPage(),
+    ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Constants.appName),
-        actions: [],
+        title: Text(Constants.appName.toUpperCase()),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
