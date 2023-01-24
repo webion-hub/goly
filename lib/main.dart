@@ -5,7 +5,6 @@ import 'package:goly/pages/auth_page.dart';
 import 'package:goly/pages/home_page.dart';
 import 'package:goly/pages/introduction_page.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:goly/utils/theme/light_color_scheme.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

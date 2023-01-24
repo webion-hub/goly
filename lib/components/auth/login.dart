@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/auth/forgot_password.dart';
+import 'package:goly/components/auth/rich_text_with_action.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/components/main_button.dart';
-import 'package:goly/image_and_title.dart';
 import 'package:goly/main.dart';
-import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 
 class LogIn extends StatefulWidget {
@@ -35,7 +33,7 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     Future logIn() async {
       final isValid = formKey.currentState!.validate();
-      if(!isValid) return;
+      if (!isValid) return;
       loadingDialog(context);
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -44,16 +42,12 @@ class _LogInState extends State<LogIn> {
         );
       } on FirebaseAuthException catch (e) {
         Utils.showSnackbBar(e.message);
-
       }
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
 
-    return SingleChildScrollView(
-      padding: Constants.pagePadding,
-      child: Column(
+    return Column(
         children: [
-          const ImageAndTitle(title: 'Log in', subtitle: 'Welcome back', image: 'assets/images/logo.png',),
           Form(
             key: formKey,
             child: Column(
@@ -68,34 +62,13 @@ class _LogInState extends State<LogIn> {
           ),
           const ForgotPassword(),
           const SizedBox(height: 20.0),
-          MainButton(onPressed: logIn),
-          const SizedBox(
-            height: 20,
-          ),
-          RichText(
-            text: TextSpan(
+          MainButton(text: "Log in", onPressed: logIn),
+          const SizedBox(height: 20),
+          RichTextWithAction(
               text: 'Don\'t have an account?',
-              style: TextStyle(color: Theme.of(context).primaryColor),
-              children: [
-                const WidgetSpan(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                  ),
-                ),
-                TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = widget.onClickedSignup,
-                  text: 'Sign Up',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                )
-              ],
-            ),
-          ),
+              actionText: 'Sign up',
+              action: widget.onClickedSignup)
         ],
-      ),
-    );
+      );
   }
 }

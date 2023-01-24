@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/auth/rich_text_with_action.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
+import 'package:goly/components/main_button.dart';
 import 'package:goly/main.dart';
-import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -28,123 +28,46 @@ class _SignUpState extends State<SignUp> {
     _passwordController.dispose();
   }
 
-    Future signUp() async {
-      final isValid = formKey.currentState!.validate();
-      if(!isValid) return;
+  Future signUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
 
-      loadingDialog(context);
-      try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
-      } on FirebaseAuthException catch (e) {
-        Utils.showSnackbBar(e.message);
-      }
-      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    loadingDialog(context);
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackbBar(e.message);
     }
-
-
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
 
   @override
   Widget build(BuildContext context) {
-
-
-    return SingleChildScrollView(
-      padding: Constants.pagePadding,
-      child: Column(
-        children: [
-          SizedBox(height: MediaQuery.of(context).size.height / 10),
-          SizedBox(
-            height: 170.0,
-            width: MediaQuery.of(context).size.width,
-            child: Image.asset('assets/images/logo.png'),
-          ),
-          const SizedBox(height: 20.0),
-          const Center(
-            child: Text(
-              'Welcome!',
-              style: TextStyle(
-                fontSize: 23.0,
-                fontWeight: FontWeight.w900,
+    return Column(
+      children: [
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+              EmailField(
+                controller: _emailController,
               ),
-            ),
+              const SizedBox(height: 10.0),
+              PasswordField(controller: _passwordController)
+            ],
           ),
-          const Center(
-            child: Text(
-              'Sign up and get started!',
-              style: TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ),
-          const SizedBox(height: 25.0),
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                EmailField(
-                  controller: _emailController,
-                ),
-                const SizedBox(height: 10.0),
-                PasswordField(controller: _passwordController)
-              ],
-            ),
-          ),
-          const SizedBox(height: 20.0),
-          SizedBox(
-            height: 45.0,
-            width: 180.0,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40.0),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              onPressed: signUp,
-              child: Text(
-                'Sign up'.toUpperCase(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          RichText(
-            text: TextSpan(
-              text: 'Already have an account?',
-              style: TextStyle(color: Theme.of(context).primaryColor),
-              children: [
-                const WidgetSpan(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.0),
-                  ),
-                ),
-                TextSpan(
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = widget.onClickedSignup,
-                  text: 'Log in',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 20.0),
+        MainButton(text: "Sign up", onPressed: signUp),
+        const SizedBox(height: 20),
+        RichTextWithAction(
+            text: 'Already have an account?',
+            actionText: 'Log in',
+            action: widget.onClickedSignup)
+      ],
     );
   }
 }
