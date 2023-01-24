@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:goly/utils/theme/dark_color_scheme.dart';
+import 'package:goly/utils/theme/light_color_scheme.dart';
 
 class Constants {
   static String appName = "Goly";
-  static const pagePadding = EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0);
-  
+  static const pagePadding =
+      EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0);
+
   static Color lightPrimary = const Color.fromARGB(255, 14, 14, 14);
   static Color darkPrimary = const Color.fromARGB(255, 150, 150, 150);
 
@@ -14,7 +17,6 @@ class Constants {
   static Color darkBG = const Color(0xff000000);
 
   static ThemeData lightTheme = ThemeData(
-    
     primarySwatch: Colors.green,
     iconTheme: const IconThemeData(color: Colors.black),
     backgroundColor: lightBG,
@@ -48,21 +50,12 @@ class Constants {
         fontWeight: FontWeight.w700,
       ),
     ),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: lightPrimary,
-      secondary: lightAccent,
-    ),
+    colorScheme: lightColorScheme,
   );
 
   static ThemeData darkTheme = ThemeData(
     iconTheme: const IconThemeData(color: Colors.white),
-    colorScheme: ColorScheme.fromSwatch(
-      accentColor: darkAccent,
-    ).copyWith(
-      primary: lightPrimary,
-      secondary: darkAccent,
-      brightness: Brightness.dark,
-    ),
+    colorScheme: darkColorScheme,
     inputDecorationTheme: InputDecorationTheme(
       focusColor: lightBG,
       fillColor: lightBG,

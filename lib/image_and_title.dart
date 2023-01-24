@@ -18,11 +18,11 @@ class ImageAndTitle extends StatelessWidget {
           ),
           const SizedBox(height: 20.0),
           Center(
-            child: Text(title),
+            child: Text(title, style: Theme.of(context).textTheme.titleLarge,),
           ),
           Center(
             child: Text(
-              subtitle,
+              subtitle, style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
           const SizedBox(height: 25.0),
