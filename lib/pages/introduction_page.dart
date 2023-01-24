@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/page_view_models/step_1.dart';
+import 'package:goly/components/page_view_models/step_2.dart';
+import 'package:goly/components/page_view_models/step_3.dart';
 import 'package:goly/pages/home_page.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
@@ -10,32 +13,9 @@ class IntroductionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       pages: [
-        PageViewModel(
-          title: "Welcome to Goly",
-          body: "Welcome to the app! This is a description of how it works.",
-          image: Center(
-            child: Icon(Icons.waving_hand,
-                size: 70.0, color: Theme.of(context).primaryColor),
-          ),
-        ),
-        PageViewModel(
-          title: "Why Goly",
-          body:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra in massa a aliquam. Integer tincidunt enim et lectus varius, a vehicula urna volutpat. Praesent placerat leo sit amet lacus varius, quis congue est elementum.  ",
-          image: Center(
-            child: Icon(Icons.question_mark_rounded,
-                size: 70.0, color: Theme.of(context).primaryColor),
-          ),
-        ),
-        PageViewModel(
-          title: "How it works",
-          body:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra in massa a aliquam. Integer tincidunt enim et lectus varius, a vehicula urna volutpat. Praesent placerat leo sit amet lacus varius, quis congue est elementum.  ",
-          image: Center(
-            child: Icon(Icons.settings,
-                size: 70.0, color: Theme.of(context).primaryColor),
-          ),
-        ),
+        step1,
+        step2,
+        step3,
       ],
       showSkipButton: true,
       showNextButton: false,
