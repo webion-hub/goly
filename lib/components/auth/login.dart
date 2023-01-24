@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/auth/forgot_password.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
+import 'package:goly/components/main_button.dart';
+import 'package:goly/image_and_title.dart';
 import 'package:goly/main.dart';
-import 'package:goly/pages/forgot_password_page.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 
@@ -51,32 +53,7 @@ class _LogInState extends State<LogIn> {
       padding: Constants.pagePadding,
       child: Column(
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height / 25),
-          SizedBox(
-            height: 170.0,
-            width: MediaQuery.of(context).size.width,
-            child: Image.asset('assets/images/logo.png'),
-          ),
-          const SizedBox(height: 20.0),
-          const Center(
-            child: Text(
-              'Welcome back!',
-              style: TextStyle(
-                fontSize: 23.0,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-          ),
-          const Center(
-            child: Text(
-              'Log into your account and get started!',
-              style: TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ),
-          const SizedBox(height: 25.0),
+          const ImageAndTitle(title: 'Log in', subtitle: 'Welcome back', image: 'assets/images/logo.png',),
           Form(
             key: formKey,
             child: Column(
@@ -89,60 +66,9 @@ class _LogInState extends State<LogIn> {
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: InkWell(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const ForgotPasswordPage(),
-                  ),
-                ),
-                child: const SizedBox(
-                  child: SizedBox(
-                    width: 130,
-                    height: 40,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          ForgotPassword(),
           const SizedBox(height: 20.0),
-          SizedBox(
-            height: 45.0,
-            width: 180.0,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40.0),
-                  ),
-                ),
-                backgroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).colorScheme.primary,
-                ),
-              ),
-              onPressed: logIn,
-              child: Text(
-                'Log in'.toUpperCase(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
+          MainButton(onPressed: logIn),
           const SizedBox(
             height: 20,
           ),
