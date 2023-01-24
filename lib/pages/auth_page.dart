@@ -26,9 +26,9 @@ class _AuthPageState extends State<AuthPage> {
         padding: Constants.pagePadding,
         child: Column(
           children: [
-            const ImageAndTitle(
-              title: 'Log in',
-              subtitle: 'Welcome back',
+            ImageAndTitle(
+              title: authType,
+              subtitle: isLogin ? "Welcome back" : "Welcome",
               image: 'assets/images/logo.png',
             ),
             isLogin
