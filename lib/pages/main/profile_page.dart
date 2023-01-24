@@ -9,9 +9,7 @@ class ProfilePage extends StatelessWidget {
     //   body: Center(child: Text('profile'),),
     // );
     return SingleChildScrollView(
-      child: Column(children: const [
-        Text('profile')
-      ]),
+      child: Container(child: Text('profile'),),
     );
   }
 }

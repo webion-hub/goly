@@ -27,6 +27,11 @@ class _AppState extends State<App> {
     return Scaffold(
       appBar: AppBar(
         title: Text(Constants.appName.toUpperCase()),
+        actions: [
+          IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => const SettingsPage(),
+            )), icon: Icon(Icons.settings))
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
