@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:goly/components/page_view_models/step_1.dart';
-import 'package:goly/components/page_view_models/step_2.dart';
-import 'package:goly/components/page_view_models/step_3.dart';
+import 'package:goly/components/instructions/step_1.dart';
+import 'package:goly/components/instructions/step_2.dart';
+import 'package:goly/components/instructions/step_3.dart';
 import 'package:goly/pages/app.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
