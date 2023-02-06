@@ -5,7 +5,7 @@ import 'package:goly/components/auth/rich_text_with_action.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
-import 'package:goly/components/main_button.dart';
+import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/utils.dart';
 

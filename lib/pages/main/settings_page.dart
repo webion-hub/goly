@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/settings/settings_list_tile.dart';
-import 'package:goly/components/theme_switcher.dart';
+import 'package:goly/components/theme/theme_switcher.dart';
 import 'package:goly/utils/constants.dart';
 
 class SettingsPage extends StatelessWidget {
