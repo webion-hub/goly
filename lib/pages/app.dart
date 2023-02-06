@@ -16,7 +16,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final user = FirebaseAuth.instance.currentUser!;
-  int pageIndex = 1;
+  int pageIndex = 0;
   List<PreferredSizeWidget> appBarLists = const <PreferredSizeWidget>[
     DiscoverAppBar(),
     GoalsAppBar(),

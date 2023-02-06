@@ -15,7 +15,9 @@ class _GoalsPerLifeAreaState extends State<GoalsPerLifeArea> {
   void initState() {
     super.initState();
     _chartData = getChartData();
-    _tooltipBehavior = TooltipBehavior(enable: true);
+    _tooltipBehavior = TooltipBehavior(
+      enable: true,
+    );
   }
 
   @override
