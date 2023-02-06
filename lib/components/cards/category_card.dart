@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CategoryCard extends StatelessWidget {
-  String title;
-  CategoryCard({super.key, required this.title});
+  final String title;
+  const CategoryCard({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

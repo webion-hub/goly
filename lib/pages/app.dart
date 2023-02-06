@@ -22,10 +22,10 @@ class _AppState extends State<App> {
     GoalsAppBar(),
     ProfileAppBar(),
   ];
-  List<Widget> pageList = const <Widget>[
-    DiscoverPage(),
-    GoalsPage(),
-    ProfilePage(),
+  List<Widget> pageList = <Widget>[
+    const DiscoverPage(),
+    const GoalsPage(),
+    const ProfilePage(),
   ];
 
   @override
