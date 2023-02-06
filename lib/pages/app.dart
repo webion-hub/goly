@@ -17,7 +17,7 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final user = FirebaseAuth.instance.currentUser!;
   int pageIndex = 1;
-  List<Widget> appBarLists = const <PreferredSizeWidget>[
+  List<PreferredSizeWidget> appBarLists = const <PreferredSizeWidget>[
     DiscoverAppBar(),
     GoalsAppBar(),
     ProfileAppBar(),
@@ -31,10 +31,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:PreferredSize(
-    preferredSize: const Size.fromHeight(100),
-    child: appBarLists[pageIndex],
-  ), 
+      appBar: appBarLists[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         onTap: ((value) {
