@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/settings/settings_list_tile.dart';
+import 'package:goly/components/theme_switcher.dart';
 import 'package:goly/utils/constants.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -9,13 +10,21 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('settings')),
-      body: const SingleChildScrollView(
-          padding: Constants.pagePadding,
-          child: SettingsListTile(
-            icon: Icons.logout,
-            ifTrailing: false,
-            text: "Logout",
-          )),
+      body: SingleChildScrollView(
+        padding: Constants.pagePadding,
+        child: Column(
+          children: [
+            const ThemeSwitcher(),
+            SettingsListTile(
+              icon: Icons.logout,
+              ifTrailing: false,
+              onTap: () {},
+              text: "Logout",
+            ),
+          ],
+        ),
+
+      ),
     );
   }
 }

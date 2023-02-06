@@ -4,10 +4,12 @@ class SettingsListTile extends StatelessWidget {
   final IconData icon;
   final String text;
   final bool ifTrailing;
+  final VoidCallback onTap;
   const SettingsListTile(
       {super.key,
       required this.icon,
       required this.text,
+      required this.onTap,
       required this.ifTrailing});
 
   @override
@@ -27,6 +29,7 @@ class SettingsListTile extends StatelessWidget {
           text,
           style: TextStyle(color: Theme.of(context).errorColor),
         ),
+        onTap: onTap,
         trailing: ifTrailing ? Container(
           width: 40,
           height: 40,
