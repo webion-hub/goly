@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/pages/main/discover_page.dart';
-import 'package:goly/pages/main/home_page.dart';
+import 'package:goly/pages/main/goals_page.dart';
 import 'package:goly/pages/main/profile_page.dart';
 import 'package:goly/pages/main/settings_page.dart';
 import 'package:goly/utils/constants.dart';
@@ -15,10 +15,10 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final user = FirebaseAuth.instance.currentUser!;
-  int pageIndex = 0;
+  int pageIndex = 1;
   List<Widget> pageList = const <Widget>[
-    HomePage(),
     DiscoverPage(),
+    GoalsPage(),
     ProfilePage(),
   ];
 
@@ -28,9 +28,11 @@ class _AppState extends State<App> {
       appBar: AppBar(
         title: Text(Constants.appName.toUpperCase()),
         actions: [
-          IconButton(onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => const SettingsPage(),
-            )), icon: const Icon(Icons.settings))
+          IconButton(
+              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => const SettingsPage(),
+                  )),
+              icon: const Icon(Icons.settings))
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -39,17 +41,23 @@ class _AppState extends State<App> {
           setState(() {
             pageIndex = value;
           });
-        } ),
+        }),
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_rounded), label: "Home"),
+            icon: Icon(Icons.tips_and_updates),
+            label: "Discover",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.tips_and_updates), label: "Discover"),
+            icon: Icon(Icons.flag_rounded),
+            label: "Goals",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded), label: "Profile"),
+            icon: Icon(Icons.person_rounded),
+            label: "Profile",
+          ),
+          
         ],
-        
       ),
       body: pageList[pageIndex],
     );
