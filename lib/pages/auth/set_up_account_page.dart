@@ -19,20 +19,13 @@ class SeteUpAccountPage extends StatefulWidget {
 class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
   @override
   Widget build(BuildContext context) {
-    var isLoading = false;
     var usernameController = TextEditingController(text: '');
-    void setUp() async {
-            setState(() {
-        isLoading = true;
-      }); 
-      await FirebaseFirestore.instance.collection('users').doc(widget.auth.user?.uid).set({
+    void setUp() {
+      FirebaseFirestore.instance.collection('users').doc(widget.auth.user?.uid).set({
         'username': usernameController.text.trim(),
         'email': widget.email,
         
       });
-      setState(() {
-        isLoading = false;
-      }); 
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
 
@@ -56,7 +49,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20.0),
-                isLoading ? const CircularProgressIndicator() :  MainButton(text: "Set up", onPressed: setUp),
+               MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),
