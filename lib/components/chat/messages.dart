@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/chat/message_bubble.dart';
 
 class Messages extends StatelessWidget {
   const Messages({super.key});
@@ -17,8 +18,8 @@ class Messages extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data?.docs.length ?? 0,
           reverse: true,
-          itemBuilder: ((context, index) => Text(
-                snapshot.data?.docs[index]['text'],
+          itemBuilder: ((context, index) => MessageBubble(
+                text: snapshot.data?.docs[index]['text'],
               )),
         );
       },
