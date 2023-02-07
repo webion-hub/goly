@@ -24,6 +24,7 @@ class IntroductionPage extends StatelessWidget {
       onDone: () async {
         final prefs = await SharedPreferences.getInstance();
         prefs.setBool('introductionDone', true);
+        // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           CupertinoPageRoute(
             builder: (_) => const App(),

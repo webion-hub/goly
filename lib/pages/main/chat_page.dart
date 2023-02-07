@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -6,12 +7,33 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: 10,
-        itemBuilder: ((context, index) => Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('This works'),
-            )),
+      appBar: AppBar(title: const Text('Chat')),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('chat/H2Zx0GlSrrBdaq7OBUWH/messages')
+            .snapshots(),
+        builder: (context, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: ((context, index) => Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(snapshot.data?.docs[index]['text']),
+                        )),
+                  ),
+      ),
+      floatingActionButton: IconButton(
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          FirebaseFirestore.instance
+              .collection('chat/H2Zx0GlSrrBdaq7OBUWH/messages')
+              .add({
+                'text': 'Dummy text message'
+              });
+        },
       ),
     );
   }
