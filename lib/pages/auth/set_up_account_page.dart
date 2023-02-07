@@ -6,19 +6,33 @@ import 'package:goly/image_and_title.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
-class SeteUpAccountPage extends StatelessWidget {
+class SeteUpAccountPage extends StatefulWidget {
   final UserCredential auth;
+  
   final String email;
   const SeteUpAccountPage({super.key, required this.auth, required this.email});
 
   @override
+  State<SeteUpAccountPage> createState() => _SeteUpAccountPageState();
+}
+
+class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
+  @override
   Widget build(BuildContext context) {
+    var isLoading = false;
     var usernameController = TextEditingController(text: '');
-    void setUp() {
-      FirebaseFirestore.instance.collection('users').doc(auth.user?.uid).set({
+    void setUp() async {
+            setState(() {
+        isLoading = true;
+      }); 
+      await FirebaseFirestore.instance.collection('users').doc(widget.auth.user?.uid).set({
         'username': usernameController.text.trim(),
-        'email': email,
+        'email': widget.email,
+        
       });
+      setState(() {
+        isLoading = false;
+      }); 
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
 
@@ -30,7 +44,7 @@ class SeteUpAccountPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ImageAndTitle(
+                const ImageAndTitle(
                   image: 'assets/images/webion-logo.png',
                   title: "Welcome!",
                   subtitle: "Set the user information to get started",
@@ -42,7 +56,7 @@ class SeteUpAccountPage extends StatelessWidget {
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20.0),
-                MainButton(text: "Set up", onPressed: setUp),
+                isLoading ? const CircularProgressIndicator() :  MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),
