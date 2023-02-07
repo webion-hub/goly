@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:goly/components/auth/rich_text_with_action.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/components/fields/password_field.dart';
@@ -31,20 +30,17 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future signUp() async {
-    final isValid = formKey.currentState!.validate();
+    final isValid = formKey.currentState!.validate(); 
     if (!isValid) return;
 
     loadingDialog(context);
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
     }
+    
     Navigator.of(context).pushReplacement(CupertinoPageRoute(
-      builder: (context) => SeteUpAccountPage(),
+      builder: (context) => const SeteUpAccountPage(),
     ));
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
