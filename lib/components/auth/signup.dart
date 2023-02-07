@@ -34,15 +34,19 @@ class _SignUpState extends State<SignUp> {
     if (!isValid) return;
 
     loadingDialog(context);
+    UserCredential auth;
     try {
+      auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      Navigator.of(context).pushReplacement(CupertinoPageRoute(
+      builder: (context) => SeteUpAccountPage(auth: auth, email: _emailController.text.trim(),),
+    ));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
-    }
-    
-    Navigator.of(context).pushReplacement(CupertinoPageRoute(
-      builder: (context) => const SeteUpAccountPage(),
-    ));
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    }   
   }
 
   @override

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/settings/settings_list_tile.dart';
 import 'package:goly/components/settings/settings_switcher.dart';
+import 'package:goly/pages/auth/auth_page.dart';
 import 'package:goly/utils/constants.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -11,7 +13,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('settings')),
-      body: SingleChildScrollView(
+      body: Container(
         padding: Constants.pagePadding,
         child: Column(
           children: [
@@ -33,7 +35,10 @@ class SettingsPage extends StatelessWidget {
             SettingsListTile(
               icon: Icons.logout,
               ifTrailing: false,
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacementNamed(AuthPage.routeName);
+              },
               text: "Logout",
             ),
           ],
