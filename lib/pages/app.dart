@@ -6,6 +6,7 @@ import 'package:goly/components/app_bars/profile_app_bar.dart';
 import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/goals_page.dart';
 import 'package:goly/pages/main/profile_page.dart';
+import 'package:goly/utils/constants.dart';
 
 class App extends StatefulWidget {
   static const routeName = '/home';
@@ -37,9 +38,11 @@ class _AppState extends State<App> {
         currentIndex: pageIndex,
         onTap: ((value) {
           setState(() {
-            pageIndex = value;
+            //pageIndex = value;
+            Navigator.of(context).pushReplacementNamed(DiscoverPage.routeName);
           });
         }),
+        showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
