@@ -16,7 +16,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.add),
         ),
         IconButton(
-          onPressed: () => Navigator.of(context).pushNamed(SettingsPage.routeName),
+          onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName),
           icon: const Icon(Icons.message_rounded),
         ),
         IconButton(

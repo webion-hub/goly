@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/auth/rich_text_with_action.dart';
 import 'package:goly/components/fields/email_field.dart';
@@ -6,6 +7,7 @@ import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/main.dart';
+import 'package:goly/pages/auth/set_up_account_page.dart';
 import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -41,7 +43,9 @@ class _SignUpState extends State<SignUp> {
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
     }
-    
+    Navigator.of(context).pushReplacement(CupertinoPageRoute(
+      builder: (context) => SeteUpAccountPage(),
+    ));
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
