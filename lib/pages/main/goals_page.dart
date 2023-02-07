@@ -4,6 +4,7 @@ import 'package:goly/components/statistics/goals_per_life_area.dart';
 import 'package:goly/utils/constants.dart';
 
 class GoalsPage extends StatefulWidget {
+  static const routeName = '/goals';
   const GoalsPage({super.key});
 
   @override

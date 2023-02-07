@@ -4,6 +4,7 @@ import 'package:goly/components/theme/theme_switcher.dart';
 import 'package:goly/utils/constants.dart';
 
 class SettingsPage extends StatelessWidget {
+  static const routeName = '/settings';
   const SettingsPage({super.key});
 
   @override

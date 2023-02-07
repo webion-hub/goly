@@ -7,6 +7,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroductionPage extends StatelessWidget {
+  static const routeName = '/introduction';
   const IntroductionPage({super.key});
 
   @override

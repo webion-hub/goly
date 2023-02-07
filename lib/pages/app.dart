@@ -8,6 +8,7 @@ import 'package:goly/pages/main/goals_page.dart';
 import 'package:goly/pages/main/profile_page.dart';
 
 class App extends StatefulWidget {
+  static const routeName = '/home';
   const App({super.key});
 
   @override

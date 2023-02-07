@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DiscoverPage extends StatelessWidget {
+  static const routeName = '/discover';
   const DiscoverPage({super.key});
 
   @override

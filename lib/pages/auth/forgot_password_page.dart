@@ -6,6 +6,7 @@ import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
+  static const routeName = '/forgot-password';
   const ForgotPasswordPage({super.key});
 
   @override

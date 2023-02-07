@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/utils/constants.dart';
 
 class ProfilePage extends StatelessWidget {
+  static const routeName = '/profile';
   const ProfilePage({super.key});
 
   @override

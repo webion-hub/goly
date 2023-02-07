@@ -1,9 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/auth/forgot_password.dart';
 import 'package:goly/pages/auth/auth_page.dart';
 import 'package:goly/pages/app.dart';
+import 'package:goly/pages/auth/forgot_password_page.dart';
 import 'package:goly/pages/introductions/introduction_page.dart';
+import 'package:goly/pages/main/chat_page.dart';
+import 'package:goly/pages/main/discover_page.dart';
+import 'package:goly/pages/main/goals_page.dart';
+import 'package:goly/pages/main/profile_page.dart';
+import 'package:goly/pages/main/settings_page.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +51,16 @@ class MyApp extends StatelessWidget {
             : const AuthPage();
         }),
       ),
+      routes: {
+        AuthPage.routeName: ((context) => const AuthPage()),
+        ForgotPasswordPage.routeName: ((context) => const ForgotPasswordPage()),
+        IntroductionPage.routeName: ((context) => const IntroductionPage()),
+        ChatPage.routeName: ((context) => const ChatPage()),
+        DiscoverPage.routeName: ((context) => const DiscoverPage()),
+        GoalsPage.routeName: ((context) => const GoalsPage()),
+        ProfilePage.routeName: ((context) => const ProfilePage()),
+        SettingsPage.routeName: ((context) => const SettingsPage()),
+      },
     );
   }
 }

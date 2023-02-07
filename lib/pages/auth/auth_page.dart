@@ -5,6 +5,7 @@ import 'package:goly/image_and_title.dart';
 import 'package:goly/utils/constants.dart';
 
 class AuthPage extends StatefulWidget {
+  static const routeName = '/auth';
   const AuthPage({super.key});
 
   @override
