@@ -1,8 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ThemeSwitcher extends StatelessWidget {
-  const ThemeSwitcher({super.key});
+class SettingsSwitcher extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final Function onChanged;
+
+  const SettingsSwitcher({
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +25,15 @@ class ThemeSwitcher extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
               //color: Theme.of(context).colorScheme.primary.withOpacity(0.2)
             ),
-            child: const Icon(Icons.dark_mode),
+            child: Icon(icon),
           ),
-          title: const Text(
-            "Change theme",
+          title: Text(
+            text,
           ),
-          onTap: () {},
           trailing: CupertinoSwitch(
-            onChanged: (value) {}, value: false,
+            onChanged: (value) => onChanged(value),
+            value: false,
           ),
-
         ),
         const Divider(),
       ],
