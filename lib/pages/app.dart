@@ -6,7 +6,6 @@ import 'package:goly/components/app_bars/profile_app_bar.dart';
 import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/goals_page.dart';
 import 'package:goly/pages/main/profile_page.dart';
-import 'package:goly/utils/constants.dart';
 
 class App extends StatefulWidget {
   static const routeName = '/home';
@@ -33,13 +32,12 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarLists[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: pageIndex,
         onTap: ((value) {
           setState(() {
-            //pageIndex = value;
-            Navigator.of(context).pushReplacementNamed(DiscoverPage.routeName);
+            pageIndex = value;
+            //Navigator.of(context).pushReplacementNamed(DiscoverPage.routeName);
           });
         }),
         showUnselectedLabels: false,
@@ -57,10 +55,12 @@ class _AppState extends State<App> {
             icon: Icon(Icons.person_rounded),
             label: "Profile",
           ),
-          
         ],
       ),
-      body: pageList[pageIndex],
+      body: IndexedStack(
+        index: pageIndex,
+        children: pageList,
+      ),
     );
   }
 }

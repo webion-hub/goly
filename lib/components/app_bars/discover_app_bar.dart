@@ -12,20 +12,16 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         
         IconButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => const SettingsPage(),
-            ),
-          ),
+          onPressed: () => Navigator.of(context).pushNamed(SettingsPage.routeName),
           icon: const Icon(Icons.add),
         ),
         IconButton(
-          onPressed: () => Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => const ChatPage(),
-            ),
-          ),
+          onPressed: () => Navigator.of(context).pushNamed(SettingsPage.routeName),
           icon: const Icon(Icons.message_rounded),
+        ),
+        IconButton(
+          onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName),
+          icon: const Icon(Icons.search),
         ),
       ],
     );
