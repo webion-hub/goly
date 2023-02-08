@@ -21,15 +21,21 @@ class SeteUpAccountPage extends StatefulWidget {
 }
 
 class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
-  File? userImageFile;
+  File? _userImageFile;
+  final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
-    userImageFile = image;
+    _userImageFile = image;
   }
 
   @override
   Widget build(BuildContext context) {
     var usernameController = TextEditingController(text: '');
     void setUp() {
+      final isValid = formKey.currentState!.validate();
+      if (!isValid) return;
+      if(_userImageFile != null) {
+        
+      }
       FirebaseFirestore.instance
           .collection('users')
           .doc(widget.auth.user?.uid)
@@ -45,6 +51,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
         child: Container(
           padding: Constants.pagePadding,
           child: Form(
+            key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -54,7 +61,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   subtitle: "Set the user information to get started",
                 ),
                 UserImagePicker(
-                  imagePickFn: (pickedImage) {},
+                  imagePickFn: _pickedImage,
                 ),
                 TextFormField(
                   controller: usernameController,
