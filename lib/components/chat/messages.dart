@@ -8,17 +8,16 @@ class Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return Column(
         children: [
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection('users')
                 .doc('FHl2G7ywdCbabRTzL5TTIF9OmMD2')
                 .get(),
-            builder: ((context, snapshot) => Text(
-                  snapshot.data!['username'],
-                )),
+            builder: ((context, snapshot) =>  Text(
+                  snapshot.data != null ? snapshot.data!['username'] : '' ,
+                ) ) ,
           ),
           Expanded(
             child: StreamBuilder(
@@ -45,7 +44,6 @@ class Messages extends StatelessWidget {
             ),
           ),
         ],
-      ),
     );
   }
 }

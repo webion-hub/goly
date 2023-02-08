@@ -11,6 +11,7 @@ class NewMessage extends StatefulWidget {
 
 class _NewMessageState extends State<NewMessage> {
   var _eneteredMessage = '';
+  final FocusNode textFocus = FocusNode();
   var messageController = TextEditingController(text: '');
   void _sendMessage() {
     FocusScope.of(context).unfocus();
@@ -21,6 +22,7 @@ class _NewMessageState extends State<NewMessage> {
       'userId': user!.uid,
     });
     messageController.text  = '';
+    FocusScope.of(context).autofocus(textFocus);
   }
 
   @override
@@ -32,6 +34,8 @@ class _NewMessageState extends State<NewMessage> {
         children: [
           Expanded(
             child: TextField(
+              focusNode: textFocus,
+              autofocus: true,
               controller: messageController,
               onSubmitted: (_) =>_sendMessage(),
               decoration: const InputDecoration(labelText: 'Send a message...'),
