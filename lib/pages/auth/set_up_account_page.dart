@@ -43,7 +43,9 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   title: "Welcome!",
                   subtitle: "Set the user information to get started",
                 ),
-                UserImagePicker(),
+                UserImagePicker(imagePickFn: (pickedImage) {
+                  
+                },),
                 TextFormField(
                   controller: usernameController,
                   decoration: const InputDecoration(labelText: 'Username'),

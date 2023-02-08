@@ -45,6 +45,7 @@ dependencies:
   shared_preferences: ^2.0.17
   syncfusion_flutter_charts: ^20.4.48
   image_picker: ^0.8.6+1
+  firebase_storage: ^11.0.10
 
 flutter_icons:
   android: true
