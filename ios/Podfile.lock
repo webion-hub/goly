@@ -615,6 +615,9 @@ PODS:
   - Firebase/Firestore (10.3.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.3.0)
+  - Firebase/Messaging (10.3.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.3.0)
   - Firebase/Storage (10.3.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.3.0)
@@ -622,8 +625,12 @@ PODS:
     - Firebase/Auth (= 10.3.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.4.1):
+  - firebase_core (2.5.0):
     - Firebase/CoreOnly (= 10.3.0)
+    - Flutter
+  - firebase_messaging (14.2.2):
+    - Firebase/Messaging (= 10.3.0)
+    - firebase_core
     - Flutter
   - firebase_storage (11.0.10):
     - Firebase/Storage (= 10.3.0)
@@ -657,6 +664,20 @@ PODS:
     - "gRPC-C++ (~> 1.44.0)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseInstallations (10.5.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.3.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseStorage (10.3.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseAuthInterop (~> 10.0)
@@ -666,6 +687,10 @@ PODS:
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
+  - GoogleDataTransport (9.2.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/AppDelegateSwizzler (7.11.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -680,6 +705,8 @@ PODS:
     - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (7.11.0)"
   - GoogleUtilities/Reachability (7.11.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.11.0):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.44.0)":
     - "gRPC-C++/Implementation (= 1.44.0)"
@@ -756,6 +783,7 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
@@ -774,7 +802,10 @@ SPEC REPOS:
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseStorage
+    - GoogleDataTransport
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
@@ -791,6 +822,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
@@ -808,7 +841,8 @@ SPEC CHECKSUMS:
   cloud_firestore: 5e5bb98722f66e820bf1aa7b3c98ffc9b2450ffb
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
   firebase_auth: 3bab991fe1df91c2f948156e9dee976e01a19ab9
-  firebase_core: bf59c32d2e53814f558efa20840c1902fa2fe461
+  firebase_core: f95c8bbe65213d406d592573ad42a12d64849cb8
+  firebase_messaging: 3daef9f9ee5b91de2f282895ec91cc5e5ca78556
   firebase_storage: 8b85bf19de50a1886f9387924fbddf066a718965
   FirebaseAppCheckInterop: 95bc238f8755d597cad95815b3c448f8617f720f
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
@@ -817,9 +851,12 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: d9fa427f1ae1edccf2368ce5e8d567e4c1f0ebc8
   FirebaseCoreInternal: e301297f4c15a17489e48ed722d733b1578e0c02
   FirebaseFirestore: 244f71ff14ef44f39e00b44d356eac708ce03103
+  FirebaseInstallations: 935bc4abb6f7a035cab7a0c31cb777b2be3dd254
+  FirebaseMessaging: e345b219fd15d325f0cf2fef28cb8ce00d851b3f
   FirebaseStorage: 0efbff0ac978981866d89804191688ae50d64033
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
+  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b

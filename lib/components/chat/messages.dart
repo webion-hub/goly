@@ -8,39 +8,44 @@ class Messages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FutureBuilder(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection('users')
-                .doc('PKhYVNZOFUXcJkNva7NWN4MEcs53')
+                .doc('FHl2G7ywdCbabRTzL5TTIF9OmMD2')
                 .get(),
-            builder: ((context, snapshot) => Text(snapshot.data!['username']))),
-        Expanded(
-          child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('chat')
-                .orderBy('dateTime', descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              return ListView.builder(
-                itemCount: snapshot.data?.docs.length ?? 0,
-                reverse: true,
-                itemBuilder: ((context, index) => MessageBubble(
-                      text: snapshot.data?.docs[index]['text'],
-                      isMe: snapshot.data?.docs[index]['userId'] ==
-                          FirebaseAuth.instance.currentUser!.uid,
-                    )),
-              );
-            },
+            builder: ((context, snapshot) => Text(
+                  snapshot.data!['username'],
+                )),
           ),
-        ),
-      ],
+          Expanded(
+            child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('chat')
+                  .orderBy('dateTime', descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data?.docs.length ?? 0,
+                  reverse: true,
+                  itemBuilder: ((context, index) => MessageBubble(
+                        text: snapshot.data?.docs[index]['text'],
+                        isMe: snapshot.data?.docs[index]['userId'] ==
+                            FirebaseAuth.instance.currentUser!.uid,
+                      )),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
