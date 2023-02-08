@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,9 @@ import 'package:goly/utils/constants.dart';
 
 class SeteUpAccountPage extends StatefulWidget {
   final UserCredential auth;
-  
+
   final String email;
+
   const SeteUpAccountPage({super.key, required this.auth, required this.email});
 
   @override
@@ -18,14 +21,21 @@ class SeteUpAccountPage extends StatefulWidget {
 }
 
 class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
+  File? userImageFile;
+  void _pickedImage(File image) {
+    userImageFile = image;
+  }
+
   @override
   Widget build(BuildContext context) {
     var usernameController = TextEditingController(text: '');
     void setUp() {
-      FirebaseFirestore.instance.collection('users').doc(widget.auth.user?.uid).set({
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(widget.auth.user?.uid)
+          .set({
         'username': usernameController.text.trim(),
         'email': widget.email,
-        
       });
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
@@ -43,9 +53,9 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   title: "Welcome!",
                   subtitle: "Set the user information to get started",
                 ),
-                UserImagePicker(imagePickFn: (pickedImage) {
-                  
-                },),
+                UserImagePicker(
+                  imagePickFn: (pickedImage) {},
+                ),
                 TextFormField(
                   controller: usernameController,
                   decoration: const InputDecoration(labelText: 'Username'),
@@ -53,7 +63,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   keyboardType: TextInputType.text,
                 ),
                 const SizedBox(height: 20.0),
-               MainButton(text: "Set up", onPressed: setUp),
+                MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),
