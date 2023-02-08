@@ -31,7 +31,9 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
         .ref()
         .child('user_image')
         .child('${widget.auth.user!.uid}${p.extension(image.path)}');
-    ref.putFile(image).whenComplete(() async => imageUrl = await ref.getDownloadURL());
+    ref
+        .putFile(image)
+        .whenComplete(() async => imageUrl = await ref.getDownloadURL());
     ;
   }
 

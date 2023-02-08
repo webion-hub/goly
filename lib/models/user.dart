@@ -1,4 +1,3 @@
-
 class UserModel {
   String? username;
   String? email;
@@ -6,7 +5,7 @@ class UserModel {
   String? id;
 
   UserModel({this.username, this.email, this.photoUrl, this.id});
-   UserModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     username = json['username'];
     email = json['email'];
     photoUrl = json['photoUrl'];
