@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/auth/signup.dart';
 import 'package:goly/components/auth/login.dart';
-import 'package:goly/image_and_title.dart';
+import 'package:goly/components/layout/image_and_title.dart';
 import 'package:goly/utils/constants.dart';
 
 class AuthPage extends StatefulWidget {
