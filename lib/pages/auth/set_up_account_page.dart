@@ -1,7 +1,8 @@
 import 'dart:io';
-
+import 'package:path/path.dart' as p;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/pickers/user_image_picker.dart';
@@ -25,6 +26,11 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
   final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
     _userImageFile = image;
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('user_image')
+        .child('${widget.auth.user!.uid}${p.extension(image.path)}');
+        ref.putFile(image);
   }
 
   @override

@@ -19,8 +19,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
     XFile? img = await picker.pickImage(source: ImageSource.gallery);
     if (img != null) {
       setState(() {
+        // ignore: unnecessary_cast
         pickedImage = File(img.path) as File;
-        print(pickedImage?.path.toLowerCase());
       });
       if (pickedImage != null) {
         widget.imagePickFn(pickedImage!);

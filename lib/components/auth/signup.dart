@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(CupertinoPageRoute(
       builder: (context) => SeteUpAccountPage(auth: auth, email: _emailController.text.trim(),),
     ));
