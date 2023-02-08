@@ -1,5 +1,5 @@
 class Validations {
-  static String? validateName(String? value) {
+  static String? validateUsername(String? value) {
     if (value!.isEmpty) return 'Username is Required.';
     final RegExp nameExp = RegExp(r'^[A-za-zğüşöçİĞÜŞÖÇ ]+$');
     if (!nameExp.hasMatch(value)) {

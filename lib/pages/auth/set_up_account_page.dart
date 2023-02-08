@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:goly/utils/validators.dart';
 import 'package:path/path.dart' as p;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -34,12 +35,12 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
     ref
         .putFile(image)
         .whenComplete(() async => imageUrl = await ref.getDownloadURL());
-    
   }
 
   @override
   Widget build(BuildContext context) {
     var usernameController = TextEditingController(text: '');
+    String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
       if (!isValid) return;
@@ -73,11 +74,17 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   imagePickFn: _pickedImage,
                 ),
                 TextFormField(
-                  controller: usernameController,
-                  decoration: const InputDecoration(labelText: 'Username'),
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.text,
-                ),
+                    controller: usernameController,
+                    decoration: const InputDecoration(labelText: 'Username'),
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    validator: (username) {
+                      errorMessage = Validations.validateUsername(username);
+                      if (username != null && errorMessage != null) {
+                        return errorMessage;
+                      }
+                      return null;
+                    }),
                 const SizedBox(height: 20.0),
                 MainButton(text: "Set up", onPressed: setUp),
               ],
