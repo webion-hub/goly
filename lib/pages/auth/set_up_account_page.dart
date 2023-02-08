@@ -23,6 +23,7 @@ class SeteUpAccountPage extends StatefulWidget {
 
 class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
   File? _userImageFile;
+  String? imageUrl;
   final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
     _userImageFile = image;
@@ -30,7 +31,8 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
         .ref()
         .child('user_image')
         .child('${widget.auth.user!.uid}${p.extension(image.path)}');
-    ref.putFile(image);
+    ref.putFile(image).whenComplete(() async => imageUrl = await ref.getDownloadURL());
+    ;
   }
 
   @override
@@ -44,8 +46,9 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
           .collection('users')
           .doc(widget.auth.user?.uid)
           .set({
-        'username': usernameController.text.trim(),
-        'email': widget.email,
+        'username': usernameController.text,
+        'email': widget.email.trim(),
+        'image_url': imageUrl,
       });
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
