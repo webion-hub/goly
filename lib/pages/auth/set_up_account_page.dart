@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/pickers/user_image_picker.dart';
-import 'package:goly/image_and_title.dart';
+import 'package:goly/components/layout/image_and_title.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -30,7 +30,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
         .ref()
         .child('user_image')
         .child('${widget.auth.user!.uid}${p.extension(image.path)}');
-        ref.putFile(image);
+    ref.putFile(image);
   }
 
   @override
