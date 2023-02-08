@@ -34,7 +34,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
     ref
         .putFile(image)
         .whenComplete(() async => imageUrl = await ref.getDownloadURL());
-    ;
+    
   }
 
   @override
