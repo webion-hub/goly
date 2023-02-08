@@ -23,7 +23,6 @@ class _LogInState extends State<LogIn> {
   final formKey = GlobalKey<FormState>();
   final FocusNode buttonFocusNode = FocusNode();
 
-
   @override
   void dispose() {
     super.dispose();
@@ -49,28 +48,35 @@ class _LogInState extends State<LogIn> {
     }
 
     return Column(
-        children: [
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                EmailField(
-                  controller: _emailController,
-                ),
-                const SizedBox(height: 10.0),
-                PasswordField(controller: _passwordController, nextFocus: buttonFocusNode,)
-              ],
-            ),
+      children: [
+        Form(
+          key: formKey,
+          child: Column(
+            children: [
+              EmailField(
+                controller: _emailController,
+              ),
+              const SizedBox(height: 10.0),
+              PasswordField(
+                controller: _passwordController,
+                nextFocus: buttonFocusNode,
+              )
+            ],
           ),
-          const ForgotPassword(),
-          const SizedBox(height: 20.0),
-          MainButton(text: "Log in", onPressed: logIn, focusNode: buttonFocusNode,),
-          const SizedBox(height: 20),
-          RichTextWithAction(
-              text: 'Don\'t have an account?',
-              actionText: 'Sign up',
-              action: widget.onClickedSignup)
-        ],
-      );
+        ),
+        const ForgotPassword(),
+        const SizedBox(height: 20.0),
+        MainButton(
+          text: "Log in",
+          onPressed: logIn,
+          focusNode: buttonFocusNode,
+        ),
+        const SizedBox(height: 20),
+        RichTextWithAction(
+            text: 'Don\'t have an account?',
+            actionText: 'Sign up',
+            action: widget.onClickedSignup)
+      ],
+    );
   }
 }

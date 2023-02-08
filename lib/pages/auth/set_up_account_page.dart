@@ -33,9 +33,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
     void setUp() {
       final isValid = formKey.currentState!.validate();
       if (!isValid) return;
-      if(_userImageFile != null) {
-        
-      }
+      if (_userImageFile != null) {}
       FirebaseFirestore.instance
           .collection('users')
           .doc(widget.auth.user?.uid)

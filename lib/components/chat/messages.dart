@@ -11,8 +11,10 @@ class Messages extends StatelessWidget {
     return Column(
       children: [
         FutureBuilder(
-            future:
-                FirebaseFirestore.instance.collection('users').doc('PKhYVNZOFUXcJkNva7NWN4MEcs53').get(),
+            future: FirebaseFirestore.instance
+                .collection('users')
+                .doc('PKhYVNZOFUXcJkNva7NWN4MEcs53')
+                .get(),
             builder: ((context, snapshot) => Text(snapshot.data!['username']))),
         Expanded(
           child: StreamBuilder(
