@@ -16,6 +16,6 @@ class PasswordField extends StatelessWidget {
                             .requestFocus(nextFocus),
         obscureText: true,
         validator: (pwd) =>
-            pwd != null && pwd.length <= 6 ? 'Enter min. 6 characters' : null);
+            pwd != null && pwd.length < 6 ? 'Enter min. 6 characters' : null);
   }
 }
