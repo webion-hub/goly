@@ -26,7 +26,7 @@ class GoalModel {
         completed = json['completed'],
         private = json['private'],
         privateDescription = json['privateDescription']
-        // steps = StepModel.fromJson(json['steps'],
+        //steps = List<StepModel>.from(StepModel.fromJson(json['steps']))
         ;
 
   Map<String, dynamic> toJson() {
