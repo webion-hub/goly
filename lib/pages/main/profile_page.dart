@@ -28,9 +28,12 @@ class _ProfilePageState extends State<ProfilePage> {
               .get(),
           builder: ((context, snapshot) {
             if (snapshot.data?.data() == null) {
-              return const Center(child: CircularProgressIndicator(),);
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
-            UserModel user = UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
+            UserModel user = UserModel.fromJson(
+                snapshot.data?.data() as Map<String, dynamic>);
             return UserProfile(user: user);
           }),
         ),

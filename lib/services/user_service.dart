@@ -5,17 +5,13 @@ import 'package:goly/models/user.dart';
 import 'package:goly/utils/firebase.dart';
 
 class UserService extends Service {
-
   UserModel? user;
   //get the authenticated uis
 
-
   String get currentUid => firebaseAuth.currentUser!.uid;
-  
-  Future<UserModel> fetchUser() async  {
-    DocumentSnapshot doc = await usersRef
-      .doc(currentUid)
-      .get();
+
+  Future<UserModel> fetchUser() async {
+    DocumentSnapshot doc = await usersRef.doc(currentUid).get();
 
     final data = doc.data() as Map<String, dynamic>;
 
@@ -31,9 +27,9 @@ class UserService extends Service {
   // }) async {
 
   //   if(user != null) {
-  //     return false; 
+  //     return false;
   //   }
-    
+
   //   user?.username = username;
   //   user?.bio = bio;
 
@@ -48,4 +44,3 @@ class UserService extends Service {
 }
 
 final userService = UserService();
-

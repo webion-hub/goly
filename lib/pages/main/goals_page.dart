@@ -13,30 +13,25 @@ class GoalsPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<GoalsPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const GoalsAppBar(),
+        appBar: const GoalsAppBar(),
         body: SingleChildScrollView(
-      padding: Constants.pagePadding,
-      child: Column(
-        children: const [
-          Text('Life areas'),
-          CategoryCard(title: "Work"),
-          CategoryCard(title: "Personal development"),
-          CategoryCard(title: "Finance"),
-          SizedBox(
-            height: 40,
+          padding: Constants.pagePadding,
+          child: Column(
+            children: const [
+              Text('Life areas'),
+              CategoryCard(title: "Work"),
+              CategoryCard(title: "Personal development"),
+              CategoryCard(title: "Finance"),
+              SizedBox(
+                height: 40,
+              ),
+              Text('Statistics'),
+              GoalsPerLifeArea(),
+            ],
           ),
-          Text('Statistics'),
-          GoalsPerLifeArea(),
-        ],
-      ),
-    ));
+        ));
   }
-
-
 }
-
