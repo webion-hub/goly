@@ -10,25 +10,23 @@ import 'package:goly/components/pickers/user_image_picker.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
-class EditProfile extends StatefulWidget {
-    String routeName = '/edit-profile';
+class EditProfile extends StatelessWidget {
+  static String routeName = '/edit-profile';
+  String? imageUrl;
   final String uid;
 
   EditProfile({super.key, required this.uid,});
 
-  @override
-  State<EditProfile> createState() => _EditProfileState();
-}
 
-class _EditProfileState extends State<EditProfile> {
-  String? imageUrl;
+
   final formKey = GlobalKey<FormState>();
+
   void _pickedImage(File image) {
 
     final ref = FirebaseStorage.instance
         .ref()
         .child('user_image')
-        .child('${widget.uid}${p.extension(image.path)}');
+        .child('$uid${p.extension(image.path)}');
     
     ref.putFile(image)
         .whenComplete(() async => imageUrl = await ref.getDownloadURL());
@@ -47,12 +45,13 @@ class _EditProfileState extends State<EditProfile> {
 
       FirebaseFirestore.instance
         .collection('users')
-        .doc(widget.uid)
+        .doc(uid)
         .set({
           'username': usernameController.text,
           'email': Utils.currentEmail().trim(),
-          'image_url': imageUrl ?? '',
+          'photoUrl': imageUrl ?? '',
           'bio': bioController.text,
+          'id': Utils.currentUid(),
         });
 
       navigatorKey.currentState!.popUntil((route) => route.isFirst);

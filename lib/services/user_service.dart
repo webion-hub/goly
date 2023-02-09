@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/user.dart';
@@ -24,28 +23,28 @@ class UserService extends Service {
   }
 
   //updates user profile in the Edit Profile Screen
-  updateProfile({
-    File? image,
-    String? username,
-    String? bio,
-    Settings? settings,
-  }) async {
+  // updateProfile({
+  //   File? image,
+  //   String? username,
+  //   String? bio,
+  //   Settings? settings,
+  // }) async {
 
-    if(user != null) {
-      return false; 
-    }
+  //   if(user != null) {
+  //     return false; 
+  //   }
     
-    user?.username = username;
-    user?.bio = bio;
+  //   user?.username = username;
+  //   user?.bio = bio;
 
-    await usersRef.doc(currentUid).update({
-      'username': username,
-      'bio': bio,
-      "photoUrl": user?.photoUrl ?? '',
-    });
+  //   await usersRef.doc(currentUid).update({
+  //     'username': username,
+  //     'bio': bio,
+  //     "photoUrl": user?.photoUrl ?? '',
+  //   });
 
-    return true;
-  }
+  //   return true;
+  // }
 }
 
 final userService = UserService();
