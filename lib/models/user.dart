@@ -5,7 +5,7 @@ class UserModel {
   String email;
   String photoUrl;
   String id;
-  String bio;
+  String? bio;
   Settings? settings;
 
   UserModel({
@@ -13,15 +13,15 @@ class UserModel {
     required this.email,
     required this.photoUrl,
     required this.id,
-    required this.bio,
+    this.bio,
     this.settings,
   });
 
   UserModel.fromJson(Map<String, dynamic> json):
     username = json['username'],
     email = json['email'],
-    photoUrl = json['photoUrl'],
-    bio = json['bio'],
+    photoUrl = json['photoUrl'] ?? 'https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg',
+    bio = json['bio'] ?? '',
     id = json['id'];
 
   Map<String, dynamic> toJson() {

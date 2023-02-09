@@ -5,7 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
   final void Function(File pickedImage) imagePickFn;
-  const UserImagePicker({super.key, required this.imagePickFn});
+  final String? imagePath;
+  const UserImagePicker({super.key, required this.imagePickFn, this.imagePath});
 
   @override
   State<UserImagePicker> createState() => _UserImagePickerState();
@@ -23,7 +24,6 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
     if (img != null) {
       setState(() {
-        // ignore: unnecessary_cast
         pickedImage = File(img.path);
       });
 
@@ -35,12 +35,20 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   @override
   Widget build(BuildContext context) {
+    ImageProvider<Object> img;
+    if (pickedImage != null) {
+      img = FileImage(pickedImage!); 
+    } else if(widget.imagePath != null) {
+      img = Image.network(widget.imagePath!).image;
+    } else {
+      img = Image.network('https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg').image;
+    }
     return Column(
       children: [
         CircleAvatar(
           radius: 80,
           backgroundColor: Theme.of(context).hoverColor,
-          backgroundImage: pickedImage != null ? FileImage(pickedImage!) : null,
+          backgroundImage: img ,
         ),
         const SizedBox(height: 10.0),
         OutlinedButton.icon(

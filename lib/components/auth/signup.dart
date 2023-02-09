@@ -6,7 +6,7 @@ import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/main.dart';
-import 'package:goly/pages/auth/edit_profile.dart';
+import 'package:goly/pages/auth/edit_profile_page.dart';
 import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
         password: _passwordController.text.trim(),
       );
       n.pushReplacement(CupertinoPageRoute(
-        builder: (context) => EditProfile(
+        builder: (context) => EditProfilePage(
           uid: Utils.currentUid(),
         ),
       ));

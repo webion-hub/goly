@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/user.dart';
-import 'package:goly/pages/auth/edit_profile.dart';
+import 'package:goly/pages/auth/edit_profile_page.dart';
 import 'package:goly/utils/utils.dart';
 
 class UserProfile extends StatelessWidget {
@@ -34,13 +34,14 @@ class UserProfile extends StatelessWidget {
           height: 10,
         ),
         Text(
-          user.bio,
+          user.bio ?? "",
         ),
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(CupertinoPageRoute(
-              builder: (context) => EditProfile(
+              builder: (context) => EditProfilePage(
                 uid: Utils.currentUid(),
+                user: user,
               ),
             ));
           },
