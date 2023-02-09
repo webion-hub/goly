@@ -66,11 +66,13 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const ImageAndTitle(
-                  image: 'assets/images/webion-logo.png',
-                  title: "Welcome!",
-                  subtitle: "Set the user information to get started",
-                ),
+                // const ImageAndTitle(
+                //   image: 'assets/images/webion-logo.png',
+                //   title: "Welcome!",
+                //   subtitle: "Set the user information to get started",
+                // ),
+                const Text('Set up the profile information'),
+                const SizedBox(height: 20.0),
                 UserImagePicker(
                   imagePickFn: _pickedImage,
                 ),
@@ -91,7 +93,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                   controller: bioController,
                     decoration: const InputDecoration(labelText: 'Bio'),
                     keyboardType: TextInputType.multiline,
-                    maxLength: 1000,
+                    maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
                 MainButton(text: "Set up", onPressed: setUp),

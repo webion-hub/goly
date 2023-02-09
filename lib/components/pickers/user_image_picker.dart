@@ -20,11 +20,13 @@ class _UserImagePickerState extends State<UserImagePicker> {
       source: ImageSource.gallery,
       maxWidth: 1000,
     );
+
     if (img != null) {
       setState(() {
         // ignore: unnecessary_cast
-        pickedImage = File(img.path) as File;
+        pickedImage = File(img.path);
       });
+
       if (pickedImage != null) {
         widget.imagePickFn(pickedImage!);
       }
@@ -36,13 +38,22 @@ class _UserImagePickerState extends State<UserImagePicker> {
     return Column(
       children: [
         CircleAvatar(
-          radius: 40,
+          radius: 80,
+          backgroundColor: Theme.of(context).hoverColor,
           backgroundImage: pickedImage != null ? FileImage(pickedImage!) : null,
         ),
-        ElevatedButton.icon(
+        const SizedBox(height: 10.0),
+        OutlinedButton.icon(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+            ),
+          ),
           onPressed: _pickImage,
           icon: const Icon(Icons.image),
-          label: const Text('Add image'),
+          label: Text(pickedImage != null ? 'Change image' : 'Add image'),
         ),
       ],
     );
