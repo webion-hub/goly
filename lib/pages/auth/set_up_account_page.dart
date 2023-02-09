@@ -22,11 +22,9 @@ class SeteUpAccountPage extends StatefulWidget {
 }
 
 class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
-  File? _userImageFile;
   String? imageUrl;
   final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
-    _userImageFile = image;
 
     final ref = FirebaseStorage.instance
         .ref()
@@ -47,7 +45,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
       if (!isValid) {
         return;
       }
-      
+
       FirebaseFirestore.instance
         .collection('users')
         .doc(widget.auth.user?.uid)
