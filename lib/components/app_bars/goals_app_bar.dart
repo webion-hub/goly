@@ -9,6 +9,7 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Goals'),
     );
   }
+
   @override
   Size get preferredSize => const Size.fromHeight(100);
 }

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:goly/components/app_bars/edit_profile_app_bar.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
@@ -61,7 +60,7 @@ class EditProfilePage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: const EditProfileAppbar(),
+      appBar: AppBar(title: Text(user!= null ? 'Edit profile' : 'Set up profile')),
       body: Center(
         child: Container(
           padding: Constants.pagePadding,
@@ -71,7 +70,7 @@ class EditProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Set up the profile information',
+                      user!= null ? 'Edit user information' : 'Set up the profile information',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 20.0),

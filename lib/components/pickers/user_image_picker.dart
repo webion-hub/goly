@@ -38,8 +38,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
   Widget build(BuildContext context) {
     ImageProvider<Object> img;
     if (pickedImage != null) {
-      img = FileImage(pickedImage!); 
-    } else if(widget.imagePath != null) {
+      img = FileImage(pickedImage!);
+    } else if (widget.imagePath != null) {
       img = Image.network(widget.imagePath!).image;
     } else {
       img = Image.network(Constants.userImageDefault).image;
@@ -49,7 +49,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
         CircleAvatar(
           radius: 80,
           backgroundColor: Theme.of(context).hoverColor,
-          backgroundImage: img ,
+          backgroundImage: img,
         ),
         const SizedBox(height: 10.0),
         OutlinedButton.icon(

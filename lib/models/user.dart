@@ -18,12 +18,12 @@ class UserModel {
     this.settings,
   });
 
-  UserModel.fromJson(Map<String, dynamic> json):
-    username = json['username'],
-    email = json['email'],
-    photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
-    bio = json['bio'] ?? '',
-    id = json['id'];
+  UserModel.fromJson(Map<String, dynamic> json)
+      : username = json['username'],
+        email = json['email'],
+        photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
+        bio = json['bio'] ?? '',
+        id = json['id'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

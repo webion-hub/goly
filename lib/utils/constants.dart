@@ -4,7 +4,8 @@ import 'package:goly/utils/theme/light_color_scheme.dart';
 
 class Constants {
   static String appName = "Goly";
-  static String userImageDefault = 'https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
+  static String userImageDefault =
+      'https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg';
   static const pagePadding =
       EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0);
 
