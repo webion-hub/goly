@@ -40,6 +40,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
   @override
   Widget build(BuildContext context) {
     var usernameController = TextEditingController(text: '');
+    var bioController = TextEditingController(text: '');
     String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
@@ -85,6 +86,13 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                       }
                       return null;
                     }),
+                const SizedBox(height: 20.0),
+                TextFormField(
+                  controller: bioController,
+                    decoration: const InputDecoration(labelText: 'Bio'),
+                    keyboardType: TextInputType.multiline,
+                    maxLength: 1000,
+                ),
                 const SizedBox(height: 20.0),
                 MainButton(text: "Set up", onPressed: setUp),
               ],
