@@ -6,26 +6,53 @@ import 'package:goly/models/user.dart';
 import 'package:goly/utils/firebase.dart';
 
 class UserService extends Service {
+
+  UserModel? user;
   //get the authenticated uis
-  String currentUid() {
-    return firebaseAuth.currentUser!.uid;
+
+  UserService() {
+    _fetchUser()
+      .then((user) => {
+        this.user = user
+      }); 
+  } 
+
+  String get currentUid => firebaseAuth.currentUser!.uid;
+  
+  Future<UserModel> _fetchUser() async  {
+    DocumentSnapshot doc = await usersRef
+      .doc(currentUid)
+      .get();
+
+    final data = doc.data() as Map<String, dynamic>;
+
+    return UserModel.fromJson(data);
   }
+
   //updates user profile in the Edit Profile Screen
-  updateProfile(
-      {File? image, String? username, String? bio, Settings? settings}) async {
-    DocumentSnapshot doc = await usersRef.doc(currentUid()).get();
-    var users = UserModel.fromJson(doc.data() as Map<String, dynamic>);
-    users.username = username;
-    users.bio = bio;
-    // if (image != null) {
-    //   users.photoUrl = await uploadImag(profilePic, image);
-    // }
-    await usersRef.doc(currentUid()).update({
+  updateProfile({
+    File? image,
+    String? username,
+    String? bio,
+    Settings? settings,
+  }) async {
+
+    if(user != null) {
+      return false; 
+    }
+    
+    user?.username = username;
+    user?.bio = bio;
+
+    await usersRef.doc(currentUid).update({
       'username': username,
       'bio': bio,
-      "photoUrl": users.photoUrl ?? '',
+      "photoUrl": user?.photoUrl ?? '',
     });
 
     return true;
   }
 }
+
+final userService = UserService();
+

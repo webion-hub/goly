@@ -29,7 +29,6 @@ class MainButton extends StatelessWidget {
         child: Text(
           text.toUpperCase(),
           style: const TextStyle(
-            color: Colors.white,
             fontSize: 12.0,
             fontWeight: FontWeight.w600,
           ),

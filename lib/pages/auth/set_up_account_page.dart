@@ -7,7 +7,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/pickers/user_image_picker.dart';
-import 'package:goly/components/layout/image_and_title.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -28,12 +27,13 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
   final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
     _userImageFile = image;
+
     final ref = FirebaseStorage.instance
         .ref()
         .child('user_image')
         .child('${widget.auth.user!.uid}${p.extension(image.path)}');
-    ref
-        .putFile(image)
+    
+    ref.putFile(image)
         .whenComplete(() async => imageUrl = await ref.getDownloadURL());
   }
 
@@ -44,16 +44,19 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
     String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
-      if (!isValid) return;
-      if (_userImageFile != null) {}
+      if (!isValid) {
+        return;
+      }
+      
       FirebaseFirestore.instance
-          .collection('users')
-          .doc(widget.auth.user?.uid)
-          .set({
-        'username': usernameController.text,
-        'email': widget.email.trim(),
-        'image_url': imageUrl,
-      });
+        .collection('users')
+        .doc(widget.auth.user?.uid)
+        .set({
+          'username': usernameController.text,
+          'email': widget.email.trim(),
+          'image_url': imageUrl ?? '',
+        });
+
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
     }
 
@@ -66,12 +69,10 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // const ImageAndTitle(
-                //   image: 'assets/images/webion-logo.png',
-                //   title: "Welcome!",
-                //   subtitle: "Set the user information to get started",
-                // ),
-                const Text('Set up the profile information'),
+                Text(
+                  'Set up the profile information',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 const SizedBox(height: 20.0),
                 UserImagePicker(
                   imagePickFn: _pickedImage,
@@ -91,9 +92,9 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
                 const SizedBox(height: 20.0),
                 TextFormField(
                   controller: bioController,
-                    decoration: const InputDecoration(labelText: 'Bio'),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 3,
+                  decoration: const InputDecoration(labelText: 'Bio'),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
                 MainButton(text: "Set up", onPressed: setUp),
