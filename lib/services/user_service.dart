@@ -10,16 +10,10 @@ class UserService extends Service {
   UserModel? user;
   //get the authenticated uis
 
-  UserService() {
-    _fetchUser()
-      .then((user) => {
-        this.user = user
-      }); 
-  } 
 
   String get currentUid => firebaseAuth.currentUser!.uid;
   
-  Future<UserModel> _fetchUser() async  {
+  Future<UserModel> fetchUser() async  {
     DocumentSnapshot doc = await usersRef
       .doc(currentUid)
       .get();

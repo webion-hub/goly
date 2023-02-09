@@ -18,3 +18,4 @@ CollectionReference chatIdRef = firestore.collection('chatIds');
 // Storage refs
 Reference profilePic = storage.ref().child('profilePics');
 Reference posts = storage.ref().child('posts');
+

@@ -1,8 +1,8 @@
 import 'dart:io';
+import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:path/path.dart' as p;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
@@ -10,18 +10,17 @@ import 'package:goly/components/pickers/user_image_picker.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
-class SeteUpAccountPage extends StatefulWidget {
-  final UserCredential auth;
+class EditProfile extends StatefulWidget {
+    String routeName = '/edit-profile';
+  final String uid;
 
-  final String email;
-
-  const SeteUpAccountPage({super.key, required this.auth, required this.email});
+  EditProfile({super.key, required this.uid,});
 
   @override
-  State<SeteUpAccountPage> createState() => _SeteUpAccountPageState();
+  State<EditProfile> createState() => _EditProfileState();
 }
 
-class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
+class _EditProfileState extends State<EditProfile> {
   String? imageUrl;
   final formKey = GlobalKey<FormState>();
   void _pickedImage(File image) {
@@ -29,7 +28,7 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
     final ref = FirebaseStorage.instance
         .ref()
         .child('user_image')
-        .child('${widget.auth.user!.uid}${p.extension(image.path)}');
+        .child('${widget.uid}${p.extension(image.path)}');
     
     ref.putFile(image)
         .whenComplete(() async => imageUrl = await ref.getDownloadURL());
@@ -48,11 +47,12 @@ class _SeteUpAccountPageState extends State<SeteUpAccountPage> {
 
       FirebaseFirestore.instance
         .collection('users')
-        .doc(widget.auth.user?.uid)
+        .doc(widget.uid)
         .set({
           'username': usernameController.text,
-          'email': widget.email.trim(),
+          'email': Utils.currentEmail().trim(),
           'image_url': imageUrl ?? '',
+          'bio': bioController.text,
         });
 
       navigatorKey.currentState!.popUntil((route) => route.isFirst);

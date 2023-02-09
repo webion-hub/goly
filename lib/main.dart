@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         ChatPage.routeName: ((context) => const ChatPage()),
         DiscoverPage.routeName: ((context) => const DiscoverPage()),
         GoalsPage.routeName: ((context) => const GoalsPage()),
-        ProfilePage.routeName: ((context) => const ProfilePage()),
+        ProfilePage.routeName: ((context) => ProfilePage(profileId: Utils.currentUid(),)),
         SettingsPage.routeName: ((context) => const SettingsPage()),
       },
     );

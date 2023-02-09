@@ -6,6 +6,7 @@ import 'package:goly/components/app_bars/profile_app_bar.dart';
 import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/goals_page.dart';
 import 'package:goly/pages/main/profile_page.dart';
+import 'package:goly/utils/utils.dart';
 
 class App extends StatefulWidget {
   static const routeName = '/home';
@@ -26,7 +27,7 @@ class _AppState extends State<App> {
   List<Widget> pageList = <Widget>[
     const DiscoverPage(),
     const GoalsPage(),
-    const ProfilePage(),
+    ProfilePage(profileId: Utils.currentUid()),
   ];
 
   @override

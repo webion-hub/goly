@@ -6,7 +6,7 @@ import 'package:goly/components/fields/password_field.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/main.dart';
-import 'package:goly/pages/auth/set_up_account_page.dart';
+import 'package:goly/pages/auth/edit_profile.dart';
 import 'package:goly/utils/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -30,24 +30,25 @@ class _SignUpState extends State<SignUp> {
   }
 
   Future signUp() async {
-    final isValid = formKey.currentState!.validate(); 
+    final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
     loadingDialog(context);
-    UserCredential auth;
     try {
-      auth = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      NavigatorState n = Navigator.of(context);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      // ignore: use_build_context_synchronously
-      Navigator.of(context).pushReplacement(CupertinoPageRoute(
-      builder: (context) => SeteUpAccountPage(auth: auth, email: _emailController.text.trim(),),
-    ));
+      n.pushReplacement(CupertinoPageRoute(
+        builder: (context) => EditProfile(
+          uid: Utils.currentUid(),
+        ),
+      ));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
-    }   
+    }
   }
 
   @override
