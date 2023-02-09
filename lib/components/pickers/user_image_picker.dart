@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
@@ -41,7 +42,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
     } else if(widget.imagePath != null) {
       img = Image.network(widget.imagePath!).image;
     } else {
-      img = Image.network('https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg').image;
+      img = Image.network(Constants.userImageDefault).image;
     }
     return Column(
       children: [

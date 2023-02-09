@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goly/utils/constants.dart';
 
 class UserModel {
   String username;
@@ -20,7 +21,7 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> json):
     username = json['username'],
     email = json['email'],
-    photoUrl = json['photoUrl'] ?? 'https://static.vecteezy.com/system/resources/thumbnails/008/442/086/small/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg',
+    photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
     bio = json['bio'] ?? '',
     id = json['id'];
 
