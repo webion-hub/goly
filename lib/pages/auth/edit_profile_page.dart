@@ -11,7 +11,7 @@ import 'package:goly/components/pickers/user_image_picker.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
   static String routeName = '/edit-profile';
 
   final String uid;
@@ -19,23 +19,29 @@ class EditProfilePage extends StatelessWidget {
 
   EditProfilePage({super.key, required this.uid, this.user});
 
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     String? imageUrl;
-    void _pickedImage(File image) {
+    void pickedImage(File image) {
       final ref = FirebaseStorage.instance
           .ref()
           .child('user_image')
-          .child('$uid${p.extension(image.path)}');
+          .child('${widget.uid}${p.extension(image.path)}');
+          
       ref
           .putFile(image)
           .whenComplete(() async => imageUrl = await ref.getDownloadURL());
     }
 
-    var usernameController = TextEditingController(text: user?.username ?? '');
-    var bioController = TextEditingController(text: user?.bio ?? '');
+    var usernameController = TextEditingController(text: widget.user?.username ?? '');
+    var bioController = TextEditingController(text: widget.user?.bio ?? '');
     String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
@@ -43,7 +49,7 @@ class EditProfilePage extends StatelessWidget {
         return;
       }
 
-      FirebaseFirestore.instance.collection('users').doc(uid).set({
+      FirebaseFirestore.instance.collection('users').doc(widget.uid).set({
         'username': usernameController.text,
         'email': Utils.currentEmail().trim(),
         'photoUrl': imageUrl ?? Constants.userImageDefault,
@@ -56,7 +62,7 @@ class EditProfilePage extends StatelessWidget {
 
     return Scaffold(
       appBar:
-          AppBar(title: Text(user != null ? 'Edit profile' : 'Set up profile')),
+          AppBar(title: Text(widget.user != null ? 'Edit profile' : 'Set up profile')),
       body: Center(
         child: Container(
           padding: Constants.pagePadding,
@@ -66,15 +72,15 @@ class EditProfilePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  user != null
+                  widget.user != null
                       ? 'Edit user information'
                       : 'Set up the profile information',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 20.0),
                 UserImagePicker(
-                  imagePickFn: _pickedImage,
-                  imagePath: user?.photoUrl,
+                  imagePickFn: pickedImage,
+                  imagePath: widget.user?.photoUrl,
                 ),
                 TextFormField(
                     controller: usernameController,
