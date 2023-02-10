@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/pages/main/chat_page.dart';
+import 'package:goly/utils/utils.dart';
 
 class UserConversationCard extends StatelessWidget {
   final String userName;
@@ -12,7 +14,11 @@ class UserConversationCard extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed(ChatPage.routeName),
+          onTap: () => Navigator.of(context).push(CupertinoPageRoute(
+            builder: (context) => ChatPage(
+              userReceiver: 'FHl2G7ywdCbabRTzL5TTIF9OmMD2',
+            ),
+          )),
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -24,7 +30,9 @@ class UserConversationCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ).image,
                   ),
-                  const SizedBox(width: 20,),
+                  const SizedBox(
+                    width: 20,
+                  ),
                   Text(userName),
                 ],
               ),
