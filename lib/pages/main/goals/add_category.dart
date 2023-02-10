@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/models/category.dart';
@@ -14,7 +13,8 @@ class AddCategoryPage extends StatelessWidget {
     TextEditingController description = TextEditingController(text: '');
     final formKey = GlobalKey<FormState>();
     void addCategory() {
-      //CategoryModel c = CategoryModel(name: name, private: private, description: description)
+      CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
+      print(c.toJson());
     }
     return Scaffold(
       appBar: AppBar(title: const Text('Add category')),
