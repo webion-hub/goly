@@ -55,10 +55,7 @@ class CategoryCard extends StatelessWidget {
         child: GestureDetector(
           onTap: () => Navigator.of(context).push(CupertinoPageRoute(
             builder: (context) => CategoryPage(
-              category: CategoryModel(
-                name: "Work life balance",
-                private: false,
-              ),
+              category: category,
             ),
           )),
           child: Card(

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/cards/goal_card.dart';
 import 'package:goly/models/category.dart';
-import 'package:goly/models/goal.dart';
 import 'package:goly/pages/main/goals/handle_category_page.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -12,13 +11,6 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GoalModel g = GoalModel(
-        id: "1",
-        private: true,
-        privateDescription: true,
-        title: "This is a test",
-        completed: false,
-        description: "This is a test description");
     void goToHandleCategory() {
       Navigator.of(context).push(CupertinoPageRoute(
         builder: (context) => HandleCategoryPage(
@@ -35,16 +27,14 @@ class CategoryPage extends StatelessWidget {
               onPressed: goToHandleCategory, icon: const Icon(Icons.edit))
         ],
       ),
-      body: Column(children: [
-        Center(
-          child: Container(
-            padding: Constants.pagePadding,
-            child: GoalCard(
-              goal: g,
-            ),
-          ),
+      body: Center(
+        child: Container(
+          padding: Constants.pagePadding,
+          child: Column(children: [
+            ...?category.goals?.map((goal) => GoalCard(goal: goal)),
+          ]),
         ),
-      ]),
+      ),
     );
   }
 }
