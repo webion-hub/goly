@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/message.dart';
 import 'package:goly/utils/utils.dart';
@@ -18,8 +17,8 @@ class _NewMessageState extends State<NewMessage> {
   var messageController = TextEditingController(text: '');
   void _sendMessage() {
     FocusScope.of(context).unfocus();
-    final user = FirebaseAuth.instance.currentUser;
-    Message m = Message(
+    //final user = FirebaseAuth.instance.currentUser;
+    MessageModel m = MessageModel(
         content: _eneteredMessage,
         senderUid: Utils.currentUid(),
         time: Timestamp.now());

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/models/category.dart';
