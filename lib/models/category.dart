@@ -6,7 +6,7 @@ class CategoryModel {
   List<GoalModel>? goals;
   bool private;
   
-  CategoryModel({required this.name, this.goals, required this.private, required this.description});
+  CategoryModel({required this.name, this.goals, required this.private, this.description});
 
     CategoryModel.fromJson(Map<String, dynamic> json):
     name = json['name'],
