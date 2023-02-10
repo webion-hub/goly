@@ -11,19 +11,19 @@ import 'package:goly/components/pickers/user_image_picker.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
-class EditProfilePage extends StatefulWidget {
-  static String routeName = '/edit-profile';
+class HandleProfilePage extends StatefulWidget {
+  static String routeName = '/handle-profile';
 
   final String uid;
   final UserModel? user;
 
-  const EditProfilePage({super.key, required this.uid, this.user});
+  const HandleProfilePage({super.key, required this.uid, this.user});
 
   @override
-  State<EditProfilePage> createState() => _EditProfilePageState();
+  State<HandleProfilePage> createState() => _HandleProfilePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _HandleProfilePageState extends State<HandleProfilePage> {
   final formKey = GlobalKey<FormState>();
 
   @override

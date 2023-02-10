@@ -3,13 +3,14 @@ import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/utils/constants.dart';
 
-class AddCategoryPage extends StatelessWidget {
+class HandleCategoryPage extends StatelessWidget {
   static String routeName = "add-category";
-  const AddCategoryPage({super.key});
+  final CategoryModel? category;
+  const HandleCategoryPage({super.key, this.category});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController categoryName = TextEditingController(text: '');
+    TextEditingController categoryName = TextEditingController(text: category?.name ?? '');
     TextEditingController description = TextEditingController(text: '');
     final formKey = GlobalKey<FormState>();
     void addCategory() {
@@ -20,7 +21,7 @@ class AddCategoryPage extends StatelessWidget {
 
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Add category')),
+      appBar: AppBar(title: Text(category !=null ? 'Edit category' : 'Add category')),
       body: Column(children: [
         Center(
         child: Container(

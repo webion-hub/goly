@@ -5,7 +5,7 @@ import 'package:goly/pages/auth/auth_page.dart';
 import 'package:goly/pages/app.dart';
 import 'package:goly/pages/auth/forgot_password_page.dart';
 import 'package:goly/pages/introductions/introduction_page.dart';
-import 'package:goly/pages/main/goals/add_category_page.dart';
+import 'package:goly/pages/main/goals/handle_category_page.dart';
 import 'package:goly/pages/main/recent_conversations.dart';
 import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/goals_page.dart';
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
         ProfilePage.routeName: ((context) => ProfilePage(profileId: Utils.currentUid(),)),
         SettingsPage.routeName: ((context) => const SettingsPage()),
         RecentConversations.routeName: ((context) => const RecentConversations()),
-        AddCategoryPage.routeName: ((context) => const AddCategoryPage()),
+        HandleCategoryPage.routeName: ((context) => const HandleCategoryPage()),
       },
     );
   }
