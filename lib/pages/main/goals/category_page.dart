@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/goal_card.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/handle_category_page.dart';
@@ -27,10 +28,10 @@ class CategoryPage extends StatelessWidget {
             onPressed: goToHandleCategory,
             icon: const Icon(Icons.edit),
           ),
-           IconButton(
+          IconButton(
             onPressed: goToHandleCategory,
             icon: const Icon(Icons.delete),
-          ),         
+          ),
         ],
       ),
       body: Center(
@@ -38,6 +39,11 @@ class CategoryPage extends StatelessWidget {
           padding: Constants.pagePadding,
           child: Column(children: [
             ...?category.goals?.map((goal) => GoalCard(goal: goal)),
+            ActionCard(
+              text: 'Add goal',
+              icon: Icons.add,
+              action: () {},
+            ),
           ]),
         ),
       ),
