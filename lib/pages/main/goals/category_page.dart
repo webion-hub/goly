@@ -24,7 +24,13 @@ class CategoryPage extends StatelessWidget {
         title: Text(category.name),
         actions: [
           IconButton(
-              onPressed: goToHandleCategory, icon: const Icon(Icons.edit))
+            onPressed: goToHandleCategory,
+            icon: const Icon(Icons.edit),
+          ),
+           IconButton(
+            onPressed: goToHandleCategory,
+            icon: const Icon(Icons.delete),
+          ),         
         ],
       ),
       body: Center(
