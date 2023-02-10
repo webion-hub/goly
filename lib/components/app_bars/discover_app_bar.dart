@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/pages/main/chat_page.dart';
+import 'package:goly/pages/main/recent_conversations.dart';
 import 'package:goly/pages/main/settings_page.dart';
 
 class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -16,7 +17,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.add),
         ),
         IconButton(
-          onPressed: () => Navigator.of(context).pushNamed(ChatPage.routeName),
+          onPressed: () => Navigator.of(context).pushNamed(RecentConversations.routeName),
           icon: const Icon(Icons.message_rounded),
         ),
         IconButton(

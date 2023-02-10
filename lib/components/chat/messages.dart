@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/chat/message_bubble.dart';
+import 'package:goly/utils/utils.dart';
 
 class Messages extends StatelessWidget {
   const Messages({super.key});
@@ -13,7 +14,7 @@ class Messages extends StatelessWidget {
           FutureBuilder(
             future: FirebaseFirestore.instance
                 .collection('users')
-                .doc('FHl2G7ywdCbabRTzL5TTIF9OmMD2')
+                .doc(Utils.currentUid())
                 .get(),
             builder: ((context, snapshot) =>  Text(
                   snapshot.data != null ? snapshot.data!['username'] : '' ,
