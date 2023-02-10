@@ -8,9 +8,10 @@ class MainCheckboxButton extends StatefulWidget {
 }
 
 class _MainCheckboxButtonState extends State<MainCheckboxButton> {
+  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    bool isChecked = false;
+    
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
@@ -24,7 +25,7 @@ class _MainCheckboxButtonState extends State<MainCheckboxButton> {
     }
 
     return Checkbox(
-      checkColor: Colors.white,
+      checkColor: Theme.of(context).primaryColor,
       fillColor: MaterialStateProperty.resolveWith(getColor),
       value: isChecked,
       onChanged: (bool? value) {
