@@ -11,7 +11,7 @@ class HandleCategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController categoryName = TextEditingController(text: category?.name ?? '');
-    TextEditingController description = TextEditingController(text: '');
+    TextEditingController description = TextEditingController(text: category?.description ?? '');
     final formKey = GlobalKey<FormState>();
     void addCategory() {
       CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
@@ -46,7 +46,7 @@ class HandleCategoryPage extends StatelessWidget {
                   maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
-                MainButton(text: "Add category", onPressed: addCategory),
+                MainButton(text: category !=null ? 'Edit category' : 'Add category', onPressed: addCategory),
               ],
             ),
           ),
