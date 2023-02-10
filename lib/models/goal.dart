@@ -4,6 +4,7 @@ class GoalModel {
   String id;
   String title;
   String? description;
+  String? reward;
   bool? completed;
   bool private;
   bool privateDescription;

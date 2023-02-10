@@ -1,10 +1,11 @@
 class StepModel {
-  String? title;
+  String title;
   String? description;
-  bool? completed;
-  bool? private;
+  String? reward;
+  bool completed;
+  bool private;
   
-  StepModel({String? title, String? description, bool? completed});
+  StepModel({required this.title, this.description, this.completed = false, required this.private});
 
     StepModel.fromJson(Map<String, dynamic> json):
     title = json['title'],
