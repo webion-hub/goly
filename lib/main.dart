@@ -5,7 +5,6 @@ import 'package:goly/pages/auth/auth_page.dart';
 import 'package:goly/pages/app.dart';
 import 'package:goly/pages/auth/forgot_password_page.dart';
 import 'package:goly/pages/introductions/introduction_page.dart';
-import 'package:goly/pages/main/chat_page.dart';
 import 'package:goly/pages/main/recent_conversations.dart';
 import 'package:goly/pages/main/discover_page.dart';
 import 'package:goly/pages/main/goals_page.dart';
@@ -55,7 +54,6 @@ class MyApp extends StatelessWidget {
         AuthPage.routeName: ((context) => const AuthPage()),
         ForgotPasswordPage.routeName: ((context) => const ForgotPasswordPage()),
         IntroductionPage.routeName: ((context) => const IntroductionPage()),
-        ChatPage.routeName: ((context) => const ChatPage()),
         DiscoverPage.routeName: ((context) => const DiscoverPage()),
         GoalsPage.routeName: ((context) => const GoalsPage()),
         ProfilePage.routeName: ((context) => ProfilePage(profileId: Utils.currentUid(),)),

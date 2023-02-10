@@ -5,7 +5,8 @@ import 'package:goly/components/chat/message_bubble.dart';
 import 'package:goly/utils/utils.dart';
 
 class Messages extends StatelessWidget {
-  const Messages({super.key});
+  final String userReceiver;
+  const Messages({super.key, required this.userReceiver});
 
   @override
   Widget build(BuildContext context) {

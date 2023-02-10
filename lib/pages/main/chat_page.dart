@@ -4,18 +4,19 @@ import 'package:goly/components/chat/new_message.dart';
 
 class ChatPage extends StatelessWidget {
   static const routeName = '/chat';
-  const ChatPage({super.key});
+  final String userReceiver;
+   ChatPage({super.key, required this.userReceiver});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Chat')),
       body: Column(
-        children: const [
+        children: [
           Expanded(
-            child: Messages(),
+            child: Messages(userReceiver: userReceiver),
           ),
-          NewMessage(),
+          NewMessage(userReceiver: userReceiver),
         ],
       ),
     );

@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class NewMessage extends StatefulWidget {
-  const NewMessage({super.key});
+  final String userReceiver;
+  const NewMessage({super.key, required this.userReceiver});
 
   @override
   State<NewMessage> createState() => _NewMessageState();
