@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:goly/components/buttons/main_outlined_button.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -52,16 +53,9 @@ class _UserImagePickerState extends State<UserImagePicker> {
           backgroundImage: img,
         ),
         const SizedBox(height: 10.0),
-        OutlinedButton.icon(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-            ),
-          ),
-          onPressed: _pickImage,
-          icon: const Icon(Icons.image),
+        MainOutlinedButton(
+          action: _pickImage,
+          icon: Icons.image,
           label: Text(pickedImage != null ? 'Change image' : 'Add image'),
         ),
       ],

@@ -46,7 +46,7 @@ class EditProfilePage extends StatelessWidget {
       FirebaseFirestore.instance.collection('users').doc(uid).set({
         'username': usernameController.text,
         'email': Utils.currentEmail().trim(),
-        'photoUrl': imageUrl ?? '',
+        'photoUrl': imageUrl ?? Constants.userImageDefault,
         'bio': bioController.text,
         'id': Utils.currentUid(),
       });

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/buttons/main_outlined_button.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/pages/auth/edit_profile_page.dart';
 import 'package:goly/utils/utils.dart';
@@ -10,6 +11,15 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void goToEditProfilePage() {
+      Navigator.of(context).push(CupertinoPageRoute(
+        builder: (context) => EditProfilePage(
+          uid: Utils.currentUid(),
+          user: user,
+        ),
+      ));
+    }
+
     return Column(
       children: [
         SizedBox(
@@ -36,17 +46,10 @@ class UserProfile extends StatelessWidget {
         Text(
           user.bio ?? "",
         ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(CupertinoPageRoute(
-              builder: (context) => EditProfilePage(
-                uid: Utils.currentUid(),
-                user: user,
-              ),
-            ));
-          },
-          child: const Text('Edit profile'),
-        ),
+        MainOutlinedButton(
+            label: const Text('Edit profile'),
+            icon: Icons.edit,
+            action: goToEditProfilePage),
         const SizedBox(
           height: 10,
         ),
