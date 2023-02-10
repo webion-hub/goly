@@ -4,14 +4,14 @@ import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/category_page.dart';
 
 class CategoryCard extends StatelessWidget {
-  final String title;
-  const CategoryCard({super.key, required this.title});
+  final CategoryModel category;
+  const CategoryCard({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Dismissible(
-        key: ValueKey(title),
+        key: ValueKey(category.name),
         background: Container(
           color: Theme.of(context).errorColor,
           alignment: Alignment.centerRight,
@@ -70,7 +70,7 @@ class CategoryCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title),
+                    Text(category.name),
                     const Text('Progress: 80%'),
                   ],
                 ),
