@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/models/category.dart';
@@ -15,6 +16,9 @@ class AddCategoryPage extends StatelessWidget {
     void addCategory() {
       CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
       print(c.toJson());
+
+      //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
+
     }
     return Scaffold(
       appBar: AppBar(title: const Text('Add category')),
