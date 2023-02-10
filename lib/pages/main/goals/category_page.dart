@@ -17,7 +17,9 @@ class CategoryPage extends StatelessWidget {
         completed: false,
         description: "This is a test description");
     return Scaffold(
-      appBar: AppBar(title: Text(categoryName)),
+      appBar: AppBar(
+        title: Text(categoryName),
+      ),
       body: Column(children: [
         Center(
           child: Container(

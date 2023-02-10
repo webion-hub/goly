@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/app_bars/goals_app_bar.dart';
+import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/category_card.dart';
 import 'package:goly/components/statistics/goals_per_life_area.dart';
+import 'package:goly/pages/main/goals/add_category_page.dart';
 import 'package:goly/utils/constants.dart';
 
 class GoalsPage extends StatefulWidget {
@@ -13,6 +15,9 @@ class GoalsPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<GoalsPage> {
+  void addCategory() {
+    Navigator.of(context).pushNamed(AddCategoryPage.routeName);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +25,17 @@ class _MainPageState extends State<GoalsPage> {
         body: SingleChildScrollView(
           padding: Constants.pagePadding,
           child: Column(
-            children: const [
-              Text('Life areas'),
-              CategoryCard(title: "Work"),
-              CategoryCard(title: "Personal development"),
-              CategoryCard(title: "Finance"),
-              SizedBox(
+            children: [
+              const Text('Life areas'),
+              const CategoryCard(title: "Work"),
+              const CategoryCard(title: "Personal development"),
+              const CategoryCard(title: "Finance"),
+              ActionCard(text: "Add category", icon: Icons.add, action: addCategory),
+              const SizedBox(
                 height: 40,
               ),
-              Text('Statistics'),
-              GoalsPerLifeArea(),
+              const Text('Statistics'),
+              const GoalsPerLifeArea(),
             ],
           ),
         ));
