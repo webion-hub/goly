@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/pages/main/chat_page.dart';
-import 'package:goly/utils/utils.dart';
 
 class UserConversationCard extends StatelessWidget {
   final String userName;

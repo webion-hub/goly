@@ -14,8 +14,8 @@ class HandleCategoryPage extends StatelessWidget {
     TextEditingController description = TextEditingController(text: category?.description ?? '');
     final formKey = GlobalKey<FormState>();
     void addCategory() {
-      CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
-      print(c.toJson());
+      //CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
+      //print(c.toJson());
 
       //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
 

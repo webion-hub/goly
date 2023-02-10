@@ -15,7 +15,7 @@ class HandleGoalPage extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     void addCategory() {
       CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
-      print(c.toJson());
+      //print(c.toJson());
 
       //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
 
