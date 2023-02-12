@@ -1,6 +1,6 @@
 # goly
 
-A new Flutter project.
+Goly is a flutter app for setting and achieving goals, while connecting with like-minded people
 
 ## Getting Started
 
