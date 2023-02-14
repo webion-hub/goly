@@ -4,7 +4,6 @@ class SettingsModel {
   bool privateRewardByDefault;
   bool privateDescriptionsByDefault;
 
-
   SettingsModel({
     this.privateAccount = false,
     this.privateGoalsByDefault = true,
@@ -20,7 +19,7 @@ class SettingsModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    
+
     data['privateAccount'] = privateGoalsByDefault;
     data['privateGoalsByDefault'] = privateRewardByDefault;
     data['privateRewardByDefault'] =
