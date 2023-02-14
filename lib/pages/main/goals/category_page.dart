@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/cards/action_card.dart';
-import 'package:goly/components/cards/goal_card.dart';
+import 'package:goly/components/cards/goal_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/handle_category_page.dart';
 import 'package:goly/utils/constants.dart';
@@ -12,6 +12,7 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     void goToHandleCategory() {
       Navigator.of(context).push(CupertinoPageRoute(
         builder: (context) => HandleCategoryPage(
@@ -38,7 +39,7 @@ class CategoryPage extends StatelessWidget {
         child: Container(
           padding: Constants.pagePadding,
           child: Column(children: [
-            ...?category.goals?.map((goal) => GoalCard(goal: goal)),
+            ...?category.goals?.map((goal) => GoalListTile(goal: goal)),
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,

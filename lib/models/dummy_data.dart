@@ -1,6 +1,5 @@
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
-import 'package:goly/models/step.dart';
 
 class DummyData {
   static List<CategoryModel> categories = [
@@ -12,16 +11,19 @@ class DummyData {
           GoalModel(
               id: '1',
               title: 'Earn 20k',
+              reward: 'Ice cream',
               private: false,
               privateDescription: false,
               steps: [
-                StepModel(
+                GoalModel(
+                  id: '1',
                   private: false,
                   title: "Make 10k",
                   completed: false,
                   description: "Make 10k",
                 ),
-                StepModel(
+                GoalModel(
+                  id: '2',
                   private: false,
                   title: "Make other 10k",
                   completed: false,

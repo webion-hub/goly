@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
-import 'package:goly/models/category.dart';
+import 'package:goly/models/goal.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleGoalPage extends StatelessWidget {
-  static String routeName = "add-category";
-  final CategoryModel? category;
-  const HandleGoalPage({super.key, this.category});
+  static String routeName = "add-goal";
+  final GoalModel? goal;
+  const HandleGoalPage({super.key, this.goal});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController categoryName = TextEditingController(text: category?.name ?? '');
-    TextEditingController description = TextEditingController(text: category?.description ?? '');
+    TextEditingController goalName = TextEditingController(text: goal?.title ?? '');
+    TextEditingController description = TextEditingController(text: goal?.description ?? '');
     final formKey = GlobalKey<FormState>();
-    void addCategory() {
-      CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
+    void addgoal() {
+      //GoalModel c = GoalModel(id:'1', title: goal.title, private: false, description: description.text);
       //print(c.toJson());
 
       //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
 
     }
     return Scaffold(
-      appBar: AppBar(title: Text(category !=null ? 'Edit category' : 'Add category')),
+      appBar: AppBar(title: Text(goal !=null ? 'Edit goal' : 'Add goal')),
       body: Column(children: [
         Center(
         child: Container(
@@ -33,7 +33,7 @@ class HandleGoalPage extends StatelessWidget {
               children: [
                 const SizedBox(height: 20.0),
                 TextFormField(
-                    controller: categoryName,
+                    controller: goalName,
                     decoration: const InputDecoration(labelText: 'Name'),
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
@@ -46,7 +46,7 @@ class HandleGoalPage extends StatelessWidget {
                   maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
-                MainButton(text: category !=null ? 'Edit category' : 'Add category', onPressed: addCategory),
+                MainButton(text: goal !=null ? 'Edit goal' : 'Add goal', onPressed: addgoal),
               ],
             ),
           ),

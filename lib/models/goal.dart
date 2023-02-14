@@ -1,23 +1,23 @@
-import 'package:goly/models/step.dart';
 
 class GoalModel {
   String id;
   String title;
   String? description;
   String? reward;
-  bool? completed;
+  bool completed;
   bool private;
   bool privateDescription;
-  List<StepModel>? steps;
+  List<GoalModel>? steps;
 
   GoalModel({
     required this.id,
     required this.title,
     this.description,
     this.steps,
+    this.reward,
     this.completed = false,
-    required this.private,
-    required this.privateDescription,
+    this.private = true,
+    this.privateDescription = true,
   });
 
   GoalModel.fromJson(Map<String, dynamic> json)
@@ -26,9 +26,7 @@ class GoalModel {
         description = json['description'],
         completed = json['completed'],
         private = json['private'],
-        privateDescription = json['privateDescription']
-        //steps = List<StepModel>.from(StepModel.fromJson(json['steps']))
-        ;
+        privateDescription = json['privateDescription'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

@@ -19,19 +19,26 @@ class _UserImagePickerState extends State<UserImagePicker> {
 
   void _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    XFile? img = await picker.pickImage(
-      source: ImageSource.gallery,
-      maxWidth: 1000,
-    );
+    try {
+      XFile? img = await picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1000,
+      );
+      if (img != null) {
+        setState(() {
+          pickedImage = File(img.path);
+        });
 
-    if (img != null) {
-      setState(() {
-        pickedImage = File(img.path);
-      });
-
-      if (pickedImage != null) {
-        widget.imagePickFn(pickedImage!);
+        if (pickedImage != null) {
+          widget.imagePickFn(pickedImage!);
+        }
       }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An error occured'),
+        ),
+      );
     }
   }
 

@@ -38,14 +38,20 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
-      ref.putFile(image).then((p0) {
-        ref.getDownloadURL().then((value) {
-          imageUrl = value.toString();
+      try {
+        ref.putFile(image).then((p0) {
+          ref.getDownloadURL().then((value) {
+            imageUrl = value.toString();
+          });
+          setState(() {
+          isLoading = false;
         });
+        });
+      } catch (e) {
         setState(() {
           isLoading = false;
         });
-      });
+      }
     }
 
     var usernameController =
