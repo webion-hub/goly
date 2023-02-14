@@ -30,7 +30,6 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     void pickedImage(File image) {
       setState(() {
         isLoading = true;
@@ -39,22 +38,14 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
-      print("here is the");
       ref.putFile(image).then((p0) {
         ref.getDownloadURL().then((value) {
           imageUrl = value.toString();
-          print(imageUrl);
         });
         setState(() {
           isLoading = false;
         });
       });
-
-      // .whenComplete(() async =>
-      //     imageUrl = await ref.getDownloadURL().whenComplete(() => setState(() {
-      //           isLoading = false;
-      //         })));
-      // print(imageUrl.toString());
     }
 
     var usernameController =
@@ -67,7 +58,6 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
       if (!isValid) {
         return;
       }
-      print(imageUrl);
 
       FirebaseFirestore.instance.collection('users').doc(widget.uid).set({
         'username': usernameController.text,
