@@ -1,4 +1,3 @@
-
 class GoalModel {
   String id;
   String title;

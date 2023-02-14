@@ -30,7 +30,8 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    var usernameController = TextEditingController(text: widget.user?.username ?? '');
+    var usernameController =
+        TextEditingController(text: widget.user?.username ?? '');
     var bioController = TextEditingController(text: widget.user?.bio ?? '');
 
     String? errorMessage;
@@ -66,7 +67,6 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
         return;
       }
       try {
-        print(usernameController.text);
         UserService.updateProfile(
             user: UserModel(
           username: usernameController.text,
