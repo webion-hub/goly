@@ -25,11 +25,12 @@ class HandleProfilePage extends StatefulWidget {
 
 class _HandleProfilePageState extends State<HandleProfilePage> {
   bool isLoading = false;
+  String? imageUrl;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    String? imageUrl;
+    
     void pickedImage(File image) {
       setState(() {
         isLoading = true;
@@ -38,12 +39,22 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
+      print("here is the");
+      ref.putFile(image).then((p0) {
+        ref.getDownloadURL().then((value) {
+          imageUrl = value.toString();
+          print(imageUrl);
+        });
+        setState(() {
+          isLoading = false;
+        });
+      });
 
-      ref.putFile(image).whenComplete(() async =>
-          imageUrl = await ref.getDownloadURL());
-      setState(() {
-        isLoading = false;
-      });      
+      // .whenComplete(() async =>
+      //     imageUrl = await ref.getDownloadURL().whenComplete(() => setState(() {
+      //           isLoading = false;
+      //         })));
+      // print(imageUrl.toString());
     }
 
     var usernameController =
@@ -56,6 +67,7 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
       if (!isValid) {
         return;
       }
+      print(imageUrl);
 
       FirebaseFirestore.instance.collection('users').doc(widget.uid).set({
         'username': usernameController.text,
@@ -91,7 +103,8 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
                 const SizedBox(height: 20.0),
                 UserImagePicker(
                   imagePickFn: pickedImage,
-                  imagePath: widget.user?.photoUrl ?? Constants.userImageDefault,
+                  imagePath:
+                      widget.user?.photoUrl ?? Constants.userImageDefault,
                 ),
                 TextFormField(
                     controller: usernameController,
@@ -113,7 +126,9 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
                   maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
-                isLoading ? const CircularProgressIndicator() :  MainButton(text: "Set up", onPressed: setUp),
+                isLoading
+                    ? const CircularProgressIndicator()
+                    : MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),

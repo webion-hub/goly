@@ -56,7 +56,9 @@ class _UserImagePickerState extends State<UserImagePicker> {
         MainOutlinedButton(
           action: _pickImage,
           icon: Icons.image,
-          label: Text(pickedImage != null ? 'Change image' : 'Add image'),
+          label: Text(
+            pickedImage != null ? 'Change image' : 'Add image',
+          ),
         ),
       ],
     );
