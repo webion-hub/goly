@@ -17,13 +17,8 @@ class UserService extends Service {
     return UserModel.fromJson(data);
   }
 
-  static Future updateProfile({
-    required UserModel user
-  }) async {
+  static Future updateProfile({required UserModel user}) async {
     final documentReferencer = _collection.doc(user.id);
-    print(user.toJson());
     return await documentReferencer.update(user.toJson());
-
   }
 }
-
