@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/utils/constants.dart';
 
 class UserModel {
@@ -7,7 +6,6 @@ class UserModel {
   String photoUrl;
   String id;
   String bio;
-  Settings? settings;
 
   UserModel({
     required this.username,
@@ -15,7 +13,6 @@ class UserModel {
     required this.photoUrl,
     required this.id,
     this.bio = "",
-    this.settings,
   });
 
   UserModel.fromJson(Map<String, dynamic> json)

@@ -45,20 +45,19 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
-      try {
-        ref.putFile(image).then((p0) {
-          ref.getDownloadURL().then((value) {
-            imageUrl = value.toString();
-          });
-          setState(() {
-            isLoading = false;
-          });
+
+      ref.putFile(image).then((p0) {
+        ref.getDownloadURL().then((value) {
+          imageUrl = value.toString();
         });
-      } catch (e) {
+      }).onError((error, stackTrace) {
+        Utils.showSnackbBar(
+            'An error has occurred uploading the image. Please try again');
+      }).whenComplete(() {
         setState(() {
           isLoading = false;
         });
-      }
+      });
     }
 
     void setUp() {
@@ -66,24 +65,21 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
       if (!isValid) {
         return;
       }
-      try {
-        UserService.updateProfile(
-            user: UserModel(
+      UserService.updateProfile(
+        user: UserModel(
           username: usernameController.text,
           bio: bioController.text,
           email: Utils.currentEmail().trim(),
           photoUrl: imageUrl ?? Constants.userImageDefault,
           id: Utils.currentUid(),
-        )).then((value) =>
-            navigatorKey.currentState!.popUntil((route) => route.isFirst));
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-                'An error has occurred updating your profile. Please try again'),
-          ),
-        );
-      }
+        ),
+      )
+          .then((value) =>
+              navigatorKey.currentState!.popUntil((route) => route.isFirst))
+          .onError((error, stackTrace) {
+        Utils.showSnackbBar(
+            'An error has occurred updating your profile. Please try again');
+      });
     }
 
     return Scaffold(
