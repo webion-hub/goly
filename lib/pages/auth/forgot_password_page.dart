@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/dialogs/loading_dialog.dart';
 import 'package:goly/components/fields/email_field.dart';
 import 'package:goly/utils/constants.dart';
@@ -19,9 +20,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     loadingDialog(context);
     try {
       var nav = Navigator.of(context);
+
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: _emailController.text.trim());
       Utils.showSnackbBar('Password Reset Email Sent');
+
       nav.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
@@ -41,16 +44,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text('Rceive an emal to reset your password'),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               EmailField(controller: _emailController),
-              const SizedBox(
-                height: 30,
-              ),
-              ElevatedButton(
+              const SizedBox(height: 30),
+              MainButton(
                 onPressed: resetPassword,
-                child: const Text('Reset your password'),
+                text: 'Reset password',
               ),
             ],
           ),
