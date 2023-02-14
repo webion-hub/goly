@@ -1,23 +1,32 @@
 class SettingsModel {
-  bool? privateGoalsByDefault;
-  bool? privateDescriptionsByDefault;
-  bool? privateAccount;
+  bool privateAccount;
+  bool privateGoalsByDefault;
+  bool privateRewardByDefault;
+  bool privateDescriptionsByDefault;
 
-  SettingsModel(
-      {this.privateGoalsByDefault = true,
-      this.privateDescriptionsByDefault = true,
-      this.privateAccount = false});
+
+  SettingsModel({
+    this.privateAccount = false,
+    this.privateGoalsByDefault = true,
+    this.privateRewardByDefault = true,
+    this.privateDescriptionsByDefault = false,
+  });
 
   SettingsModel.fromJson(Map<String, dynamic> json)
-      : privateGoalsByDefault = json['privateGoalsByDefault'],
-        privateAccount = json['privateAccount'];
+      : privateAccount = json['privateAccount'],
+        privateGoalsByDefault = json['privateGoalsByDefault'],
+        privateRewardByDefault = json['privateRewardByDefault'],
+        privateDescriptionsByDefault = json['privateDescriptionsByDefault'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['privateGoalsByDefault'] = privateGoalsByDefault ?? 'true';
-    data['privateDescriptionsByDefault'] =
-        privateDescriptionsByDefault ?? 'true';
-    data['privateAccount'] = privateAccount ?? 'false';
+    
+    data['privateAccount'] = privateGoalsByDefault;
+    data['privateGoalsByDefault'] = privateRewardByDefault;
+    data['privateRewardByDefault'] =
+        privateRewardByDefault;
+    data['privateDescriptionsByDefault'] = privateDescriptionsByDefault;
+
     return data;
   }
 }
