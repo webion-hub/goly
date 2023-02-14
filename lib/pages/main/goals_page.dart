@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/app_bars/goals_app_bar.dart';
 import 'package:goly/components/cards/action_card.dart';
-import 'package:goly/components/cards/category_card.dart';
+import 'package:goly/components/list_tile/category_list_tile.dart';
 import 'package:goly/components/statistics/goals_per_life_area.dart';
 import 'package:goly/models/dummy_data.dart';
 import 'package:goly/pages/main/goals/handle_category_page.dart';

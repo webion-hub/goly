@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/settings/settings_switcher.dart';
 import 'package:goly/models/category.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleCategoryPage extends StatelessWidget {
@@ -14,10 +15,10 @@ class HandleCategoryPage extends StatelessWidget {
     TextEditingController categoryName = TextEditingController(text: category?.name ?? '');
     TextEditingController description = TextEditingController(text: category?.description ?? '');
     final formKey = GlobalKey<FormState>();
-    void addCategory() {
-      //CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
-      //print(c.toJson());
-
+    void addCategory() async {
+      CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
+      print(c.toJson());
+      CategoryService.addCategory(category: c);
       //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
 
     }
