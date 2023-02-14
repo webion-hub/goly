@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class SettingsSwitcher extends StatelessWidget {
   final IconData icon;
   final String text;
+  final String? subtitle;
   final Function onChanged;
 
   const SettingsSwitcher({
     super.key,
     required this.icon,
     required this.text,
+    this.subtitle,
     required this.onChanged,
   });
 
@@ -30,6 +32,7 @@ class SettingsSwitcher extends StatelessWidget {
           title: Text(
             text,
           ),
+          subtitle: subtitle != null ? Text(subtitle!) : null,
           trailing: CupertinoSwitch(
             onChanged: (value) => onChanged(value),
             value: false,
