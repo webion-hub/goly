@@ -11,7 +11,6 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: const Text('Discover'),
       actions: [
-        
         IconButton(
           onPressed: () => Navigator.of(context).pushNamed(SettingsPage.routeName),
           icon: const Icon(Icons.add),

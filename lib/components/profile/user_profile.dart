@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_outlined_button.dart';
+import 'package:goly/components/profile/user_image.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/pages/auth/handle_profile_page.dart';
 import 'package:goly/utils/utils.dart';
@@ -23,15 +24,9 @@ class UserProfile extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: 120,
-          height: 120,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: Image.network(
-              user.photoUrl,
-              fit: BoxFit.cover,
-            ),
-          ),
+          width: 140,
+          height: 140,
+          child: UserImage(imageUrl: user.photoUrl),
         ),
         const SizedBox(
           height: 20,

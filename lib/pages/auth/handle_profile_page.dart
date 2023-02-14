@@ -24,20 +24,26 @@ class HandleProfilePage extends StatefulWidget {
 }
 
 class _HandleProfilePageState extends State<HandleProfilePage> {
+  bool isLoading = false;
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     String? imageUrl;
     void pickedImage(File image) {
+      setState(() {
+        isLoading = true;
+      });
       final ref = FirebaseStorage.instance
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
 
-      ref
-          .putFile(image)
-          .whenComplete(() async => imageUrl = await ref.getDownloadURL());
+      ref.putFile(image).whenComplete(() async =>
+          imageUrl = await ref.getDownloadURL());
+      setState(() {
+        isLoading = false;
+      });      
     }
 
     var usernameController =
@@ -85,7 +91,7 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
                 const SizedBox(height: 20.0),
                 UserImagePicker(
                   imagePickFn: pickedImage,
-                  imagePath: widget.user?.photoUrl,
+                  imagePath: widget.user?.photoUrl ?? Constants.userImageDefault,
                 ),
                 TextFormField(
                     controller: usernameController,
@@ -107,7 +113,7 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
                   maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
-                MainButton(text: "Set up", onPressed: setUp),
+                isLoading ? const CircularProgressIndicator() :  MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),
