@@ -38,7 +38,6 @@ class _AppState extends State<App> {
         onTap: ((value) {
           setState(() {
             pageIndex = value;
-            //Navigator.of(context).pushReplacementNamed(DiscoverPage.routeName);
           });
         }),
         showUnselectedLabels: false,
