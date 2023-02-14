@@ -34,14 +34,16 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
           .ref()
           .child('user_image')
           .child('${widget.uid}${p.extension(image.path)}');
-          
+
       ref
           .putFile(image)
           .whenComplete(() async => imageUrl = await ref.getDownloadURL());
     }
 
-    var usernameController = TextEditingController(text: widget.user?.username ?? '');
+    var usernameController =
+        TextEditingController(text: widget.user?.username ?? '');
     var bioController = TextEditingController(text: widget.user?.bio ?? '');
+
     String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
@@ -61,8 +63,11 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
     }
 
     return Scaffold(
-      appBar:
-          AppBar(title: Text(widget.user != null ? 'Edit profile' : 'Set up profile')),
+      appBar: AppBar(
+        title: Text(
+          widget.user != null ? 'Edit profile' : 'Set up profile',
+        ),
+      ),
       body: Center(
         child: Container(
           padding: Constants.pagePadding,
@@ -74,7 +79,7 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
                 Text(
                   widget.user != null
                       ? 'Edit user information'
-                      : 'Set up the profile information',
+                      : 'Set up your profile',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 20.0),
