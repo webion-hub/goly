@@ -20,12 +20,22 @@ class SettingsPage extends StatelessWidget {
             SettingsSwitcher(
               icon: Icons.lock,
               onChanged: (bool a) {},
-              text: "All goals private as default",
+              text: "Private account",
             ),
             SettingsSwitcher(
               icon: Icons.lock,
               onChanged: (bool a) {},
-              text: "Private Account",
+              text: "Private goal by default",
+            ),
+            SettingsSwitcher(
+              icon: Icons.lock,
+              onChanged: (bool a) {},
+              text: "Private reward by default",
+            ),
+            SettingsSwitcher(
+              icon: Icons.lock,
+              onChanged: (bool a) {},
+              text: "Private description by default",
             ),
             SettingsSwitcher(
               icon: Icons.dark_mode,

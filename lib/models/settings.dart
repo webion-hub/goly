@@ -22,8 +22,7 @@ class SettingsModel {
 
     data['privateAccount'] = privateGoalsByDefault;
     data['privateGoalsByDefault'] = privateRewardByDefault;
-    data['privateRewardByDefault'] =
-        privateRewardByDefault;
+    data['privateRewardByDefault'] = privateRewardByDefault;
     data['privateDescriptionsByDefault'] = privateDescriptionsByDefault;
 
     return data;
