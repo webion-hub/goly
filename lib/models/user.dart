@@ -6,7 +6,7 @@ class UserModel {
   String email;
   String photoUrl;
   String id;
-  String? bio;
+  String bio;
   Settings? settings;
 
   UserModel({
@@ -14,7 +14,7 @@ class UserModel {
     required this.email,
     required this.photoUrl,
     required this.id,
-    this.bio,
+    this.bio = "",
     this.settings,
   });
 

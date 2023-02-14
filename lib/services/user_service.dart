@@ -4,43 +4,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/utils/firebase.dart';
 
+final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final CollectionReference _collection = _firestore.collection('users');
+
 class UserService extends Service {
   UserModel? user;
-  //get the authenticated uis
+  static String get currentUid => firebaseAuth.currentUser!.uid;
 
-  String get currentUid => firebaseAuth.currentUser!.uid;
-
-  Future<UserModel> fetchUser() async {
-    DocumentSnapshot doc = await usersRef.doc(currentUid).get();
-
+  static Future<UserModel> fetchUser() async {
+    DocumentSnapshot doc = await _collection.doc(currentUid).get();
     final data = doc.data() as Map<String, dynamic>;
-
     return UserModel.fromJson(data);
   }
 
-  //updates user profile in the Edit Profile Screen
-  // updateProfile({
-  //   File? image,
-  //   String? username,
-  //   String? bio,
-  //   Settings? settings,
-  // }) async {
+  static Future updateProfile({
+    required UserModel user
+  }) async {
+    final documentReferencer = _collection.doc(user.id);
+    print(user.toJson());
+    return await documentReferencer.update(user.toJson());
 
-  //   if(user != null) {
-  //     return false;
-  //   }
-
-  //   user?.username = username;
-  //   user?.bio = bio;
-
-  //   await usersRef.doc(currentUid).update({
-  //     'username': username,
-  //     'bio': bio,
-  //     "photoUrl": user?.photoUrl ?? '',
-  //   });
-
-  //   return true;
-  // }
+  }
 }
 
-final userService = UserService();

@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:goly/models/user.dart';
+import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:path/path.dart' as p;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
@@ -30,10 +30,16 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    var usernameController = TextEditingController(text: widget.user?.username ?? '');
+    var bioController = TextEditingController(text: widget.user?.bio ?? '');
+
+    String? errorMessage;
+
     void pickedImage(File image) {
       setState(() {
         isLoading = true;
       });
+
       final ref = FirebaseStorage.instance
           .ref()
           .child('user_image')
@@ -44,8 +50,8 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
             imageUrl = value.toString();
           });
           setState(() {
-          isLoading = false;
-        });
+            isLoading = false;
+          });
         });
       } catch (e) {
         setState(() {
@@ -54,26 +60,30 @@ class _HandleProfilePageState extends State<HandleProfilePage> {
       }
     }
 
-    var usernameController =
-        TextEditingController(text: widget.user?.username ?? '');
-    var bioController = TextEditingController(text: widget.user?.bio ?? '');
-
-    String? errorMessage;
     void setUp() {
       final isValid = formKey.currentState!.validate();
       if (!isValid) {
         return;
       }
-
-      FirebaseFirestore.instance.collection('users').doc(widget.uid).set({
-        'username': usernameController.text,
-        'email': Utils.currentEmail().trim(),
-        'photoUrl': imageUrl ?? Constants.userImageDefault,
-        'bio': bioController.text,
-        'id': Utils.currentUid(),
-      });
-
-      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+      try {
+        print(usernameController.text);
+        UserService.updateProfile(
+            user: UserModel(
+          username: usernameController.text,
+          bio: bioController.text,
+          email: Utils.currentEmail().trim(),
+          photoUrl: imageUrl ?? Constants.userImageDefault,
+          id: Utils.currentUid(),
+        )).then((value) =>
+            navigatorKey.currentState!.popUntil((route) => route.isFirst));
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                'An error has occurred updating your profile. Please try again'),
+          ),
+        );
+      }
     }
 
     return Scaffold(

@@ -28,30 +28,20 @@ class UserProfile extends StatelessWidget {
           height: 140,
           child: UserImage(imageUrl: user.photoUrl),
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 20),
         Text(
           user.username,
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(
-          height: 10,
-        ),
-        Text(
-          user.bio ?? "",
-        ),
+        const SizedBox(height: 10),
+        Text(user.bio),
         MainOutlinedButton(
             label: const Text('Edit profile'),
             icon: Icons.edit,
             action: goToHandleProfilePage),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
         const Divider(),
-        const SizedBox(
-          height: 10,
-        ),
+        const SizedBox(height: 10),
       ],
     );
   }

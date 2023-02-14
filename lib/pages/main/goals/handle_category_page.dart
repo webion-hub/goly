@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
-import 'package:goly/components/settings/settings_list_tile.dart';
 import 'package:goly/components/settings/settings_switcher.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/utils/constants.dart';
