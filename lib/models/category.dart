@@ -14,7 +14,7 @@ class CategoryModel {
 
   CategoryModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
-        goals = json['goals'],
+        //goals = json['goals'],
         private = json['private'];
 
   Map<String, dynamic> toJson() {

@@ -23,7 +23,7 @@ class HandleCategoryPage extends StatelessWidget {
           private: false,
           description: description.text,
           goals: category?.goals);
-      print(c.toJson());
+      //print(c.toJson());
 
       category == null
           ? CategoryService.addCategory(category: c)
