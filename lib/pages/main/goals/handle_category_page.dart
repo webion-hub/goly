@@ -12,50 +12,65 @@ class HandleCategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController categoryName = TextEditingController(text: category?.name ?? '');
-    TextEditingController description = TextEditingController(text: category?.description ?? '');
+    TextEditingController categoryName =
+        TextEditingController(text: category?.name ?? '');
+    TextEditingController description =
+        TextEditingController(text: category?.description ?? '');
     final formKey = GlobalKey<FormState>();
     void addCategory() async {
-      CategoryModel c = CategoryModel(name: categoryName.text, private: false, description: description.text);
+      CategoryModel c = CategoryModel(
+          name: categoryName.text,
+          private: false,
+          description: description.text,
+          goals: category?.goals);
       print(c.toJson());
-      CategoryService.addCategory(category: c);
-      //FirebaseFirestore.instance.collection('users').doc(Utils.currentUid()).set();
 
+      category == null
+          ? CategoryService.addCategory(category: c)
+          : CategoryService.editCategory(category: c);
     }
+
     return Scaffold(
-      appBar: AppBar(title: Text(category !=null ? 'Edit category' : 'Add category')),
+      appBar: AppBar(
+          title: Text(category != null ? 'Edit category' : 'Add category')),
       body: Column(children: [
         Center(
-        child: Container(
-          padding: Constants.pagePadding,
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20.0),
-                TextFormField(
+          child: Container(
+            padding: Constants.pagePadding,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20.0),
+                  TextFormField(
                     controller: categoryName,
                     decoration: const InputDecoration(labelText: 'Name'),
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
-                ),
-                const SizedBox(height: 20.0),
-                TextFormField(
-                  controller: description,
-                  decoration: const InputDecoration(labelText: 'Description'),
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 3,
-                ),
-                const SizedBox(height: 20.0),
-                SettingsSwitcher(icon: Icons.lock, text: "Make this category private", subtitle: "And all the goals inside it", onChanged: () {}),
-                const SizedBox(height: 20.0),
-                MainButton(text: category !=null ? 'Edit category' : 'Add category', onPressed: addCategory),
-              ],
+                  ),
+                  const SizedBox(height: 20.0),
+                  TextFormField(
+                    controller: description,
+                    decoration: const InputDecoration(labelText: 'Description'),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 3,
+                  ),
+                  const SizedBox(height: 20.0),
+                  SettingsSwitcher(
+                      icon: Icons.lock,
+                      text: "Make this category private",
+                      subtitle: "And all the goals inside it",
+                      onChanged: () {}),
+                  const SizedBox(height: 20.0),
+                  MainButton(
+                      text: category != null ? 'Edit category' : 'Add category',
+                      onPressed: addCategory),
+                ],
+              ),
             ),
           ),
         ),
-      ),
       ]),
     );
   }

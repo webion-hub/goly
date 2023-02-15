@@ -10,13 +10,14 @@ final CollectionReference _collection = _firestore.collection('goals');
 class CategoryService extends Service {
   static Future addCategory({required CategoryModel category}) async {
     return await _collection
-      .doc(Utils.currentUid())
-      .set(category.toJson());
+      .doc(Utils.currentUid()).collection('categories')
+      .add(category.toJson(),);
   }
 
   static Future editCategory({required CategoryModel category}) async {
     return await _collection
-      .doc()
+      .doc(Utils.currentUid()).collection('categories')
+      .doc('eWdXda9XtZ4UlFmfS3DG')
       .update(category.toJson());
   }
 

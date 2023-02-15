@@ -18,9 +18,10 @@ class CategoryModel {
         private = json['private'];
 
   Map<String, dynamic> toJson() {
+    
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
-    data['goals'] = goals;
+    //data['goals'] = goals.forEach((element) {element.toJson()});
     data['private'] = private;
     return data;
   }
