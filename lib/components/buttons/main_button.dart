@@ -15,7 +15,7 @@ class MainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 45.0,
-      width: 180.0,
+      width: double.infinity,
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

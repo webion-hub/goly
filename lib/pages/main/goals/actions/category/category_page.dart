@@ -5,33 +5,22 @@ import 'package:goly/components/cards/description_card.dart';
 import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/components/list_tile/goal_list_tile.dart';
 import 'package:goly/models/category.dart';
-import 'package:goly/models/goal.dart';
 import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
-import 'package:goly/pages/main/goals/goals_page.dart';
+import 'package:goly/pages/main/goals/actions/goal/handle_goal_page.dart';
 import 'package:goly/services/category_service.dart';
-import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class CategoryPage extends StatelessWidget {
   final CategoryModel category;
   const CategoryPage({super.key, required this.category});
 
-  void addGoalToCategory() {
-    GoalService.addGoal(
-        categoryName: category.name,
-        goal: GoalModel(
-          title: "WebionTest",
-        ));
-  }
-
   @override
   Widget build(BuildContext context) {
     void goToHandleCategory() {
       Navigator.of(context).push(CupertinoPageRoute(
-        builder: (context) => HandleCategoryPage(
-          category: category,
-        ),
-      ));
+          builder: (context) => HandleCategoryPage(
+                category: category,
+              )));
     }
 
     void deleteCategory() {
@@ -50,6 +39,14 @@ class CategoryPage extends StatelessWidget {
           },
         ),
       );
+    }
+
+    void goToHandleGoal() {
+      Navigator.of(context).push(CupertinoPageRoute(
+        builder: (context) => HandleGoalPage(
+          categoryName: category.name,
+        ),
+      ));
     }
 
     return Scaffold(
@@ -77,7 +74,7 @@ class CategoryPage extends StatelessWidget {
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,
-              action: addGoalToCategory,
+              action: goToHandleGoal,
             ),
           ]),
         ),

@@ -17,11 +17,19 @@ class HandleCategoryPage extends StatefulWidget {
 class _HandleCategoryPageState extends State<HandleCategoryPage> {
   bool privateCategory = false;
   bool privateDescription = false;
+
+  late TextEditingController categoryName =
+      TextEditingController(text: widget.category?.name ?? '');
+
+  late TextEditingController description =
+      TextEditingController(text: widget.category?.description ?? '');
+
   void privateCategoryChange(bool value) {
     setState(() {
       privateCategory = value;
     });
   }
+
   void privateDescriptionChange(bool value) {
     setState(() {
       privateDescription = value;
@@ -30,20 +38,14 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController categoryName =
-        TextEditingController(text: widget.category?.name ?? '');
-    TextEditingController description =
-        TextEditingController(text: widget.category?.description ?? '');
-
     final formKey = GlobalKey<FormState>();
     void addCategory() async {
       CategoryModel c = CategoryModel(
-        name: categoryName.text,
-        private: privateCategory,
-        description: description.text,
-        goals: widget.category?.goals,
-        privateDescription: privateDescription
-      );
+          name: categoryName.text,
+          private: privateCategory,
+          description: description.text,
+          goals: widget.category?.goals,
+          privateDescription: privateDescription);
 
       widget.category == null
           ? CategoryService.addCategory(category: c)
@@ -79,24 +81,25 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
                   ),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(
-                    initialValue: privateCategory,
+                      initialValue: privateCategory,
                       icon: Icons.lock,
                       text: "Private category",
                       subtitle: "Makes private all the goals inside it",
                       onChanged: privateCategoryChange),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(
-                    initialValue: privateDescription,
+                      initialValue: privateDescription,
                       icon: Icons.lock,
                       text: "Private description",
                       subtitle: "Makes private description",
                       onChanged: privateDescriptionChange),
                   const SizedBox(height: 20.0),
                   MainButton(
-                      text: widget.category != null
-                          ? 'Update category'
-                          : 'Add category',
-                      onPressed: addCategory),
+                    text: widget.category != null
+                        ? 'Update category'
+                        : 'Add category',
+                    onPressed: addCategory,
+                  ),
                 ],
               ),
             ),

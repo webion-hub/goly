@@ -3,8 +3,9 @@ class GoalModel {
   String? description;
   String? reward;
   bool completed;
-  bool private;
+  bool privateGoal;
   bool privateDescription;
+  bool privateReward;
   List<GoalModel>? steps;
 
   GoalModel({
@@ -13,8 +14,9 @@ class GoalModel {
     this.steps,
     this.reward,
     this.completed = false,
-    this.private = true,
+    this.privateGoal = true,
     this.privateDescription = true,
+    this.privateReward = true,
   });
 
   GoalModel.fromJson(Map<String, dynamic> json)
@@ -22,8 +24,9 @@ class GoalModel {
        : title = json['title'],
         description = json['description'],
         completed = json['completed'],
-        private = json['private'],
-        privateDescription = json['privateDescription'];
+        privateGoal = json['privateGoal'],
+        privateDescription = json['privateDescription'],
+        privateReward = json['privateReward'];
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -31,7 +34,7 @@ class GoalModel {
     data['title'] = title;
     data['description'] = description;
     data['completed'] = completed;
-    data['private'] = private;
+    data['privateGoal'] = privateGoal;
     data['privateDescription'] = privateDescription;
     return data;
   }
