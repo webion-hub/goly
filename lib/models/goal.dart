@@ -26,7 +26,7 @@ class GoalModel {
         completed = json['completed'],
         privateGoal = json['privateGoal'],
         privateDescription = json['privateDescription'],
-        privateReward = json['privateReward'];
+        privateReward = json['privateReward'] ?? false;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

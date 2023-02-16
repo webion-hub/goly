@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/actions/category/category_page.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -43,6 +44,7 @@ class CategoryCard extends StatelessWidget {
                 Navigator.of(ctx).pop(false);
               },
               yesAction: () {
+                CategoryService.deleteCategory(categoryId: category.name);
                 Navigator.of(ctx).pop(true);
               },
             ),

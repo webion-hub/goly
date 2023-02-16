@@ -18,17 +18,20 @@ class CategoryModel {
   CategoryModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
       description = json['description'],
-        //goals = json['goals'],
+        goals = ((json['goals'] as List<dynamic>)
+          .map((g) => GoalModel.fromJson(g))
+          .toList()
+        ),
         private = json['private'],
         privateDescription = json['privateDescription'] ?? false;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['description'] = description;
-    //data['goals'] = goals.forEach((element) {element.toJson()});
-    data['private'] = private;
-    data['privateDescription'] = privateDescription;
-    return data;
+    return <String, dynamic>{
+      'name': name,
+      'description': description,
+      'goals': goals?.map((element) => element.toJson()) ?? [],
+      'private': private,
+      'privateDescription': privateDescription,
+    };
   }
 }

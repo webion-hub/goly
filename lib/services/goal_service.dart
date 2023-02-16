@@ -8,22 +8,18 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
 class GoalService extends Service {
-  static Future addGoal({required String categoryName, required GoalModel goal}) async {
+  static Future addGoal(
+      {required String categoryName, required GoalModel goal}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryName)
-        .collection('goals')
-        .add(
-          goal.toJson(),
-        );
+        .update({
+      'goals': FieldValue.arrayUnion([goal.toJson()])
+    });
   }
 
   static Future editGoal({required GoalModel goal}) async {
-    return await _collection
-      .doc()
-      .update(goal.toJson());
+    return await _collection.doc().update(goal.toJson());
   }
-
-
 }
