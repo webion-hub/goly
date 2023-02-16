@@ -17,12 +17,12 @@ class _GoalListTileState extends State<GoalListTile> {
     return widget.goal.steps == null  ? CheckboxListTile(
       value: false,
       onChanged: (_) {},
-      title: Text(widget.goal.title),
+      title: Text(widget.goal.name),
       subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
       controlAffinity: ListTileControlAffinity.leading,
     ) :
     ListTile(
-      title:  Text(widget.goal.title),
+      title:  Text(widget.goal.name),
       onTap: () {},
       leading: const Icon(Icons.open_in_new),
       subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,

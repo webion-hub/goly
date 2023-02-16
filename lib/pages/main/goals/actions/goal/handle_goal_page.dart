@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/settings/settings_switcher.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleGoalPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class HandleGoalPage extends StatefulWidget {
 
 class _HandleGoalPageState extends State<HandleGoalPage> {
   late TextEditingController goalName =
-      TextEditingController(text: widget.goal?.title ?? '');
+      TextEditingController(text: widget.goal?.name ?? '');
   late TextEditingController description =
       TextEditingController(text: widget.goal?.description ?? '');
   late TextEditingController reward =
@@ -36,6 +37,7 @@ class _HandleGoalPageState extends State<HandleGoalPage> {
       privateDescription = value;
     });
   }
+
   void privateRewardChange(bool value) {
     setState(() {
       privateReward = value;
@@ -45,10 +47,24 @@ class _HandleGoalPageState extends State<HandleGoalPage> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    void addgoal() {}
+    void addGoal() {
+      GoalService.addGoal(
+        categoryName: widget.categoryName,
+        goal: GoalModel(
+          name: goalName.text,
+          description: description.text,
+          reward: reward.text,
+          privateGoal: privateGoal,
+          privateDescription: privateDescription,
+          privateReward: privateReward,
+        ),
+      );
+    }
+
     return Scaffold(
-      appBar:
-          AppBar(title: Text(widget.goal != null ? 'Edit goal' : 'Add goal')),
+      appBar: AppBar(
+        title: Text(widget.goal != null ? 'Edit goal' : 'Add goal'),
+      ),
       body: Column(children: [
         Center(
           child: Container(
@@ -81,28 +97,29 @@ class _HandleGoalPageState extends State<HandleGoalPage> {
                   ),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(
-                    initialValue: privateGoal,
+                      initialValue: privateGoal,
                       icon: Icons.lock,
                       text: "Private goal",
                       subtitle: "Makes private all the goals inside it",
                       onChanged: privateGoalChange),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(
-                    initialValue: privateDescription,
+                      initialValue: privateDescription,
                       icon: Icons.lock,
                       text: "Private description",
                       subtitle: "Makes description private",
                       onChanged: privateDescriptionChange),
-                      const SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   SettingsSwitcher(
-                    initialValue: privateReward,
+                      initialValue: privateReward,
                       icon: Icons.lock,
                       text: "Private reward",
                       subtitle: "Makes reward private",
                       onChanged: privateRewardChange),
                   MainButton(
-                      text: widget.goal != null ? 'Edit goal' : 'Add goal',
-                      onPressed: addgoal),
+                    text: widget.goal != null ? 'Edit goal' : 'Add goal',
+                    onPressed: addGoal,
+                  ),
                 ],
               ),
             ),

@@ -1,5 +1,5 @@
 class GoalModel {
-  String title;
+  String name;
   String? description;
   String? reward;
   bool completed;
@@ -9,7 +9,7 @@ class GoalModel {
   List<GoalModel>? steps;
 
   GoalModel({
-    required this.title,
+    required this.name,
     this.description,
     this.steps,
     this.reward,
@@ -21,7 +21,7 @@ class GoalModel {
 
   GoalModel.fromJson(Map<String, dynamic> json)
       //: id = json['id'],
-       : title = json['title'],
+       : name = json['name'],
         description = json['description'],
         completed = json['completed'],
         privateGoal = json['privateGoal'],
@@ -31,7 +31,7 @@ class GoalModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     //data['id'] = id;
-    data['title'] = title;
+    data['name'] = name;
     data['description'] = description;
     data['completed'] = completed;
     data['privateGoal'] = privateGoal;
