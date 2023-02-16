@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/dialogs/confirmation_dialog.dart';
@@ -56,8 +58,12 @@ class CategoryCard extends StatelessWidget {
                 ),
               )),
           leading: const Icon(Icons.open_in_new),
-          subtitle:
-              category.description != null ? Text(category.description!) : null,
+          subtitle: category.description != null
+              ? Text(
+                  category.description!
+                      .substring(0, min(category.description!.length, 40)),
+                )
+              : null,
           trailing: FittedBox(
             child: CircularPercentIndicator(
               radius: 16.0,
