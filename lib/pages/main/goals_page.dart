@@ -24,7 +24,6 @@ class _MainPageState extends State<GoalsPage> {
 
   @override
   Widget build(BuildContext context) {
-    //var categories = DummyData.categories;
     List<CategoryModel> categories = List.empty();
     return Scaffold(
         appBar: const GoalsAppBar(),
@@ -46,8 +45,6 @@ class _MainPageState extends State<GoalsPage> {
                 snapshot.data?.docs.map((element) {
                   categories.add(CategoryModel.fromJson(element.data()));
                 });
-                // snapshot.data?.docs.forEach((element) {print(element.data()); });
-                // snapshot.data?.docs.toList().map((e) => print(e.toString()));
 
                 return Column(
                   children: [
@@ -55,10 +52,13 @@ class _MainPageState extends State<GoalsPage> {
                       'Life areas',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    ...categories
-                        .map((category) => CategoryCard(category: category)),
-                    ...?snapshot.data?.docs.map((e) => CategoryCard(
-                        category: CategoryModel.fromJson(e.data()))),
+                    ...?snapshot.data?.docs.map(
+                      (e) => CategoryCard(
+                        category: CategoryModel.fromJson(
+                          e.data(),
+                        ),
+                      ),
+                    ),
                     ActionCard(
                       text: "Add category",
                       icon: Icons.add,
