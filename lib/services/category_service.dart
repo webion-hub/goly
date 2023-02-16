@@ -35,6 +35,7 @@ class CategoryService extends Service {
         .snapshots();
         
   }
+  
   static Future getCategoriesFuture({String? userId}) async {
     return _collection
         .doc(userId ?? Utils.currentUid())
@@ -42,13 +43,11 @@ class CategoryService extends Service {
         .snapshots();
   }
 
-  static Future deleteCategories({required String categoryId}) async {
+  static Future deleteCategory({required String categoryId}) async {
       return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .delete();
-
   }
-
 }

@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/description_card.dart';
+import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/components/list_tile/goal_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
+import 'package:goly/pages/main/goals/goals_page.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -13,11 +15,13 @@ import 'package:goly/utils/constants.dart';
 class CategoryPage extends StatelessWidget {
   final CategoryModel category;
   const CategoryPage({super.key, required this.category});
-  void deleteCategory() {
-    CategoryService.deleteCategories(categoryId: category.name);
-  }
+
   void addGoalToCategory() {
-    GoalService.addGoal(categoryName: category.name, goal: GoalModel(title: "WebionTest", ));
+    GoalService.addGoal(
+        categoryName: category.name,
+        goal: GoalModel(
+          title: "WebionTest",
+        ));
   }
 
   @override
@@ -30,6 +34,24 @@ class CategoryPage extends StatelessWidget {
       ));
     }
 
+    void deleteCategory() {
+      showDialog(
+        context: context,
+        builder: (context) => ConfirmationDialog(
+          title: 'Are you sure?',
+          message:
+              'Are you sure you want to delete this category? All goals inside it will be deleted',
+          noAction: () {
+            Navigator.of(context).pop();
+          },
+          yesAction: () {
+            CategoryService.deleteCategory(categoryId: category.name);
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(category.name),
@@ -39,7 +61,7 @@ class CategoryPage extends StatelessWidget {
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: goToHandleCategory,
+            onPressed: deleteCategory,
             icon: const Icon(Icons.delete),
           ),
         ],
@@ -55,7 +77,7 @@ class CategoryPage extends StatelessWidget {
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,
-              action:addGoalToCategory,
+              action: addGoalToCategory,
             ),
           ]),
         ),

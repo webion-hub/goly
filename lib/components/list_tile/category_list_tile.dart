@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/actions/category/category_page.dart';
-import 'package:goly/utils/utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -33,25 +33,16 @@ class CategoryCard extends StatelessWidget {
         confirmDismiss: (direction) {
           return showDialog(
             context: context,
-            builder: (ctx) => AlertDialog(
-              title: const Text('Are you sure?'),
-              content: const Text(
-                'Do you want to remove this category and all the goals inside it?',
-              ),
-              actions: <Widget>[
-                ElevatedButton(
-                  child: const Text('No'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop(false);
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('Yes'),
-                  onPressed: () {
-                    Navigator.of(ctx).pop(true);
-                  },
-                ),
-              ],
+            builder: (ctx) => ConfirmationDialog(
+              title: 'Are you sure?',
+              message:
+                  'Do you want to remove this category and all the goals inside it?',
+              noAction: () {
+                Navigator.of(ctx).pop(false);
+              },
+              yesAction: () {
+                Navigator.of(ctx).pop(true);
+              },
             ),
           );
         },
