@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/pages/main/goals/actions/category/category_page.dart';
+import 'package:goly/utils/utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
   final CategoryModel category;
   const CategoryCard({super.key, required this.category});
-
+  void noAction(_) {}
+  void yesAction(_) {}
   @override
   Widget build(BuildContext context) {
     return Center(
