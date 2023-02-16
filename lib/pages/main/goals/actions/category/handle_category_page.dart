@@ -5,33 +5,55 @@ import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
 
-class HandleCategoryPage extends StatelessWidget {
+class HandleCategoryPage extends StatefulWidget {
   static String routeName = "add-category";
   final CategoryModel? category;
   const HandleCategoryPage({super.key, this.category});
 
   @override
+  State<HandleCategoryPage> createState() => _HandleCategoryPageState();
+}
+
+class _HandleCategoryPageState extends State<HandleCategoryPage> {
+  bool privateCategory = false;
+  bool privateDescription = false;
+  void privateCategoryChange(bool value) {
+    setState(() {
+      privateCategory = value;
+    });
+  }
+  void privateDescriptionChange(bool value) {
+    setState(() {
+      privateDescription = value;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextEditingController categoryName =
-        TextEditingController(text: category?.name ?? '');
+        TextEditingController(text: widget.category?.name ?? '');
     TextEditingController description =
-        TextEditingController(text: category?.description ?? '');
+        TextEditingController(text: widget.category?.description ?? '');
+
     final formKey = GlobalKey<FormState>();
     void addCategory() async {
       CategoryModel c = CategoryModel(
-          name: categoryName.text,
-          private: false,
-          description: description.text,
-          goals: category?.goals);
+        name: categoryName.text,
+        private: privateCategory,
+        description: description.text,
+        goals: widget.category?.goals,
+        privateDescription: privateDescription
+      );
 
-      category == null
+      widget.category == null
           ? CategoryService.addCategory(category: c)
           : CategoryService.editCategory(category: c);
     }
 
     return Scaffold(
       appBar: AppBar(
-          title: Text(category != null ? 'Edit category' : 'Add category')),
+          title:
+              Text(widget.category != null ? 'Edit category' : 'Add category')),
       body: Column(children: [
         Center(
           child: Container(
@@ -57,13 +79,23 @@ class HandleCategoryPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(
+                    initialValue: privateCategory,
                       icon: Icons.lock,
-                      text: "Make this category private",
-                      subtitle: "And all the goals inside it",
-                      onChanged: () {}),
+                      text: "Private category",
+                      subtitle: "Makes private all the goals inside it",
+                      onChanged: privateCategoryChange),
+                  const SizedBox(height: 20.0),
+                  SettingsSwitcher(
+                    initialValue: privateDescription,
+                      icon: Icons.lock,
+                      text: "Private description",
+                      subtitle: "Makes private description",
+                      onChanged: privateDescriptionChange),
                   const SizedBox(height: 20.0),
                   MainButton(
-                      text: category != null ? 'Edit category' : 'Add category',
+                      text: widget.category != null
+                          ? 'Update category'
+                          : 'Add category',
                       onPressed: addCategory),
                 ],
               ),

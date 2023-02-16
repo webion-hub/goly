@@ -4,8 +4,10 @@ import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/description_card.dart';
 import 'package:goly/components/list_tile/goal_list_tile.dart';
 import 'package:goly/models/category.dart';
+import 'package:goly/models/goal.dart';
 import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
 import 'package:goly/services/category_service.dart';
+import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class CategoryPage extends StatelessWidget {
@@ -13,6 +15,9 @@ class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key, required this.category});
   void deleteCategory() {
     CategoryService.deleteCategories(categoryId: category.name);
+  }
+  void addGoalToCategory() {
+    GoalService.addGoal(categoryName: category.name, goal: GoalModel(title: "WebionTest", ));
   }
 
   @override
@@ -50,7 +55,7 @@ class CategoryPage extends StatelessWidget {
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,
-              action: () {},
+              action:addGoalToCategory,
             ),
           ]),
         ),

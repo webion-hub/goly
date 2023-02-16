@@ -5,10 +5,12 @@ class SettingsSwitcher extends StatelessWidget {
   final IconData icon;
   final String text;
   final String? subtitle;
-  final Function onChanged;
+  final Function(bool) onChanged;
+  final bool initialValue;
 
   const SettingsSwitcher({
     super.key,
+    this.initialValue = false,
     required this.icon,
     required this.text,
     this.subtitle,
@@ -33,8 +35,8 @@ class SettingsSwitcher extends StatelessWidget {
           ),
           subtitle: subtitle != null ? Text(subtitle!) : null,
           trailing: CupertinoSwitch(
-            onChanged: (value) => onChanged(value),
-            value: false,
+            onChanged: onChanged,
+            value: initialValue,
           ),
         ),
         const Divider(),
