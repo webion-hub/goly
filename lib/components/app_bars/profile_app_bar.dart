@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goly/pages/main/settings_page.dart';
+import 'package:goly/pages/main/profile/settings_page.dart';
 import 'package:goly/utils/constants.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {

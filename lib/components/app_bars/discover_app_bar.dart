@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:goly/pages/main/chat_page.dart';
-import 'package:goly/pages/main/recent_conversations.dart';
-import 'package:goly/pages/main/settings_page.dart';
+import 'package:goly/pages/main/discover/actions/chat_page.dart';
+import 'package:goly/pages/main/discover/actions/recent_conversations.dart';
+import 'package:goly/pages/main/profile/settings_page.dart';
 
 class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DiscoverAppBar({super.key});

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/app_bars/discover_app_bar.dart';
 import 'package:goly/components/app_bars/goals_app_bar.dart';
 import 'package:goly/components/app_bars/profile_app_bar.dart';
-import 'package:goly/pages/main/discover_page.dart';
-import 'package:goly/pages/main/goals_page.dart';
-import 'package:goly/pages/main/profile_page.dart';
+import 'package:goly/pages/main/discover/discover_page.dart';
+import 'package:goly/pages/main/goals/goals_page.dart';
+import 'package:goly/pages/main/profile/profile_page.dart';
 import 'package:goly/utils/utils.dart';
 
 class App extends StatefulWidget {

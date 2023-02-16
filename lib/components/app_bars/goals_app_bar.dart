@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goly/pages/main/goals/handle_category_page.dart';
+import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
 
 class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GoalsAppBar({super.key});
