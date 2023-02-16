@@ -50,6 +50,7 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
       widget.category == null
           ? CategoryService.addCategory(category: c)
           : CategoryService.editCategory(category: c);
+      Navigator.of(context).pop();
     }
 
     return Scaffold(

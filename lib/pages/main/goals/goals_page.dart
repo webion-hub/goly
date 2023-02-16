@@ -41,7 +41,6 @@ class _MainPageState extends State<GoalsPage> {
                     child: CircularProgressIndicator(),
                   );
                 }
-
                 snapshot.data?.docs.map((element) {
                   categories.add(CategoryModel.fromJson(element.data()));
                 });
@@ -49,7 +48,7 @@ class _MainPageState extends State<GoalsPage> {
                 return Column(
                   children: [
                     Text(
-                      'Life areas',
+                      'Categories',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     ...?snapshot.data?.docs.map(

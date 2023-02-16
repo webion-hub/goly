@@ -59,6 +59,7 @@ class _HandleGoalPageState extends State<HandleGoalPage> {
           privateReward: privateReward,
         ),
       );
+      Navigator.of(context).pop();
     }
 
     return Scaffold(
