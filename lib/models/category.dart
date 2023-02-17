@@ -17,11 +17,10 @@ class CategoryModel {
 
   CategoryModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
-      description = json['description'],
+        description = json['description'],
         goals = ((json['goals'] as List<dynamic>)
-          .map((g) => GoalModel.fromJson(g))
-          .toList()
-        ),
+            .map((g) => GoalModel.fromJson(g))
+            .toList()),
         private = json['private'],
         privateDescription = json['privateDescription'] ?? false;
 

@@ -21,7 +21,9 @@ class _NewMessageState extends State<NewMessage> {
     //     content: _eneteredMessage,
     //     senderUid: Utils.currentUid(),
     //     time: Timestamp.now());
-    FirebaseFirestore.instance.collection('conversations').doc(Utils.currentUid());
+    FirebaseFirestore.instance
+        .collection('conversations')
+        .doc(Utils.currentUid());
     // (Utils.currentUid()).add(m.toJson())
     messageController.text = '';
     FocusScope.of(context).autofocus(textFocus);

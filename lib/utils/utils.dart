@@ -19,5 +19,4 @@ class Utils {
   static String currentEmail() {
     return firebaseAuth.currentUser!.email!;
   }
-
 }

@@ -4,7 +4,8 @@ class MarkAsCompletedListTile extends StatefulWidget {
   const MarkAsCompletedListTile({super.key});
 
   @override
-  State<MarkAsCompletedListTile> createState() => _MarkAsCompletedListTileState();
+  State<MarkAsCompletedListTile> createState() =>
+      _MarkAsCompletedListTileState();
 }
 
 class _MarkAsCompletedListTileState extends State<MarkAsCompletedListTile> {

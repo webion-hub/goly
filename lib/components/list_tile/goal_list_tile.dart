@@ -7,7 +7,8 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 class GoalListTile extends StatefulWidget {
   final GoalModel goal;
   final String categoryName;
-  const GoalListTile({super.key, required this.categoryName, required this.goal});
+  const GoalListTile(
+      {super.key, required this.categoryName, required this.goal});
 
   @override
   State<GoalListTile> createState() => _GoalListTileState();
@@ -16,15 +17,15 @@ class GoalListTile extends StatefulWidget {
 class _GoalListTileState extends State<GoalListTile> {
   void gotoGoalPage() {
     Navigator.of(context).push(CupertinoPageRoute(
-            builder: (context) => GoalPage(
-              categoryName: widget.categoryName,
-              goal: widget.goal,
-            ),
-          ));
+      builder: (context) => GoalPage(
+        categoryName: widget.categoryName,
+        goal: widget.goal,
+      ),
+    ));
   }
+
   @override
   Widget build(BuildContext context) {
-    
     // return widget.goal.steps == null  ? CheckboxListTile(
     //   value: false,
     //   onChanged: (_) {},
@@ -34,7 +35,7 @@ class _GoalListTileState extends State<GoalListTile> {
     // ) :
 
     return ListTile(
-      title:  Text(widget.goal.name),
+      title: Text(widget.goal.name),
       onTap: gotoGoalPage,
       leading: const Icon(Icons.open_in_new),
       subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
@@ -46,9 +47,6 @@ class _GoalListTileState extends State<GoalListTile> {
           progressColor: Colors.green,
         ),
       ),
-
-      
     );
- 
   }
 }

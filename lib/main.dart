@@ -28,10 +28,10 @@ final navigatorKey = GlobalKey<NavigatorState>();
 class MyApp extends StatelessWidget {
   final bool introductionDone;
   const MyApp({super.key, required this.introductionDone});
-  
+
   @override
   Widget build(BuildContext context) {
-    final  home = introductionDone  ? const App() : const IntroductionPage();
+    final home = introductionDone ? const App() : const IntroductionPage();
 
     return MaterialApp(
       title: Constants.appName,
@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((BuildContext context, snapshot) {
           return snapshot.connectionState == ConnectionState.waiting
-          ? const CircularProgressIndicator()
-          : snapshot.hasData
-            ? home
-            : const AuthPage();
+              ? const CircularProgressIndicator()
+              : snapshot.hasData
+                  ? home
+                  : const AuthPage();
         }),
       ),
       routes: {
@@ -57,9 +57,12 @@ class MyApp extends StatelessWidget {
         IntroductionPage.routeName: ((context) => const IntroductionPage()),
         DiscoverPage.routeName: ((context) => const DiscoverPage()),
         GoalsPage.routeName: ((context) => const GoalsPage()),
-        ProfilePage.routeName: ((context) => ProfilePage(profileId: Utils.currentUid(),)),
+        ProfilePage.routeName: ((context) => ProfilePage(
+              profileId: Utils.currentUid(),
+            )),
         SettingsPage.routeName: ((context) => const SettingsPage()),
-        RecentConversations.routeName: ((context) => const RecentConversations()),
+        RecentConversations.routeName: ((context) =>
+            const RecentConversations()),
         HandleCategoryPage.routeName: ((context) => const HandleCategoryPage()),
       },
     );

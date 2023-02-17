@@ -13,7 +13,7 @@ class UserService extends Service {
 
   static Future<UserModel> fetchUser() async {
     DocumentSnapshot doc = await _collection.doc(currentUid).get();
-    
+
     final data = doc.data() as Map<String, dynamic>;
     return UserModel.fromJson(data);
   }

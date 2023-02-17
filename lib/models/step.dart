@@ -14,7 +14,7 @@ class StepModel {
   });
 
   StepModel.fromJson(Map<String, dynamic> json)
-       : name = json['name'],
+      : name = json['name'],
         completed = json['completed'],
         privateGoal = json['privateGoal'],
         privateReward = json['privateReward'] ?? false;

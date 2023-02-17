@@ -22,29 +22,28 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         padding: Constants.pagePadding,
         child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(widget.profileId)
-                  .snapshots(),
-          builder: (context, snapshot) {
-            return FutureBuilder(
-              future: FirebaseFirestore.instance
-                  .collection('users')
-                  .doc(widget.profileId)
-                  .get(),
-              builder: ((context, snapshot) {
-                if (snapshot.data?.data() == null) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                UserModel user = UserModel.fromJson(
-                    snapshot.data?.data() as Map<String, dynamic>);
-                return UserProfile(user: user);
-              }),
-            );
-          }
-        ),
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(widget.profileId)
+                .snapshots(),
+            builder: (context, snapshot) {
+              return FutureBuilder(
+                future: FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(widget.profileId)
+                    .get(),
+                builder: ((context, snapshot) {
+                  if (snapshot.data?.data() == null) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  UserModel user = UserModel.fromJson(
+                      snapshot.data?.data() as Map<String, dynamic>);
+                  return UserProfile(user: user);
+                }),
+              );
+            }),
       ),
     );
   }

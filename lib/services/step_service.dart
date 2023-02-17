@@ -8,8 +8,11 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
 class StepService extends Service {
-  static Future addStep(
-      {required String categoryName, required int goalIndex, required StepModel step,}) async {
+  static Future addStep({
+    required String categoryName,
+    required int goalIndex,
+    required StepModel step,
+  }) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -19,8 +22,11 @@ class StepService extends Service {
     });
   }
 
-  static Future editStep({required String categoryName, required int goalIndex, required StepModel step,}) async {
+  static Future editStep({
+    required String categoryName,
+    required int goalIndex,
+    required StepModel step,
+  }) async {
     return await _collection.doc().update(step.toJson());
   }
-
 }

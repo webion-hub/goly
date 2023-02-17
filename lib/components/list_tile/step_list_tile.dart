@@ -12,7 +12,6 @@ class StepListTile extends StatefulWidget {
 class _StepListTileState extends State<StepListTile> {
   @override
   Widget build(BuildContext context) {
-    
     return CheckboxListTile(
       value: false,
       onChanged: (_) {},
@@ -34,7 +33,5 @@ class _StepListTileState extends State<StepListTile> {
     //       progressColor: Colors.green,
     //     ),
     //   ),
-
- 
   }
 }

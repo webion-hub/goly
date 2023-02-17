@@ -5,7 +5,7 @@ import 'package:goly/components/chat/new_message.dart';
 class ChatPage extends StatelessWidget {
   static const routeName = '/chat';
   final String userReceiver;
-   const ChatPage({super.key, required this.userReceiver});
+  const ChatPage({super.key, required this.userReceiver});
 
   @override
   Widget build(BuildContext context) {

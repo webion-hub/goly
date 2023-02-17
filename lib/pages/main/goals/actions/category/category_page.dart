@@ -70,7 +70,8 @@ class CategoryPage extends StatelessWidget {
             category.description != null
                 ? DescriptionCard(text: category.description!)
                 : const SizedBox(),
-            ...?category.goals?.map((goal) => GoalListTile(categoryName: category.name, goal: goal)),
+            ...?category.goals?.map((goal) =>
+                GoalListTile(categoryName: category.name, goal: goal)),
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,

@@ -15,7 +15,10 @@ class DescriptionCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Description", style: Theme.of(context).textTheme.subtitle2,),
+              Text(
+                "Description",
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
               const SizedBox(height: 20),
               Text(text),
             ],

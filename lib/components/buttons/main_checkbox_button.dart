@@ -11,7 +11,6 @@ class _MainCheckboxButtonState extends State<MainCheckboxButton> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
-    
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,
