@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ImageAndTitle extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class ImageAndTitle extends StatelessWidget {
         SizedBox(
           height: 170.0,
           width: MediaQuery.of(context).size.width,
-          child: Image.asset('assets/images/logo.png'),
+          child:SvgPicture.asset(image),
         ),
         const SizedBox(height: 20.0),
         Center(

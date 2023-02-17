@@ -8,6 +8,7 @@ import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/fields/text_field_input.dart';
 
 class LogIn extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -53,14 +54,21 @@ class _LogInState extends State<LogIn> {
           key: formKey,
           child: Column(
             children: [
-              EmailField(
-                controller: _emailController,
+              TextFieldInput(
+                hintText: "Email",
+                textInputType: TextInputType.emailAddress,
+                textEditingController: _emailController,
               ),
               const SizedBox(height: 10.0),
-              PasswordField(
-                controller: _passwordController,
-                nextFocus: buttonFocusNode,
-              )
+              // PasswordField(
+              //   controller: _passwordController,
+              //   nextFocus: buttonFocusNode,
+              // )
+              TextFieldInput(
+                hintText: "Password",
+                textInputType: TextInputType.text,
+                textEditingController: _passwordController,
+              ),
             ],
           ),
         ),
