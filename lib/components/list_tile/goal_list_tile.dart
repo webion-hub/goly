@@ -1,29 +1,41 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/pages/main/goals/actions/goal/goal_page.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class GoalListTile extends StatefulWidget {
   final GoalModel goal;
-  const GoalListTile({super.key, required this.goal});
+  final String categoryName;
+  const GoalListTile({super.key, required this.categoryName, required this.goal});
 
   @override
   State<GoalListTile> createState() => _GoalListTileState();
 }
 
 class _GoalListTileState extends State<GoalListTile> {
+  void gotoGoalPage() {
+    Navigator.of(context).push(CupertinoPageRoute(
+            builder: (context) => GoalPage(
+              categoryName: widget.categoryName,
+              goal: widget.goal,
+            ),
+          ));
+  }
   @override
   Widget build(BuildContext context) {
     
-    return widget.goal.steps == null  ? CheckboxListTile(
-      value: false,
-      onChanged: (_) {},
-      title: Text(widget.goal.name),
-      subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
-      controlAffinity: ListTileControlAffinity.leading,
-    ) :
-    ListTile(
+    // return widget.goal.steps == null  ? CheckboxListTile(
+    //   value: false,
+    //   onChanged: (_) {},
+    //   title: Text(widget.goal.name),
+    //   subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
+    //   controlAffinity: ListTileControlAffinity.leading,
+    // ) :
+
+    return ListTile(
       title:  Text(widget.goal.name),
-      onTap: () {},
+      onTap: gotoGoalPage,
       leading: const Icon(Icons.open_in_new),
       subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
       trailing: FittedBox(

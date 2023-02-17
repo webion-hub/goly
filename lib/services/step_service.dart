@@ -2,24 +2,25 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/models/step.dart';
 import 'package:goly/utils/utils.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
-class GoalService extends Service {
-  static Future addGoal(
-      {required String categoryName, required GoalModel goal}) async {
+class StepService extends Service {
+  static Future addStep(
+      {required String categoryName, required int goalIndex, required StepModel step,}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryName)
         .update({
-      'goals': FieldValue.arrayUnion([goal.toJson()])
+      'goals.1': FieldValue.arrayUnion([step.toJson()])
     });
   }
 
-  // static Future editGoal({required GoalModel goal}) async {
+  // static Future editStep({required GoalModel goal}) async {
   //   return await _collection.doc().update(goal.toJson());
   // }
 }

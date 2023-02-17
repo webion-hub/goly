@@ -4,22 +4,24 @@ import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/description_card.dart';
 import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/components/list_tile/goal_list_tile.dart';
-import 'package:goly/models/category.dart';
-import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
+import 'package:goly/components/list_tile/step_list_tile.dart';
+import 'package:goly/models/goal.dart';
 import 'package:goly/pages/main/goals/actions/goal/handle_goal_page.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
 
-class CategoryPage extends StatelessWidget {
-  final CategoryModel category;
-  const CategoryPage({super.key, required this.category});
+class GoalPage extends StatelessWidget {
+  final GoalModel goal;
+  final String categoryName;
+  const GoalPage({super.key, required this.categoryName, required this.goal});
 
   @override
   Widget build(BuildContext context) {
     void goToHandleCategory() {
       Navigator.of(context).push(CupertinoPageRoute(
-          builder: (context) => HandleCategoryPage(
-                category: category,
+          builder: (context) => HandleGoalPage(
+                goal: goal,
+                categoryName: categoryName,
               )));
     }
 
@@ -34,7 +36,7 @@ class CategoryPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
           yesAction: () {
-            CategoryService.deleteCategory(categoryId: category.name);
+            CategoryService.deleteCategory(categoryId: categoryName);
             Navigator.of(context).popUntil((route) => route.isFirst);
           },
         ),
@@ -44,14 +46,14 @@ class CategoryPage extends StatelessWidget {
     void goToHandleGoal() {
       Navigator.of(context).push(CupertinoPageRoute(
         builder: (context) => HandleGoalPage(
-          categoryName: category.name,
+          categoryName: categoryName,
         ),
       ));
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(category.name),
+        title: Text(categoryName),
         actions: [
           IconButton(
             onPressed: goToHandleCategory,
@@ -67,10 +69,10 @@ class CategoryPage extends StatelessWidget {
         child: Container(
           padding: Constants.pagePadding,
           child: Column(children: [
-            category.description != null
-                ? DescriptionCard(text: category.description!)
+            goal.description != null
+                ? DescriptionCard(text: goal.description!)
                 : const SizedBox(),
-            ...?category.goals?.map((goal) => GoalListTile(categoryName: category.name, goal: goal)),
+            ...?goal.steps?.map((step) => StepListTile(step: step)),
             ActionCard(
               text: 'Add goal',
               icon: Icons.add,
