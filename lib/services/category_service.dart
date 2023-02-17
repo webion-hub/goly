@@ -9,33 +9,30 @@ final CollectionReference _collection = _firestore.collection('goals');
 
 class CategoryService extends Service {
   static Future addCategory({required CategoryModel category}) async {
-
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(category.name)
-        .set(
-          category.toJson(),
-        );
+        .set(category.toJson());
   }
 
   static Future editCategory({required CategoryModel category}) async {
     return await _collection
-      .doc(Utils.currentUid())
-      .collection('categories')
-      .doc('eWdXda9XtZ4UlFmfS3DG')
-      .update(category.toJson());
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc('eWdXda9XtZ4UlFmfS3DG')
+        .update(category.toJson());
   }
 
-  static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoriesStream({String? userId})  {
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoriesStream(
+      {String? userId}) {
     return _collection
         .doc(userId ?? Utils.currentUid())
         .collection('categories')
         .doc()
         .snapshots();
-        
   }
-  
+
   static Future getCategoriesFuture({String? userId}) async {
     return _collection
         .doc(userId ?? Utils.currentUid())
@@ -44,7 +41,7 @@ class CategoryService extends Service {
   }
 
   static Future deleteCategory({required String categoryId}) async {
-      return _collection
+    return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)

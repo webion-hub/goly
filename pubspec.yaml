@@ -50,6 +50,7 @@ dependencies:
   firebase_messaging: ^14.2.2
   cached_network_image: ^3.2.3
   percent_indicator: ^4.2.2
+  dartdoc: ^6.1.5
 
 flutter_icons:
   android: true
