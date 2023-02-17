@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:goly/widgets/auth/rich_text_with_action.dart';
-import 'package:goly/widgets/fields/email_field.dart';
-import 'package:goly/widgets/fields/password_field.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/auth/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/fields/text_field_input.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -57,15 +56,20 @@ class _SignUpState extends State<SignUp> {
       children: [
         Form(
           key: formKey,
-          child: Column(
-            children: [
-              EmailField(
-                controller: _emailController,
-              ),
-              const SizedBox(height: 10.0),
-              PasswordField(controller: _passwordController)
-            ],
-          ),
+          child: Column(children: [
+            TextFieldInput(
+              hintText: "Email",
+              textInputType: TextInputType.emailAddress,
+              textEditingController: _emailController,
+            ),
+            const SizedBox(height: 10.0),
+            TextFieldInput(
+              hintText: "Password",
+              isPass: true,
+              textInputType: TextInputType.text,
+              textEditingController: _passwordController,
+            ),
+          ]),
         ),
         const SizedBox(height: 20.0),
         MainButton(text: "Sign up", onPressed: signUp),

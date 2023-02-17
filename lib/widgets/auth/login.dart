@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
 import 'package:goly/widgets/auth/rich_text_with_action.dart';
-import 'package:goly/widgets/fields/email_field.dart';
-import 'package:goly/widgets/fields/password_field.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
@@ -66,6 +64,7 @@ class _LogInState extends State<LogIn> {
               // )
               TextFieldInput(
                 hintText: "Password",
+                isPass: true,
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
               ),
