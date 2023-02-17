@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/cards/action_card.dart';
 import 'package:goly/components/cards/description_card.dart';
 import 'package:goly/components/dialogs/confirmation_dialog.dart';
-import 'package:goly/components/list_tile/goal_list_tile.dart';
+import 'package:goly/components/list_tile/mark_as_completed_list_tile.dart';
 import 'package:goly/components/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/models/step.dart';
 import 'package:goly/pages/main/goals/actions/goal/handle_goal_page.dart';
-import 'package:goly/services/category_service.dart';
+import 'package:goly/services/goal_service.dart';
+import 'package:goly/services/step_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class GoalPage extends StatelessWidget {
@@ -31,29 +33,35 @@ class GoalPage extends StatelessWidget {
         builder: (context) => ConfirmationDialog(
           title: 'Are you sure?',
           message:
-              'Are you sure you want to delete this category? All goals inside it will be deleted',
+              'Are you sure you want to delete this goal? All goals steps it will be deleted',
           noAction: () {
             Navigator.of(context).pop();
           },
           yesAction: () {
-            CategoryService.deleteCategory(categoryId: categoryName);
+            GoalService.deleteGoal(categoryName: categoryName, goal: goal);
             Navigator.of(context).popUntil((route) => route.isFirst);
           },
         ),
       );
     }
 
-    void goToHandleGoal() {
-      Navigator.of(context).push(CupertinoPageRoute(
-        builder: (context) => HandleGoalPage(
-          categoryName: categoryName,
-        ),
-      ));
+    void goToHandleStep() async {
+      // try{
+      //   StepService.addStep(categoryName: categoryName, goalIndex: 1, step: StepModel(name: "stepTest"));
+      // } catch (e) {
+      //   print(e);
+      // }
+      
+      // Navigator.of(context).push(CupertinoPageRoute(
+      //   builder: (context) => HandleGoalPage(
+      //     categoryName: categoryName,
+      //   ),
+      // ));
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(categoryName),
+        title: Text(goal.name),
         actions: [
           IconButton(
             onPressed: goToHandleCategory,
@@ -72,11 +80,12 @@ class GoalPage extends StatelessWidget {
             goal.description != null
                 ? DescriptionCard(text: goal.description!)
                 : const SizedBox(),
+            const MarkAsCompletedListTile(),
             ...?goal.steps?.map((step) => StepListTile(step: step)),
             ActionCard(
-              text: 'Add goal',
+              text: 'Add step',
               icon: Icons.add,
-              action: goToHandleGoal,
+              action: goToHandleStep,
             ),
           ]),
         ),

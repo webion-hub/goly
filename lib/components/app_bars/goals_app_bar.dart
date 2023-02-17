@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
 
 class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GoalsAppBar({super.key});
@@ -8,12 +7,6 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Goals'),
-      actions: [
-                IconButton(
-          onPressed: () => Navigator.of(context).pushNamed(HandleCategoryPage.routeName),
-          icon: const Icon(Icons.add),
-        ),
-      ],
     );
   }
 

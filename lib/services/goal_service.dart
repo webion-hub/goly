@@ -22,4 +22,14 @@ class GoalService extends Service {
   // static Future editGoal({required GoalModel goal}) async {
   //   return await _collection.doc().update(goal.toJson());
   // }
+  static Future deleteGoal(
+      {required String categoryName, required GoalModel goal}) async {
+    return await _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryName)
+        .update({
+      'goals': FieldValue.arrayUnion([goal.toJson()])
+    });
+  }
 }

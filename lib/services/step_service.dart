@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/utils/utils.dart';
 
@@ -16,11 +15,12 @@ class StepService extends Service {
         .collection('categories')
         .doc(categoryName)
         .update({
-      'goals.1': FieldValue.arrayUnion([step.toJson()])
+      'goals[$goalIndex.steps]': FieldValue.arrayUnion([step.toJson()])
     });
   }
 
-  // static Future editStep({required GoalModel goal}) async {
-  //   return await _collection.doc().update(goal.toJson());
-  // }
+  static Future editStep({required String categoryName, required int goalIndex, required StepModel step,}) async {
+    return await _collection.doc().update(step.toJson());
+  }
+
 }

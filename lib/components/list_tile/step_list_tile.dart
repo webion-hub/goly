@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class StepListTile extends StatefulWidget {
   final StepModel step;
