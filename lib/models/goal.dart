@@ -38,7 +38,7 @@ class GoalModel {
       'description': description,
       'completed': completed,
       'privateGoal': privateGoal,
-      'goals': steps?.map((step) => step.toJson()) ?? [],
+      'steps': steps?.map((step) => step.toJson()) ?? [],
       'privateDescription': privateDescription,
     };
   }

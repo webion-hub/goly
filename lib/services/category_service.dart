@@ -8,19 +8,21 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
 class CategoryService extends Service {
+  ///Add a new category to firestore under the collection categories
   static Future addCategory({required CategoryModel category}) async {
-    return await _collection
+    return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(category.name)
         .set(category.toJson());
   }
 
+  ///Edit a new category to firestore under the collection categories
   static Future editCategory({required CategoryModel category}) async {
-    return await _collection
+    return _collection
         .doc(Utils.currentUid())
         .collection('categories')
-        .doc('eWdXda9XtZ4UlFmfS3DG')
+        .doc(category.name)
         .update(category.toJson());
   }
 
@@ -33,10 +35,12 @@ class CategoryService extends Service {
         .snapshots();
   }
 
-  static Future getCategoriesFuture({String? userId}) async {
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoryStream(
+      {String? userId, required String categoryId}) {
     return _collection
         .doc(userId ?? Utils.currentUid())
         .collection('categories')
+        .doc(categoryId)
         .snapshots();
   }
 
@@ -46,5 +50,24 @@ class CategoryService extends Service {
         .collection('categories')
         .doc(categoryId)
         .delete();
+  }
+
+  static Future<int> getNumberofGoals({required String categoryId}) async {
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .get()
+        .then((value) => value.size);
+  }
+  static Stream<QuerySnapshot<Map<String,dynamic>>> getCategoryGoals({required String categoryId}) {
+    print(categoryId);
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .snapshots();
   }
 }

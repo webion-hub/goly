@@ -6,6 +6,7 @@ import 'package:goly/components/dialogs/confirmation_dialog.dart';
 import 'package:goly/components/list_tile/mark_as_completed_list_tile.dart';
 import 'package:goly/components/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/models/step.dart';
 import 'package:goly/pages/main/goals/actions/goal/handle_goal_page.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -44,11 +45,12 @@ class GoalPage extends StatelessWidget {
     }
 
     void goToHandleStep() async {
-      // try{
-      //   StepService.addStep(categoryName: categoryName, goalIndex: 1, step: StepModel(name: "stepTest"));
-      // } catch (e) {
-      //   print(e);
-      // }
+      try{
+        GoalService.addStepToGoal(goal: goal, step: StepModel(name: "stepTest"));
+        //StepService.addStep(categoryName: categoryName, goalIndex: 1, step: StepModel(name: "stepTest"));
+      } catch (e) {
+        print(e);
+      }
 
       // Navigator.of(context).push(CupertinoPageRoute(
       //   builder: (context) => HandleGoalPage(

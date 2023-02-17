@@ -55,7 +55,7 @@ class CategoryCard extends StatelessWidget {
           onTap: (() => Navigator.of(context).push(
                 CupertinoPageRoute(
                   builder: (context) => CategoryPage(
-                    category: category,
+                    categoryName: category.name,
                   ),
                 ),
               )),

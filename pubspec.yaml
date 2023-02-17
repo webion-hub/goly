@@ -51,6 +51,8 @@ dependencies:
   cached_network_image: ^3.2.3
   percent_indicator: ^4.2.2
   dartdoc: ^6.1.5
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.0
 
 flutter_icons:
   android: true
@@ -71,6 +73,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
