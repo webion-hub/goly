@@ -4,7 +4,7 @@ import 'package:goly/widgets/auth/rich_text_with_action.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
-import 'package:goly/screens/auth/handle_profile_screen.dart';
+import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/fields/text_field_input.dart';
 

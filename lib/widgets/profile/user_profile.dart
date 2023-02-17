@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/widgets/buttons/main_outlined_button.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 import 'package:goly/models/user.dart';
-import 'package:goly/screens/auth/handle_profile_screen.dart';
+import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 
 class UserProfile extends StatelessWidget {

@@ -10,7 +10,7 @@ import 'package:goly/screens/main/discover/actions/recent_conversations_screen.d
 import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
-import 'package:goly/screens/main/profile/settings_screen.dart';
+import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';

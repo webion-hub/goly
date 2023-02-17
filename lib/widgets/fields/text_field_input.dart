@@ -19,7 +19,7 @@ class TextFieldInput extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       borderSide: Divider.createBorderSide(context),
     );
-
+    //TODO: add validation
     return TextField(
       controller: textEditingController,
       decoration: InputDecoration(
