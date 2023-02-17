@@ -50,7 +50,7 @@ class _UserImagePickerState extends State<UserImagePicker> {
     } else if (widget.imagePath != null) {
       img = Image.network(widget.imagePath!).image;
     } else {
-      img = Image.network(Constants.userImageDefault).image;
+      img = Image.asset(Constants.userImageDefault).image;
     }
     return Column(
       children: [
