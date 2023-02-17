@@ -1,11 +1,8 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goly/models/step.dart';
-import 'package:goly/utils/utils.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _collection = _firestore.collection('goals');
+// final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// final CollectionReference _collection = _firestore.collection('goals');
 
 class StepService extends Service {
   // static Future addStep({

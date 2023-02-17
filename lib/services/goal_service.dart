@@ -16,7 +16,6 @@ class GoalService extends Service {
   }) async {
     var numberOfGoals = 
         await CategoryService.getNumberofGoals(categoryId: categoryName);
-    print(numberOfGoals);
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -53,9 +52,9 @@ class GoalService extends Service {
 
   static void addStepToGoal(
       {required GoalModel goal, required StepModel step}) {
-    if (goal.steps == null) {
-      goal.steps = [];
-    }
-    goal.steps!.add(step);
+    // if (goal.steps == null) {
+    //   goal.steps = [];
+    // }
+    // goal.steps!.add(step);
   }
 }

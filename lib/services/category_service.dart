@@ -68,7 +68,6 @@ class CategoryService extends Service {
         .then((value) => value.size);
   }
   static Stream<QuerySnapshot<Map<String,dynamic>>> getCategoryGoals({required String categoryId}) {
-    print(categoryId);
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')

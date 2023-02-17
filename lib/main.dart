@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/pages/auth/auth_page.dart';
-import 'package:goly/pages/app.dart';
-import 'package:goly/pages/auth/forgot_password_page.dart';
-import 'package:goly/pages/introductions/introduction_page.dart';
-import 'package:goly/pages/main/goals/actions/category/handle_category_page.dart';
-import 'package:goly/pages/main/discover/actions/recent_conversations.dart';
-import 'package:goly/pages/main/discover/discover_page.dart';
-import 'package:goly/pages/main/goals/goals_page.dart';
-import 'package:goly/pages/main/profile/profile_page.dart';
-import 'package:goly/pages/main/profile/settings_page.dart';
+import 'package:goly/screens/auth/auth_screen.dart';
+import 'package:goly/screens/app.dart';
+import 'package:goly/screens/auth/forgot_password_screen.dart';
+import 'package:goly/screens/introductions/introduction_screen.dart';
+import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
+import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
+import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/goals/goals_screen.dart';
+import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:goly/screens/main/profile/settings_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,22 +48,22 @@ class MyApp extends StatelessWidget {
               ? const CircularProgressIndicator()
               : snapshot.hasData
                   ? home
-                  : const AuthPage();
+                  : const AuthScreen();
         }),
       ),
       routes: {
-        AuthPage.routeName: ((context) => const AuthPage()),
-        ForgotPasswordPage.routeName: ((context) => const ForgotPasswordPage()),
+        AuthScreen.routeName: ((context) => const AuthScreen()),
+        ForgotPasswordScreen.routeName: ((context) => const ForgotPasswordScreen()),
         IntroductionPage.routeName: ((context) => const IntroductionPage()),
-        DiscoverPage.routeName: ((context) => const DiscoverPage()),
-        GoalsPage.routeName: ((context) => const GoalsPage()),
-        ProfilePage.routeName: ((context) => ProfilePage(
+        DiscoverScreen.routeName: ((context) => const DiscoverScreen()),
+        GoalsScreen.routeName: ((context) => const GoalsScreen()),
+        ProfileScreen.routeName: ((context) => ProfileScreen(
               profileId: Utils.currentUid(),
             )),
-        SettingsPage.routeName: ((context) => const SettingsPage()),
-        RecentConversations.routeName: ((context) =>
-            const RecentConversations()),
-        HandleCategoryPage.routeName: ((context) => const HandleCategoryPage()),
+        SettingsScreen.routeName: ((context) => const SettingsScreen()),
+        RecentConversationsScreen.routeName: ((context) =>
+            const RecentConversationsScreen()),
+        HandleCategoryScreen.routeName: ((context) => const HandleCategoryScreen()),
       },
     );
   }
