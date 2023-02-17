@@ -24,7 +24,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(authType)),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Container(
           padding: Constants.pagePadding,
           child: Column(
             children: [

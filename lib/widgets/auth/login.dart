@@ -58,10 +58,6 @@ class _LogInState extends State<LogIn> {
                 textEditingController: _emailController,
               ),
               const SizedBox(height: 10.0),
-              // PasswordField(
-              //   controller: _passwordController,
-              //   nextFocus: buttonFocusNode,
-              // )
               TextFieldInput(
                 hintText: "Password",
                 isPass: true,
