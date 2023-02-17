@@ -41,6 +41,9 @@ class _MainPageState extends State<GoalsPage> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                if(snapshot.data == null) {
+                  return Text('Start adding some categories ');
+                }
                 snapshot.data?.docs.map((element) {
                   categories.add(CategoryModel.fromJson(element.data()));
                 });

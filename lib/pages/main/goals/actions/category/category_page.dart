@@ -52,18 +52,19 @@ class CategoryPage extends StatelessWidget {
 
     return StreamBuilder(
         stream: CategoryService.getCategoryStream(categoryId: categoryName),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+        builder: (context, categorySnapshot) {
+          if (categorySnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          if (!snapshot.hasData) {
+          if (!categorySnapshot.hasData) {
             return const Center(
               child: Text('error'),
             );
           }
-          var category = CategoryModel.fromJson(snapshot.data!.data()!);
+          print(categorySnapshot.data);
+          var category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
           print(category.toJson());
           return Scaffold(
             appBar: AppBar(
@@ -89,22 +90,20 @@ class CategoryPage extends StatelessWidget {
                   StreamBuilder(
                       stream: CategoryService.getCategoryGoals(
                           categoryId: category.name),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
+                      builder: (context, goalSnapshot) {
+                        if (!goalSnapshot.hasData) {
                           return const Text('Start adding some data');
                         }
-                        List<GoalModel> goals = List.empty();
-                        print(snapshot.data!.docs);
-
-                        snapshot.data!.docs.map((element) {
-                          print("$element a");
-                          goals.add(GoalModel.fromJson(element.data()));
-                        });
                         return Column(
-                            children: snapshot.data!.docs
-                                .map((e) => GoalListTile(
+                            children: goalSnapshot.data!.docs
+                                .map(
+                                  (e) => GoalListTile(
                                     categoryName: category.name,
-                                    goal: GoalModel.fromJson(e.data())))
+                                    goal: GoalModel.fromJson(
+                                      e.data(),
+                                    ),
+                                  ),
+                                )
                                 .toList());
                       }),
                   ActionCard(

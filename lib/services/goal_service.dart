@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/services/category_service.dart';

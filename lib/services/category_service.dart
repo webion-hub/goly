@@ -45,13 +45,22 @@ class CategoryService extends Service {
   }
 
   static Future deleteCategory({required String categoryId}) async {
+    await deleteCategoryGoals(categoryId: categoryId);
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .delete();
   }
-
+  static Future deleteCategoryGoals({required String categoryId}) async {
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc()
+        .delete();
+  }
   static Future<int> getNumberofGoals({required String categoryId}) async {
     return _collection
         .doc(Utils.currentUid())
