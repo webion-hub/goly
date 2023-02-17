@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/components/buttons/main_button.dart';
 import 'package:goly/components/settings/settings_switcher.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -47,10 +48,15 @@ class _HandleGoalPageState extends State<HandleGoalPage> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    void addGoal() {
-      GoalService.addGoal(
+    void addGoal() async {
+      int? goalId;
+      if(widget.goal == null) {
+        goalId = await CategoryService.getNumberofGoals(categoryId: widget.categoryName);
+      }
+      await GoalService.addGoal(
         categoryName: widget.categoryName,
         goal: GoalModel(
+          id: widget.goal?.id ?? goalId!,
           name: goalName.text,
           description: description.text,
           reward: reward.text,
