@@ -18,12 +18,9 @@ class CategoryService extends Service {
   }
 
   ///Edit a new category to firestore under the collection categories
-  static Future editCategory({required CategoryModel category}) async {
-    return _collection
-        .doc(Utils.currentUid())
-        .collection('categories')
-        .doc(category.name)
-        .update(category.toJson());
+  static Future editCategory({required String oldCategoryName, required CategoryModel category}) async {
+    deleteCategory(categoryId: oldCategoryName);
+    addCategory(category: category);
   }
 
   static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoriesStream(

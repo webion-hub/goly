@@ -39,7 +39,7 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    void addCategory() async {
+    void handleCategory() async {
       CategoryModel c = CategoryModel(
           name: categoryName.text,
           private: privateCategory,
@@ -49,7 +49,7 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
 
       widget.category == null
           ? CategoryService.addCategory(category: c)
-          : CategoryService.editCategory(category: c);
+          : CategoryService.editCategory(oldCategoryName: widget.category!.name, category: c);
       Navigator.of(context).pop();
     }
 
@@ -99,7 +99,7 @@ class _HandleCategoryPageState extends State<HandleCategoryPage> {
                     text: widget.category != null
                         ? 'Update category'
                         : 'Add category',
-                    onPressed: addCategory,
+                    onPressed: handleCategory,
                   ),
                 ],
               ),

@@ -19,11 +19,14 @@ class GoalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void goToHandleCategory() {
-      Navigator.of(context).push(CupertinoPageRoute(
+      Navigator.of(context).push(
+        CupertinoPageRoute(
           builder: (context) => HandleGoalPage(
-                goal: goal,
-                categoryName: categoryName,
-              )));
+            goal: goal,
+            categoryName: categoryName,
+          ),
+        ),
+      );
     }
 
     void deleteCategory() {
@@ -45,8 +48,9 @@ class GoalPage extends StatelessWidget {
     }
 
     void goToHandleStep() async {
-      try{
-        GoalService.addStepToGoal(goal: goal, step: StepModel(name: "stepTest"));
+      try {
+        GoalService.addStepToGoal(
+            goal: goal, step: StepModel(name: "stepTest"));
         //StepService.addStep(categoryName: categoryName, goalIndex: 1, step: StepModel(name: "stepTest"));
       } catch (e) {
         print(e);
