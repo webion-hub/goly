@@ -1,18 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/responsive/mobile_screen_layout.dart';
-import 'package:goly/responsive/responsive_layout.dart';
-import 'package:goly/responsive/web_screen_layout.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
-import 'package:goly/screens/auth/forgot_password_screen.dart';
-import 'package:goly/screens/introductions/introduction_screen.dart';
-import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
-import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
-import 'package:goly/screens/main/goals/goals_screen.dart';
-import 'package:goly/screens/main/profile/profile_screen.dart';
-import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/router.dart';
 import 'package:goly/utils/theme/dark_mode.dart';
@@ -62,6 +53,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
+  static String routeName = "/";
   const Home({
     Key? key,
   }) : super(key: key);
@@ -75,10 +67,11 @@ class Home extends StatelessWidget {
             // Checking if the snapshot has any data or not
             if (snapshot.hasData) {
               // if snapshot has data which means user is logged in then we check the width of screen and accordingly display the screen layout
-              return const ResponsiveLayout(
-                mobileScreenLayout: MobileScreenLayout(),
-                webScreenLayout: WebScreenlayout(),
-              );
+              GoRouter.of(context).go(DiscoverScreen.routeName);
+              // const ResponsiveLayout(
+              //   mobileScreenLayout: MobileScreenLayout(),
+              //   webScreenLayout: WebScreenlayout(),
+              //);
             } else if (snapshot.hasError) {
               return Center(
                 child: Text('${snapshot.error}'),
@@ -92,6 +85,7 @@ class Home extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+              GoRouter.of(context).go(AuthScreen.routeName);
 
           return const AuthScreen();
       }),

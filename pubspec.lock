@@ -127,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  change_notifier:
+    dependency: "direct main"
+    description:
+      name: change_notifier
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.24.0"
   characters:
     dependency: transitive
     description:
@@ -225,6 +232,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  dart_internal:
+    dependency: transitive
+    description:
+      name: dart_internal
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.6"
   dart_style:
     dependency: transitive
     description:
@@ -779,6 +793,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.1"
   rxdart:
     dependency: transitive
     description:
@@ -1030,5 +1051,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.6 <3.0.0"
+  dart: ">=2.18.6 <2.20.0"
   flutter: ">=3.3.0"
