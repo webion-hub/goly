@@ -12,12 +12,15 @@ class Constants {
     backgroundColor: LightMode.backgroundColor,
     primaryColor: LightMode.primaryColor,
     secondaryHeaderColor: LightMode.secondaryColor,
+    colorScheme: LightMode.lightColorScheme,
+    
   );
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
-    backgroundColor: DarkMode.backgroundColor,
+    scaffoldBackgroundColor: DarkMode.backgroundColor,
     primaryColor: DarkMode.primaryColor,
     secondaryHeaderColor: DarkMode.secondaryColor,
+    colorScheme: DarkMode.darkColorScheme,
   );
 
 }

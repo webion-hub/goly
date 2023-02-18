@@ -14,9 +14,9 @@ class ImageAndTitle extends StatelessWidget {
       children: [
         SizedBox(height: MediaQuery.of(context).size.height / 25),
         SizedBox(
-          height: 170.0,
+          height: 140.0,
           width: MediaQuery.of(context).size.width,
-          child:SvgPicture.asset(image),
+          child: Image.asset(image),
         ),
         const SizedBox(height: 20.0),
         Center(

@@ -73,11 +73,6 @@ class _SignUpState extends State<SignUp> {
         ),
         const SizedBox(height: 20.0),
         MainButton(text: "Sign up", onPressed: signUp),
-        const SizedBox(height: 20),
-        RichTextWithAction(
-            text: 'Already have an account?',
-            actionText: 'Log in',
-            action: widget.onClickedSignup)
       ],
     );
   }

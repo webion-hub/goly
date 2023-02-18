@@ -74,11 +74,7 @@ class _LogInState extends State<LogIn> {
           onPressed: logIn,
           focusNode: buttonFocusNode,
         ),
-        const SizedBox(height: 20),
-        RichTextWithAction(
-            text: 'Don\'t have an account?',
-            actionText: 'Sign up',
-            action: widget.onClickedSignup)
+
       ],
     );
   }
