@@ -40,10 +40,10 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: Constants.homeScreenItems,
         controller: pageController,
         pageSnapping: false,
         onPageChanged: onPageChanged,
+        children: Constants.homeScreenItems,
       ),
       bottomNavigationBar: CupertinoTabBar(
         items: const [

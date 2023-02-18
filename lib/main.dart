@@ -5,7 +5,6 @@ import 'package:goly/responsive/mobile_screen_layout.dart';
 import 'package:goly/responsive/responsive_layout.dart';
 import 'package:goly/responsive/web_screen_layout.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
-import 'package:goly/screens/app.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/introductions/introduction_screen.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
@@ -18,11 +17,8 @@ import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/theme/dark_mode.dart';
 import 'package:goly/utils/theme/light_mode.dart';
 import 'package:goly/utils/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final prefs = await SharedPreferences.getInstance();
   //final introductionDone = prefs.getBool('introductionDone') ?? false;
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -51,7 +47,7 @@ class MyApp extends StatelessWidget {
               // Checking if the snapshot has any data or not
               if (snapshot.hasData) {
                 // if snapshot has data which means user is logged in then we check the width of screen and accordingly display the screen layout
-                return ResponsiveLayout(
+                return const ResponsiveLayout(
                   mobileScreenLayout: MobileScreenLayout(),
                   webScreenLayout: WebScreenlayout(),
                 );
