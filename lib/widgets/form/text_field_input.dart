@@ -5,23 +5,40 @@ class TextFieldInput extends StatelessWidget {
   final bool isPass;
   final String hintText;
   final TextInputType textInputType;
+  final int? maxLines;
+  final String? Function(String?)? validation;
   const TextFieldInput({
     Key? key,
     required this.textEditingController,
     this.isPass = false,
     required this.hintText,
     required this.textInputType,
+    this.maxLines,
+    this.validation,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String? errorMessage;
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: Divider.createBorderSide(context),
     );
-    //TODO: add validation
-    return TextField(
+    return TextFormField(
       controller: textEditingController,
+      maxLines: maxLines,
+      keyboardType: textInputType,
+      obscureText: isPass,
+      validator: (value) {
+          if(validation == null) {
+            return null;
+          }
+          errorMessage = validation!(value);
+          if (value != null && errorMessage != null) {
+            return errorMessage;
+          }
+          return null;
+        },
       decoration: InputDecoration(
         hintText: hintText,
         border: inputBorder,
@@ -30,8 +47,7 @@ class TextFieldInput extends StatelessWidget {
         filled: true,
         contentPadding: const EdgeInsets.all(16),
       ),
-      keyboardType: textInputType,
-      obscureText: isPass,
+
     );
   }
 }

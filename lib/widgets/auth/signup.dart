@@ -6,7 +6,7 @@ import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
-import 'package:goly/widgets/fields/text_field_input.dart';
+import 'package:goly/widgets/form/text_field_input.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedSignup;

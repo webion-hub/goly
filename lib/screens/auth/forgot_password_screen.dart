@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
-import 'package:goly/widgets/fields/email_field.dart';
+import 'package:goly/widgets/form/email_field.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 

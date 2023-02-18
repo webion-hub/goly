@@ -20,7 +20,13 @@ class Validations {
 
   static String? validatePassword(String? value) {
     if (value!.isEmpty || value.length < 6) {
-      return 'Please enter more than 6 characters';
+      return 'Please enter at least 6 characters';
+    }
+    return null;
+  }
+  static String? validateBio(String? value) {
+    if (value!.length > 100) {
+      return 'The bio musst be less than 100 characters';
     }
     return null;
   }

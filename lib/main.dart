@@ -12,6 +12,8 @@ import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:goly/utils/theme/dark_mode.dart';
+import 'package:goly/utils/theme/light_mode.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,8 +41,8 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: Utils.messangerKey,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
-      theme: Constants.lightTheme,
-      darkTheme: Constants.darkTheme,
+      theme: LightMode.lightTheme,
+      darkTheme: DarkMode.darkTheme,
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: ((BuildContext context, snapshot) {

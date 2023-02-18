@@ -3,6 +3,8 @@ import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
+import 'package:goly/widgets/form/input_label.dart';
+import 'package:goly/widgets/form/text_field_input.dart';
 import 'package:path/path.dart' as p;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -27,20 +29,22 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
   bool isLoading = false;
   String? imageUrl;
   final formKey = GlobalKey<FormState>();
+  late final _usernameController = TextEditingController(text: widget.user?.username ?? '');
+  late final _bioController = TextEditingController(text: widget.user?.bio ?? '');
+  String? errorMessage;
 
   @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+    _bioController.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    var usernameController =
-        TextEditingController(text: widget.user?.username ?? '');
-    var bioController = TextEditingController(text: widget.user?.bio ?? '');
-
-    String? errorMessage;
-
     void pickedImage(File image) {
       setState(() {
         isLoading = true;
       });
-
       final ref = FirebaseStorage.instance
           .ref()
           .child('user_image')
@@ -67,8 +71,8 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
       }
       UserService.updateProfile(
         user: UserModel(
-          username: usernameController.text,
-          bio: bioController.text,
+          username: _usernameController.text,
+          bio: _bioController.text,
           email: Utils.currentEmail().trim(),
           photoUrl: imageUrl ?? Constants.userImageDefault,
           id: Utils.currentUid(),
@@ -108,25 +112,14 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
                   imagePath:
                       widget.user?.photoUrl ?? Constants.userImageDefault,
                 ),
-                TextFormField(
-                    controller: usernameController,
-                    decoration: const InputDecoration(labelText: 'Username'),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    validator: (username) {
-                      errorMessage = Validations.validateUsername(username);
-                      if (username != null && errorMessage != null) {
-                        return errorMessage;
-                      }
-                      return null;
-                    }),
                 const SizedBox(height: 20.0),
-                TextFormField(
-                  controller: bioController,
-                  decoration: const InputDecoration(labelText: 'Bio'),
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 3,
-                ),
+                const InputLabel(text: 'Username',),
+                const SizedBox(height: 10.0),
+                TextFieldInput(textEditingController: _usernameController, hintText: 'Username', textInputType: TextInputType.text, validation: Validations.validateUsername),
+                const SizedBox(height: 20.0),
+                const InputLabel(text: 'Bio',),
+                const SizedBox(height: 10.0),
+                TextFieldInput(textEditingController: _bioController, hintText: 'Bio', textInputType: TextInputType.multiline, validation: Validations.validateBio, maxLines: 3,),
                 const SizedBox(height: 20.0),
                 isLoading
                     ? const CircularProgressIndicator()
@@ -139,3 +132,4 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
     );
   }
 }
+
