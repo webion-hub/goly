@@ -14,8 +14,6 @@ import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleProfileScreen extends StatefulWidget {
-  static String routeName = '/handle-profile';
-
   final String uid;
   final UserModel? user;
 

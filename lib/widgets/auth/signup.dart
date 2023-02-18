@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:goly/widgets/auth/rich_text_with_action.dart';
-import 'package:goly/widgets/dialogs/loading_dialog.dart';
+import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/text_field_input.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   final _emailController = TextEditingController(text: '');
   final _passwordController = TextEditingController(text: '');
   final formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -31,11 +32,12 @@ class _SignUpState extends State<SignUp> {
   Future signUp() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
-
-    loadingDialog(context);
+    setState(() {
+      isLoading = true;
+    });
     try {
       NavigatorState n = Navigator.of(context);
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await AuthService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
@@ -47,6 +49,10 @@ class _SignUpState extends State<SignUp> {
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -72,7 +78,9 @@ class _SignUpState extends State<SignUp> {
           ]),
         ),
         const SizedBox(height: 20.0),
-        MainButton(text: "Sign up", onPressed: signUp),
+        isLoading
+            ? circularProgress(context)
+            : MainButton(text: "Sign up", onPressed: signUp),
       ],
     );
   }

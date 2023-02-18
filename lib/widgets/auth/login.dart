@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
-import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/text_field_input.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 
 class LogIn extends StatefulWidget {
   final VoidCallback onClickedSignup;
@@ -21,6 +21,7 @@ class _LogInState extends State<LogIn> {
   final _passwordController = TextEditingController(text: '');
   final formKey = GlobalKey<FormState>();
   final FocusNode buttonFocusNode = FocusNode();
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -32,11 +33,22 @@ class _LogInState extends State<LogIn> {
   Future logIn() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
-    loadingDialog(context);
-    var error = await AuthService.logInUser(
-        email: _emailController.text, password: _passwordController.text);
-    Utils.showSnackbBar(error);
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      await AuthService.logInUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackbBar(e.message);
+    } finally {
+    setState(() {
+      isLoading = false;
+    });
+    }
   }
 
   @override
@@ -64,11 +76,13 @@ class _LogInState extends State<LogIn> {
         ),
         const ForgotPassword(),
         const SizedBox(height: 20.0),
-        MainButton(
-          text: "Log in",
-          onPressed: logIn,
-          focusNode: buttonFocusNode,
-        ),
+        isLoading
+            ? circularProgress(context)
+            : MainButton(
+                text: "Log in",
+                onPressed: logIn,
+                focusNode: buttonFocusNode,
+              ),
       ],
     );
   }
