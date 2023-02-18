@@ -40,51 +40,52 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
     _bioController.dispose();
   }
 
-    void pickedImage(File image) {
+  void pickedImage(File image) {
+    setState(() {
+      isLoading = true;
+    });
+
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('user_image')
+        .child('${widget.uid}${p.extension(image.path)}');
+
+    ref.putFile(image).then((p0) {
+      ref.getDownloadURL().then((value) {
+        imageUrl = value.toString();
+      });
+    }).onError((error, stackTrace) {
+      Utils.showSnackbBar(
+          'An error has occurred uploading the image. Please try again');
+    }).whenComplete(() {
       setState(() {
-        isLoading = true;
+        isLoading = false;
       });
+    });
+  }
 
-      final ref = FirebaseStorage.instance
-          .ref()
-          .child('user_image')
-          .child('${widget.uid}${p.extension(image.path)}');
-
-      ref.putFile(image).then((p0) {
-        ref.getDownloadURL().then((value) {
-          imageUrl = value.toString();
-        });
-      }).onError((error, stackTrace) {
-        Utils.showSnackbBar(
-            'An error has occurred uploading the image. Please try again');
-      }).whenComplete(() {
-        setState(() {
-          isLoading = false;
-        });
-      });
+  void setUp() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
     }
-
-    void setUp() {
-      final isValid = formKey.currentState!.validate();
-      if (!isValid) {
-        return;
-      }
-      UserService.updateProfile(
-        user: UserModel(
-          username: _usernameController.text,
-          bio: _bioController.text,
-          email: Utils.currentEmail().trim(),
-          photoUrl: imageUrl ?? Constants.userImageDefault,
-          id: Utils.currentUid(),
-        ),
-      )
-          .then((value) =>
-              navigatorKey.currentState!.popUntil((route) => route.isFirst))
-          .onError((error, stackTrace) {
-        Utils.showSnackbBar(
-            'An error has occurred updating your profile. Please try again');
-      });
+    try {
+    await UserService.updateProfile(
+      user: UserModel(
+        username: _usernameController.text,
+        bio: _bioController.text,
+        email: Utils.currentEmail().trim(),
+        photoUrl: imageUrl ?? Constants.userImageDefault,
+        id: Utils.currentUid(),
+      ),
+    );
+    } catch (e) {
+      Utils.showSnackbBar(
+          'An error has occurred updating your profile. Please try again');
+    } finally  {
+       Navigator.of(context).popUntil((route) => route.isFirst);
     }
+  }
   // void pickedImage(File image) async {
   //   setState(() {
   //     isLoading = true;

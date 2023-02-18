@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/main.dart';
 import 'package:goly/utils/constants.dart';
 
 class MobileScreenLayout extends StatefulWidget {
@@ -26,6 +27,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   }
 
   void onPageChanged(int page) {
+    navigatorKey.currentState!.popUntil(((route) => route.isFirst));
     setState(() {
       _page = page;
     });
@@ -65,7 +67,7 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       ),
       tabBuilder: (context, index) {
           return CupertinoTabView(builder: (context) {
-            return CupertinoPageScaffold(child: Constants.homeScreenItems.elementAt(index));
+            return CupertinoPageScaffold(child: Constants.homeScreenItems.elementAt(index), );
           },);
       },
 
