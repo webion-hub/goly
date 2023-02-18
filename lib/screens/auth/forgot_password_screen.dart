@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
-import 'package:goly/widgets/form/email_field.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/form/text_field_input.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static const routeName = '/forgot-password';
@@ -15,6 +15,11 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+  }
   final _emailController = TextEditingController(text: '');
   Future resetPassword() async {
     loadingDialog(context);
@@ -45,7 +50,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             children: [
               const Text('Rceive an emal to reset your password'),
               const SizedBox(height: 20),
-              EmailField(controller: _emailController),
+              TextFieldInput(textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
               const SizedBox(height: 30),
               MainButton(
                 onPressed: resetPassword,

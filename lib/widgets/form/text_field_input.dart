@@ -26,7 +26,7 @@ class TextFieldInput extends StatelessWidget {
     );
     return TextFormField(
       controller: textEditingController,
-      maxLines: maxLines,
+      maxLines: maxLines ?? 1,
       keyboardType: textInputType,
       obscureText: isPass,
       validator: (value) {
