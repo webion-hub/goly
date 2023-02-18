@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart' as p;
-import 'package:goly/main.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
@@ -25,7 +24,7 @@ class HandleProfileScreen extends StatefulWidget {
 
 class _HandleProfileScreenState extends State<HandleProfileScreen> {
   bool isLoading = false;
-  String? imageUrl;
+  late String? imageUrl = widget.user?.photoUrl;
   final formKey = GlobalKey<FormState>();
   late final _usernameController =
       TextEditingController(text: widget.user?.username ?? '');
