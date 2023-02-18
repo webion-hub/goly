@@ -5,7 +5,6 @@ import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/services/firebase_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
-import 'package:goly/main.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/text_field_input.dart';
 import 'package:goly/widgets/layout/indicators.dart';
@@ -43,15 +42,15 @@ class _LogInState extends State<LogIn> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      //navigatorKey.currentState!.popUntil((route) => route.isFirst);
       GoRouter.of(context).go(DiscoverScreen.routeName);
+
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
     } finally {
     setState(() {
       isLoading = false;
     });
-    }
+    } 
   }
 
   @override

@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/utils/constants.dart';
 
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,7 +13,6 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () =>
             GoRouter.of(context).push('/settings'),
-              //Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const SettingsScreen())),
           icon: const Icon(Icons.settings),
         )
       ],

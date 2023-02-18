@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
-import 'package:goly/utils/constants.dart';
 
 class PageShell extends StatefulWidget {
   final Widget child;

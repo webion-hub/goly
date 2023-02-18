@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/main.dart';
 import 'package:goly/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/introductions/introduction_screen.dart';
-import 'package:goly/screens/main/discover/actions/chat_screen.dart';
 import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
