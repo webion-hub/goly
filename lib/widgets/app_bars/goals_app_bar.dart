@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/screens/introductions/introduction_screen.dart';
 
 class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,10 +12,7 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Goals'),
       actions: [
         IconButton(
-            onPressed: () => Navigator.of(context).push(CupertinoPageRoute(
-                  builder: ((context) => const IntroductionPage()),
-                  maintainState: false,
-                )),
+            onPressed: () => GoRouter.of(context).go(ExplenationScreen.routeName),
             icon: const Icon(Icons.question_mark_rounded)),
       ],
     );

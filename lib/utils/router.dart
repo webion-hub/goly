@@ -4,6 +4,7 @@ import 'package:goly/main.dart';
 import 'package:goly/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
+import 'package:goly/screens/introductions/introduction_screen.dart';
 import 'package:goly/screens/main/discover/actions/chat_screen.dart';
 import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
@@ -27,6 +28,11 @@ final router = GoRouter(
             }
           }),
           //builder: (context, state) => const Home(),
+        ),
+        /// Introductions
+        GoRoute(
+          path: ExplenationScreen.routeName,
+          builder: (context, state) => const ExplenationScreen(),
         ),
 
         /// Auth screens
@@ -65,7 +71,7 @@ final router = GoRouter(
         ),
       ],
       builder:(context, state, child) {
-        if(state.fullpath == AuthScreen.routeName || state.fullpath == ForgotPasswordScreen.routeName) {
+        if(state.fullpath == AuthScreen.routeName || state.fullpath == ForgotPasswordScreen.routeName || state.fullpath == ExplenationScreen.routeName) {
           return child;
         }
         return PageShell(child:child);
