@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
-import 'package:goly/widgets/auth/rich_text_with_action.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
@@ -29,23 +29,18 @@ class _LogInState extends State<LogIn> {
     _passwordController.dispose();
   }
 
+  Future logIn() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
+    loadingDialog(context);
+    var error = await AuthService.logInUser(
+        email: _emailController.text, password: _passwordController.text);
+    Utils.showSnackbBar(error);
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Future logIn() async {
-      final isValid = formKey.currentState!.validate();
-      if (!isValid) return;
-      loadingDialog(context);
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-      } on FirebaseAuthException catch (e) {
-        Utils.showSnackbBar(e.message);
-      }
-      navigatorKey.currentState!.popUntil((route) => route.isFirst);
-    }
-
     return Column(
       children: [
         Form(
@@ -74,7 +69,6 @@ class _LogInState extends State<LogIn> {
           onPressed: logIn,
           focusNode: buttonFocusNode,
         ),
-
       ],
     );
   }

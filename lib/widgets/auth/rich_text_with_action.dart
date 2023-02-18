@@ -5,18 +5,19 @@ class RichTextWithAction extends StatelessWidget {
   final String text;
   final String actionText;
   final VoidCallback action;
-  const RichTextWithAction(
-      {super.key,
-      required this.text,
-      required this.actionText,
-      required this.action});
+  const RichTextWithAction({
+    super.key,
+    required this.text,
+    required this.actionText,
+    required this.action,
+  });
 
   @override
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
         text: text,
-        style: TextStyle(color: Theme.of(context).primaryColor),
+        style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         children: [
           const WidgetSpan(
             child: Padding(
