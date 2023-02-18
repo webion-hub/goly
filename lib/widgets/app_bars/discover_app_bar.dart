@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/screens/main/discover/actions/chat_screen.dart';
 import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
@@ -18,7 +19,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           onPressed: () =>
-              Navigator.of(context).pushNamed(RecentConversationsScreen.routeName),
+              Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const RecentConversationsScreen())),
           icon: const Icon(Icons.message_rounded),
         ),
         IconButton(

@@ -38,14 +38,14 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: pageController,
-        pageSnapping: false,
-        onPageChanged: onPageChanged,
-        children: Constants.homeScreenItems,
-      ),
-      bottomNavigationBar: CupertinoTabBar(
+    return CupertinoTabScaffold(
+      // body: PageView(
+      //   controller: pageController,
+      //   pageSnapping: false,
+      //   onPageChanged: onPageChanged,
+      //   children: Constants.homeScreenItems,
+      // ),
+      tabBar: CupertinoTabBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.tips_and_updates),
@@ -60,9 +60,15 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
             label: "Profile",
           ),
         ],
-        onTap: navigationTapped,
-        currentIndex: _page,
+        // onTap: navigationTapped,
+        // currentIndex: _page,
       ),
+      tabBuilder: (context, index) {
+          return CupertinoTabView(builder: (context) {
+            return CupertinoPageScaffold(child: Constants.homeScreenItems.elementAt(index));
+          },);
+      },
+
     );
   }
 }
