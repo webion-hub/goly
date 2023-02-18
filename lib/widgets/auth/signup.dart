@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:goly/services/auth_service.dart';
+import 'package:goly/services/firebase_service.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
@@ -37,7 +37,7 @@ class _SignUpState extends State<SignUp> {
     });
     try {
       NavigatorState n = Navigator.of(context);
-      await AuthService.signUpUser(
+      await FirebaseService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );

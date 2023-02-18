@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final FirebaseAuth _firestore = FirebaseAuth.instance;
 
-class AuthService extends Service {
+class FirebaseService extends Service {
   static Future signUpUser({
     required String email,
     required String password,
@@ -23,4 +23,6 @@ class AuthService extends Service {
       password: password,
     );
   }
+
+  
 }

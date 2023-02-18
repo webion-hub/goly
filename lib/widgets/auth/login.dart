@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/services/auth_service.dart';
+import 'package:goly/services/firebase_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
@@ -37,7 +37,7 @@ class _LogInState extends State<LogIn> {
       isLoading = true;
     });
     try {
-      await AuthService.logInUser(
+      await FirebaseService.logInUser(
         email: _emailController.text,
         password: _passwordController.text,
       );

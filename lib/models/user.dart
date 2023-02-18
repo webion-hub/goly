@@ -28,6 +28,7 @@ class UserModel {
     data['email'] = email;
     data['photoUrl'] = photoUrl;
     data['id'] = id;
+    data['bio'] = bio;
     return data;
   }
 }
