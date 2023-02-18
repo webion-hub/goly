@@ -27,7 +27,6 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
   }
 
   void onPageChanged(int page) {
-    navigatorKey.currentState!.popUntil(((route) => route.isFirst));
     setState(() {
       _page = page;
     });

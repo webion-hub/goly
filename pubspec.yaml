@@ -54,6 +54,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
   flutter_svg: ^1.1.6
+  go_router: ^6.0.9
 
 flutter_icons:
   android: true
