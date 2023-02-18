@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/goals/goals_screen.dart';
+import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:goly/utils/constants.dart';
 
 class PageShell extends StatefulWidget {
   final Widget child;
@@ -36,18 +40,18 @@ class _PageShellState extends State<PageShell> {
     setState(() {
       _page = page;
     });
-    String where = '/';
+    String url = '/';
     switch (page) {
       case 0:
-        where = '/';
+        url = DiscoverScreen.routeName;
         break;
       case 1:
-        where = '/goals';
+        url = GoalsScreen.routeName;
         break;
       case 2:
-        where = '/profile';
+        url = ProfileScreen.routeName;
     }
-    GoRouter.of(context).go(where);
+    GoRouter.of(context).go(url);
     //Animating Page
     pageController.jumpToPage(page);
   }
