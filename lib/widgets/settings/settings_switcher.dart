@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SettingsSwitcher extends StatelessWidget {
+class SettingsSwitcher extends StatefulWidget {
   final IconData icon;
   final String text;
   final String? subtitle;
@@ -18,6 +18,12 @@ class SettingsSwitcher extends StatelessWidget {
   });
 
   @override
+  State<SettingsSwitcher> createState() => _SettingsSwitcherState();
+}
+
+class _SettingsSwitcherState extends State<SettingsSwitcher> {
+  late bool currentValue = widget.initialValue;
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -28,15 +34,21 @@ class SettingsSwitcher extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
             ),
-            child: Icon(icon),
+            child: Icon(widget.icon),
           ),
           title: Text(
-            text,
+            widget.text,
           ),
-          subtitle: subtitle != null ? Text(subtitle!) : null,
+          subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
           trailing: CupertinoSwitch(
-            onChanged: onChanged,
-            value: initialValue,
+            onChanged: (value) {
+              widget.onChanged(value);
+              setState(() {
+                 currentValue = value;
+              });
+             
+            },
+            value: currentValue,
           ),
         ),
         const Divider(),

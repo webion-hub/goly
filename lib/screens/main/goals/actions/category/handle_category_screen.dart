@@ -17,8 +17,8 @@ class HandleCategoryScreen extends StatefulWidget {
 }
 
 class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
-  bool privateCategory = false;
-  bool privateDescription = false;
+  late bool privateCategory = widget.category?.private ?? false;
+  late bool privateDescription = widget.category?.privateDescription ?? false;
 
   late TextEditingController categoryName =
       TextEditingController(text: widget.category?.name ?? '');

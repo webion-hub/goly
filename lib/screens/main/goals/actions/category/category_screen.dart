@@ -23,7 +23,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void deleteCategory() {
+    void deleteCategory() async {
       showDialog(
         context: context,
         builder: (context) => ConfirmationDialog(
@@ -34,8 +34,7 @@ class CategoryScreen extends StatelessWidget {
             Navigator.of(context).pop();
           },
           yesAction: () {
-            CategoryService.deleteCategory(categoryId: categoryId);
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            CategoryService.deleteCategory(categoryId: categoryId).then((value) => GoRouter.of(context).pop());
           },
         ),
       );

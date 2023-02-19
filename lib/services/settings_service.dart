@@ -13,9 +13,21 @@ class SettingsService extends Service {
   SettingsModel? settings;
   static String get currentUid => firebaseAuth.currentUser!.uid;
 
-  static Future updateSettings({required SettingsModel settings}) async {
+  static Future updateSettings({
+    bool? privateAccount,
+    bool? privateGoalsByDefault,
+    bool? privateRewardByDefault,
+    bool? privateDescriptionsByDefault,
+  }) async {
     final documentReferencer = _collection.doc(currentUid);
-    return await documentReferencer.update({'settings': settings.toJson()});
+    SettingsModel currentSettings = await getCurrentSettings();
+    SettingsModel newSettings = SettingsModel(
+      privateAccount: privateAccount ?? currentSettings.privateAccount,
+      privateGoalsByDefault: privateGoalsByDefault ?? currentSettings.privateGoalsByDefault,
+      privateRewardByDefault: privateRewardByDefault ?? currentSettings.privateRewardByDefault,
+      privateDescriptionsByDefault: privateDescriptionsByDefault ?? currentSettings.privateDescriptionsByDefault,
+    );
+    return await documentReferencer.update({'settings': newSettings.toJson()});
   }
 
   static Future<SettingsModel> getCurrentSettings() async {
