@@ -15,19 +15,6 @@ class PageShell extends StatefulWidget {
 
 class _PageShellState extends State<PageShell> {
   int _page = 0;
-  late PageController pageController; // for tabs animation
-
-  @override
-  void initState() {
-    super.initState();
-    pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
 
   void onPageChanged(int page) {
     setState(() {
@@ -51,19 +38,12 @@ class _PageShellState extends State<PageShell> {
         url = ProfileScreen.routeName;
     }
     GoRouter.of(context).go(url);
-    //Animating Page
-    pageController.jumpToPage(page);
   }
 
   @override
     Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
-      // PageView(
-      //   children: Constants.homeScreenItems,
-      //   controller: pageController,
-      //   onPageChanged: onPageChanged,
-      // ),
+      body: SafeArea(child: widget.child),
       bottomNavigationBar: CupertinoTabBar(
         items: [
           BottomNavigationBarItem(
