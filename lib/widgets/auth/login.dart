@@ -41,8 +41,7 @@ class _LogInState extends State<LogIn> {
       await FirebaseService.logInUser(
         email: _emailController.text,
         password: _passwordController.text,
-      );
-      GoRouter.of(context).go(DiscoverScreen.routeName);
+      ).then((value) => GoRouter.of(context).go(DiscoverScreen.routeName));
 
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);

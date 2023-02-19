@@ -4,6 +4,7 @@ import 'package:goly/widgets/settings/settings_switcher.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:uuid/uuid.dart';
 
 class HandleCategoryScreen extends StatefulWidget {
   static String routeNameHandle = "/handle-category";
@@ -42,6 +43,7 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
     final formKey = GlobalKey<FormState>();
     void handleCategory() async {
       CategoryModel c = CategoryModel(
+        id: const Uuid().v1(),
           name: categoryName.text,
           private: privateCategory,
           description: description.text,
@@ -50,7 +52,7 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
 
       widget.category == null
           ? CategoryService.addCategory(category: c)
-          : CategoryService.editCategory(oldCategoryName: widget.category!.name, category: c);
+          : CategoryService.editCategory(category: c);
       Navigator.of(context).pop();
     }
 

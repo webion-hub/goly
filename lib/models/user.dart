@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goly/models/settings.dart';
 import 'package:goly/utils/constants.dart';
 
 class UserModel {
@@ -6,12 +8,14 @@ class UserModel {
   String photoUrl;
   String id;
   String bio;
+  SettingsModel settings;
 
   UserModel({
     required this.username,
     required this.email,
     required this.photoUrl,
     required this.id,
+    this.settings = const SettingsModel(privateAccount: false, privateDescriptionsByDefault: false, privateGoalsByDefault: false, privateRewardByDefault: false),
     this.bio = "",
   });
 
@@ -20,7 +24,8 @@ class UserModel {
         email = json['email'],
         photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
         bio = json['bio'] ?? '',
-        id = json['id'];
+        id = json['id'],
+        settings = SettingsModel.fromJson(json['settings']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -29,6 +34,7 @@ class UserModel {
     data['photoUrl'] = photoUrl;
     data['id'] = id;
     data['bio'] = bio;
+    data['settings'] = settings.toJson();
     return data;
   }
 }

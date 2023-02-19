@@ -13,14 +13,17 @@ class CategoryService extends Service {
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
-        .doc(category.name)
+        .doc(category.id)
         .set(category.toJson());
   }
 
   ///Edit a new category to firestore under the collection categories
-  static Future editCategory({required String oldCategoryName, required CategoryModel category}) async {
-    deleteCategory(categoryId: oldCategoryName);
-    addCategory(category: category);
+  static Future editCategory({required CategoryModel category}) async {
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(category.id)
+        .update(category.toJson());
   }
 
   static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoriesStream(

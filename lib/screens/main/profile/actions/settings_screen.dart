@@ -40,7 +40,7 @@ class SettingsScreen extends StatelessWidget {
             SettingsSwitcher(
               icon: Icons.dark_mode,
               onChanged: (bool a) {},
-              text: "Change theme",
+              text: "Dark mode",
             ),
             SettingsListTile(
               icon: Icons.logout,

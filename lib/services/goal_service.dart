@@ -11,15 +11,15 @@ final CollectionReference _collection = _firestore.collection('goals');
 
 class GoalService extends Service {
   static Future addGoal({
-    required String categoryName,
+    required String categoryId,
     required GoalModel goal,
   }) async {
     var numberOfGoals = 
-        await CategoryService.getNumberofGoals(categoryId: categoryName);
+        await CategoryService.getNumberofGoals(categoryId: categoryId);
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
-        .doc(categoryName)
+        .doc(categoryId)
         .collection('goals')
         .doc(numberOfGoals.toString())
         .set(goal.toJson());

@@ -1,10 +1,10 @@
 class SettingsModel {
-  bool privateAccount;
-  bool privateGoalsByDefault;
-  bool privateRewardByDefault;
-  bool privateDescriptionsByDefault;
+  final bool privateAccount;
+  final bool privateGoalsByDefault;
+  final bool privateRewardByDefault;
+  final bool privateDescriptionsByDefault;
 
-  SettingsModel({
+  const SettingsModel({
     this.privateAccount = false,
     this.privateGoalsByDefault = true,
     this.privateRewardByDefault = true,
@@ -12,16 +12,16 @@ class SettingsModel {
   });
 
   SettingsModel.fromJson(Map<String, dynamic> json)
-      : privateAccount = json['privateAccount'],
-        privateGoalsByDefault = json['privateGoalsByDefault'],
-        privateRewardByDefault = json['privateRewardByDefault'],
-        privateDescriptionsByDefault = json['privateDescriptionsByDefault'];
+      : privateAccount = json['privateAccount'] as dynamic,
+        privateGoalsByDefault = json['privateGoalsByDefault'] as dynamic,
+        privateRewardByDefault = json['privateRewardByDefault'] as dynamic,
+        privateDescriptionsByDefault = json['privateDescriptionsByDefault'] as dynamic;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
 
-    data['privateAccount'] = privateGoalsByDefault;
-    data['privateGoalsByDefault'] = privateRewardByDefault;
+    data['privateAccount'] = privateAccount;
+    data['privateGoalsByDefault'] = privateGoalsByDefault;
     data['privateRewardByDefault'] = privateRewardByDefault;
     data['privateDescriptionsByDefault'] = privateDescriptionsByDefault;
 

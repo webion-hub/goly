@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:go_router/go_router.dart';
+import 'package:goly/screens/introductions/explenation_screen.dart';
+import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:path/path.dart' as p;
 import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
@@ -13,6 +16,7 @@ import 'package:goly/widgets/pickers/user_image_picker.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleProfileScreen extends StatefulWidget {
+  static const routeName = '/handle-profile';
   final String uid;
   final UserModel? user;
 
@@ -77,7 +81,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
         photoUrl: imageUrl ?? Constants.userImageDefault,
         id: Utils.currentUid(),
       ),
-    );
+    ).then((value) => GoRouter.of(context).go(ExplenationScreen.routeName));
     } catch (e) {
       Utils.showSnackbBar(
           'An error has occurred updating your profile. Please try again');

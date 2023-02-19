@@ -14,8 +14,8 @@ import 'package:goly/utils/constants.dart';
 
 class CategoryScreen extends StatelessWidget {
   static const String routeName = "/category";
-  final String categoryName;
-  const CategoryScreen({super.key, required this.categoryName});
+  final String categoryId;
+  const CategoryScreen({super.key, required this.categoryId});
   void goToHandleCategory(BuildContext context, CategoryModel category) {
     GoRouter.of(context)
         .push(HandleCategoryScreen.routeNameHandle, extra: category);
@@ -34,7 +34,7 @@ class CategoryScreen extends StatelessWidget {
             Navigator.of(context).pop();
           },
           yesAction: () {
-            CategoryService.deleteCategory(categoryId: categoryName);
+            CategoryService.deleteCategory(categoryId: categoryId);
             Navigator.of(context).popUntil((route) => route.isFirst);
           },
         ),
@@ -44,13 +44,13 @@ class CategoryScreen extends StatelessWidget {
     void goToHandleGoal() {
       Navigator.of(context).push(CupertinoPageRoute(
         builder: (context) => HandleGoalScreen(
-          categoryName: categoryName,
+          categoryId: categoryId,
         ),
       ));
     }
 
     return StreamBuilder(
-        stream: CategoryService.getCategoryStream(categoryId: categoryName),
+        stream: CategoryService.getCategoryStream(categoryId: categoryId),
         builder: (context, categorySnapshot) {
           if (categorySnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -65,7 +65,7 @@ class CategoryScreen extends StatelessWidget {
           var category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
           return Scaffold(
             appBar: AppBar(
-              title: Text(categoryName),
+              title: Text(category.name),
               actions: [
                 IconButton(
                   onPressed: () => goToHandleCategory(context, category),
@@ -86,7 +86,7 @@ class CategoryScreen extends StatelessWidget {
                       : const SizedBox(),
                   StreamBuilder(
                       stream: CategoryService.getCategoryGoals(
-                          categoryId: category.name),
+                          categoryId: category.id),
                       builder: (context, goalSnapshot) {
                         if (!goalSnapshot.hasData) {
                           return const Text('Start adding some data');
@@ -95,7 +95,7 @@ class CategoryScreen extends StatelessWidget {
                             children: goalSnapshot.data!.docs
                                 .map(
                                   (e) => GoalListTile(
-                                    categoryName: category.name,
+                                    categoryId: category.id,
                                     goal: GoalModel.fromJson(
                                       e.data(),
                                     ),

@@ -9,8 +9,8 @@ import 'package:goly/utils/constants.dart';
 class HandleGoalScreen extends StatefulWidget {
   static String routeName = "add-goal";
   final GoalModel? goal;
-  final String categoryName;
-  const HandleGoalScreen({super.key, this.goal, required this.categoryName});
+  final String categoryId;
+  const HandleGoalScreen({super.key, this.goal, required this.categoryId});
 
   @override
   State<HandleGoalScreen> createState() => _HandleGoalScreenState();
@@ -51,10 +51,10 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
     void addGoal() async {
       int? goalId;
       if(widget.goal == null) {
-        goalId = await CategoryService.getNumberofGoals(categoryId: widget.categoryName);
+        goalId = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
       }
       await GoalService.addGoal(
-        categoryName: widget.categoryName,
+        categoryId: widget.categoryId,
         goal: GoalModel(
           id: widget.goal?.id ?? goalId!,
           name: goalName.text,

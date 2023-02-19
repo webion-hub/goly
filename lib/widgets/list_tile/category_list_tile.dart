@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
@@ -18,7 +17,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Dismissible(
-        key: ValueKey(category.name),
+        key: ValueKey(category.id),
         background: Container(
           color: Theme.of(context).errorColor,
           alignment: Alignment.centerRight,
@@ -45,7 +44,7 @@ class CategoryCard extends StatelessWidget {
                 Navigator.of(ctx).pop(false);
               },
               yesAction: () {
-                CategoryService.deleteCategory(categoryId: category.name);
+                CategoryService.deleteCategory(categoryId: category.id);
                 Navigator.of(ctx).pop(true);
               },
             ),
@@ -53,7 +52,7 @@ class CategoryCard extends StatelessWidget {
         },
         child: ListTile(
           title: Text(category.name),
-          onTap: (() => GoRouter.of(context).push(CategoryScreen.routeName, extra: category.name)),
+          onTap: (() => GoRouter.of(context).push(CategoryScreen.routeName, extra: category.id)),
           leading: const Icon(Icons.open_in_new),
           subtitle: category.description != null
               ? Text(

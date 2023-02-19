@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/services/firebase_service.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/main.dart';
@@ -36,16 +37,11 @@ class _SignUpState extends State<SignUp> {
       isLoading = true;
     });
     try {
-      NavigatorState n = Navigator.of(context);
       await FirebaseService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-      );
-      n.pushReplacement(CupertinoPageRoute(
-        builder: (context) => HandleProfileScreen(
-          uid: Utils.currentUid(),
-        ),
-      ));
+      ).then((value) => GoRouter.of(context).pushReplacement(HandleProfileScreen.routeName));
+      
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
       navigatorKey.currentState!.popUntil((route) => route.isFirst);

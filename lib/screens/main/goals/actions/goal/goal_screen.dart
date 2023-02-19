@@ -24,7 +24,7 @@ class GoalScreen extends StatelessWidget {
         CupertinoPageRoute(
           builder: (context) => HandleGoalScreen(
             goal: goal,
-            categoryName: categoryName,
+            categoryId: categoryName,
           ),
         ),
       );
