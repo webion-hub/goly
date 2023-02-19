@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/introductions/introduction_screen.dart';
+import 'package:goly/screens/introductions/explenation_screen.dart';
 
 class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GoalsAppBar({super.key});

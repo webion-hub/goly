@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
@@ -52,13 +53,7 @@ class CategoryCard extends StatelessWidget {
         },
         child: ListTile(
           title: Text(category.name),
-          onTap: (() => Navigator.of(context).push(
-                CupertinoPageRoute(
-                  builder: (context) => CategoryScreen(
-                    categoryName: category.name,
-                  ),
-                ),
-              )),
+          onTap: (() => GoRouter.of(context).push(CategoryScreen.routeName, extra: category.name)),
           leading: const Icon(Icons.open_in_new),
           subtitle: category.description != null
               ? Text(

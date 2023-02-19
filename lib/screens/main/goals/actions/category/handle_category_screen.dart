@@ -6,7 +6,8 @@ import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleCategoryScreen extends StatefulWidget {
-  static String routeName = "add-category";
+  static String routeNameHandle = "/handle-category";
+  static String routeNameAdd = "/add-category";
   final CategoryModel? category;
   const HandleCategoryScreen({super.key, this.category});
 

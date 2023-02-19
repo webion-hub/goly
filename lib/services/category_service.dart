@@ -75,4 +75,12 @@ class CategoryService extends Service {
         .collection('goals')
         .snapshots();
   }
+  static Future getCategoryById({required String categoryId}) async {
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .get()
+        .then((value) => value);    
+  }
 }

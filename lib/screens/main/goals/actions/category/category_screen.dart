@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
@@ -12,18 +13,16 @@ import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class CategoryScreen extends StatelessWidget {
+  static const String routeName = "/category";
   final String categoryName;
   const CategoryScreen({super.key, required this.categoryName});
+  void goToHandleCategory(BuildContext context, CategoryModel category) {
+    GoRouter.of(context)
+        .push(HandleCategoryScreen.routeNameHandle, extra: category);
+  }
 
   @override
   Widget build(BuildContext context) {
-    void goToHandleCategory(CategoryModel category) {
-      Navigator.of(context).push(CupertinoPageRoute(
-          builder: (context) => HandleCategoryScreen(
-                category: category,
-              )));
-    }
-
     void deleteCategory() {
       showDialog(
         context: context,
@@ -69,7 +68,7 @@ class CategoryScreen extends StatelessWidget {
               title: Text(categoryName),
               actions: [
                 IconButton(
-                  onPressed: () => goToHandleCategory(category),
+                  onPressed: () => goToHandleCategory(context, category),
                   icon: const Icon(Icons.edit),
                 ),
                 IconButton(

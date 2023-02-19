@@ -33,21 +33,6 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: LightMode.lightTheme,
       darkTheme: DarkMode.darkTheme,
-      //home: Home(),
-      // routes: {
-      //   AuthScreen.routeName: ((context) => const AuthScreen()),
-      //   ForgotPasswordScreen.routeName: ((context) => const ForgotPasswordScreen()),
-      //   IntroductionPage.routeName: ((context) => const IntroductionPage()),
-      //   DiscoverScreen.routeName: ((context) => const DiscoverScreen()),
-      //   GoalsScreen.routeName: ((context) => const GoalsScreen()),
-      //   ProfileScreen.routeName: ((context) => ProfileScreen(
-      //         profileId: Utils.currentUid(),
-      //       )),
-      //   SettingsScreen.routeName: ((context) => const SettingsScreen()),
-      //   RecentConversationsScreen.routeName: ((context) =>
-      //       const RecentConversationsScreen()),
-      //   HandleCategoryScreen.routeName: ((context) => const HandleCategoryScreen()),
-      // },
     );
   }
 }

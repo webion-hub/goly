@@ -7,6 +7,8 @@ class TextFieldInput extends StatelessWidget {
   final TextInputType textInputType;
   final int? maxLines;
   final String? Function(String?)? validation;
+  final FocusNode? nextFocus;
+
   const TextFieldInput({
     Key? key,
     required this.textEditingController,
@@ -15,6 +17,7 @@ class TextFieldInput extends StatelessWidget {
     required this.textInputType,
     this.maxLines,
     this.validation,
+    this.nextFocus
   }) : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class TextFieldInput extends StatelessWidget {
       maxLines: maxLines ?? 1,
       keyboardType: textInputType,
       obscureText: isPass,
+      onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(nextFocus),
       validator: (value) {
           if(validation == null) {
             return null;

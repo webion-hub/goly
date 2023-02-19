@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/app_bars/goals_app_bar.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/list_tile/category_list_tile.dart';
@@ -19,7 +20,7 @@ class GoalsScreen extends StatefulWidget {
 
 class _MainPageState extends State<GoalsScreen> {
   void addCategory() {
-    Navigator.of(context).pushNamed(HandleCategoryScreen.routeName);
+    GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd);
   }
 
   @override
