@@ -44,7 +44,8 @@ class CategoryCard extends StatelessWidget {
                 Navigator.of(ctx).pop(false);
               },
               yesAction: ()async  {
-                await CategoryService.deleteCategory(categoryId: category.id).then((value) => Navigator.of(ctx).pop());                
+                Navigator.of(ctx).pop();
+                await CategoryService.deleteCategory(categoryId: category.id);                
               },
             ),
           );
