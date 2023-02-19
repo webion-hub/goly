@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
@@ -14,23 +15,16 @@ import 'package:goly/utils/constants.dart';
 class GoalScreen extends StatelessWidget {
   static const routeName = '/single-goal';
   final GoalModel goal;
-  final String categoryName;
-  const GoalScreen({super.key, required this.categoryName, required this.goal});
+  final String categoryId;
+  const GoalScreen({super.key, required this.categoryId, required this.goal});
 
   @override
   Widget build(BuildContext context) {
-    void goToHandleCategory() {
-      Navigator.of(context).push(
-        CupertinoPageRoute(
-          builder: (context) => HandleGoalScreen(
-            goal: goal,
-            categoryId: categoryName,
-          ),
-        ),
-      );
+    void goToHandleGoal() {      
+      GoRouter.of(context).go(HandleGoalScreen.routeName, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
-    void deleteCategory() {
+    void deleteGoal() {
       showDialog(
         context: context,
         builder: (context) => AsyncConfirmationDialog(
@@ -41,23 +35,16 @@ class GoalScreen extends StatelessWidget {
             Navigator.of(context).pop();
           },
           yesAction: () async {
-            await GoalService.deleteGoal(categoryName: categoryName, goal: goal).then((value) => Navigator.of(context).pop());          },
+            Navigator.of(context).pop();
+            await GoalService.deleteGoal(
+                categoryId: categoryId, goal: goal);
+          },
         ),
       );
     }
 
     void goToHandleStep() async {
-
-        GoalService.addStepToGoal(
-            goal: goal, step: StepModel(name: "stepTest"));
-        //StepService.addStep(categoryName: categoryName, goalIndex: 1, step: StepModel(name: "stepTest"));
-
-
-      // Navigator.of(context).push(CupertinoPageRoute(
-      //   builder: (context) => HandleGoalScreen(
-      //     categoryName: categoryName,
-      //   ),
-      // ));
+      GoalService.addStepToGoal(goal: goal, step: StepModel(name: "stepTest"));
     }
 
     return Scaffold(
@@ -65,11 +52,11 @@ class GoalScreen extends StatelessWidget {
         title: Text(goal.name),
         actions: [
           IconButton(
-            onPressed: goToHandleCategory,
+            onPressed: goToHandleGoal,
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: deleteCategory,
+            onPressed: deleteGoal,
             icon: const Icon(Icons.delete),
           ),
         ],

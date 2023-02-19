@@ -98,8 +98,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                   TextFormField(
                     controller: reward,
                     decoration: const InputDecoration(labelText: 'Reward'),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 3,
+                    keyboardType: TextInputType.text,
                   ),
                   const SizedBox(height: 20.0),
                   SettingsSwitcher(

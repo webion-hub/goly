@@ -29,25 +29,25 @@ class GoalService extends Service {
   //   return await _collection.doc().update(goal.toJson());
   // }
   static Future editGoal(
-      {required String categoryName, required GoalModel goal}) async {
+      {required String categoryId, required GoalModel goal}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
-        .doc(categoryName)
-        .update({
-      'goals': FieldValue.arrayUnion([goal.toJson()])
-    });
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goal.id.toString())
+        .update(goal.toJson());
   }
 
   static Future deleteGoal(
-      {required String categoryName, required GoalModel goal}) async {
+      {required String categoryId, required GoalModel goal}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
-        .doc(categoryName)
-        .update({
-      'goals': FieldValue.arrayUnion([goal.toJson()])
-    });
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goal.id.toString())
+        .delete();
   }
 
   static void addStepToGoal(

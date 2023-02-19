@@ -45,11 +45,7 @@ class CategoryScreen extends StatelessWidget {
     }
 
     void goToHandleGoal() {
-      Navigator.of(context).push(CupertinoPageRoute(
-        builder: (context) => HandleGoalScreen(
-          categoryId: categoryId,
-        ),
-      ));
+      GoRouter.of(context).go(HandleGoalScreen.routeName, extra: {'categoryId': categoryId, 'goal': null});
     }
 
     return StreamBuilder(
