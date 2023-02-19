@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/utils/constants.dart';
 

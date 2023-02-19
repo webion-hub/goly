@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:path/path.dart' as p;
 import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
