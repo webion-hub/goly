@@ -43,7 +43,7 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
     final formKey = GlobalKey<FormState>();
     void handleCategory() async {
       CategoryModel c = CategoryModel(
-        id: const Uuid().v1(),
+          id: widget.category?.id ?? const Uuid().v1(),
           name: categoryName.text,
           private: privateCategory,
           description: description.text,

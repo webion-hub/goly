@@ -46,7 +46,6 @@ class _SettingsSwitcherState extends State<SettingsSwitcher> {
               setState(() {
                  currentValue = value;
               });
-             
             },
             value: currentValue,
           ),

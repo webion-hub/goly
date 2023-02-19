@@ -33,17 +33,15 @@ class GoalScreen extends StatelessWidget {
     void deleteCategory() {
       showDialog(
         context: context,
-        builder: (context) => ConfirmationDialog(
+        builder: (context) => AsyncConfirmationDialog(
           title: 'Are you sure?',
           message:
               'Are you sure you want to delete this goal? All goals steps it will be deleted',
           noAction: () {
             Navigator.of(context).pop();
           },
-          yesAction: () {
-            GoalService.deleteGoal(categoryName: categoryName, goal: goal);
-            Navigator.of(context).popUntil((route) => route.isFirst);
-          },
+          yesAction: () async {
+            await GoalService.deleteGoal(categoryName: categoryName, goal: goal).then((value) => Navigator.of(context).pop());          },
         ),
       );
     }

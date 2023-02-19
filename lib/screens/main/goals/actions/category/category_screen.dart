@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
@@ -23,18 +24,21 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void deleteCategory() async {
+    void deleteCategory() {
       showDialog(
         context: context,
-        builder: (context) => ConfirmationDialog(
+        builder: (context) => AsyncConfirmationDialog(
           title: 'Are you sure?',
           message:
               'Are you sure you want to delete this category? All goals inside it will be deleted',
           noAction: () {
             Navigator.of(context).pop();
           },
-          yesAction: () {
-            CategoryService.deleteCategory(categoryId: categoryId).then((value) => GoRouter.of(context).pop());
+          yesAction: () async {
+            Navigator.of(context).pop();
+            GoRouter.of(context).go(GoalsScreen.routeName);
+            await CategoryService.deleteCategory(categoryId: categoryId);
+            
           },
         ),
       );
@@ -56,12 +60,13 @@ class CategoryScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          if (!categorySnapshot.hasData) {
+          if (!categorySnapshot.hasData || categorySnapshot.data?.data() == null) {             
             return const Center(
               child: Text('error'),
             );
           }
-          var category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
+          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
+          
           return Scaffold(
             appBar: AppBar(
               title: Text(category.name),
