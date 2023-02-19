@@ -12,6 +12,7 @@ import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class GoalScreen extends StatelessWidget {
+  static const routeName = '/single-goal';
   final GoalModel goal;
   final String categoryName;
   const GoalScreen({super.key, required this.categoryName, required this.goal});

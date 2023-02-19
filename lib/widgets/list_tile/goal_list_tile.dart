@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -16,12 +17,13 @@ class GoalListTile extends StatefulWidget {
 
 class _GoalListTileState extends State<GoalListTile> {
   void gotoGoalScreen() {
-    Navigator.of(context).push(CupertinoPageRoute(
-      builder: (context) => GoalScreen(
-        categoryName: widget.categoryName,
-        goal: widget.goal,
-      ),
-    ));
+    GoRouter.of(context).push(GoalScreen.routeName, extra: {'categoryId': widget.categoryName, 'goal': widget.goal});
+    //Navigator.of(context).push(CupertinoPageRoute(
+    //   builder: (context) => GoalScreen(
+    //     categoryName: widget.categoryName,
+    //     goal: widget.goal,
+    //   ),
+    // ));
   }
 
   @override
