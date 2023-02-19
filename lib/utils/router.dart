@@ -66,38 +66,46 @@ final router = GoRouter(
           builder: (context, state) => const GoalsScreen(),
         ),
         GoRoute(
-          path: CategoryScreen.routeName,
-          builder: (context, state) {
-            String categoryId = state.extra.toString();
-            return CategoryScreen(categoryId: categoryId);
-          }
-        ),
+            path: CategoryScreen.routeName,
+            builder: (context, state) {
+              String categoryId = state.extra.toString();
+              return CategoryScreen(categoryId: categoryId);
+            }),
         GoRoute(
-          path: GoalScreen.routeName,
-          builder: (context, state) {
-            Map<String, Object> extras = state.extra as Map<String, Object>;
-            String categoryId = extras['categoryId'] as String;
-            GoalModel goal = extras['goal'] as GoalModel;
+            path: GoalScreen.routeName,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              GoalModel goal = extras['goal'] as GoalModel;
 
-            return GoalScreen(goal: goal, categoryId: categoryId,);
-          }
-        ),
+              return GoalScreen(
+                goal: goal,
+                categoryId: categoryId,
+              );
+            }),
         GoRoute(
-          path: HandleGoalScreen.routeName,
-          builder: (context, state) {
-            Map<String, Object> extras = state.extra as Map<String, Object>;
-            String categoryId = extras['categoryId'] as String;
-            GoalModel goal = extras['goal'] as GoalModel;
+            path: HandleGoalScreen.routeNameEdit,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              GoalModel? goal = extras['goal'] as GoalModel;
 
-            return HandleGoalScreen(goal: goal, categoryId: categoryId,);
-          }
-        ),
+              return HandleGoalScreen(
+                goal: goal,
+                categoryId: categoryId,
+              );
+            }),
+        GoRoute(
+            path: HandleGoalScreen.routeNameAdd,
+            builder: (context, state) {
+              return HandleGoalScreen(categoryId: state.extra.toString());
+            }),
         GoRoute(
           path: HandleCategoryScreen.routeNameAdd,
           builder: (context, state) => const HandleCategoryScreen(),
         ),
         GoRoute(
-          path: HandleCategoryScreen.routeNameHandle,
+          path: HandleCategoryScreen.routeNameEdit,
           builder: (context, state) {
             CategoryModel category = state.extra as CategoryModel;
             return HandleCategoryScreen(

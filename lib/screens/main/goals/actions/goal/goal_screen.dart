@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/cards/action_card.dart';
@@ -12,6 +11,8 @@ import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
+//TODO: Add streambuilder
+
 class GoalScreen extends StatelessWidget {
   static const routeName = '/single-goal';
   final GoalModel goal;
@@ -21,7 +22,7 @@ class GoalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void goToHandleGoal() {      
-      GoRouter.of(context).go(HandleGoalScreen.routeName, extra: {'categoryId': categoryId, 'goal': goal});
+      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
     void deleteGoal() {

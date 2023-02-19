@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
@@ -19,7 +18,7 @@ class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key, required this.categoryId});
   void goToHandleCategory(BuildContext context, CategoryModel category) {
     GoRouter.of(context)
-        .push(HandleCategoryScreen.routeNameHandle, extra: category);
+        .push(HandleCategoryScreen.routeNameEdit, extra: category);
   }
 
   @override
@@ -45,7 +44,7 @@ class CategoryScreen extends StatelessWidget {
     }
 
     void goToHandleGoal() {
-      GoRouter.of(context).go(HandleGoalScreen.routeName, extra: {'categoryId': categoryId, 'goal': null});
+      GoRouter.of(context).push(HandleGoalScreen.routeNameAdd, extra: categoryId);
     }
 
     return StreamBuilder(

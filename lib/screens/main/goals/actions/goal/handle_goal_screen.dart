@@ -7,7 +7,8 @@ import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleGoalScreen extends StatefulWidget {
-  static String routeName = "add-goal";
+  static String routeNameAdd = "/add-goal";
+  static String routeNameEdit = "/edit-goal";
   final GoalModel? goal;
   final String categoryId;
   const HandleGoalScreen({super.key, this.goal, required this.categoryId});
@@ -49,22 +50,30 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     void addGoal() async {
-      int? goalId;
-      if(widget.goal == null) {
-        goalId = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
-      }
-      await GoalService.addGoal(
-        categoryId: widget.categoryId,
-        goal: GoalModel(
-          id: widget.goal?.id ?? goalId!,
+      if(widget.goal != null) {
+        GoalModel editedGoal = GoalModel(
+          id: widget.goal!.id,
           name: goalName.text,
           description: description.text,
           reward: reward.text,
           privateGoal: privateGoal,
           privateDescription: privateDescription,
           privateReward: privateReward,
-        ),
-      ).then((value) => Navigator.of(context).pop());
+        );
+        await GoalService.editGoal(categoryId: widget.categoryId, goal: editedGoal).then((value) => Navigator.of(context).pop());
+      } else {
+        final id = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
+          GoalModel newGoal = GoalModel(
+          id: id,
+          name: goalName.text,
+          description: description.text,
+          reward: reward.text,
+          privateGoal: privateGoal,
+          privateDescription: privateDescription,
+          privateReward: privateReward,
+        );
+        await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal).then((value) => Navigator.of(context).pop());
+      }
     }
 
     return Scaffold(
