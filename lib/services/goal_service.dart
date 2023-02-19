@@ -57,4 +57,14 @@ class GoalService extends Service {
     // }
     // goal.steps!.add(step);
   }
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId({required String categoryId, required int goalId})  {
+     return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goalId.toString())
+        .snapshots();
+
+  }
 }
