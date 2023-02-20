@@ -81,7 +81,7 @@ class GoalScreen extends StatelessWidget {
                   g.steps!.isEmpty
                       ? MarkAsCompletedListTile(
                           categoryId: categoryId,
-                          goalId: goalId,
+                          goal: g,
                         )
                       : const SizedBox(),
                   ...?g.steps?.map((step) => StepListTile(

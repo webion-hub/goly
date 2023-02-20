@@ -7,10 +7,10 @@ import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible_list_title.dart';
 
 class StepListTile extends StatefulWidget {
-  StepModel step;
+  final StepModel step;
   final String categoryId;
   final int goalId;
-  StepListTile(
+  const StepListTile(
       {super.key,
       required this.step,
       required this.categoryId,
@@ -50,10 +50,11 @@ class _StepListTileState extends State<StepListTile> {
           if (value != null) {
             widget.step.completed = value;
             StepService.editStep(
-                categoryId: widget.categoryId,
-                goalId: widget.goalId,
-                stepId: widget.step.id,
-                step: widget.step);
+              categoryId: widget.categoryId,
+              goalId: widget.goalId,
+              stepId: widget.step.id,
+              step: widget.step,
+            );
           }
         },
         title: Text(widget.step.name),
