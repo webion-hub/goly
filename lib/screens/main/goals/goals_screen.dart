@@ -42,7 +42,7 @@ class _MainPageState extends State<GoalsScreen> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if(snapshot.data == null) {
+                if (snapshot.data == null) {
                   return const Text('Start adding some categories ');
                 }
                 snapshot.data?.docs.map((element) {

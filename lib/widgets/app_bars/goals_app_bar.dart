@@ -11,7 +11,8 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Goals'),
       actions: [
         IconButton(
-            onPressed: () => GoRouter.of(context).go(ExplenationScreen.routeName),
+            onPressed: () =>
+                GoRouter.of(context).go(ExplenationScreen.routeName),
             icon: const Icon(Icons.question_mark_rounded)),
       ],
     );

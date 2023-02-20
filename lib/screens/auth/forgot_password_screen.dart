@@ -20,6 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     super.dispose();
     _emailController.dispose();
   }
+
   final _emailController = TextEditingController(text: '');
   Future resetPassword() async {
     loadingDialog(context);
@@ -50,7 +51,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             children: [
               const Text('Rceive an emal to reset your password'),
               const SizedBox(height: 20),
-              TextFieldInput(textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
+              TextFieldInput(
+                  textEditingController: _emailController,
+                  hintText: 'Email',
+                  textInputType: TextInputType.emailAddress),
               const SizedBox(height: 30),
               MainButton(
                 onPressed: resetPassword,

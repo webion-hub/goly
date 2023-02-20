@@ -50,7 +50,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     void addGoal() async {
-      if(widget.goal != null) {
+      if (widget.goal != null) {
         GoalModel editedGoal = GoalModel(
           id: widget.goal!.id,
           name: goalName.text,
@@ -60,10 +60,13 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
           privateDescription: privateDescription,
           privateReward: privateReward,
         );
-        await GoalService.editGoal(categoryId: widget.categoryId, goal: editedGoal).then((value) => Navigator.of(context).pop());
+        await GoalService.editGoal(
+                categoryId: widget.categoryId, goal: editedGoal)
+            .then((value) => Navigator.of(context).pop());
       } else {
-        final id = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
-          GoalModel newGoal = GoalModel(
+        final id = await CategoryService.getNumberofGoals(
+            categoryId: widget.categoryId);
+        GoalModel newGoal = GoalModel(
           id: id,
           name: goalName.text,
           description: description.text,
@@ -72,7 +75,8 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
           privateDescription: privateDescription,
           privateReward: privateReward,
         );
-        await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal).then((value) => Navigator.of(context).pop());
+        await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal)
+            .then((value) => Navigator.of(context).pop());
       }
     }
 
@@ -100,7 +104,8 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                     const SizedBox(height: 20.0),
                     TextFormField(
                       controller: description,
-                      decoration: const InputDecoration(labelText: 'Description'),
+                      decoration:
+                          const InputDecoration(labelText: 'Description'),
                       keyboardType: TextInputType.multiline,
                       maxLines: 3,
                     ),

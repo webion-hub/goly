@@ -28,7 +28,7 @@ class ExplenationScreen extends StatelessWidget {
           final prefs = await SharedPreferences.getInstance();
           prefs.setBool('introductionDone', true);
         } finally {
-        GoRouter.of(context).go(DiscoverScreen.routeName);
+          GoRouter.of(context).go(DiscoverScreen.routeName);
         }
       },
     );

@@ -8,7 +8,7 @@ class FirebaseService extends Service {
     required String email,
     required String password,
   }) async {
-    return  await _firestore.createUserWithEmailAndPassword(
+    return await _firestore.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -23,6 +23,4 @@ class FirebaseService extends Service {
       password: password,
     );
   }
-
-  
 }

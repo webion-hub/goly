@@ -66,7 +66,8 @@ class SettingsScreen extends StatelessWidget {
                     text: "Private description by default",
                   ),
                   Consumer(
-                    builder:(context, ThemeNotifier notifier, child) => SettingsSwitcher(
+                    builder: (context, ThemeNotifier notifier, child) =>
+                        SettingsSwitcher(
                       icon: Icons.dark_mode,
                       initialValue: notifier.dark,
                       onChanged: (bool value) {

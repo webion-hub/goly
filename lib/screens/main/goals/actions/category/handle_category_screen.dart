@@ -80,7 +80,8 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                     const SizedBox(height: 20.0),
                     TextFormField(
                       controller: description,
-                      decoration: const InputDecoration(labelText: 'Description'),
+                      decoration:
+                          const InputDecoration(labelText: 'Description'),
                       keyboardType: TextInputType.multiline,
                       maxLines: 3,
                     ),

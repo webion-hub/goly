@@ -35,7 +35,8 @@ class CategoryScreen extends StatelessWidget {
           },
           yesAction: () async {
             Navigator.of(context).pop();
-            await CategoryService.deleteCategory(categoryId: categoryId).then((value) =>  GoRouter.of(context).go(GoalsScreen.routeName));
+            await CategoryService.deleteCategory(categoryId: categoryId).then(
+                (value) => GoRouter.of(context).go(GoalsScreen.routeName));
           },
         ),
       );

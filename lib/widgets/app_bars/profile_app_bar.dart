@@ -11,8 +11,7 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(Constants.appName.toUpperCase()),
       actions: [
         IconButton(
-          onPressed: () =>
-            GoRouter.of(context).push('/settings'),
+          onPressed: () => GoRouter.of(context).push('/settings'),
           icon: const Icon(Icons.settings),
         )
       ],

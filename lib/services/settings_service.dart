@@ -23,9 +23,12 @@ class SettingsService extends Service {
     SettingsModel currentSettings = await getCurrentSettings();
     SettingsModel newSettings = SettingsModel(
       privateAccount: privateAccount ?? currentSettings.privateAccount,
-      privateGoalsByDefault: privateGoalsByDefault ?? currentSettings.privateGoalsByDefault,
-      privateRewardByDefault: privateRewardByDefault ?? currentSettings.privateRewardByDefault,
-      privateDescriptionsByDefault: privateDescriptionsByDefault ?? currentSettings.privateDescriptionsByDefault,
+      privateGoalsByDefault:
+          privateGoalsByDefault ?? currentSettings.privateGoalsByDefault,
+      privateRewardByDefault:
+          privateRewardByDefault ?? currentSettings.privateRewardByDefault,
+      privateDescriptionsByDefault: privateDescriptionsByDefault ??
+          currentSettings.privateDescriptionsByDefault,
     );
     return await documentReferencer.update({'settings': newSettings.toJson()});
   }

@@ -41,27 +41,35 @@ class _PageShellState extends State<PageShell> {
   }
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child: widget.child),
       bottomNavigationBar: CupertinoTabBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.tips_and_updates,
-            color: (_page == 0) ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondary,
+            icon: Icon(
+              Icons.tips_and_updates,
+              color: (_page == 0)
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).colorScheme.secondary,
             ),
             label: "Discover",
-            
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.flag_rounded,
-            color: (_page == 1) ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondary,
+            icon: Icon(
+              Icons.flag_rounded,
+              color: (_page == 1)
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).colorScheme.secondary,
             ),
             label: "Goals",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded,
-            color: (_page == 2) ? Theme.of(context).primaryColor : Theme.of(context).colorScheme.secondary,
+            icon: Icon(
+              Icons.person_rounded,
+              color: (_page == 2)
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).colorScheme.secondary,
             ),
             label: "Profile",
           ),
@@ -70,5 +78,5 @@ class _PageShellState extends State<PageShell> {
         currentIndex: _page,
       ),
     );
-    }
   }
+}

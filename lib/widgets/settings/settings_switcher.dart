@@ -44,7 +44,7 @@ class _SettingsSwitcherState extends State<SettingsSwitcher> {
             onChanged: (value) {
               widget.onChanged(value);
               setState(() {
-                 currentValue = value;
+                currentValue = value;
               });
             },
             value: currentValue,

@@ -8,7 +8,7 @@ class DarkMode {
     colorScheme: DarkMode.darkColorScheme,
     appBarTheme: appBarTheme,
   );
-  
+
   ///Colors for dark mode
   static Color backgroundColor = const Color.fromARGB(255, 0, 0, 0);
   static Color primaryColor = const Color(0xff00ffab);
@@ -44,7 +44,7 @@ class DarkMode {
     inversePrimary: Color(0xFF006C47),
     shadow: Color(0xFF000000),
     surfaceTint: Color(0xFF72DAA6),
-);
+  );
 
   static final appBarTheme = AppBarTheme(
     elevation: 0.0,
@@ -61,5 +61,4 @@ class DarkMode {
       fontWeight: FontWeight.w700,
     ),
   );
-
 }

@@ -19,8 +19,9 @@ class GoalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void goToHandleGoal(GoalModel goal) {      
-      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
+    void goToHandleGoal(GoalModel goal) {
+      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit,
+          extra: {'categoryId': categoryId, 'goal': goal});
     }
 
     void deleteGoal(int goalId) {
@@ -43,51 +44,58 @@ class GoalScreen extends StatelessWidget {
     }
 
     void goToHandleStep() async {
-      GoRouter.of(context).push(HandleStepScreen.routeNameAdd, extra: {'categoryId': categoryId, 'goalId': goalId});
+      GoRouter.of(context).push(HandleStepScreen.routeNameAdd,
+          extra: {'categoryId': categoryId, 'goalId': goalId});
       //StepService.editStep(categoryId: categoryId, goalId: goalId, step: StepModel(name: "gino"), stepId: 0);
     }
 
-    return StreamBuilder (
-      stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
-      builder: (context, snapshot) {
-        if(snapshot.data == null || snapshot.data!.data() == null) {
-          return const Text('Error');
-        }
-        GoalModel g = GoalModel.fromJson(snapshot.data!.data()!);
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(g.name),
-            actions: [
-              IconButton(
-                onPressed: () => goToHandleGoal(g),
-                icon: const Icon(Icons.edit),
-              ),
-              IconButton(
-                onPressed: () => deleteGoal(goalId),
-                icon: const Icon(Icons.delete),
-              ),
-            ],
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              padding: Constants.pagePadding,
-              child: Column(children: [
-                g.description != null
-                    ? DescriptionCard(text: g.description!)
-                    : const SizedBox(),
-                g.steps!.isEmpty ? MarkAsCompletedListTile(categoryId: categoryId, goalId: goalId,) : const SizedBox(),
-                ...?g.steps?.map((step) => StepListTile(step: step, categoryId: categoryId, goalId: goalId)),
-                //g.steps!.asMap().forEach((key, value) => const SizedBox(),),
-                ActionCard(
-                  text: 'Add step',
-                  icon: Icons.add,
-                  action: goToHandleStep,
+    return StreamBuilder(
+        stream: GoalService.getGoalStreamFromId(
+            categoryId: categoryId, goalId: goalId),
+        builder: (context, snapshot) {
+          if (snapshot.data == null || snapshot.data!.data() == null) {
+            return const Text('Error');
+          }
+          GoalModel g = GoalModel.fromJson(snapshot.data!.data()!);
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(g.name),
+              actions: [
+                IconButton(
+                  onPressed: () => goToHandleGoal(g),
+                  icon: const Icon(Icons.edit),
                 ),
-              ]),
+                IconButton(
+                  onPressed: () => deleteGoal(goalId),
+                  icon: const Icon(Icons.delete),
+                ),
+              ],
             ),
-          ),
-        );
-      }
-    );
+            body: SingleChildScrollView(
+              child: Container(
+                padding: Constants.pagePadding,
+                child: Column(children: [
+                  g.description != null
+                      ? DescriptionCard(text: g.description!)
+                      : const SizedBox(),
+                  g.steps!.isEmpty
+                      ? MarkAsCompletedListTile(
+                          categoryId: categoryId,
+                          goalId: goalId,
+                        )
+                      : const SizedBox(),
+                  ...?g.steps?.map((step) => StepListTile(
+                      step: step, categoryId: categoryId, goalId: goalId)),
+                  //g.steps!.asMap().forEach((key, value) => const SizedBox(),),
+                  ActionCard(
+                    text: 'Add step',
+                    icon: Icons.add,
+                    action: goToHandleStep,
+                  ),
+                ]),
+              ),
+            ),
+          );
+        });
   }
 }

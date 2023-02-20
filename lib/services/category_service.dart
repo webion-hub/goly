@@ -52,6 +52,7 @@ class CategoryService extends Service {
         .doc(categoryId)
         .delete();
   }
+
   static Future deleteCategoryGoals({required String categoryId}) async {
     return _collection
         .doc(Utils.currentUid())
@@ -61,6 +62,7 @@ class CategoryService extends Service {
         .doc()
         .delete();
   }
+
   static Future<int> getNumberofGoals({required String categoryId}) async {
     return _collection
         .doc(Utils.currentUid())
@@ -70,7 +72,9 @@ class CategoryService extends Service {
         .get()
         .then((value) => value.size);
   }
-  static Stream<QuerySnapshot<Map<String,dynamic>>> getCategoryGoals({required String categoryId}) {
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoryGoals(
+      {required String categoryId}) {
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -78,12 +82,13 @@ class CategoryService extends Service {
         .collection('goals')
         .snapshots();
   }
+
   static Future getCategoryById({required String categoryId}) async {
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .get()
-        .then((value) => value);    
+        .then((value) => value);
   }
 }

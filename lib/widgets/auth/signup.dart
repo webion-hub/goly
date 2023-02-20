@@ -40,8 +40,8 @@ class _SignUpState extends State<SignUp> {
       await FirebaseService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-      ).then((value) => GoRouter.of(context).pushReplacement(HandleProfileScreen.routeName));
-      
+      ).then((value) =>
+          GoRouter.of(context).pushReplacement(HandleProfileScreen.routeName));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
       navigatorKey.currentState!.popUntil((route) => route.isFirst);

@@ -72,22 +72,23 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
       return;
     }
     try {
-    await UserService.updateProfile(
-      user: UserModel(
-        username: _usernameController.text,
-        bio: _bioController.text,
-        email: Utils.currentEmail().trim(),
-        photoUrl: imageUrl ?? Constants.userImageDefault,
-        id: Utils.currentUid(),
-      ),
-    ).then((value) => GoRouter.of(context).go(ExplenationScreen.routeName));
+      await UserService.updateProfile(
+        user: UserModel(
+          username: _usernameController.text,
+          bio: _bioController.text,
+          email: Utils.currentEmail().trim(),
+          photoUrl: imageUrl ?? Constants.userImageDefault,
+          id: Utils.currentUid(),
+        ),
+      ).then((value) => GoRouter.of(context).go(ExplenationScreen.routeName));
     } catch (e) {
       Utils.showSnackbBar(
           'An error has occurred updating your profile. Please try again');
-    } finally  {
-       Navigator.of(context).popUntil((route) => route.isFirst);
+    } finally {
+      Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

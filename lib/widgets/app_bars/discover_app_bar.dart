@@ -13,8 +13,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: const Text('Discover'),
       actions: [
         IconButton(
-          onPressed: () =>
-              GoRouter.of(context).push(SettingsScreen.routeName),
+          onPressed: () => GoRouter.of(context).push(SettingsScreen.routeName),
           icon: const Icon(Icons.add),
         ),
         IconButton(
@@ -23,8 +22,7 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.message_rounded),
         ),
         IconButton(
-          onPressed: () =>
-              GoRouter.of(context).push(ChatScreen.routeName),
+          onPressed: () => GoRouter.of(context).push(ChatScreen.routeName),
           icon: const Icon(Icons.search),
         ),
       ],

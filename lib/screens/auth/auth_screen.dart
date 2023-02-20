@@ -38,10 +38,12 @@ class _AuthScreenState extends State<AuthScreen> {
                   ? LogIn(onClickedSignup: toggle)
                   : SignUp(onClickedSignup: toggle),
               const SizedBox(height: 20),
-        RichTextWithAction(
-            text: isLogin ? 'Don\'t have an account?' : 'Already have an account?',
-            actionText: isLogin ? 'Sign up' : 'Log in',
-            action: toggle)
+              RichTextWithAction(
+                  text: isLogin
+                      ? 'Don\'t have an account?'
+                      : 'Already have an account?',
+                  actionText: isLogin ? 'Sign up' : 'Log in',
+                  action: toggle)
             ],
           ),
         ),

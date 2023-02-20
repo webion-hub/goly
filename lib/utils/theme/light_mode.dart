@@ -6,9 +6,9 @@ class LightMode {
     primaryColor: primaryColor,
     secondaryHeaderColor: secondaryColor,
     colorScheme: lightColorScheme,
-    appBarTheme:  appBarTheme,
+    appBarTheme: appBarTheme,
   );
-  
+
   ///Colors for light mode
   static Color backgroundColor = const Color.fromARGB(255, 255, 255, 255);
   static Color primaryColor = const Color(0xff00ffab);
@@ -61,5 +61,4 @@ class LightMode {
       fontWeight: FontWeight.w700,
     ),
   );
-
 }

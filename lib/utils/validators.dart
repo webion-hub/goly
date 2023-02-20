@@ -24,6 +24,7 @@ class Validations {
     }
     return null;
   }
+
   static String? validateBio(String? value) {
     if (value!.length > 100) {
       return 'The bio musst be less than 100 characters';

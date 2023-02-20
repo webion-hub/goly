@@ -42,14 +42,13 @@ class _LogInState extends State<LogIn> {
         email: _emailController.text,
         password: _passwordController.text,
       ).then((value) => GoRouter.of(context).go(DiscoverScreen.routeName));
-
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
     } finally {
-    setState(() {
-      isLoading = false;
-    });
-    } 
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
