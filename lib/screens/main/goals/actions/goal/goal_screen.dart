@@ -13,17 +13,17 @@ import 'package:goly/utils/constants.dart';
 
 class GoalScreen extends StatelessWidget {
   static const routeName = '/single-goal';
-  final GoalModel goal;
+  final int goalId;
   final String categoryId;
-  const GoalScreen({super.key, required this.categoryId, required this.goal});
+  const GoalScreen({super.key, required this.categoryId, required this.goalId});
 
   @override
   Widget build(BuildContext context) {
-    void goToHandleGoal() {      
+    void goToHandleGoal(GoalModel goal) {      
       GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
-    void deleteGoal() {
+    void deleteGoal(int goalId) {
       showDialog(
         context: context,
         builder: (context) => AsyncConfirmationDialog(
@@ -36,7 +36,7 @@ class GoalScreen extends StatelessWidget {
           yesAction: () async {
             Navigator.of(context).pop();
             await GoalService.deleteGoal(
-                categoryId: categoryId, goal: goal);
+                categoryId: categoryId, goalId: goalId);
           },
         ),
       );
@@ -44,11 +44,11 @@ class GoalScreen extends StatelessWidget {
 
     void goToHandleStep() async {
       //TODO: make it work
-      GoalService.addStepToGoal(categoryId: categoryId, goalId: goal.id, step: StepModel(name: "dsadass"));
+      GoalService.addStepToGoal(categoryId: categoryId, goalId: goalId, step: StepModel(name: "New step"));
     }
 
     return StreamBuilder (
-      stream: GoalService.getGoalFromId(categoryId: categoryId, goalId: goal.id),
+      stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
       builder: (context, snapshot) {
         if(snapshot.data == null || snapshot.data!.data() == null) {
           return const Text('Error');
@@ -59,11 +59,11 @@ class GoalScreen extends StatelessWidget {
             title: Text(g.name),
             actions: [
               IconButton(
-                onPressed: goToHandleGoal,
+                onPressed: () => goToHandleGoal(g),
                 icon: const Icon(Icons.edit),
               ),
               IconButton(
-                onPressed: deleteGoal,
+                onPressed: () => deleteGoal(goalId),
                 icon: const Icon(Icons.delete),
               ),
             ],
@@ -75,7 +75,8 @@ class GoalScreen extends StatelessWidget {
                 g.description != null
                     ? DescriptionCard(text: g.description!)
                     : const SizedBox(),
-                const MarkAsCompletedListTile(),
+                g.steps!.isEmpty ? MarkAsCompletedListTile(categoryId: categoryId, goalId: goalId,) : const SizedBox(),
+                
                 ...?g.steps?.map((step) => StepListTile(step: step)),
                 ActionCard(
                   text: 'Add step',

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MarkAsCompletedListTile extends StatefulWidget {
-  const MarkAsCompletedListTile({super.key});
+  final String categoryId;
+  final int goalId;
+
+  const MarkAsCompletedListTile({super.key, required this.categoryId, required this.goalId});
 
   @override
   State<MarkAsCompletedListTile> createState() =>

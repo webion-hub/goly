@@ -83,10 +83,10 @@ refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges(
             builder: (context, state) {
               Map<String, Object> extras = state.extra as Map<String, Object>;
               String categoryId = extras['categoryId'] as String;
-              GoalModel goal = extras['goal'] as GoalModel;
+              int goalId = extras['goalId'] as int;
 
               return GoalScreen(
-                goal: goal,
+                goalId: goalId,
                 categoryId: categoryId,
               );
             }),

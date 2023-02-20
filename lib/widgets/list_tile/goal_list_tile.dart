@@ -19,7 +19,7 @@ class GoalListTile extends StatefulWidget {
 class _GoalListTileState extends State<GoalListTile> {
   void gotoGoalScreen() {
     GoRouter.of(context).push(GoalScreen.routeName,
-        extra: {'categoryId': widget.categoryId, 'goal': widget.goal});
+        extra: {'categoryId': widget.categoryId, 'goalId': widget.goal.id});
   }
 
   @override
@@ -38,7 +38,7 @@ class _GoalListTileState extends State<GoalListTile> {
                   },
                   yesAction: () async {
                     await GoalService.deleteGoal(
-                            categoryId: widget.categoryId, goal: widget.goal)
+                            categoryId: widget.categoryId, goalId: widget.goal.id)
                         .then((value) => Navigator.of(ctx).pop());
                   },
                 )));

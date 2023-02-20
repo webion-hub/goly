@@ -40,13 +40,13 @@ class GoalService extends Service {
   }
 
   static Future deleteGoal(
-      {required String categoryId, required GoalModel goal}) async {
+      {required String categoryId, required int goalId}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .collection('goals')
-        .doc(goal.id.toString())
+        .doc(goalId.toString())
         .delete();
   }
 
@@ -64,8 +64,18 @@ class GoalService extends Service {
       'steps': FieldValue.arrayUnion([step.toJson()])
     });
   }
+  static Future toggleGoalCompletition(String categoryId, int goalId) async {
+        return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goalId.toString())
+        .snapshots();
 
-  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId(
+  }
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalStreamFromId(
       {required String categoryId, required int goalId}) {
     return _collection
         .doc(Utils.currentUid())
@@ -74,5 +84,14 @@ class GoalService extends Service {
         .collection('goals')
         .doc(goalId.toString())
         .snapshots();
+  }  
+  static Future getGoalFromId(
+      {required String categoryId, required int goalId}) async {
+    return _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goalId.toString());
   }
 }
