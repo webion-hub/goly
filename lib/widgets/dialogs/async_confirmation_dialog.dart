@@ -39,7 +39,7 @@ class _AsyncConfirmationDialogState extends State<AsyncConfirmationDialog> {
               });
               await widget.yesAction();
               setState(() {
-                isLoading = false;                
+                isLoading = false;
               });
             },
           ),

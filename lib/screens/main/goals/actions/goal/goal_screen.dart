@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/services/step_service.dart';
+import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/mark_as_completed_list_tile.dart';
 import 'package:goly/widgets/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
-import 'package:goly/models/step.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -44,9 +43,8 @@ class GoalScreen extends StatelessWidget {
     }
 
     void goToHandleStep() async {
-      //TODO: make it work
-
-      StepService.editStep(categoryId: categoryId, goalId: goalId, step: StepModel(name: "gino"), stepId: 0);
+      GoRouter.of(context).push(HandleStepScreen.routeNameAdd, extra: {'categoryId': categoryId, 'goalId': goalId});
+      //StepService.editStep(categoryId: categoryId, goalId: goalId, step: StepModel(name: "gino"), stepId: 0);
     }
 
     return StreamBuilder (
@@ -78,8 +76,8 @@ class GoalScreen extends StatelessWidget {
                     ? DescriptionCard(text: g.description!)
                     : const SizedBox(),
                 g.steps!.isEmpty ? MarkAsCompletedListTile(categoryId: categoryId, goalId: goalId,) : const SizedBox(),
-                
-                ...?g.steps?.map((step) => StepListTile(step: step)),
+                ...?g.steps?.map((step) => StepListTile(step: step, categoryId: categoryId, goalId: goalId)),
+                //g.steps!.asMap().forEach((key, value) => const SizedBox(),),
                 ActionCard(
                   text: 'Add step',
                   icon: Icons.add,

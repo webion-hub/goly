@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/buttons/main_outlined_button.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
-import 'package:goly/utils/utils.dart';
 
 class UserProfile extends StatelessWidget {
   final UserModel user;
@@ -13,12 +12,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void goToHandleProfileScreen() {
-      Navigator.of(context).push(CupertinoPageRoute(
-        builder: (context) => HandleProfileScreen(
-          uid: Utils.currentUid(),
-          user: user,
-        ),
-      ));
+      GoRouter.of(context).go(HandleProfileScreen.routeName);
     }
 
     return Column(

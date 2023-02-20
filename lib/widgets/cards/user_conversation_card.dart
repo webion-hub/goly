@@ -13,6 +13,7 @@ class UserConversationCard extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
+          
           onTap: () => Navigator.of(context).push(CupertinoPageRoute(
             builder: (context) => const ChatScreen(
               userReceiver: 'FHl2G7ywdCbabRTzL5TTIF9OmMD2',

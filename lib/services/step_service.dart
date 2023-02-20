@@ -9,7 +9,6 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
 class StepService extends Service {
-
   static Future addStepToGoal(
       {required String categoryId,
       required int goalId,
@@ -24,22 +23,23 @@ class StepService extends Service {
       'steps': FieldValue.arrayUnion([step.toJson()])
     });
   }
+
   static Future editStep(
       {required String categoryId,
       required int goalId,
       required int stepId,
       required StepModel step}) async {
-    final docref =  await _collection
+    final docref = _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .collection('goals')
         .doc(goalId.toString());
-        _firestore.runTransaction((transaction) async {
-          final snapshot = await transaction.get(docref);
-          final goal = GoalModel.fromJson(snapshot.data()!);
-          goal.steps?[stepId] = step;
-          transaction.update(docref, goal.toJson());
-        });
+    return _firestore.runTransaction((transaction) async {
+      final snapshot = await transaction.get(docref);
+      final goal = GoalModel.fromJson(snapshot.data()!);
+      goal.steps?[stepId] = step;
+      transaction.update(docref, goal.toJson());
+    });
   }
 }

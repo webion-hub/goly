@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/mark_as_completed_list_tile.dart';
-import 'package:goly/widgets/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
-import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -71,8 +68,6 @@ class StepScreen extends StatelessWidget {
                     ? DescriptionCard(text: g.description!)
                     : const SizedBox(),
                 g.steps!.isEmpty ? MarkAsCompletedListTile(categoryId: categoryId, goalId: goalId,) : const SizedBox(),
-                
-                ...?g.steps?.map((step) => StepListTile(step: step)),
                 ActionCard(
                   text: 'Add step',
                   icon: Icons.add,

@@ -141,6 +141,17 @@ final router = GoRouter(
               );
             }),
         GoRoute(
+            path: HandleStepScreen.routeNameAdd,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              int goalId = extras['goalId'] as int;
+              return HandleStepScreen(
+                goalId: goalId,
+                categoryId: categoryId,
+              );
+            }),
+        GoRoute(
             path: HandleStepScreen.routeNameEdit,
             builder: (context, state) {
               Map<String, Object> extras = state.extra as Map<String, Object>;

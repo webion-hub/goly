@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
+import 'package:goly/services/goal_service.dart';
+import 'package:goly/services/step_service.dart';
 import 'package:goly/widgets/buttons/main_button.dart';
 import 'package:goly/widgets/settings/settings_switcher.dart';
-import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleStepScreen extends StatefulWidget {
@@ -11,7 +12,8 @@ class HandleStepScreen extends StatefulWidget {
   final StepModel? step;
   final int goalId;
   final String categoryId;
-  const HandleStepScreen({super.key, this.step, required this.categoryId, required this.goalId});
+  const HandleStepScreen(
+      {super.key, this.step, required this.categoryId, required this.goalId});
 
   @override
   State<HandleStepScreen> createState() => _HandleStepScreenState();
@@ -41,28 +43,29 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     void addStep() async {
-      if(widget.step != null) {
-        StepModel step = StepModel(
-          name: stepName.text,
-          reward: reward.text,
-          privateStep: privateStep,
-          privateReward: privateReward,
-        );
-        await GoalService.addStepToGoal(categoryId: widget.categoryId, goalId: widget.goalId, step: step).then((value) => Navigator.of(context).pop());
-      } 
-      // else {
-      //   final id = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
-      //     GoalModel newGoal = GoalModel(
-      //     id: id,
-      //     name: stepName.text,
-      //     description: description.text,
-      //     reward: reward.text,
-      //     privateStep: privateStep,
-      //     privateDescription: privateDescription,
-      //     privateReward: privateReward,
-      //   );
-      //   await GoalService.addStep(categoryId: widget.categoryId, goal: newGoal).then((value) => Navigator.of(context).pop());
-      // }
+      var numberOfSteps = await GoalService.getNumberOfSteps(
+          categoryId: widget.categoryId, goalId: widget.goalId);
+      StepModel step = StepModel(
+        id: widget.step?.id ?? numberOfSteps,
+        name: stepName.text,
+        reward: reward.text,
+        privateStep: privateStep,
+        privateReward: privateReward,
+      );
+      if (widget.step == null) {
+        await StepService.addStepToGoal(
+                categoryId: widget.categoryId,
+                goalId: widget.goalId,
+                step: step)
+            .then((value) => Navigator.of(context).pop());
+      } else {
+        await StepService.editStep(
+                categoryId: widget.categoryId,
+                goalId: widget.goalId,
+                step: step,
+                stepId: 0)
+            .then((value) => Navigator.of(context).pop());
+      }
     }
 
     return Scaffold(
