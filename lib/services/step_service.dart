@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
+import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/utils.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -13,6 +14,18 @@ class StepService extends Service {
       {required String categoryId,
       required int goalId,
       required StepModel step}) async {
+    /// Set goal as not completed if we add a step
+    GoalModel? goal;
+    await GoalService.getGoalFromId(categoryId: categoryId, goalId: goalId)
+        .then((value) {
+      goal = GoalModel.fromJson(value.data()!);
+    });
+
+    if (goal == null) {
+      return;
+    }
+    await GoalService.toggleCategoryCompleted(
+        categoryId: categoryId, goal: goal!, value: false);
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
