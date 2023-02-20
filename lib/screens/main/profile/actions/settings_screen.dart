@@ -68,6 +68,7 @@ class SettingsScreen extends StatelessWidget {
                   Consumer(
                     builder:(context, ThemeNotifier notifier, child) => SettingsSwitcher(
                       icon: Icons.dark_mode,
+                      initialValue: notifier.dark,
                       onChanged: (bool value) {
                         notifier.toggleTheme();
                       },

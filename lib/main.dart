@@ -7,9 +7,9 @@ import 'package:goly/utils/theme/light_mode.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/view_models/theme_view_model.dart';
 import 'package:provider/provider.dart';
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //final introductionDone = prefs.getBool('introductionDone') ?? false;
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -17,28 +17,25 @@ Future main() async {
 final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key,});
+  const MyApp({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    return ChangeNotifierProvider (
+    return ChangeNotifierProvider(
       create: (_) => ThemeNotifier(),
       child: Consumer<ThemeNotifier>(
         builder: (context, ThemeNotifier notifier, child) {
           return MaterialApp.router(
-          routerConfig: router,
-          title: Constants.appName,
-          //navigatorKey: navigatorKey,
-          scaffoldMessengerKey: Utils.messangerKey,
-          debugShowCheckedModeBanner: false,
-          //themeMode: ThemeMode.system,
-          theme: notifier.dark ? DarkMode.theme : LightMode.theme,
-          //darkTheme: DarkMode.theme,
-        );
+            routerConfig: router,
+            title: Constants.appName,
+            scaffoldMessengerKey: Utils.messangerKey,
+            debugShowCheckedModeBanner: false,
+            theme: notifier.dark ? DarkMode.theme : LightMode.theme,
+          );
         },
       ),
     );
   }
 }
-
