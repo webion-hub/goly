@@ -14,7 +14,7 @@ class GoalService extends Service {
     required String categoryId,
     required GoalModel goal,
   }) async {
-    var numberOfGoals = 
+    var numberOfGoals =
         await CategoryService.getNumberofGoals(categoryId: categoryId);
     return await _collection
         .doc(Utils.currentUid())
@@ -50,21 +50,29 @@ class GoalService extends Service {
         .delete();
   }
 
-  static void addStepToGoal(
-      {required GoalModel goal, required StepModel step}) {
-    // if (goal.steps == null) {
-    //   goal.steps = [];
-    // }
-    // goal.steps!.add(step);
+  static Future addStepToGoal(
+      {required String categoryId,
+      required int goalId,
+      required StepModel step}) async {
+    return await _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goalId.toString())
+        .update({
+      'steps': FieldValue.arrayUnion([step.toJson()])
+    });
   }
-  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId({required String categoryId, required int goalId})  {
-     return _collection
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId(
+      {required String categoryId, required int goalId}) {
+    return _collection
         .doc(Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .collection('goals')
         .doc(goalId.toString())
         .snapshots();
-
   }
 }

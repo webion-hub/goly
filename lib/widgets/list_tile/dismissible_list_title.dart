@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible_background.dart';
 
 class DismissibleListTile extends StatelessWidget {
