@@ -28,20 +28,21 @@ class _GoalListTileState extends State<GoalListTile> {
       uniqueKey: ValueKey(widget.goal.id),
       confirmDismiss: (direction) {
         return showDialog(
-            context: context,
-            builder: ((ctx) => AsyncConfirmationDialog(
-                  title: 'Are you sure?',
-                  message:
-                      'Do you want to remove this goal and all the steeps inside it?',
-                  noAction: () {
-                    Navigator.of(ctx).pop(false);
-                  },
-                  yesAction: () async {
-                    await GoalService.deleteGoal(
-                            categoryId: widget.categoryId, goalId: widget.goal.id)
-                        .then((value) => Navigator.of(ctx).pop());
-                  },
-                )));
+          context: context,
+          builder: ((ctx) => AsyncConfirmationDialog(
+                title: 'Are you sure?',
+                message:
+                    'Do you want to remove this goal and all the steeps inside it?',
+                noAction: () {
+                  Navigator.of(ctx).pop(false);
+                },
+                yesAction: () async {
+                  await GoalService.deleteGoal(
+                          categoryId: widget.categoryId, goalId: widget.goal.id)
+                      .then((value) => Navigator.of(ctx).pop());
+                },
+              )),
+        );
       },
       child: ListTile(
         title: Text(widget.goal.name),

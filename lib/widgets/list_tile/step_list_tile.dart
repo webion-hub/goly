@@ -16,22 +16,8 @@ class _StepListTileState extends State<StepListTile> {
       value: false,
       onChanged: (_) {},
       title: Text(widget.step.name),
-      subtitle: widget.step.reward != null ? Text(widget.step.reward!) : null,
+      subtitle: widget.step.reward != "" ? Text(widget.step.reward!) : null,
       controlAffinity: ListTileControlAffinity.leading,
     );
-
-    // return ListTile(
-    //   title:  Text(widget.goal.name),
-    //   onTap: () {},
-    //   leading: const Icon(Icons.open_in_new),
-    //   subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
-    //   trailing: FittedBox(
-    //     child: CircularPercentIndicator(
-    //       radius: 16.0,
-    //       lineWidth: 4.0,
-    //       percent: 0.4,
-    //       progressColor: Colors.green,
-    //     ),
-    //   ),
   }
 }

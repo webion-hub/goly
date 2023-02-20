@@ -42,7 +42,7 @@ class GoalModel {
       'description': description,
       'completed': completed,
       'privateGoal': privateGoal,
-      'steps': steps?.map((step) => step.toJson()) ?? [],
+      'steps': steps?.map((step) => step.toJson()).toList() ?? [],
       'privateDescription': privateDescription,
     };
   }

@@ -2,14 +2,14 @@ class StepModel {
   String name;
   String? reward;
   bool completed;
-  bool privateGoal;
+  bool privateStep;
   bool privateReward;
 
   StepModel({
     required this.name,
     this.reward,
     this.completed = false,
-    this.privateGoal = false,
+    this.privateStep = false,
     this.privateReward = false,
   });
 
@@ -17,7 +17,7 @@ class StepModel {
       : name = json['name'],
         reward = json['reward'] ?? "",
         completed = json['completed'],
-        privateGoal = json['privateGoal'],
+        privateStep = json['privateStep'],
         privateReward = json['privateReward'];
 
   Map<String, dynamic> toJson() {
@@ -25,7 +25,7 @@ class StepModel {
     data['name'] = name;
     data['reward'] = reward ?? "";
     data['completed'] = completed;
-    data['privateGoal'] = privateGoal;
+    data['privateStep'] = privateStep;
     data['privateReward'] = privateReward;
 
     return data;

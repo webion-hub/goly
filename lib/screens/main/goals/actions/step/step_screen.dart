@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/services/step_service.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
@@ -8,20 +7,20 @@ import 'package:goly/widgets/list_tile/mark_as_completed_list_tile.dart';
 import 'package:goly/widgets/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
-import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
-class GoalScreen extends StatelessWidget {
+class StepScreen extends StatelessWidget {
   static const routeName = '/single-goal';
+  final int stepId;
   final int goalId;
   final String categoryId;
-  const GoalScreen({super.key, required this.categoryId, required this.goalId});
+  const StepScreen({super.key, required this.categoryId, required this.goalId, required this.stepId});
 
   @override
   Widget build(BuildContext context) {
-    void goToHandleGoal(GoalModel goal) {      
-      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
+    void goToHandleStep(GoalModel goal) {      
+      //GoRouter.of(context).push(HandleStepScree.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
     void deleteGoal(int goalId) {
@@ -43,12 +42,6 @@ class GoalScreen extends StatelessWidget {
       );
     }
 
-    void goToHandleStep() async {
-      //TODO: make it work
-
-      StepService.editStep(categoryId: categoryId, goalId: goalId, step: StepModel(name: "gino"), stepId: 0);
-    }
-
     return StreamBuilder (
       stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
       builder: (context, snapshot) {
@@ -61,7 +54,7 @@ class GoalScreen extends StatelessWidget {
             title: Text(g.name),
             actions: [
               IconButton(
-                onPressed: () => goToHandleGoal(g),
+                onPressed: () => goToHandleStep(g),
                 icon: const Icon(Icons.edit),
               ),
               IconButton(

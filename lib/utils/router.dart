@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/models/step.dart';
 import 'package:goly/providers/go_router_refresh_stream.dart';
 import 'package:goly/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
@@ -15,22 +16,24 @@ import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
+import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
+import 'package:goly/screens/main/goals/actions/step/step_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 
-
-
 final router = GoRouter(
-  initialLocation: FirebaseAuth.instance.currentUser == null ? AuthScreen.routeName : DiscoverScreen.routeName,
+  initialLocation: FirebaseAuth.instance.currentUser == null
+      ? AuthScreen.routeName
+      : DiscoverScreen.routeName,
   errorPageBuilder: (context, state) => MaterialPage<void>(
-  key: state.pageKey,
-  child: ErrorScreen(error: state.error),
-),
-
-refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
+    key: state.pageKey,
+    child: ErrorScreen(error: state.error),
+  ),
+  refreshListenable:
+      GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
   routes: [
     ShellRoute(
       routes: [
@@ -73,35 +76,6 @@ refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges(
           builder: (context, state) => const GoalsScreen(),
         ),
         GoRoute(
-            path: CategoryScreen.routeName,
-            builder: (context, state) {
-              String categoryId = state.extra.toString();
-              return CategoryScreen(categoryId: categoryId);
-            }),
-        GoRoute(
-            path: GoalScreen.routeName,
-            builder: (context, state) {
-              Map<String, Object> extras = state.extra as Map<String, Object>;
-              String categoryId = extras['categoryId'] as String;
-              int goalId = extras['goalId'] as int;
-
-              return GoalScreen(
-                goalId: goalId,
-                categoryId: categoryId,
-              );
-            }),
-        GoRoute(
-            path: HandleGoalScreen.routeNameEdit,
-            builder: (context, state) {
-              Map<String, Object> extras = state.extra as Map<String, Object>;
-              String categoryId = extras['categoryId'] as String;
-              GoalModel? goal = extras['goal'] as GoalModel;
-              return HandleGoalScreen(
-                goal: goal,
-                categoryId: categoryId,
-              );
-            }),
-        GoRoute(
             path: HandleGoalScreen.routeNameAdd,
             builder: (context, state) {
               return HandleGoalScreen(categoryId: state.extra.toString());
@@ -119,6 +93,66 @@ refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges(
             );
           },
         ),
+        GoRoute(
+            path: CategoryScreen.routeName,
+            builder: (context, state) {
+              String categoryId = state.extra.toString();
+              return CategoryScreen(categoryId: categoryId);
+            }),
+        GoRoute(
+            path: GoalScreen.routeName,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              int goalId = extras['goalId'] as int;
+              return GoalScreen(
+                goalId: goalId,
+                categoryId: categoryId,
+              );
+            }),
+        GoRoute(
+            path: HandleGoalScreen.routeNameEdit,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              GoalModel? goal = extras['goal'] as GoalModel;
+              return HandleGoalScreen(
+                goal: goal,
+                categoryId: categoryId,
+              );
+            }),
+        GoRoute(
+            path: CategoryScreen.routeName,
+            builder: (context, state) {
+              String categoryId = state.extra.toString();
+              return CategoryScreen(categoryId: categoryId);
+            }),
+        GoRoute(
+            path: StepScreen.routeName,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              int goalId = extras['goalId'] as int;
+              int stepId = extras['stepId'] as int;
+              return StepScreen(
+                goalId: goalId,
+                categoryId: categoryId,
+                stepId: stepId,
+              );
+            }),
+        GoRoute(
+            path: HandleStepScreen.routeNameEdit,
+            builder: (context, state) {
+              Map<String, Object> extras = state.extra as Map<String, Object>;
+              String categoryId = extras['categoryId'] as String;
+              int goalId = extras['goalId'] as int;
+              StepModel? step = extras['step'] as StepModel;
+              return HandleStepScreen(
+                goalId: goalId,
+                step: step,
+                categoryId: categoryId,
+              );
+            }),
 
         /// Profile
         GoRoute(
