@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LightMode {
-  static ThemeData lightTheme = ThemeData.light().copyWith(
+  static ThemeData theme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: backgroundColor,
     primaryColor: primaryColor,
     secondaryHeaderColor: secondaryColor,

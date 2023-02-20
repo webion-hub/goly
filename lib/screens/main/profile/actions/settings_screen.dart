@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/services/settings_service.dart';
+import 'package:goly/view_models/theme_view_model.dart';
 import 'package:goly/widgets/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = '/settings';
@@ -63,10 +65,14 @@ class SettingsScreen extends StatelessWidget {
                     },
                     text: "Private description by default",
                   ),
-                  SettingsSwitcher(
-                    icon: Icons.dark_mode,
-                    onChanged: (bool value) {},
-                    text: "Dark mode",
+                  Consumer(
+                    builder:(context, ThemeNotifier notifier, child) => SettingsSwitcher(
+                      icon: Icons.dark_mode,
+                      onChanged: (bool value) {
+                        notifier.toggleTheme();
+                      },
+                      text: "Dark mode",
+                    ),
                   ),
                   SettingsListTile(
                     icon: Icons.logout,

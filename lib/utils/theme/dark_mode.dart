@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DarkMode {
-  static ThemeData darkTheme = ThemeData.dark().copyWith(
+  static ThemeData theme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: DarkMode.backgroundColor,
     primaryColor: DarkMode.primaryColor,
     secondaryHeaderColor: DarkMode.secondaryColor,

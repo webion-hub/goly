@@ -2,11 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeProvider extends ChangeNotifier {
+class ThemeNotifier extends ChangeNotifier {
   final String key = 'theme';
   SharedPreferences? _prefs;
   bool _darkTheme = false;
   bool get dark => _darkTheme;
+
+  ThemeNotifier() {
+    _loadfromPrefs();
+  }
 
   appProvider() {
     _darkTheme = true;
