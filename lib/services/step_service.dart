@@ -24,11 +24,12 @@ class StepService extends Service {
     });
   }
 
-  static Future editStep(
-      {required String categoryId,
-      required int goalId,
-      required int stepId,
-      required StepModel step}) async {
+  static Future editStep({
+    required String categoryId,
+    required int goalId,
+    required int stepId,
+    required StepModel step,
+  }) async {
     final docref = _collection
         .doc(Utils.currentUid())
         .collection('categories')

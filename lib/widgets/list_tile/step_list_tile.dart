@@ -7,10 +7,10 @@ import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible_list_title.dart';
 
 class StepListTile extends StatefulWidget {
-  final StepModel step;
+  StepModel step;
   final String categoryId;
   final int goalId;
-  const StepListTile(
+  StepListTile(
       {super.key,
       required this.step,
       required this.categoryId,
@@ -45,8 +45,17 @@ class _StepListTileState extends State<StepListTile> {
                 )));
       },
       child: CheckboxListTile(
-        value: false,
-        onChanged: (_) {},
+        value: widget.step.completed,
+        onChanged: (value) {
+          if (value != null) {
+            widget.step.completed = value;
+            StepService.editStep(
+                categoryId: widget.categoryId,
+                goalId: widget.goalId,
+                stepId: widget.step.id,
+                step: widget.step);
+          }
+        },
         title: Text(widget.step.name),
         subtitle: widget.step.reward != "" ? Text(widget.step.reward!) : null,
         controlAffinity: ListTileControlAffinity.leading,
