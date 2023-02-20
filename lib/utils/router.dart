@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/providers/go_router_refresh_stream.dart';
 import 'package:goly/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
+import 'package:goly/screens/error_screen.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
 import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
@@ -17,15 +21,23 @@ import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 
+
+
 final router = GoRouter(
-  initialLocation: AuthScreen.routeName,
+  initialLocation: FirebaseAuth.instance.currentUser == null ? AuthScreen.routeName : DiscoverScreen.routeName,
+  errorPageBuilder: (context, state) => MaterialPage<void>(
+  key: state.pageKey,
+  child: ErrorScreen(error: state.error),
+),
+
+refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
   routes: [
     ShellRoute(
       routes: [
         GoRoute(
           path: '/',
           redirect: ((context, state) {
-            return AuthScreen.routeName;
+            return DiscoverScreen.routeName;
             // if (FirebaseAuth.instance.currentUser != null) {
             //   return DiscoverScreen.routeName;
             // } else {

@@ -43,6 +43,7 @@ class GoalScreen extends StatelessWidget {
     }
 
     void goToHandleStep() async {
+      //TODO: make it work
       GoalService.addStepToGoal(goal: goal, step: StepModel(name: "stepTest"));
     }
 

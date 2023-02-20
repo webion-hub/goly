@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/services/settings_service.dart';
 import 'package:goly/widgets/settings/settings_list_tile.dart';
@@ -72,8 +73,7 @@ class SettingsScreen extends StatelessWidget {
                     ifTrailing: false,
                     onTap: () {
                       FirebaseAuth.instance.signOut();
-                      Navigator.of(context)
-                          .pushReplacementNamed(AuthScreen.routeName);
+                      GoRouter.of(context).go(AuthScreen.routeName);
                     },
                     text: "Logout",
                   ),

@@ -9,7 +9,6 @@ import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/utils/utils.dart';
 
 class App extends StatefulWidget {
-  static const routeName = '/home';
   const App({super.key});
 
   @override
