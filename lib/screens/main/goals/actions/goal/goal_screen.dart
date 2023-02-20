@@ -68,7 +68,7 @@ class GoalScreen extends StatelessWidget {
               ),
             ],
           ),
-          body: Center(
+          body: SingleChildScrollView(
             child: Container(
               padding: Constants.pagePadding,
               child: Column(children: [

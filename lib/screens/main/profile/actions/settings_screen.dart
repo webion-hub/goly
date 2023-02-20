@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
             }
             SettingsModel settings = snapshot.data!;
 
-            return Container(
+            return SingleChildScrollView(
               padding: Constants.pagePadding,
               child: Column(
                 children: [

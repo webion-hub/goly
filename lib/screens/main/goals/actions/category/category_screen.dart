@@ -37,14 +37,14 @@ class CategoryScreen extends StatelessWidget {
             Navigator.of(context).pop();
             GoRouter.of(context).go(GoalsScreen.routeName);
             await CategoryService.deleteCategory(categoryId: categoryId);
-            
           },
         ),
       );
     }
 
     void goToHandleGoal() {
-      GoRouter.of(context).push(HandleGoalScreen.routeNameAdd, extra: categoryId);
+      GoRouter.of(context)
+          .push(HandleGoalScreen.routeNameAdd, extra: categoryId);
     }
 
     return StreamBuilder(
@@ -55,13 +55,15 @@ class CategoryScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          if (!categorySnapshot.hasData || categorySnapshot.data?.data() == null) {             
+          if (!categorySnapshot.hasData ||
+              categorySnapshot.data?.data() == null) {
             return const Center(
               child: Text('error'),
             );
           }
-          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
-          
+          CategoryModel category =
+              CategoryModel.fromJson(categorySnapshot.data!.data()!);
+
           return Scaffold(
             appBar: AppBar(
               title: Text(category.name),
@@ -76,39 +78,37 @@ class CategoryScreen extends StatelessWidget {
                 ),
               ],
             ),
-            body: Center(
-              child: Container(
-                padding: Constants.pagePadding,
-                child: Column(children: [
-                  category.description != null
-                      ? DescriptionCard(text: category.description!)
-                      : const SizedBox(),
-                  StreamBuilder(
-                      stream: CategoryService.getCategoryGoals(
-                          categoryId: category.id),
-                      builder: (context, goalSnapshot) {
-                        if (!goalSnapshot.hasData) {
-                          return const Text('Start adding some data');
-                        }
-                        return Column(
-                            children: goalSnapshot.data!.docs
-                                .map(
-                                  (e) => GoalListTile(
-                                    categoryId: category.id,
-                                    goal: GoalModel.fromJson(
-                                      e.data(),
-                                    ),
+            body: SingleChildScrollView(
+              padding: Constants.pagePadding,
+              child: Column(children: [
+                category.description != null
+                    ? DescriptionCard(text: category.description!)
+                    : const SizedBox(),
+                StreamBuilder(
+                    stream: CategoryService.getCategoryGoals(
+                        categoryId: category.id),
+                    builder: (context, goalSnapshot) {
+                      if (!goalSnapshot.hasData) {
+                        return const Text('Start adding some data');
+                      }
+                      return Column(
+                          children: goalSnapshot.data!.docs
+                              .map(
+                                (e) => GoalListTile(
+                                  categoryId: category.id,
+                                  goal: GoalModel.fromJson(
+                                    e.data(),
                                   ),
-                                )
-                                .toList());
-                      }),
-                  ActionCard(
-                    text: 'Add goal',
-                    icon: Icons.add,
-                    action: goToHandleGoal,
-                  ),
-                ]),
-              ),
+                                ),
+                              )
+                              .toList());
+                    }),
+                ActionCard(
+                  text: 'Add goal',
+                  icon: Icons.add,
+                  action: goToHandleGoal,
+                ),
+              ]),
             ),
           );
         });

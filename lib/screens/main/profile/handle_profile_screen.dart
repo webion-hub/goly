@@ -141,7 +141,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
           widget.user != null ? 'Edit profile' : 'Set up profile',
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Container(
           padding: Constants.pagePadding,
           child: Form(

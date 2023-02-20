@@ -80,66 +80,68 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
       appBar: AppBar(
         title: Text(widget.goal != null ? 'Edit goal' : 'Add goal'),
       ),
-      body: Column(children: [
-        Center(
-          child: Container(
-            padding: Constants.pagePadding,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: goalName,
-                    decoration: const InputDecoration(labelText: 'Name'),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: description,
-                    decoration: const InputDecoration(labelText: 'Description'),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 3,
-                  ),
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: reward,
-                    decoration: const InputDecoration(labelText: 'Reward'),
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 20.0),
-                  SettingsSwitcher(
-                      initialValue: privateGoal,
-                      icon: Icons.lock,
-                      text: "Private goal",
-                      subtitle: "Makes private all the goals inside it",
-                      onChanged: privateGoalChange),
-                  const SizedBox(height: 20.0),
-                  SettingsSwitcher(
-                      initialValue: privateDescription,
-                      icon: Icons.lock,
-                      text: "Private description",
-                      subtitle: "Makes description private",
-                      onChanged: privateDescriptionChange),
-                  const SizedBox(height: 20.0),
-                  SettingsSwitcher(
-                      initialValue: privateReward,
-                      icon: Icons.lock,
-                      text: "Private reward",
-                      subtitle: "Makes reward private",
-                      onChanged: privateRewardChange),
-                  MainButton(
-                    text: widget.goal != null ? 'Edit goal' : 'Add goal',
-                    onPressed: addGoal,
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Center(
+            child: Container(
+              padding: Constants.pagePadding,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      controller: goalName,
+                      decoration: const InputDecoration(labelText: 'Name'),
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.text,
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      controller: description,
+                      decoration: const InputDecoration(labelText: 'Description'),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 3,
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      controller: reward,
+                      decoration: const InputDecoration(labelText: 'Reward'),
+                      keyboardType: TextInputType.text,
+                    ),
+                    const SizedBox(height: 20.0),
+                    SettingsSwitcher(
+                        initialValue: privateGoal,
+                        icon: Icons.lock,
+                        text: "Private goal",
+                        subtitle: "Makes private all the goals inside it",
+                        onChanged: privateGoalChange),
+                    const SizedBox(height: 20.0),
+                    SettingsSwitcher(
+                        initialValue: privateDescription,
+                        icon: Icons.lock,
+                        text: "Private description",
+                        subtitle: "Makes description private",
+                        onChanged: privateDescriptionChange),
+                    const SizedBox(height: 20.0),
+                    SettingsSwitcher(
+                        initialValue: privateReward,
+                        icon: Icons.lock,
+                        text: "Private reward",
+                        subtitle: "Makes reward private",
+                        onChanged: privateRewardChange),
+                    MainButton(
+                      text: widget.goal != null ? 'Edit goal' : 'Add goal',
+                      onPressed: addGoal,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }

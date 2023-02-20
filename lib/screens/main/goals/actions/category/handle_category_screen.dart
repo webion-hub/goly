@@ -60,56 +60,58 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
       appBar: AppBar(
           title:
               Text(widget.category != null ? 'Edit category' : 'Add category')),
-      body: Column(children: [
-        Center(
-          child: Container(
-            padding: Constants.pagePadding,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: categoryName,
-                    decoration: const InputDecoration(labelText: 'Name'),
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                  ),
-                  const SizedBox(height: 20.0),
-                  TextFormField(
-                    controller: description,
-                    decoration: const InputDecoration(labelText: 'Description'),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 3,
-                  ),
-                  const SizedBox(height: 20.0),
-                  SettingsSwitcher(
-                      initialValue: privateCategory,
-                      icon: Icons.lock,
-                      text: "Private category",
-                      subtitle: "Makes private all the goals inside it",
-                      onChanged: privateCategoryChange),
-                  const SizedBox(height: 20.0),
-                  SettingsSwitcher(
-                      initialValue: privateDescription,
-                      icon: Icons.lock,
-                      text: "Private description",
-                      subtitle: "Makes private description",
-                      onChanged: privateDescriptionChange),
-                  const SizedBox(height: 20.0),
-                  MainButton(
-                    text: widget.category != null
-                        ? 'Update category'
-                        : 'Add category',
-                    onPressed: handleCategory,
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Column(children: [
+          Center(
+            child: Container(
+              padding: Constants.pagePadding,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      controller: categoryName,
+                      decoration: const InputDecoration(labelText: 'Name'),
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.text,
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextFormField(
+                      controller: description,
+                      decoration: const InputDecoration(labelText: 'Description'),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 3,
+                    ),
+                    const SizedBox(height: 20.0),
+                    SettingsSwitcher(
+                        initialValue: privateCategory,
+                        icon: Icons.lock,
+                        text: "Private category",
+                        subtitle: "Makes private all the goals inside it",
+                        onChanged: privateCategoryChange),
+                    const SizedBox(height: 20.0),
+                    SettingsSwitcher(
+                        initialValue: privateDescription,
+                        icon: Icons.lock,
+                        text: "Private description",
+                        subtitle: "Makes private description",
+                        onChanged: privateDescriptionChange),
+                    const SizedBox(height: 20.0),
+                    MainButton(
+                      text: widget.category != null
+                          ? 'Update category'
+                          : 'Add category',
+                      onPressed: handleCategory,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
