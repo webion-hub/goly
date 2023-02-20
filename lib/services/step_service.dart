@@ -42,4 +42,19 @@ class StepService extends Service {
       transaction.update(docref, goal.toJson());
     });
   }
+  static Future deleteStep(
+      {required String categoryId,
+      required int goalId,
+      required int stepId,
+      required StepModel step}) async {
+    return await _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .doc(goalId.toString())
+        .update({
+      'steps': FieldValue.arrayRemove([step.toJson()])
+    });
+  }
 }
