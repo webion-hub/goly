@@ -20,7 +20,7 @@ class CategoryCard extends StatelessWidget {
       child: Dismissible(
         key: ValueKey(category.id),
         background: const DismissibleBackground(),
-        direction: DismissDirection.horizontal,
+        direction: DismissDirection.endToStart,
         confirmDismiss: (direction) {
           return showDialog(
             context: context,
@@ -38,22 +38,26 @@ class CategoryCard extends StatelessWidget {
             ),
           );
         },
-        child: ListTile(
-          title: Text(category.name),
-          onTap: (() => GoRouter.of(context).push(CategoryScreen.routeName, extra: category.id)),
-          leading: const Icon(Icons.open_in_new),
-          subtitle: category.description != null
-              ? Text(
-                  category.description!
-                      .substring(0, min(category.description!.length, 40)),
-                )
-              : null,
-          trailing: FittedBox(
-            child: CircularPercentIndicator(
-              radius: 16.0,
-              lineWidth: 4.0,
-              percent: 0.4,
-              progressColor: Colors.green,
+        child: ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+
+          child: ListTile(
+            title: Text(category.name),
+            onTap: (() => GoRouter.of(context).push(CategoryScreen.routeName, extra: category.id)),
+            leading: const Icon(Icons.open_in_new),
+            subtitle: category.description != null
+                ? Text(
+                    category.description!
+                        .substring(0, min(category.description!.length, 40)),
+                  )
+                : null,
+            trailing: FittedBox(
+              child: CircularPercentIndicator(
+                radius: 16.0,
+                lineWidth: 4.0,
+                percent: 0.4,
+                progressColor: Colors.green,
+              ),
             ),
           ),
         ),
