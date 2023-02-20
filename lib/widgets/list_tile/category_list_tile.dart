@@ -6,6 +6,7 @@ import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/services/category_service.dart';
+import 'package:goly/widgets/list_tile/dismissible_background.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -18,21 +19,8 @@ class CategoryCard extends StatelessWidget {
     return Center(
       child: Dismissible(
         key: ValueKey(category.id),
-        background: Container(
-          color: Theme.of(context).errorColor,
-          alignment: Alignment.centerRight,
-          padding: const EdgeInsets.only(right: 20),
-          margin: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 4,
-          ),
-          child: const Icon(
-            Icons.delete,
-            color: Colors.white,
-            size: 20,
-          ),
-        ),
-        direction: DismissDirection.endToStart,
+        background: const DismissibleBackground(),
+        direction: DismissDirection.horizontal,
         confirmDismiss: (direction) {
           return showDialog(
             context: context,

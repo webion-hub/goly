@@ -38,11 +38,6 @@ refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges(
           path: '/',
           redirect: ((context, state) {
             return DiscoverScreen.routeName;
-            // if (FirebaseAuth.instance.currentUser != null) {
-            //   return DiscoverScreen.routeName;
-            // } else {
-            //   return AuthScreen.routeName;
-            // }
           }),
         ),
 
@@ -101,7 +96,6 @@ refreshListenable: GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges(
               Map<String, Object> extras = state.extra as Map<String, Object>;
               String categoryId = extras['categoryId'] as String;
               GoalModel? goal = extras['goal'] as GoalModel;
-
               return HandleGoalScreen(
                 goal: goal,
                 categoryId: categoryId,

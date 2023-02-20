@@ -88,51 +88,6 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
        Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
-  // void pickedImage(File image) async {
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   try {
-  //     imageUrl = await UserService.uploadUserImage(image);
-  //   } catch (e) {
-  //     Utils.showSnackbBar(
-  //         'An error has occurred uploading the image. Please try again');
-  //   } finally {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-
-  // void setUp() async {
-  //   final isValid = formKey.currentState!.validate();
-  //   if (!isValid) {
-  //     return;
-  //   }
-  //   setState(() {
-  //     isLoading = true;
-  //   });
-  //   try {
-  //     await UserService.updateProfile(
-  //         user: UserModel(
-  //       username: _usernameController.text,
-  //       bio: _bioController.text,
-  //       email: Utils.currentEmail().trim(),
-  //       photoUrl: imageUrl ?? Constants.userImageDefault,
-  //       id: Utils.currentUid(),
-  //     ));
-  //     navigatorKey.currentState!.popUntil((route) => route.isFirst);
-  //   } on FirebaseAuthException catch (e){
-  //     print(Utils.currentUid());
-  //     Utils.showSnackbBar(
-  //         'An error has occurred updating your profile. Please try again');
-  //   } finally {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
