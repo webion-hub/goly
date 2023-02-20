@@ -17,7 +17,6 @@ import 'package:goly/screens/main/goals/actions/category/handle_category_screen.
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
-import 'package:goly/screens/main/goals/actions/step/step_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
@@ -126,19 +125,6 @@ final router = GoRouter(
             builder: (context, state) {
               String categoryId = state.extra.toString();
               return CategoryScreen(categoryId: categoryId);
-            }),
-        GoRoute(
-            path: StepScreen.routeName,
-            builder: (context, state) {
-              Map<String, Object> extras = state.extra as Map<String, Object>;
-              String categoryId = extras['categoryId'] as String;
-              int goalId = extras['goalId'] as int;
-              int stepId = extras['stepId'] as int;
-              return StepScreen(
-                goalId: goalId,
-                categoryId: categoryId,
-                stepId: stepId,
-              );
             }),
         GoRoute(
             path: HandleStepScreen.routeNameAdd,
