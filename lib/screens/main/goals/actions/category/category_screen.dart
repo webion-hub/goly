@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
-import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
+import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/goal_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
@@ -35,8 +35,7 @@ class CategoryScreen extends StatelessWidget {
           },
           yesAction: () async {
             Navigator.of(context).pop();
-            GoRouter.of(context).go(GoalsScreen.routeName);
-            await CategoryService.deleteCategory(categoryId: categoryId);
+            await CategoryService.deleteCategory(categoryId: categoryId).then((value) =>  GoRouter.of(context).go(GoalsScreen.routeName));
           },
         ),
       );

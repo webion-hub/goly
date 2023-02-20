@@ -18,6 +18,11 @@ class AsyncConfirmationDialog extends StatefulWidget {
 }
 
 class _AsyncConfirmationDialogState extends State<AsyncConfirmationDialog> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {

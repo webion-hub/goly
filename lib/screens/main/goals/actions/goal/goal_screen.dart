@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
-import 'package:goly/widgets/dialogs/confirmation_dialog.dart';
+import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/mark_as_completed_list_tile.dart';
 import 'package:goly/widgets/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
