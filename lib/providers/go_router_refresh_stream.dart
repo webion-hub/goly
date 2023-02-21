@@ -9,7 +9,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
           (dynamic _) => notifyListeners(),
         );
   }
-
+  
   late final StreamSubscription<dynamic> _subscription;
 
   @override

@@ -18,7 +18,7 @@ class StepModel {
   StepModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
-        reward = json['reward'] ?? "",
+        reward = json['reward'],
         completed = json['completed'],
         privateStep = json['privateStep'],
         privateReward = json['privateReward'];
@@ -27,7 +27,7 @@ class StepModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['reward'] = reward ?? "";
+    data['reward'] = reward;
     data['completed'] = completed;
     data['privateStep'] = privateStep;
     data['privateReward'] = privateReward;

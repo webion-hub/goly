@@ -14,11 +14,7 @@ class UserModel {
     required this.email,
     required this.photoUrl,
     required this.id,
-    this.settings = const SettingsModel(
-        privateAccount: false,
-        privateDescriptionsByDefault: false,
-        privateGoalsByDefault: false,
-        privateRewardByDefault: false),
+    this.settings = SettingsModel.defaultSettings,
     this.bio = "",
   });
 

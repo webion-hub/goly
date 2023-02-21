@@ -53,52 +53,5 @@ class CategoryCard extends StatelessWidget {
             ),
           ),
         ));
-    // return Center(
-    //   child: Dismissible(
-    //     key: ValueKey(category.id),
-    //     background: const DismissibleBackground(),
-    //     direction: DismissDirection.endToStart,
-    //     confirmDismiss: (direction) {
-    //       return showDialog(
-    //         context: context,
-    //         builder: (ctx) => AsyncConfirmationDialog(
-    //           title: 'Are you sure?',
-    //           message:
-    //               'Do you want to remove this category and all the goals inside it?',
-    //           noAction: () {
-    //             Navigator.of(ctx).pop(false);
-    //           },
-    //           yesAction: () async {
-    //             Navigator.of(ctx).pop();
-    //             await CategoryService.deleteCategory(categoryId: category.id);
-    //           },
-    //         ),
-    //       );
-    //     },
-    //     child: ClipRRect(
-    //       borderRadius: BorderRadius.circular(10),
-    //       child: ListTile(
-    //         title: Text(category.name),
-    //         onTap: (() => GoRouter.of(context)
-    //             .push(CategoryScreen.routeName, extra: category.id)),
-    //         leading: const Icon(Icons.open_in_new),
-    //         subtitle: category.description != null
-    //             ? Text(
-    //                 category.description!
-    //                     .substring(0, min(category.description!.length, 40)),
-    //               )
-    //             : null,
-    //         trailing: FittedBox(
-    //           child: CircularPercentIndicator(
-    //             radius: 16.0,
-    //             lineWidth: 4.0,
-    //             percent: 0.4,
-    //             progressColor: Colors.green,
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
