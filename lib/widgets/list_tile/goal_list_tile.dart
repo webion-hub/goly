@@ -37,9 +37,9 @@ class _GoalListTileState extends State<GoalListTile> {
                   Navigator.of(ctx).pop(false);
                 },
                 yesAction: () async {
-                  Navigator.of(ctx).pop();
+                  
                   await GoalService.deleteGoal(
-                      categoryId: widget.categoryId, goalId: widget.goal.id);
+                      categoryId: widget.categoryId, goalId: widget.goal.id).then((value) => Navigator.of(ctx).pop());
                 },
               )),
         );

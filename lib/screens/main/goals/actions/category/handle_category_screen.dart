@@ -47,7 +47,6 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
           name: categoryName.text,
           private: privateCategory,
           description: description.text,
-          goals: widget.category?.goals,
           privateDescription: privateDescription);
 
       widget.category == null

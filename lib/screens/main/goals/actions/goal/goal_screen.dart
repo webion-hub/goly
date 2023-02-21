@@ -36,8 +36,8 @@ class GoalScreen extends StatelessWidget {
           },
           yesAction: () async {
             Navigator.of(context).pop();
-            await GoalService.deleteGoal(
-                categoryId: categoryId, goalId: goalId);
+            await GoalService.deleteGoal(categoryId: categoryId, goalId: goalId)
+                .then((value) => GoRouter.of(context).pop());
           },
         ),
       );
@@ -46,7 +46,6 @@ class GoalScreen extends StatelessWidget {
     void goToHandleStep() async {
       GoRouter.of(context).push(HandleStepScreen.routeNameAdd,
           extra: {'categoryId': categoryId, 'goalId': goalId});
-      //StepService.editStep(categoryId: categoryId, goalId: goalId, step: StepModel(name: "gino"), stepId: 0);
     }
 
     return StreamBuilder(

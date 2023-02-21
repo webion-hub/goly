@@ -73,7 +73,7 @@ class CategoryService extends Service {
         .then((value) => value.size);
   }
 
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoryGoals(
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoryGoalsStream(
       {required String categoryId}) {
     return _collection
         .doc(Utils.currentUid())
@@ -81,6 +81,15 @@ class CategoryService extends Service {
         .doc(categoryId)
         .collection('goals')
         .snapshots();
+  }
+  static Future<QuerySnapshot<Map<String, dynamic>>> getCategoryGoals(
+      {required String categoryId}) async{
+    return await _collection
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .doc(categoryId)
+        .collection('goals')
+        .get();
   }
 
   static Future getCategoryById({required String categoryId}) async {
@@ -91,4 +100,18 @@ class CategoryService extends Service {
         .get()
         .then((value) => value);
   }
+
+  // static Future<double> getPercentageOfCompletition(
+  //     {required String categoryId}) async {
+  //   // CategoryModel? category;
+  //   // await getCategoryById(categoryId: categoryId).then((value) {
+  //   //   category = CategoryModel.fromJson(value.data()!);
+  //   // });
+  //   List<CategoryModel> goals;
+  //   await getCategoryGoals(categoryId: categoryId).then((value) {
+  //     value.docs.forEach((element) {goals.add(GoalModel.fromJson(element.))});
+  //   });
+  //   return 2.2;
+
+  // }
 }

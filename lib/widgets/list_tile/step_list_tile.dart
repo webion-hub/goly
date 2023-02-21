@@ -46,15 +46,19 @@ class _StepListTileState extends State<StepListTile> {
       },
       child: CheckboxListTile(
         value: widget.step.completed,
-        onChanged: (value) {
+        onChanged: (value) async{
           if (value != null) {
             widget.step.completed = value;
-            StepService.editStep(
+            await StepService.editStep(
               categoryId: widget.categoryId,
               goalId: widget.goalId,
               stepId: widget.step.id,
               step: widget.step,
             );
+            setState(() {
+              
+            });
+
           }
         },
         title: Text(widget.step.name),

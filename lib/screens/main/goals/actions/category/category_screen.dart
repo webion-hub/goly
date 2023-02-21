@@ -85,7 +85,7 @@ class CategoryScreen extends StatelessWidget {
                     ? DescriptionCard(text: category.description!)
                     : const SizedBox(),
                 StreamBuilder(
-                    stream: CategoryService.getCategoryGoals(
+                    stream: CategoryService.getCategoryGoalsStream(
                         categoryId: category.id),
                     builder: (context, goalSnapshot) {
                       if (!goalSnapshot.hasData) {
