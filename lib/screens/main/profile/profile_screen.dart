@@ -5,16 +5,11 @@ import 'package:goly/widgets/profile/user_profile.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/utils/constants.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile';
   final String profileId;
   const ProfileScreen({super.key, required this.profileId});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,13 +19,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('users')
-                .doc(widget.profileId)
+                .doc(profileId)
                 .snapshots(),
             builder: (context, snapshot) {
               return FutureBuilder(
                 future: FirebaseFirestore.instance
                     .collection('users')
-                    .doc(widget.profileId)
+                    .doc(profileId)
                     .get(),
                 builder: ((context, snapshot) {
                   if (snapshot.data?.data() == null) {

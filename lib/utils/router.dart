@@ -5,7 +5,7 @@ import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/providers/go_router_refresh_stream.dart';
-import 'package:goly/responsive/page_shell.dart';
+import 'package:goly/screens/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/auth/error_screen.dart';

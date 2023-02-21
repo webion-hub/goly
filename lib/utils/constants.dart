@@ -21,4 +21,7 @@ class Constants {
       profileId: FirebaseAuth.instance.currentUser!.uid,
     ),
   ];
+  static IconData getLockerIcon({required bool private}) {
+    return private ? Icons.lock_outline_rounded : Icons.lock_open_outlined;
+  }
 }

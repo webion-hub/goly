@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
@@ -45,12 +46,7 @@ class CategoryCard extends StatelessWidget {
                 )
               : null,
           trailing: FittedBox(
-            child: CircularPercentIndicator(
-              radius: 16.0,
-              lineWidth: 4.0,
-              percent: 0.4,
-              progressColor: Colors.green,
-            ),
+            child: Icon(Constants.getLockerIcon(private: category.private)),
           ),
         ));
   }
