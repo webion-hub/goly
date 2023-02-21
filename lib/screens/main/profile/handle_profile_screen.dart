@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:path/path.dart' as p;
 import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
@@ -141,7 +142,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
                 ),
                 const SizedBox(height: 20.0),
                 isLoading
-                    ? const CircularProgressIndicator()
+                    ? buffering()
                     : MainButton(text: "Set up", onPressed: setUp),
               ],
             ),

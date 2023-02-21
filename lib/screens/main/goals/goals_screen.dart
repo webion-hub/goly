@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/app_bars/goals_app_bar.dart';
 import 'package:goly/widgets/cards/action_card.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/widgets/list_tile/category_list_tile.dart';
 import 'package:goly/widgets/statistics/goals_per_life_area.dart';
 import 'package:goly/models/category.dart';
@@ -38,9 +39,7 @@ class _MainPageState extends State<GoalsScreen> {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return buffering();
                 }
                 if (snapshot.data == null) {
                   return const Text('Start adding some categories ');

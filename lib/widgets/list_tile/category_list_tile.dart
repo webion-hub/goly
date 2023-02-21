@@ -8,7 +8,6 @@ import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/list_tile/dismissible_list_title.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CategoryCard extends StatelessWidget {
   final CategoryModel category;

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/app_bars/profile_app_bar.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/widgets/profile/user_profile.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/utils/constants.dart';
@@ -29,9 +30,7 @@ class ProfileScreen extends StatelessWidget {
                     .get(),
                 builder: ((context, snapshot) {
                   if (snapshot.data?.data() == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return buffering();
                   }
                   UserModel user = UserModel.fromJson(
                       snapshot.data?.data() as Map<String, dynamic>);

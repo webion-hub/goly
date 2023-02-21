@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/chat/message_bubble.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 
 class Messages extends StatelessWidget {
   final String userReceiver;
@@ -29,9 +30,7 @@ class Messages extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return buffering();
               }
               return ListView.builder(
                 itemCount: snapshot.data?.docs.length ?? 0,

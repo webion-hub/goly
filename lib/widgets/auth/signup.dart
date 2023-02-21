@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
         ),
         const SizedBox(height: 20.0),
         isLoading
-            ? circularProgress(context)
+            ? buffering()
             : MainButton(text: "Sign up", onPressed: signUp),
       ],
     );

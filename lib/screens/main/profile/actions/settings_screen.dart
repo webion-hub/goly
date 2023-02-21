@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/services/settings_service.dart';
 import 'package:goly/view_models/theme_view_model.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/widgets/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
@@ -22,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
           future: SettingsService.getCurrentSettings(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return buffering();
             }
             SettingsModel settings = snapshot.data!;
 

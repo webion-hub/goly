@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 
 class AsyncConfirmationDialog extends StatefulWidget {
   final String title;
@@ -23,7 +24,7 @@ class _AsyncConfirmationDialogState extends State<AsyncConfirmationDialog> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const Center(child: CircularProgressIndicator())
+        ? buffering()
         : AlertDialog(
             title: Text(widget.title),
             content: Text(widget.message),

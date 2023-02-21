@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 
 class UserImage extends StatelessWidget {
   final double? width;
@@ -13,7 +14,7 @@ class UserImage extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,
-          placeholder: (context, url) => const CircularProgressIndicator(),
+          placeholder: (context, url) => buffering(),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ));
   }

@@ -77,7 +77,7 @@ class _LogInState extends State<LogIn> {
         const ForgotPassword(),
         const SizedBox(height: 20.0),
         isLoading
-            ? circularProgress(context)
+            ? buffering()
             : MainButton(
                 text: "Log in",
                 onPressed: logIn,
