@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/services/firebase_service.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/utils/utils.dart';
-import 'package:goly/widgets/form/text_field_input.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
 class SignUp extends StatefulWidget {

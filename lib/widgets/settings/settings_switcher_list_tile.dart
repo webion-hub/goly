@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SettingsSwitcher extends StatefulWidget {
+class SettingsSwitcherListTile extends StatefulWidget {
   final IconData icon;
   final String text;
   final String? subtitle;
   final Function(bool) onChanged;
   final bool initialValue;
 
-  const SettingsSwitcher({
+  const SettingsSwitcherListTile({
     super.key,
     this.initialValue = false,
     required this.icon,
@@ -18,10 +18,10 @@ class SettingsSwitcher extends StatefulWidget {
   });
 
   @override
-  State<SettingsSwitcher> createState() => _SettingsSwitcherState();
+  State<SettingsSwitcherListTile> createState() => _SettingsSwitcherListTileState();
 }
 
-class _SettingsSwitcherState extends State<SettingsSwitcher> {
+class _SettingsSwitcherListTileState extends State<SettingsSwitcherListTile> {
   late bool currentValue = widget.initialValue;
   @override
   Widget build(BuildContext context) {

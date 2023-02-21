@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/services/step_service.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
-import 'package:goly/widgets/settings/settings_switcher.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleStepScreen extends StatefulWidget {
@@ -97,14 +97,14 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                       keyboardType: TextInputType.text,
                     ),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateStep,
                         icon: Icons.lock,
                         text: "Private step",
                         subtitle: "Makes the step private",
                         onChanged: privateStepChange),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateReward,
                         icon: Icons.lock,
                         text: "Private reward",

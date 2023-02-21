@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/app_bars/discover_app_bar.dart';
+import 'package:goly/widgets/layout/app_bars/discover_app_bar.dart';
 
 class DiscoverScreen extends StatelessWidget {
   static const routeName = '/dicover';

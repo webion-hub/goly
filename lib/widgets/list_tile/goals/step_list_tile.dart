@@ -4,7 +4,7 @@ import 'package:goly/models/step.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
 import 'package:goly/services/step_service.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
-import 'package:goly/widgets/list_tile/dismissible_list_title.dart';
+import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
 
 class StepListTile extends StatefulWidget {
   final StepModel step;

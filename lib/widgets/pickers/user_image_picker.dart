@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/buttons/main_outlined_button.dart';
+import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
 

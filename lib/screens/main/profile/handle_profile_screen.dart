@@ -8,10 +8,10 @@ import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
-import 'package:goly/widgets/form/input_label.dart';
-import 'package:goly/widgets/form/text_field_input.dart';
+import 'package:goly/widgets/form/input/input_label.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/pickers/user_image_picker.dart';
 import 'package:goly/utils/constants.dart';
 

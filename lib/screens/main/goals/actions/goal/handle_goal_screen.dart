@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
-import 'package:goly/widgets/settings/settings_switcher.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/goal_service.dart';
@@ -116,21 +116,21 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       keyboardType: TextInputType.text,
                     ),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateGoal,
                         icon: Icons.lock,
                         text: "Private goal",
                         subtitle: "Makes private all the goals inside it",
                         onChanged: privateGoalChange),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateDescription,
                         icon: Icons.lock,
                         text: "Private description",
                         subtitle: "Makes description private",
                         onChanged: privateDescriptionChange),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateReward,
                         icon: Icons.lock,
                         text: "Private reward",

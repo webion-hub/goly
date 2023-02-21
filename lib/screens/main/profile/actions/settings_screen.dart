@@ -5,8 +5,8 @@ import 'package:goly/models/settings.dart';
 import 'package:goly/services/settings_service.dart';
 import 'package:goly/view_models/theme_view_model.dart';
 import 'package:goly/widgets/layout/indicators.dart';
-import 'package:goly/widgets/settings/settings_list_tile.dart';
-import 'package:goly/widgets/settings/settings_switcher.dart';
+import 'package:goly/widgets/list_tile/settings/settings_list_tile.dart';
+import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
               padding: Constants.pagePadding,
               child: Column(
                 children: [
-                  SettingsSwitcher(
+                  SettingsSwitcherListTile(
                     icon: Icons.lock,
                     initialValue: settings.privateAccount,
                     onChanged: (bool value) {
@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                     text: "Private account",
                   ),
-                  SettingsSwitcher(
+                  SettingsSwitcherListTile(
                     icon: Icons.lock,
                     initialValue: settings.privateGoalsByDefault,
                     onChanged: (bool value) {
@@ -48,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                     text: "Private goal by default",
                   ),
-                  SettingsSwitcher(
+                  SettingsSwitcherListTile(
                     icon: Icons.lock,
                     initialValue: settings.privateRewardByDefault,
                     onChanged: (bool value) {
@@ -57,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
                     },
                     text: "Private reward by default",
                   ),
-                  SettingsSwitcher(
+                  SettingsSwitcherListTile(
                     icon: Icons.lock,
                     initialValue: settings.privateDescriptionsByDefault,
                     onChanged: (bool value) {
@@ -68,7 +68,7 @@ class SettingsScreen extends StatelessWidget {
                   ),
                   Consumer(
                     builder: (context, ThemeNotifier notifier, child) =>
-                        SettingsSwitcher(
+                        SettingsSwitcherListTile(
                       icon: Icons.dark_mode,
                       initialValue: notifier.dark,
                       onChanged: (bool value) {

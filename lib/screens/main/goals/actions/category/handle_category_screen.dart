@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
-import 'package:goly/widgets/settings/settings_switcher.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -85,14 +85,14 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                       maxLines: 3,
                     ),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateCategory,
                         icon: Icons.lock,
                         text: "Private category",
                         subtitle: "Makes private all the goals inside it",
                         onChanged: privateCategoryChange),
                     const SizedBox(height: 20.0),
-                    SettingsSwitcher(
+                    SettingsSwitcherListTile(
                         initialValue: privateDescription,
                         icon: Icons.lock,
                         text: "Private description",

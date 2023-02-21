@@ -7,7 +7,7 @@ import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/services/category_service.dart';
-import 'package:goly/widgets/list_tile/dismissible_list_title.dart';
+import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
 
 class CategoryCard extends StatelessWidget {
   final CategoryModel category;

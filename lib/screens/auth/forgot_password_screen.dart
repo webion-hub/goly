@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/buttons/main_button.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/dialogs/loading_dialog.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
-import 'package:goly/widgets/form/text_field_input.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   static const routeName = '/forgot-password';
