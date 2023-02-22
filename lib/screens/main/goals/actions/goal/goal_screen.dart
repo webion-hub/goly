@@ -4,12 +4,12 @@ import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/cards/description_card.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
-import 'package:goly/widgets/list_tile/mark_as_completed_list_tile.dart';
-import 'package:goly/widgets/list_tile/step_list_tile.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:goly/widgets/list_tile/goals/mark_as_completed_list_tile.dart';
+import 'package:goly/widgets/list_tile/goals/step_list_tile.dart';
 
 class GoalScreen extends StatelessWidget {
   static const routeName = '/single-goal';

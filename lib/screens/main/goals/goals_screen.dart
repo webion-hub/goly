@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/widgets/layout/app_bars/goals_app_bar.dart';
 import 'package:goly/widgets/cards/action_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
-import 'package:goly/widgets/list_tile/category_list_tile.dart';
+import 'package:goly/widgets/list_tile/goals/category_list_tile.dart';
 import 'package:goly/widgets/statistics/goals_per_life_area.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
