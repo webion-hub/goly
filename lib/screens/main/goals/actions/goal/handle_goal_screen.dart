@@ -45,10 +45,6 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
       privateReward = value;
     });
   }
-
-  @override
-  Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     void addGoal() async {
       if (widget.goal != null) {
         GoalModel editedGoal = GoalModel(
@@ -79,7 +75,9 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
             .then((value) => Navigator.of(context).pop());
       }
     }
-
+  @override
+  Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.goal != null ? 'Edit goal' : 'Add goal'),

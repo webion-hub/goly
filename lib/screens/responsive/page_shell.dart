@@ -50,7 +50,7 @@ class _PageShellState extends State<PageShell> {
             icon: Icon(
               Icons.tips_and_updates,
               color: (_page == 0)
-                  ? Theme.of(context).primaryColor
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).colorScheme.secondary,
             ),
             label: "Discover",
@@ -59,7 +59,7 @@ class _PageShellState extends State<PageShell> {
             icon: Icon(
               Icons.flag_rounded,
               color: (_page == 1)
-                  ? Theme.of(context).primaryColor
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).colorScheme.secondary,
             ),
             label: "Goals",
@@ -68,7 +68,7 @@ class _PageShellState extends State<PageShell> {
             icon: Icon(
               Icons.person_rounded,
               color: (_page == 2)
-                  ? Theme.of(context).primaryColor
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).colorScheme.secondary,
             ),
             label: "Profile",

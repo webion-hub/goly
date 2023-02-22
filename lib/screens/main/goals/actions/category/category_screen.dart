@@ -17,37 +17,26 @@ class CategoryScreen extends StatelessWidget {
   static const String routeName = "/category";
   final String categoryId;
   const CategoryScreen({super.key, required this.categoryId});
-  void goToHandleCategory(BuildContext context, CategoryModel category) {
-    GoRouter.of(context)
-        .push(HandleCategoryScreen.routeNameEdit, extra: category);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    void deleteCategory() {
+    void deleteCategory(BuildContext context) {
       showDialog(
         context: context,
-        builder: (context) => AsyncConfirmationDialog(
+        builder: (ctx) => AsyncConfirmationDialog(
           title: 'Are you sure?',
           message:
               'Are you sure you want to delete this category? All goals inside it will be deleted',
           noAction: () {
-            Navigator.of(context).pop();
+            Navigator.of(ctx).pop();
           },
           yesAction: () async {
-            Navigator.of(context).pop();
+            Navigator.of(ctx).pop();
             await CategoryService.deleteCategory(categoryId: categoryId).then(
-                (value) => GoRouter.of(context).go(GoalsScreen.routeName));
+                (value) => GoRouter.of(ctx).go(GoalsScreen.routeName));
           },
         ),
       );
     }
-
-    void goToHandleGoal() {
-      GoRouter.of(context)
-          .push(HandleGoalScreen.routeNameAdd, extra: categoryId);
-    }
-
+  @override
+  Widget build(BuildContext context) {
     return StreamBuilder(
         stream: CategoryService.getCategoryStream(categoryId: categoryId),
         builder: (context, categorySnapshot) {
@@ -60,19 +49,18 @@ class CategoryScreen extends StatelessWidget {
               child: Text('error'),
             );
           }
-          CategoryModel category =
-              CategoryModel.fromJson(categorySnapshot.data!.data()!);
+          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
 
           return Scaffold(
             appBar: AppBar(
               title: Text(category.name),
               actions: [
                 IconButton(
-                  onPressed: () => goToHandleCategory(context, category),
+                  onPressed: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameEdit, extra: category),
                   icon: const Icon(Icons.edit),
                 ),
                 IconButton(
-                  onPressed: deleteCategory,
+                  onPressed: () => deleteCategory(context),
                   icon: const Icon(Icons.delete),
                 ),
               ],
@@ -105,7 +93,7 @@ class CategoryScreen extends StatelessWidget {
                 ActionCard(
                   text: 'Add goal',
                   icon: Icons.add,
-                  action: goToHandleGoal,
+                  action: () => GoRouter.of(context).push(HandleGoalScreen.routeNameAdd, extra: categoryId),
                 ),
               ]),
             ),

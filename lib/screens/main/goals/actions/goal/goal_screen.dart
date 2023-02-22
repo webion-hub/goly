@@ -71,9 +71,9 @@ class GoalScreen extends StatelessWidget {
               ],
             ),
             body: SingleChildScrollView(
-              child: Container(
-                padding: Constants.pagePadding,
-                child: Column(children: [
+              padding: Constants.pagePadding,
+              child: Column(
+                children: [
                   g.description != null
                       ? DescriptionCard(text: g.description!)
                       : const SizedBox(),
@@ -85,13 +85,12 @@ class GoalScreen extends StatelessWidget {
                       : const SizedBox(),
                   ...?g.steps?.map((step) => StepListTile(
                       step: step, categoryId: categoryId, goalId: goalId)),
-                  //g.steps!.asMap().forEach((key, value) => const SizedBox(),),
                   ActionCard(
                     text: 'Add step',
                     icon: Icons.add,
                     action: goToHandleStep,
                   ),
-                ]),
+                ],
               ),
             ),
           );

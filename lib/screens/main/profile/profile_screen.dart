@@ -32,8 +32,7 @@ class ProfileScreen extends StatelessWidget {
                   if (snapshot.data?.data() == null) {
                     return buffering();
                   }
-                  UserModel user = UserModel.fromJson(
-                      snapshot.data?.data() as Map<String, dynamic>);
+                  UserModel user = UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
                   return UserProfile(user: user);
                 }),
               );

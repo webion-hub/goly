@@ -20,10 +20,6 @@ class GoalsScreen extends StatefulWidget {
 }
 
 class _MainPageState extends State<GoalsScreen> {
-  void addCategory() {
-    GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd);
-  }
-
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = List.empty();
@@ -64,7 +60,7 @@ class _MainPageState extends State<GoalsScreen> {
                     ActionCard(
                       text: "Add category",
                       icon: Icons.add,
-                      action: addCategory,
+                      action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
                     ),
                     const SizedBox(height: 40),
                     Text(

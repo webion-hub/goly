@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -49,14 +50,7 @@ class _GoalListTileState extends State<GoalListTile> {
         onTap: gotoGoalScreen,
         leading: const Icon(Icons.open_in_new),
         subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
-        trailing: FittedBox(
-          child: CircularPercentIndicator(
-            radius: 16.0,
-            lineWidth: 4.0,
-            percent: 0.4,
-            progressColor: Colors.green,
-          ),
-        ),
+        trailing: Icon(Constants.getLockerIcon(private: widget.goal.privateGoal)),
       ),
     );
   }

@@ -44,8 +44,7 @@ class CategoryCard extends StatelessWidget {
                       .substring(0, min(category.description!.length, 40)),
                 )
               : null,
-          trailing: FittedBox(
-            child: Icon(Constants.getLockerIcon(private: category.private)),
+          trailing: Icon(Constants.getLockerIcon(private: category.private),
           ),
         ));
   }

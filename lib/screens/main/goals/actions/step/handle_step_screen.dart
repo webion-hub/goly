@@ -39,87 +39,80 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
     });
   }
 
+  void addStep() async {
+    var numberOfSteps = await GoalService.getNumberOfSteps(
+        categoryId: widget.categoryId, goalId: widget.goalId);
+    StepModel step = StepModel(
+      id: widget.step?.id ?? numberOfSteps,
+      name: stepName.text,
+      reward: reward.text,
+      privateStep: privateStep,
+      privateReward: privateReward,
+    );
+    if (widget.step == null) {
+      await StepService.addStepToGoal(
+              categoryId: widget.categoryId, goalId: widget.goalId, step: step)
+          .then((value) => Navigator.of(context).pop());
+    } else {
+      await StepService.editStep(
+              categoryId: widget.categoryId,
+              goalId: widget.goalId,
+              step: step,
+              stepId: 0)
+          .then((value) => Navigator.of(context).pop());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    void addStep() async {
-      var numberOfSteps = await GoalService.getNumberOfSteps(
-          categoryId: widget.categoryId, goalId: widget.goalId);
-      StepModel step = StepModel(
-        id: widget.step?.id ?? numberOfSteps,
-        name: stepName.text,
-        reward: reward.text,
-        privateStep: privateStep,
-        privateReward: privateReward,
-      );
-      if (widget.step == null) {
-        await StepService.addStepToGoal(
-                categoryId: widget.categoryId,
-                goalId: widget.goalId,
-                step: step)
-            .then((value) => Navigator.of(context).pop());
-      } else {
-        await StepService.editStep(
-                categoryId: widget.categoryId,
-                goalId: widget.goalId,
-                step: step,
-                stepId: 0)
-            .then((value) => Navigator.of(context).pop());
-      }
-    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.step != null ? 'Edit step' : 'Add step'),
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          Center(
-            child: Container(
-              padding: Constants.pagePadding,
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: stepName,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.text,
-                    ),
-                    const SizedBox(height: 20.0),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: reward,
-                      decoration: const InputDecoration(labelText: 'Reward'),
-                      keyboardType: TextInputType.text,
-                    ),
-                    const SizedBox(height: 20.0),
-                    SettingsSwitcherListTile(
-                        initialValue: privateStep,
-                        icon: Icons.lock,
-                        text: "Private step",
-                        subtitle: "Makes the step private",
-                        onChanged: privateStepChange),
-                    const SizedBox(height: 20.0),
-                    SettingsSwitcherListTile(
-                        initialValue: privateReward,
-                        icon: Icons.lock,
-                        text: "Private reward",
-                        subtitle: "Makes reward private",
-                        onChanged: privateRewardChange),
-                    MainButton(
-                      text: widget.step != null ? 'Edit step' : 'Add step',
-                      onPressed: addStep,
-                    ),
-                  ],
-                ),
+        padding: Constants.pagePadding,
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 20.0),
+              TextFormField(
+                controller: stepName,
+                decoration: const InputDecoration(labelText: 'Name'),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.text,
               ),
-            ),
+              const SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
+              TextFormField(
+                controller: reward,
+                decoration: const InputDecoration(labelText: 'Reward'),
+                keyboardType: TextInputType.text,
+              ),
+              const SizedBox(height: 20.0),
+              SettingsSwitcherListTile(
+                  initialValue: privateStep,
+                  icon: Icons.lock,
+                  text: "Private step",
+                  subtitle: "Makes the step private",
+                  onChanged: privateStepChange),
+              const SizedBox(height: 20.0),
+              SettingsSwitcherListTile(
+                  initialValue: privateReward,
+                  icon: Icons.lock,
+                  text: "Private reward",
+                  subtitle: "Makes reward private",
+                  onChanged: privateRewardChange),
+              MainButton(
+                text: widget.step != null ? 'Edit step' : 'Add step',
+                onPressed: addStep,
+              ),
+            ],
           ),
-        ]),
+        ),
       ),
     );
   }
