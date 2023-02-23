@@ -38,7 +38,7 @@ class _MainPageState extends State<GoalsScreen> {
                   return buffering();
                 }
                 if (snapshot.data == null) {
-                  return const Text('Start adding some categories ');
+                  return Text('Start adding some categories ${FirebaseFirestore.instance.collection} ');
                 }
                 snapshot.data?.docs.map((element) {
                   categories.add(CategoryModel.fromJson(element.data()));

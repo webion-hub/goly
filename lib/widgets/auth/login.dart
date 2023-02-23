@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
-import 'package:goly/services/firebase_service.dart';
+import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/utils/utils.dart';
@@ -38,7 +38,7 @@ class _LogInState extends State<LogIn> {
       isLoading = true;
     });
     try {
-      await FirebaseService.logInUser(
+      await AuthService.logInUser(
         email: _emailController.text,
         password: _passwordController.text,
       ).then((value) => GoRouter.of(context).go(DiscoverScreen.routeName));

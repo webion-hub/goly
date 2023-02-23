@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/utils/firebase.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Utils {
   static final messangerKey = GlobalKey<ScaffoldMessengerState>();
@@ -19,4 +20,13 @@ class Utils {
   static String currentEmail() {
     return firebaseAuth.currentUser!.email!;
   }
+
+static pickImage(ImageSource source) async {
+  final ImagePicker imagePicker = ImagePicker();
+  XFile? file = await imagePicker.pickImage(source: source);
+  if (file != null) {
+    return await file.readAsBytes();
+  }
+}
+
 }

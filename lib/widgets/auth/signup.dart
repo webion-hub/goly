@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/services/firebase_service.dart';
+import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/main.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
@@ -37,11 +37,11 @@ class _SignUpState extends State<SignUp> {
       isLoading = true;
     });
     try {
-      await FirebaseService.signUpUser(
+      await AuthService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       ).then((value) =>
-          GoRouter.of(context).pushReplacement(HandleProfileScreen.routeName));
+          GoRouter.of(context).pushReplacement(HandleProfileScreen.routeNameSetUp));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
       navigatorKey.currentState!.popUntil((route) => route.isFirst);

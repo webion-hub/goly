@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -35,5 +36,11 @@ class UserModel {
     data['bio'] = bio;
     data['settings'] = settings.toJson();
     return data;
+  }
+
+  static UserModel fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
+
+    return UserModel.fromJson(snapshot);
   }
 }

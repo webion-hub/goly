@@ -6,7 +6,6 @@ import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class GoalListTile extends StatefulWidget {
   final GoalModel goal;

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/providers/user_provider.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:provider/provider.dart';
 
 class PageShell extends StatefulWidget {
   final Widget child;
@@ -15,13 +17,22 @@ class PageShell extends StatefulWidget {
 
 class _PageShellState extends State<PageShell> {
   int _page = 0;
+  @override
+  void initState() {
+    super.initState();
+    addData();
+  }
 
   void onPageChanged(int page) {
     setState(() {
       _page = page;
     });
   }
-
+  addData() async {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    await userProvider.refreshUser();
+  }
   void navigationTapped(int page) {
     setState(() {
       _page = page;

@@ -18,20 +18,21 @@ class CategoryCard extends StatelessWidget {
         uniqueKey: ValueKey(category.id),
         confirmDismiss: (direction) {
           return showDialog(
-              context: context,
-              builder: ((ctx) => AsyncConfirmationDialog(
-                    title: 'Are you sure?',
-                    message:
-                        'Do you want to remove this category and all the goals inside it?',
-                    noAction: () {
-                      Navigator.of(ctx).pop(false);
-                    },
-                    yesAction: () async {
-                      Navigator.of(ctx).pop();
-                      await CategoryService.deleteCategory(
-                          categoryId: category.id);
-                    },
-                  )));
+            context: context,
+            builder: ((ctx) => AsyncConfirmationDialog(
+                  title: 'Are you sure?',
+                  message:
+                      'Do you want to remove this category and all the goals inside it?',
+                  noAction: () {
+                    Navigator.of(ctx).pop(false);
+                  },
+                  yesAction: () async {
+                    Navigator.of(ctx).pop();
+                    await CategoryService.deleteCategory(
+                        categoryId: category.id);
+                  },
+                )),
+          );
         },
         child: ListTile(
           title: Text(category.name),
@@ -44,7 +45,8 @@ class CategoryCard extends StatelessWidget {
                       .substring(0, min(category.description!.length, 40)),
                 )
               : null,
-          trailing: Icon(Constants.getLockerIcon(private: category.private),
+          trailing: Icon(
+            Constants.getLockerIcon(private: category.private),
           ),
         ));
   }

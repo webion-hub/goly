@@ -12,7 +12,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void goToHandleProfileScreen() {
-      GoRouter.of(context).go(HandleProfileScreen.routeName);
+      GoRouter.of(context).push(HandleProfileScreen.routeNameEdit, extra: user);
     }
 
     return Column(

@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
-import 'package:goly/providers/go_router_refresh_stream.dart';
+import 'package:goly/models/user.dart';
+import 'package:goly/providers/go_router_provider.dart';
+import 'package:goly/screens/main/discover/actions/add_post_screen.dart';
 import 'package:goly/screens/responsive/page_shell.dart';
 import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
@@ -32,7 +34,7 @@ final router = GoRouter(
     child: ErrorScreen(error: state.error),
   ),
   refreshListenable:
-      GoRouterRefreshStream(FirebaseAuth.instance.authStateChanges()),
+      GoRouterProvider(FirebaseAuth.instance.authStateChanges()),
   routes: [
     ShellRoute(
       routes: [
@@ -67,6 +69,10 @@ final router = GoRouter(
         GoRoute(
           path: RecentConversationsScreen.routeName,
           builder: (context, state) => const RecentConversationsScreen(),
+        ),
+        GoRoute(
+          path: AddPostScreen.routeName,
+          builder: (context, state) => const AddPostScreen(),
         ),
 
         /// Goals
@@ -158,9 +164,17 @@ final router = GoRouter(
               ProfileScreen(profileId: Utils.currentUid()),
         ),
         GoRoute(
-          path: HandleProfileScreen.routeName,
+          path: HandleProfileScreen.routeNameSetUp,
           builder: (context, state) =>
               HandleProfileScreen(uid: Utils.currentUid()),
+        ),
+        GoRoute(
+          path: HandleProfileScreen.routeNameEdit,
+          builder: (context, state) {
+            UserModel user = state.extra as UserModel;
+            return HandleProfileScreen(uid: Utils.currentUid(), user: user,);
+          }
+              
         ),
         GoRoute(
           path: SettingsScreen.routeName,

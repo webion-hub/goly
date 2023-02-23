@@ -111,7 +111,5 @@ class CategoryService extends Service {
   //   await getCategoryGoals(categoryId: categoryId).then((value) {
   //     value.docs.forEach((element) {goals.add(GoalModel.fromJson(element.))});
   //   });
-  //   return 2.2;
-
   // }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/settings.dart';
 import 'package:goly/services/settings_service.dart';
-import 'package:goly/view_models/theme_view_model.dart';
+import 'package:goly/providers/theme_provider.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/widgets/list_tile/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
@@ -67,7 +67,7 @@ class SettingsScreen extends StatelessWidget {
                     text: "Private description by default",
                   ),
                   Consumer(
-                    builder: (context, ThemeNotifier notifier, child) =>
+                    builder: (context, ThemeProvider notifier, child) =>
                         SettingsSwitcherListTile(
                       icon: Icons.dark_mode,
                       initialValue: notifier.dark,
