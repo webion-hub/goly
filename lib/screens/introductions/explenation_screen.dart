@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
-import 'package:goly/widgets/instructions/step_1.dart';
-import 'package:goly/widgets/instructions/step_2.dart';
-import 'package:goly/widgets/instructions/step_3.dart';
+import 'package:goly/utils/introductions.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,11 +12,9 @@ class ExplenationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      pages: [
-        step1,
-        step2,
-        step3,
-      ],
+      pages: Introductions.welcome.map((e) {
+        return PageViewModel(title: e.title, body: e.description, image: Center(child: Icon(e.icon, size: 70,)));
+      }).toList(),
       showSkipButton: true,
       showNextButton: false,
       skip: const Text("Skip"),

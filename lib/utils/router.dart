@@ -33,8 +33,7 @@ final router = GoRouter(
     key: state.pageKey,
     child: ErrorScreen(error: state.error),
   ),
-  refreshListenable:
-      GoRouterProvider(FirebaseAuth.instance.authStateChanges()),
+  refreshListenable: GoRouterProvider(FirebaseAuth.instance.authStateChanges()),
   routes: [
     ShellRoute(
       routes: [
@@ -169,13 +168,14 @@ final router = GoRouter(
               HandleProfileScreen(uid: Utils.currentUid()),
         ),
         GoRoute(
-          path: HandleProfileScreen.routeNameEdit,
-          builder: (context, state) {
-            UserModel user = state.extra as UserModel;
-            return HandleProfileScreen(uid: Utils.currentUid(), user: user,);
-          }
-              
-        ),
+            path: HandleProfileScreen.routeNameEdit,
+            builder: (context, state) {
+              UserModel user = state.extra as UserModel;
+              return HandleProfileScreen(
+                uid: Utils.currentUid(),
+                user: user,
+              );
+            }),
         GoRoute(
           path: SettingsScreen.routeName,
           builder: (context, state) => const SettingsScreen(),

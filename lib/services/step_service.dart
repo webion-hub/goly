@@ -56,7 +56,6 @@ class StepService extends Service {
       transaction.update(docref, goal.toJson());
     });
   }
-  ///TODO: Add toggleStep
 
   static Future deleteStep(
       {required String categoryId,
