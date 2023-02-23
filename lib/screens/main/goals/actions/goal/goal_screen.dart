@@ -74,7 +74,7 @@ class GoalScreen extends StatelessWidget {
               padding: Constants.pagePadding,
               child: Column(
                 children: [
-                  g.description != null
+                  g.description != null && g.description!.isNotEmpty
                       ? DescriptionCard(text: g.description!)
                       : const SizedBox(),
                   g.steps!.isEmpty

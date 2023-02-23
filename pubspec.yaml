@@ -58,6 +58,7 @@ dependencies:
   change_notifier: ^0.24.0
   uuid: ^3.0.7
   provider: ^6.0.5
+  darq: ^1.2.1
 
 flutter_icons:
   android: true

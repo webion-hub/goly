@@ -5,6 +5,9 @@ import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/utils.dart';
 
+import 'package:darq/darq.dart';
+
+
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('goals');
 
@@ -93,5 +96,18 @@ class GoalService extends Service {
   static Future toggleCategoryCompleted({required String categoryId, required GoalModel goal, required bool value}) async {
           goal.completed = value;
       return await GoalService.editGoal(categoryId: categoryId, goal: goal);
+  }
+  static double getPercentageOfCompletition(GoalModel goal) {
+    print(goal);
+    if (goal.steps == null || goal.steps!.isEmpty) {
+      return goal.completed ? 1 : 0;
+    }
+
+    final totalSteps = goal.steps!.length;
+    final stepCount = goal.steps!
+      .where((e) => e.completed)
+      .count();
+
+    return stepCount / totalSteps;
   }
 }

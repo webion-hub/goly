@@ -6,6 +6,7 @@ import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class GoalListTile extends StatefulWidget {
   final GoalModel goal;
@@ -47,7 +48,14 @@ class _GoalListTileState extends State<GoalListTile> {
       child: ListTile(
         title: Text(widget.goal.name),
         onTap: gotoGoalScreen,
-        leading: const Icon(Icons.open_in_new),
+        leading: FittedBox(
+            child: CircularPercentIndicator(
+              radius: 16.0,
+              lineWidth: 4.0,
+              percent: GoalService.getPercentageOfCompletition(widget.goal),
+              progressColor: Colors.green,
+            ),
+          ),
         subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
         trailing: Icon(Constants.getLockerIcon(private: widget.goal.privateGoal)),
       ),
