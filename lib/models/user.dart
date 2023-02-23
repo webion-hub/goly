@@ -20,12 +20,12 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json)
-      : username = json['username'],
-        email = json['email'],
-        photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
-        bio = json['bio'] ?? '',
-        id = json['id'],
-        settings = SettingsModel.fromJson(json['settings']);
+    : username = json['username'],
+      email = json['email'],
+      photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
+      bio = json['bio'],
+      id = json['id'],
+      settings = SettingsModel.fromJson(json['settings']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -40,7 +40,6 @@ class UserModel {
 
   static UserModel fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
-
     return UserModel.fromJson(snapshot);
   }
 }

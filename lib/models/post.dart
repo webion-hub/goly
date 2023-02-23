@@ -11,15 +11,15 @@ class Post {
   final String profImage;
 
   const Post(
-      {required this.description,
-      required this.uid,
-      required this.username,
-      required this.likes,
-      required this.postId,
-      required this.datePublished,
-      required this.postUrl,
-      required this.profImage,
-      });
+    {required this.description,
+    required this.uid,
+    required this.username,
+    required this.likes,
+    required this.postId,
+    required this.datePublished,
+    required this.postUrl,
+    required this.profImage,
+    });
 
   static Post fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
@@ -37,13 +37,13 @@ class Post {
   }
 
    Map<String, dynamic> toJson() => {
-        "description": description,
-        "uid": uid,
-        "likes": likes,
-        "username": username,
-        "postId": postId,
-        "datePublished": datePublished,
-        'postUrl': postUrl,
-        'profImage': profImage
-      };
+      "description": description,
+      "uid": uid,
+      "likes": likes,
+      "username": username,
+      "postId": postId,
+      "datePublished": datePublished,
+      'postUrl': postUrl,
+      'profImage': profImage
+    };
 }
