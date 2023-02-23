@@ -98,7 +98,6 @@ class GoalService extends Service {
       return await GoalService.editGoal(categoryId: categoryId, goal: goal);
   }
   static double getPercentageOfCompletition(GoalModel goal) {
-    print(goal);
     if (goal.steps == null || goal.steps!.isEmpty) {
       return goal.completed ? 1 : 0;
     }

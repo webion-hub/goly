@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
@@ -20,11 +21,9 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
   late bool privateCategory = widget.category?.private ?? false;
   late bool privateDescription = widget.category?.privateDescription ?? false;
 
-  late TextEditingController categoryName =
-      TextEditingController(text: widget.category?.name ?? '');
+  late TextEditingController categoryName = TextEditingController(text: widget.category?.name ?? '');
 
-  late TextEditingController description =
-      TextEditingController(text: widget.category?.description ?? '');
+  late TextEditingController description = TextEditingController(text: widget.category?.description ?? '');
 
   void privateCategoryChange(bool value) {
     setState(() {
@@ -43,11 +42,12 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
     final formKey = GlobalKey<FormState>();
     void handleCategory() async {
       CategoryModel c = CategoryModel(
-          id: widget.category?.id ?? const Uuid().v1(),
-          name: categoryName.text,
-          private: privateCategory,
-          description: description.text,
-          privateDescription: privateDescription);
+        id: widget.category?.id ?? const Uuid().v1(),
+        name: categoryName.text,
+        private: privateCategory,
+        description: description.text,
+        privateDescription: privateDescription,
+      );
 
       widget.category == null
           ? CategoryService.addCategory(category: c)
@@ -69,22 +69,18 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: categoryName,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.text,
+                    TextFieldInput(
+                      textEditingController: categoryName, 
+                      hintText: 'Name', 
+                      textInputType: TextInputType.text, 
+                      label: 'Name',
                     ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: description,
-                      decoration:
-                          const InputDecoration(labelText: 'Description'),
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 3,
+                    TextFieldInput(
+                      textEditingController: description, 
+                      hintText: 'Description', 
+                      textInputType: TextInputType.multiline,
+                      label: 'Description',
                     ),
-                    const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
                         initialValue: privateCategory,
                         icon: Icons.lock,

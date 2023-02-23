@@ -3,6 +3,7 @@ import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/services/step_service.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -78,21 +79,18 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20.0),
-              TextFormField(
-                controller: stepName,
-                decoration: const InputDecoration(labelText: 'Name'),
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.text,
+              TextFieldInput(
+                textEditingController: stepName, 
+                hintText: 'Name', 
+                textInputType: TextInputType.text,
+                label: 'Name',
               ),
-              const SizedBox(height: 20.0),
-              const SizedBox(height: 20.0),
-              TextFormField(
-                controller: reward,
-                decoration: const InputDecoration(labelText: 'Reward'),
-                keyboardType: TextInputType.text,
+              TextFieldInput(
+                textEditingController: reward, 
+                hintText: 'Reward', 
+                textInputType: TextInputType.text,
+                label: 'Rew',
               ),
-              const SizedBox(height: 20.0),
               SettingsSwitcherListTile(
                   initialValue: privateStep,
                   icon: Icons.lock,

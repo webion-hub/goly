@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
@@ -18,12 +19,9 @@ class HandleGoalScreen extends StatefulWidget {
 }
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
-  late TextEditingController goalName =
-      TextEditingController(text: widget.goal?.name ?? '');
-  late TextEditingController description =
-      TextEditingController(text: widget.goal?.description ?? '');
-  late TextEditingController reward =
-      TextEditingController(text: widget.goal?.reward ?? '');
+  late TextEditingController goalName =TextEditingController(text: widget.goal?.name ?? '');
+  late TextEditingController description = TextEditingController(text: widget.goal?.description ?? '');
+  late TextEditingController reward = TextEditingController(text: widget.goal?.reward ?? '');
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
@@ -56,8 +54,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
           privateDescription: privateDescription,
           privateReward: privateReward,
         );
-        await GoalService.editGoal(
-                categoryId: widget.categoryId, goal: editedGoal)
+        await GoalService.editGoal(categoryId: widget.categoryId, goal: editedGoal)
             .then((value) => Navigator.of(context).pop());
       } else {
         final id = await CategoryService.getNumberofGoals(
@@ -92,28 +89,26 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: goalName,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.text,
+                    TextFieldInput(
+                      textEditingController: goalName, 
+                      hintText: 'Name', 
+                      textInputType: TextInputType.text,
+                      label: 'Name',
                     ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: description,
-                      decoration:
-                          const InputDecoration(labelText: 'Description'),
-                      keyboardType: TextInputType.multiline,
+                    TextFieldInput(
+                      textEditingController: description, 
+                      hintText: 'Description', 
+                      textInputType: TextInputType.multiline,
                       maxLines: 3,
+                      label: 'Description',
                     ),
-                    const SizedBox(height: 20.0),
-                    TextFormField(
-                      controller: reward,
-                      decoration: const InputDecoration(labelText: 'Reward'),
-                      keyboardType: TextInputType.text,
+                    TextFieldInput(
+                      textEditingController: reward, 
+                      hintText: 'Reward', 
+                      textInputType: TextInputType.text,
+                      maxLines: 3,
+                      label: 'Reward',
                     ),
-                    const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
                         initialValue: privateGoal,
                         icon: Icons.lock,
