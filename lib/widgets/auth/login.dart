@@ -32,8 +32,8 @@ class _LogInState extends State<LogIn> {
   }
 
   Future logIn() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
+    final isValid = formKey.currentState?.validate();
+    if (isValid == null || !isValid) return;
     setState(() {
       isLoading = true;
     });

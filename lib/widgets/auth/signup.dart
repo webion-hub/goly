@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
           GoRouter.of(context).pushReplacement(HandleProfileScreen.routeNameSetUp));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
-      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+     Navigator.of(context).popUntil((route) => route.isFirst);
     } finally {
       setState(() {
         isLoading = false;

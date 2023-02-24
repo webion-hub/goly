@@ -2,15 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/services/firestore_service.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/form/buttons/main_button.dart';
+import 'package:goly/widgets/form/input/text_field_input.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
 class AddPostScreen extends StatefulWidget {
   static const String routeName = "/add-post";
   const AddPostScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddPostScreen>  createState() => _AddPostScreenState();
+  State<AddPostScreen> createState() => _AddPostScreenState();
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
@@ -87,7 +92,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       setState(() {
         isLoading = false;
       });
-       Utils.showSnackbBar(err.toString());
+      Utils.showSnackbBar(err.toString());
     }
   }
 
@@ -106,85 +111,69 @@ class _AddPostScreenState extends State<AddPostScreen> {
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
-
-    return _file == null
-        ? Center(
-            child: IconButton(
-              icon: const Icon(
-                Icons.upload,
-              ),
-              onPressed: () => _selectImage(context),
-            ),
-          )
-        : Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'Post to',
-              ),
-              centerTitle: false,
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => postImage(
-                    userProvider.getUser.id,
-                    userProvider.getUser.username,
-                    userProvider.getUser.photoUrl,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Post to'),
+      ),
+      // POST FORM
+      body: isLoading
+          ? buffering()
+          : SingleChildScrollView(
+              padding: Constants.pagePadding,
+              child: Column(
+                children: [
+                  Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.onSurface),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: _file != null
+                          ? AspectRatio(
+                              aspectRatio: 487 / 451,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  alignment: FractionalOffset.topCenter,
+                                  image: MemoryImage(_file!),
+                                )),
+                              ),
+                            )
+                          : Center(
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.upload,
+                                ),
+                                onPressed: () => _selectImage(context),
+                              ),
+                            ),
+                    ),
                   ),
-                  child: const Text(
-                    "Post",
-                    style: TextStyle(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0),
+                  const SizedBox(height: 10),
+                  TextFieldInput(
+                    textEditingController: _descriptionController,
+                    hintText: 'Write a caption',
+                    textInputType: TextInputType.text,
+                    label: 'Caption',
                   ),
-                )
-              ],
+                  const SizedBox(height: 10),
+                  MainButton(
+                    text: 'Post',
+                    onPressed: () => postImage(
+                      userProvider.getUser.id,
+                      userProvider.getUser.username,
+                      userProvider.getUser.photoUrl,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
-            // POST FORM
-            body: Column(
-              children: <Widget>[
-                isLoading
-                    ? const LinearProgressIndicator()
-                    : const Padding(padding: EdgeInsets.only(top: 0.0)),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                        userProvider.getUser.photoUrl,
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: TextField(
-                        controller: _descriptionController,
-                        decoration: const InputDecoration(
-                            hintText: "Write a caption...",
-                            border: InputBorder.none),
-                        maxLines: 8,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 45.0,
-                      width: 45.0,
-                      child: AspectRatio(
-                        aspectRatio: 487 / 451,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                            fit: BoxFit.fill,
-                            alignment: FractionalOffset.topCenter,
-                            image: MemoryImage(_file!),
-                          )),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(),
-              ],
-            ),
-          );
+    );
   }
 }
