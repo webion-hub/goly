@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
+import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/services/firestore_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
@@ -22,6 +24,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _goal = TextEditingController();
 
   _selectImage(BuildContext parentContext) async {
     return showDialog(
@@ -85,6 +88,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
           'Posted!',
         );
         clearImage();
+        
       } else {
         Utils.showSnackbBar(res);
       }
@@ -93,6 +97,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
         isLoading = false;
       });
       Utils.showSnackbBar(err.toString());
+    }
+    finally {
+      GoRouter.of(context).go(DiscoverScreen.routeName);
     }
   }
 
@@ -106,60 +113,69 @@ class _AddPostScreenState extends State<AddPostScreen> {
   void dispose() {
     super.dispose();
     _descriptionController.dispose();
+    _goal.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final UserProvider userProvider = Provider.of<UserProvider>(context);
+
+    var imageContainer = Container(
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.onSurface),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
+      child: SizedBox(
+        height: 200,
+        width: 200,
+        child: _file != null
+            ? AspectRatio(
+                aspectRatio: 487 / 451,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    fit: BoxFit.fill,
+                    alignment: FractionalOffset.topCenter,
+                    image: MemoryImage(_file!),
+                  )),
+                ),
+              )
+            : Center(
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.upload,
+                  ),
+                  onPressed: () => _selectImage(context),
+                ),
+              ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Post to'),
       ),
       // POST FORM
       body: isLoading
-          ? buffering()
+          ? customBuffering()
           : SingleChildScrollView(
               padding: Constants.pagePadding,
               child: Column(
                 children: [
-                  Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.onSurface),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: _file != null
-                          ? AspectRatio(
-                              aspectRatio: 487 / 451,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  alignment: FractionalOffset.topCenter,
-                                  image: MemoryImage(_file!),
-                                )),
-                              ),
-                            )
-                          : Center(
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.upload,
-                                ),
-                                onPressed: () => _selectImage(context),
-                              ),
-                            ),
-                    ),
-                  ),
+                  imageContainer,
                   const SizedBox(height: 10),
                   TextFieldInput(
                     textEditingController: _descriptionController,
                     hintText: 'Write a caption',
                     textInputType: TextInputType.text,
                     label: 'Caption',
+                  ),
+                  TextFieldInput(
+                    textEditingController: _goal,
+                    hintText: 'Which goal is it about?',
+                    textInputType: TextInputType.text,
+                    label: 'Goal',
                   ),
                   const SizedBox(height: 10),
                   MainButton(

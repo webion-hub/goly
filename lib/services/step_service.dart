@@ -24,7 +24,7 @@ class StepService extends Service {
     if (goal == null) {
       return;
     }
-    await GoalService.toggleCategoryCompleted(
+    await GoalService.toggleGoalCompleted(
         categoryId: categoryId, goal: goal!, value: false);
     return await _collection
         .doc(Utils.currentUid())

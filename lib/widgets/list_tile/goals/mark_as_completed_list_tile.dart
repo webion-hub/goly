@@ -18,7 +18,7 @@ class _MarkAsCompletedListTileState extends State<MarkAsCompletedListTile> {
   void toggleGoalCompleted(bool? value) async {
     if (value != null) {
       widget.goal.completed = value;
-      await GoalService.toggleCategoryCompleted(categoryId: widget.categoryId, goal: widget.goal, value: value);
+      await GoalService.toggleGoalCompleted(categoryId: widget.categoryId, goal: widget.goal, value: value);
       setState(() {
         
       });

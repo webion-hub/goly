@@ -9,6 +9,7 @@ class Post {
   final DateTime datePublished;
   final String postUrl;
   final String profImage;
+  final String? goal;
 
   const Post(
     {required this.description,
@@ -18,6 +19,7 @@ class Post {
     required this.postId,
     required this.datePublished,
     required this.postUrl,
+    this.goal,
     required this.profImage,
     });
 
@@ -32,7 +34,8 @@ class Post {
       datePublished: snapshot["datePublished"],
       username: snapshot["username"],
       postUrl: snapshot['postUrl'],
-      profImage: snapshot['profImage']
+      profImage: snapshot['profImage'],
+      goal: snapshot['goal']
     );
   }
 
@@ -44,6 +47,7 @@ class Post {
       "postId": postId,
       "datePublished": datePublished,
       'postUrl': postUrl,
-      'profImage': profImage
+      'profImage': profImage,
+      'goal': goal,
     };
 }
