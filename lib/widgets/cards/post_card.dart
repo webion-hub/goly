@@ -42,21 +42,57 @@ class PostCard extends StatelessWidget {
       ),
     );
 
-    var actions = Row(children: [
-      IconButton(
-        icon: const Icon(Icons.message),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: const Icon(Icons.send),
-        onPressed: () {},
-      ),
-      IconButton(
-        icon: const Icon(Icons.favorite),
-        onPressed: () {},
-      ),
-    ]);
+    var actions = Row(
+      children: [
+        IconButton(
+          icon: const Icon(Icons.message),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: const Icon(Icons.send),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: const Icon(Icons.favorite),
+          onPressed: () {},
+        ),
+        Expanded(
+            child: Align(
+          alignment: Alignment.centerRight,
+          child: IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () {},
+          ),
+        )),
+      ],
+    );
 
+    var userDescription = SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('142 likes'),
+          const SizedBox(height: 10),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "${post.username}: ",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextSpan(
+                  text: post.description,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
     return Column(
       children: [
         userSection,
@@ -64,6 +100,15 @@ class PostCard extends StatelessWidget {
         imageSection,
         const SizedBox(height: 20),
         actions,
+        const SizedBox(height: 20),
+        userDescription,
+        const SizedBox(height: 20),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: const Text(
+            'View all 120 comments',
+          ),
+        ),
         const SizedBox(height: 40),
       ],
     );

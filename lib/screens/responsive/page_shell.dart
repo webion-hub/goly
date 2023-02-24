@@ -56,6 +56,8 @@ class _PageShellState extends State<PageShell> {
     return Scaffold(
       body: SafeArea(child: widget.child),
       bottomNavigationBar: CupertinoTabBar(
+        border: Border.all(
+        ),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
