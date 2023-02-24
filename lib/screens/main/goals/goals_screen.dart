@@ -38,7 +38,7 @@ class _MainPageState extends State<GoalsScreen> {
                   return buffering();
                 }
                 if (snapshot.data == null) {
-                  return Text('Start adding some categories ${FirebaseFirestore.instance.collection} ');
+                  return const Text('Start adding some categories');
                 }
                 snapshot.data?.docs.map((element) {
                   categories.add(CategoryModel.fromJson(element.data()));
@@ -60,7 +60,8 @@ class _MainPageState extends State<GoalsScreen> {
                     ActionCard(
                       text: "Add category",
                       icon: Icons.add,
-                      action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
+                      action: () => GoRouter.of(context)
+                          .push(HandleCategoryScreen.routeNameAdd),
                     ),
                     const SizedBox(height: 40),
                     Text(
