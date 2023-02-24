@@ -8,7 +8,6 @@ class PostCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var userSection = Row(
       children: [
         UserImage(imageUrl: post.profImage, width: 50),
@@ -30,13 +29,15 @@ class PostCard extends StatelessWidget {
         aspectRatio: 487 / 451,
         child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-            fit: BoxFit.fill,
-            alignment: FractionalOffset.topCenter,
-            image: NetworkImage(
-              post.postUrl,
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              alignment: FractionalOffset.topCenter,
+              image: NetworkImage(
+                post.postUrl,
+              ),
             ),
-          )),
+            borderRadius: const BorderRadius.all(Radius.circular(18)),
+          ),
         ),
       ),
     );
@@ -55,7 +56,7 @@ class PostCard extends StatelessWidget {
         onPressed: () {},
       ),
     ]);
-    
+
     return Column(
       children: [
         userSection,
