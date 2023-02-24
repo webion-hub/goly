@@ -12,6 +12,8 @@ class UserImage extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: CachedNetworkImage(
+          width: width ?? 120,
+          height: width ?? 120,
           imageUrl: imageUrl,
           fit: BoxFit.cover,
           placeholder: (context, url) => buffering(),
