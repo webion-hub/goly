@@ -93,6 +93,7 @@ class PostCard extends StatelessWidget {
         ],
       ),
     );
+    
     return Column(
       children: [
         userSection,

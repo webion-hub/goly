@@ -4,11 +4,12 @@ class ActionCard extends StatelessWidget {
   final String text;
   final IconData icon;
   final Function action;
-  const ActionCard(
-      {super.key,
-      required this.text,
-      required this.icon,
-      required this.action});
+  const ActionCard({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.action,
+  });
 
   @override
   Widget build(BuildContext context) {

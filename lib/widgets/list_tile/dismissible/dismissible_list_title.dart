@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goly/widgets/list_tile/dismissible/dismissible_background.dart';
+import 'package:goly/widgets/list_tile/dismissible/backgrounds/dismissible_background.dart';
 
 class DismissibleListTile extends StatelessWidget {
   final Key uniqueKey;

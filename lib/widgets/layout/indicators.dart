@@ -10,7 +10,7 @@ Widget customBuffering() {
       child: Column(
     children: [
       Lottie.asset('assets/json/goal_loading.json'),
-      const Text('Loading...')
+      const Text('Loading...'),
     ],
   ));
 }

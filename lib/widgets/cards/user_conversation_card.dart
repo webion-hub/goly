@@ -5,8 +5,7 @@ import 'package:goly/screens/main/discover/actions/chat_screen.dart';
 class UserConversationCard extends StatelessWidget {
   final String userName;
   final String userPicture;
-  const UserConversationCard(
-      {super.key, required this.userName, required this.userPicture});
+  const UserConversationCard({super.key, required this.userName, required this.userPicture});
 
   @override
   Widget build(BuildContext context) {

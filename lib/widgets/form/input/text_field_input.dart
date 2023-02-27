@@ -11,18 +11,17 @@ class TextFieldInput extends StatelessWidget {
   final FocusNode? nextFocus;
   final String? label;
 
-  const TextFieldInput(
-      {Key? key,
-      required this.textEditingController,
-      this.isPass = false,
-      required this.hintText,
-      required this.textInputType,
-      this.maxLines,
-      this.validation,
-      this.nextFocus,
-      this.label
-      })
-      : super(key: key);
+  const TextFieldInput({
+    Key? key,
+    required this.textEditingController,
+    this.isPass = false,
+    required this.hintText,
+    required this.textInputType,
+    this.maxLines,
+    this.validation,
+    this.nextFocus,
+    this.label,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,8 @@ class TextFieldInput extends StatelessWidget {
           maxLines: maxLines ?? 1,
           keyboardType: textInputType,
           obscureText: isPass,
-          onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(nextFocus),
+          onFieldSubmitted: (_) =>
+              FocusScope.of(context).requestFocus(nextFocus),
           validator: (value) {
             if (validation == null) {
               return null;
@@ -65,4 +65,3 @@ class TextFieldInput extends StatelessWidget {
     );
   }
 }
-
