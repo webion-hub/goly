@@ -1,81 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/models/step.dart';
-import 'package:goly/models/user.dart';
-import 'package:goly/providers/go_router_provider.dart';
-import 'package:goly/screens/main/discover/actions/add_post_screen.dart';
-import 'package:goly/screens/responsive/page_shell.dart';
-import 'package:goly/screens/auth/auth_screen.dart';
-import 'package:goly/screens/auth/forgot_password_screen.dart';
-import 'package:goly/screens/auth/error_screen.dart';
-import 'package:goly/screens/introductions/explenation_screen.dart';
-import 'package:goly/screens/main/discover/actions/recent_conversations_screen.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
-import 'package:goly/screens/main/profile/actions/settings_screen.dart';
-import 'package:goly/screens/main/profile/handle_profile_screen.dart';
-import 'package:goly/screens/main/profile/profile_screen.dart';
-import 'package:goly/utils/utils.dart';
 
-final router = GoRouter(
-  initialLocation: FirebaseAuth.instance.currentUser == null
-      ? AuthScreen.routeName
-      : DiscoverScreen.routeName,
-  errorPageBuilder: (context, state) => MaterialPage<void>(
-    key: state.pageKey,
-    child: ErrorScreen(error: state.error),
-  ),
-  refreshListenable: GoRouterProvider(FirebaseAuth.instance.authStateChanges()),
-  routes: [
-    ShellRoute(
-      routes: [
-        GoRoute(
-          path: '/',
-          redirect: ((context, state) {
-            return DiscoverScreen.routeName;
-          }),
-        ),
-
-        /// Introductions
-        GoRoute(
-          path: ExplenationScreen.routeName,
-          builder: (context, state) => const ExplenationScreen(),
-        ),
-
-        /// Auth screens
-        GoRoute(
-          path: AuthScreen.routeName,
-          builder: (context, state) => const AuthScreen(),
-        ),
-        GoRoute(
-          path: ForgotPasswordScreen.routeName,
-          builder: (context, state) => const ForgotPasswordScreen(),
-        ),
-
-        /// Discover
-        GoRoute(
-          path: DiscoverScreen.routeName,
-          builder: (context, state) => const DiscoverScreen(),
-        ),
-        GoRoute(
-          path: RecentConversationsScreen.routeName,
-          builder: (context, state) => const RecentConversationsScreen(),
-        ),
-        GoRoute(
-          path: AddPostScreen.routeName,
-          builder: (context, state) => const AddPostScreen(),
-        ),
-
-        /// Goals
-        GoRoute(
+final List<RouteBase> goalPages = [
+GoRoute(
           path: GoalsScreen.routeName,
           builder: (context, state) => const GoalsScreen(),
         ),
@@ -155,40 +90,4 @@ final router = GoRouter(
                 categoryId: categoryId,
               );
             }),
-
-        /// Profile
-        GoRoute(
-          path: ProfileScreen.routeName,
-          builder: (context, state) =>
-              ProfileScreen(profileId: Utils.currentUid()),
-        ),
-        GoRoute(
-          path: HandleProfileScreen.routeNameSetUp,
-          builder: (context, state) =>
-              HandleProfileScreen(uid: Utils.currentUid()),
-        ),
-        GoRoute(
-            path: HandleProfileScreen.routeNameEdit,
-            builder: (context, state) {
-              UserModel user = state.extra as UserModel;
-              return HandleProfileScreen(
-                uid: Utils.currentUid(),
-                user: user,
-              );
-            }),
-        GoRoute(
-          path: SettingsScreen.routeName,
-          builder: (context, state) => const SettingsScreen(),
-        ),
-      ],
-      builder: (context, state, child) {
-        if (state.fullpath == AuthScreen.routeName ||
-            state.fullpath == ForgotPasswordScreen.routeName ||
-            state.fullpath == ExplenationScreen.routeName) {
-          return child;
-        }
-        return PageShell(child: child);
-      },
-    )
-  ],
-);
+];

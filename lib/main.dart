@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:goly/utils/router.dart';
+import 'package:goly/utils/router/router.dart';
 import 'package:goly/utils/theme/dark_mode.dart';
 import 'package:goly/utils/theme/light_mode.dart';
 import 'package:goly/utils/utils.dart';

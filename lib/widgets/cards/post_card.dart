@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/post.dart';
+import 'package:goly/services/firestore_service.dart';
+import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/animations/like_animation.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final PostModel post;
   const PostCard({super.key, required this.post});
 
   @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  bool isLikeAnimating = false;
+  @override
   Widget build(BuildContext context) {
     var userSection = Row(
       children: [
-        UserImage(imageUrl: post.profImage, width: 50),
+        UserImage(imageUrl: widget.post.profImage, width: 50),
         const SizedBox(width: 10),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(post.username, style: Theme.of(context).textTheme.bodyText1),
+            Text(widget.post.username, style: Theme.of(context).textTheme.bodyText1),
             const SizedBox(height: 5),
-            post.goal != null ? Text(post.goal!) : const SizedBox(),
+            widget.post.goal != null ? Text(widget.post.goal!) : const SizedBox(),
           ],
         ),
       ],
     );
 
     var imageSection = GestureDetector(
-      onDoubleTap: () {},
+      onDoubleTap: () {
+                FireStoreMethods().likePost(
+          widget.post.postId,
+          Utils.currentUid(),
+          widget.post.likes,
+        );
+        setState(() {
+          isLikeAnimating = true;
+        });
+      },
       child: AspectRatio(
         aspectRatio: 487 / 451,
         child: Container(
@@ -33,7 +51,7 @@ class PostCard extends StatelessWidget {
               fit: BoxFit.fill,
               alignment: FractionalOffset.topCenter,
               image: NetworkImage(
-                post.postUrl,
+                widget.post.postUrl,
               ),
             ),
             borderRadius: const BorderRadius.all(Radius.circular(18)),
@@ -52,9 +70,12 @@ class PostCard extends StatelessWidget {
           icon: const Icon(Icons.send),
           onPressed: () {},
         ),
-        IconButton(
-          icon: const Icon(Icons.favorite),
-          onPressed: () {},
+        LikeAnimation(
+          isAnimating: widget.post.likes.contains(Utils.currentUid()),
+          child: IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {},
+          ),
         ),
         Expanded(
             child: Align(
@@ -79,13 +100,13 @@ class PostCard extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: "${post.username}: ",
+                  text: "${widget.post.username}: ",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 TextSpan(
-                  text: post.description,
+                  text: widget.post.description,
                 ),
               ],
             ),

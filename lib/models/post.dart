@@ -4,7 +4,7 @@ class PostModel {
   final String description;
   final String uid;
   final String username;
-  final dynamic likes;
+  final List<dynamic> likes;
   final String postId;
   final DateTime datePublished;
   final String postUrl;
@@ -53,7 +53,7 @@ class PostModel {
   PostModel.fromJson(Map<String, dynamic> json)
       : description = json["description"],
         uid = json["uid"],
-        likes = json["likes"],
+        likes = (json['likes'] as List<dynamic>),
         postId = json["postId"],
         datePublished = DateTime
           .parse((json["datePublished"] as Timestamp)

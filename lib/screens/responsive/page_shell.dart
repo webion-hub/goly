@@ -53,43 +53,57 @@ class _PageShellState extends State<PageShell> {
 
   @override
   Widget build(BuildContext context) {
+    var bottomNavigation = ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(36)),
+        child: Container(
+          color: Theme.of(context).hoverColor,
+          child: ClipRRect(
+            clipBehavior: Clip.antiAliasWithSaveLayer,            
+            child: CupertinoTabBar(
+              inactiveColor: Colors.transparent,
+              height: 60,
+              backgroundColor: Colors.transparent,
+              border: Border.all(
+                style: BorderStyle.none
+              ),
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.tips_and_updates,
+                    color: (_page == 0)
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
+                  label: "Discover",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.flag_rounded,
+                    color: (_page == 1)
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
+                  label: "Goals",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person_rounded,
+                    color: (_page == 2)
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
+                  label: "Profile",
+                ),
+              ],
+              onTap: navigationTapped,
+              currentIndex: _page,
+            ),
+          ),
+        ),
+      );
     return Scaffold(
       body: SafeArea(child: widget.child),
-      bottomNavigationBar: CupertinoTabBar(
-        border: Border.all(
-        ),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.tips_and_updates,
-              color: (_page == 0)
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
-            ),
-            label: "Discover",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.flag_rounded,
-              color: (_page == 1)
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
-            ),
-            label: "Goals",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_rounded,
-              color: (_page == 2)
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
-            ),
-            label: "Profile",
-          ),
-        ],
-        onTap: navigationTapped,
-        currentIndex: _page,
-      ),
+      bottomNavigationBar: bottomNavigation,
     );
   }
 }
