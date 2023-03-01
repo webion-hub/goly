@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/models/post.dart';
+import 'package:goly/screens/main/discover/actions/comment_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';
@@ -91,8 +93,10 @@ class _PostCardState extends State<PostCard> {
     var actions = Row(
       children: [
         IconButton(
-          icon: const Icon(Icons.message),
-          onPressed: () {},
+          icon: const Icon(Icons.comment),
+          onPressed: () {
+            GoRouter.of(context).push(CommentsScreen.routeName, extra: widget.post.postId);
+          },
         ),
         IconButton(
           icon: const Icon(Icons.send),
@@ -160,11 +164,12 @@ class _PostCardState extends State<PostCard> {
         actions,
         const SizedBox(height: 20),
         userDescription,
-        const SizedBox(height: 20),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          child: const Text(
+        const SizedBox(height: 10),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
             'View all 120 comments',
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ),
         const SizedBox(height: 40),

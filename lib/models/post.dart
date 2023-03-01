@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:goly/utils/utils.dart';
 
 class PostModel {
   final String description;
@@ -55,10 +56,7 @@ class PostModel {
         uid = json["uid"],
         likes = (json['likes'] as List<dynamic>),
         postId = json["postId"],
-        datePublished = DateTime
-          .parse((json["datePublished"] as Timestamp)
-          .toDate()
-          .toString()),
+        datePublished = Utils.dateTimeToTimeStamp(json['datePublished']),
         username = json["username"],
         postUrl = json['postUrl'],
         profImage = json['profImage'],

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:goly/models/comment.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/services/storage_service.dart';
 import 'package:uuid/uuid.dart';
@@ -15,8 +16,8 @@ class PostService extends Service {
     return _collection.snapshots();
   }
 
-  static Future<String> uploadPost(String description, Uint8List file, String uid,
-      String username, String profImage) async {
+  static Future<String> uploadPost(String description, Uint8List file,
+      String uid, String username, String profImage) async {
     // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "Some error occurred";
     try {
@@ -75,14 +76,14 @@ class PostService extends Service {
             .doc(postId)
             .collection('comments')
             .doc(commentId)
-            .set({
-          'profilePic': profilePic,
-          'name': name,
-          'uid': uid,
-          'text': text,
-          'commentId': commentId,
-          'datePublished': DateTime.now(),
-        });
+            .set(CommentModel(
+              id: commentId,
+              datePublished: DateTime.now(),
+              name: name,
+              profilePic: profilePic,
+              text: text,
+              uid: uid,
+            ).toJson());
         res = 'success';
       } else {
         res = "Please enter text";

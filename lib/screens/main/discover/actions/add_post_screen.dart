@@ -127,20 +127,15 @@ class _AddPostScreenState extends State<AddPostScreen> {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: SizedBox(
-        height: 200,
-        width: 200,
         child: _file != null
-            ? AspectRatio(
-                aspectRatio: 487 / 451,
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    fit: BoxFit.fill,
-                    alignment: FractionalOffset.topCenter,
-                    image: MemoryImage(_file!),
-                  )),
-                ),
-              )
+            ? Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                alignment: FractionalOffset.topCenter,
+                image: MemoryImage(_file!),
+              )),
+            )
             : Center(
                 child: IconButton(
                   icon: const Icon(
