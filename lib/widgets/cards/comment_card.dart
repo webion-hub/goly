@@ -26,42 +26,40 @@ class CommentCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "${comment.name}: ",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "${comment.name}: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.inverseSurface,
+                          ),
+                        ),
+                        TextSpan(
+                          text: comment.text,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inverseSurface,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                TextSpan(
-                  text: comment.text,
-                  style:  TextStyle(color: Theme.of(context).colorScheme.inverseSurface)
-                ),
-              ],
-            ),
-          ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       DateFormat.yMMMd().format(
-                       comment.datePublished,
+                        comment.datePublished,
                       ),
                       style: const TextStyle(
-                          fontSize: 12, fontWeight: FontWeight.w400,),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                   )
                 ],
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(8),
-            child: const Icon(
-              Icons.favorite,
-              size: 16,
-            ),
-          )
         ],
       ),
     );

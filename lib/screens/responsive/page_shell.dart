@@ -54,14 +54,14 @@ class _PageShellState extends State<PageShell> {
   @override
   Widget build(BuildContext context) {
     var bottomNavigation = ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(36)),
+        borderRadius: const BorderRadius.all(Radius.circular(2)),
         child: Container(
           color: Theme.of(context).hoverColor,
           child: ClipRRect(
             clipBehavior: Clip.antiAliasWithSaveLayer,            
             child: CupertinoTabBar(
               inactiveColor: Colors.transparent,
-              height: 60,
+              //height: 60,
               backgroundColor: Colors.transparent,
               border: Border.all(
                 style: BorderStyle.none
