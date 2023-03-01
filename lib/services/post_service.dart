@@ -3,7 +3,6 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:goly/models/comment.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/services/storage_service.dart';
 import 'package:uuid/uuid.dart';
@@ -63,36 +62,7 @@ class PostService extends Service {
     return res;
   }
 
-  // Post comment
-  static Future<String> postComment(String postId, String text, String uid,
-      String name, String profilePic) async {
-    String res = "Some error occurred";
-    try {
-      if (text.isNotEmpty) {
-        // if the likes list contains the user uid, we need to remove it
-        String commentId = const Uuid().v1();
-        _firestore
-            .collection('posts')
-            .doc(postId)
-            .collection('comments')
-            .doc(commentId)
-            .set(CommentModel(
-              id: commentId,
-              datePublished: DateTime.now(),
-              name: name,
-              profilePic: profilePic,
-              text: text,
-              uid: uid,
-            ).toJson());
-        res = 'success';
-      } else {
-        res = "Please enter text";
-      }
-    } catch (err) {
-      res = err.toString();
-    }
-    return res;
-  }
+
 
   // Delete Post
   static Future<String> deletePost(String postId) async {

@@ -134,7 +134,7 @@ class _PostCardState extends State<PostCard> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('142 likes'),
+          Text('${widget.post.likes.length} likes'),
           const SizedBox(height: 10),
           RichText(
             text: TextSpan(
@@ -165,13 +165,13 @@ class _PostCardState extends State<PostCard> {
         const SizedBox(height: 20),
         userDescription,
         const SizedBox(height: 10),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            'View all 120 comments',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
+        // Align(
+        //   alignment: Alignment.centerLeft,
+          // child: Text(
+          //   'View all ${widget.post} comments',
+          //   style: Theme.of(context).textTheme.bodySmall,
+          // ),
+        // ),
         const SizedBox(height: 40),
       ],
     );

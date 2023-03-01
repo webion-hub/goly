@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/comment.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/services/post_service.dart';
+import 'package:goly/services/comment_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/cards/comment_card.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +21,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
   final TextEditingController commentEditingController = TextEditingController();
     void postComment(String uid, String name, String profilePic) async {
     try {
-      String res = await PostService.postComment(
+      String res = await CommentService.postComment(
         widget.postId,
         commentEditingController.text,
         uid,
@@ -52,11 +52,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
         centerTitle: false,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(widget.postId)
-            .collection('comments')
-            .snapshots(),
+        stream: CommentService.getCommentsStreamFromPost(postId: widget.postId),
         builder: (context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
