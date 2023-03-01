@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
-import 'package:goly/services/firestore_service.dart';
+import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
@@ -73,7 +73,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     // start the loading
     try {
       // upload to storage and db
-      String res = await FireStoreMethods().uploadPost(
+      String res = await PostService.uploadPost(
         _descriptionController.text,
         _file!,
         uid,

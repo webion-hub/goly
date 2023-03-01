@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/post.dart';
-import 'package:goly/services/firestore_service.dart';
+import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';
 import 'package:goly/widgets/profile/user_image.dart';
@@ -37,7 +37,7 @@ class _PostCardState extends State<PostCard> {
 
     var imageSection = GestureDetector(
       onDoubleTap: () {
-        FireStoreMethods().likePost(
+        PostService.likePost(
           widget.post.postId,
           Utils.currentUid(),
           widget.post.likes,
@@ -105,7 +105,7 @@ class _PostCardState extends State<PostCard> {
                 ? const Icon(Icons.favorite, color: Colors.red)
                 : const Icon(Icons.favorite_border),
             onPressed: () {
-              FireStoreMethods().likePost(
+              PostService.likePost(
                 widget.post.postId,
                 Utils.currentUid(),
                 widget.post.likes,
