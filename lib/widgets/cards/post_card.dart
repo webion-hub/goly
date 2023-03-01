@@ -24,9 +24,12 @@ class _PostCardState extends State<PostCard> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.post.username, style: Theme.of(context).textTheme.bodyText1),
+            Text(widget.post.username,
+                style: Theme.of(context).textTheme.bodyText1),
             const SizedBox(height: 5),
-            widget.post.goal != null ? Text(widget.post.goal!) : const SizedBox(),
+            widget.post.goal != null
+                ? Text(widget.post.goal!)
+                : const SizedBox(),
           ],
         ),
       ],
@@ -34,7 +37,7 @@ class _PostCardState extends State<PostCard> {
 
     var imageSection = GestureDetector(
       onDoubleTap: () {
-                FireStoreMethods().likePost(
+        FireStoreMethods().likePost(
           widget.post.postId,
           Utils.currentUid(),
           widget.post.likes,
@@ -43,20 +46,45 @@ class _PostCardState extends State<PostCard> {
           isLikeAnimating = true;
         });
       },
-      child: AspectRatio(
-        aspectRatio: 487 / 451,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              alignment: FractionalOffset.topCenter,
-              image: NetworkImage(
-                widget.post.postUrl,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          AspectRatio(
+            aspectRatio: 487 / 451,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  alignment: FractionalOffset.topCenter,
+                  image: NetworkImage(
+                    widget.post.postUrl,
+                  ),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(18)),
               ),
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(18)),
           ),
-        ),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: isLikeAnimating ? 1 : 0,
+            child: LikeAnimation(
+              isAnimating: isLikeAnimating,
+              duration: const Duration(
+                milliseconds: 400,
+              ),
+              onEnd: () {
+                setState(() {
+                  isLikeAnimating = false;
+                });
+              },
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.white,
+                size: 100,
+              ),
+            ),
+          ),
+        ],
       ),
     );
 
@@ -73,8 +101,16 @@ class _PostCardState extends State<PostCard> {
         LikeAnimation(
           isAnimating: widget.post.likes.contains(Utils.currentUid()),
           child: IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {},
+            icon: widget.post.likes.contains(Utils.currentUid())
+                ? const Icon(Icons.favorite, color: Colors.red)
+                : const Icon(Icons.favorite_border),
+            onPressed: () {
+              FireStoreMethods().likePost(
+                widget.post.postId,
+                Utils.currentUid(),
+                widget.post.likes,
+              );
+            },
           ),
         ),
         Expanded(
@@ -114,7 +150,7 @@ class _PostCardState extends State<PostCard> {
         ],
       ),
     );
-    
+
     return Column(
       children: [
         userSection,
