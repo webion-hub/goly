@@ -6,8 +6,7 @@ class MarkAsCompletedListTile extends StatefulWidget {
   final String categoryId;
   final GoalModel goal;
 
-  const MarkAsCompletedListTile(
-      {super.key, required this.categoryId, required this.goal});
+  const MarkAsCompletedListTile({super.key, required this.categoryId, required this.goal});
 
   @override
   State<MarkAsCompletedListTile> createState() =>

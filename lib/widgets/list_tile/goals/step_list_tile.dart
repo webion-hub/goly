@@ -10,11 +10,12 @@ class StepListTile extends StatefulWidget {
   final StepModel step;
   final String categoryId;
   final int goalId;
-  const StepListTile(
-      {super.key,
-      required this.step,
-      required this.categoryId,
-      required this.goalId});
+  const StepListTile({
+    super.key,
+    required this.step,
+    required this.categoryId,
+    required this.goalId,
+  });
 
   @override
   State<StepListTile> createState() => _StepListTileState();
@@ -46,7 +47,7 @@ class _StepListTileState extends State<StepListTile> {
       },
       child: CheckboxListTile(
         value: widget.step.completed,
-        onChanged: (value) async{
+        onChanged: (value) async {
           if (value != null) {
             widget.step.completed = value;
             await StepService.editStep(
@@ -55,10 +56,7 @@ class _StepListTileState extends State<StepListTile> {
               stepId: widget.step.id,
               step: widget.step,
             );
-            setState(() {
-              
-            });
-
+            setState(() {});
           }
         },
         title: Text(widget.step.name),

@@ -22,7 +22,6 @@ class SettingsListTile extends StatelessWidget {
           height: 40,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            //color: Theme.of(context).colorScheme.primary.withOpacity(0.2)
           ),
           child: Icon(icon),
         ),
