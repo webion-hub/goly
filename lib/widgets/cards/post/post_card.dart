@@ -1,12 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/screens/main/discover/actions/comment_screen.dart';
-import 'package:goly/services/comment_service.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';
+import 'package:goly/widgets/cards/post/comments_number.dart';
+import 'package:goly/widgets/cards/post/user_Section.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 
 class PostCard extends StatefulWidget {
@@ -22,24 +22,6 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    var userSection = Row(
-      children: [
-        UserImage(imageUrl: widget.post.profImage, width: 50),
-        const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(widget.post.username,
-                style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 5),
-            widget.post.goal != null
-                ? Text(widget.post.goal!)
-                : const SizedBox(),
-          ],
-        ),
-      ],
-    );
-
     var imageSection = GestureDetector(
       onDoubleTap: () {
         PostService.likePost(
@@ -161,7 +143,12 @@ class _PostCardState extends State<PostCard> {
 
     return Column(
       children: [
-        userSection,
+        UserSection(
+          userImage: widget.post.profImage,
+          username: widget.post.username,
+          goal: widget.post.goal,
+        ),
+        //userSection,
         const SizedBox(height: 20),
         imageSection,
         const SizedBox(height: 20),
@@ -172,38 +159,6 @@ class _PostCardState extends State<PostCard> {
         CommentsNumber(postId: widget.post.postId),
         const SizedBox(height: 40),
       ],
-    );
-  }
-}
-
-class CommentsNumber extends StatefulWidget {
-  final String postId;
-  const CommentsNumber({super.key, required this.postId});
-
-  @override
-  State<CommentsNumber> createState() => _CommentsNumberState();
-}
-
-class _CommentsNumberState extends State<CommentsNumber> {
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: GestureDetector(
-        onTap: () => GoRouter.of(context)
-            .push(CommentsScreen.routeName, extra: widget.postId),
-        child: StreamBuilder(
-            stream:
-                CommentService.getCommentsStreamFromPost(postId: widget.postId),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              int numberOfComments = snapshot.data?.docs.length ?? 0;
-              return Text(
-                'View all $numberOfComments comments',
-                style: Theme.of(context).textTheme.bodySmall,
-              );
-            }),
-      ),
     );
   }
 }

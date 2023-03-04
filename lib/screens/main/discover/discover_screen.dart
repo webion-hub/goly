@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:goly/widgets/cards/post_card.dart';
+import 'package:goly/widgets/cards/post/post_card.dart';
 import 'package:goly/widgets/layout/app_bars/discover_app_bar.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
