@@ -27,7 +27,7 @@ class SettingsListTile extends StatelessWidget {
         ),
         title: Text(
           text,
-          style: TextStyle(color: Theme.of(context).errorColor),
+          style: const TextStyle(color: Colors.red),
         ),
         onTap: onTap,
         trailing: ifTrailing

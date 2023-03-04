@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/screens/main/discover/actions/comment_screen.dart';
+import 'package:goly/services/comment_service.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';
@@ -17,6 +19,7 @@ class PostCard extends StatefulWidget {
 
 class _PostCardState extends State<PostCard> {
   bool isLikeAnimating = false;
+
   @override
   Widget build(BuildContext context) {
     var userSection = Row(
@@ -27,7 +30,7 @@ class _PostCardState extends State<PostCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.post.username,
-                style: Theme.of(context).textTheme.bodyText1),
+                style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 5),
             widget.post.goal != null
                 ? Text(widget.post.goal!)
@@ -95,7 +98,8 @@ class _PostCardState extends State<PostCard> {
         IconButton(
           icon: const Icon(Icons.comment),
           onPressed: () {
-            GoRouter.of(context).push(CommentsScreen.routeName, extra: widget.post.postId);
+            GoRouter.of(context)
+                .push(CommentsScreen.routeName, extra: widget.post.postId);
           },
         ),
         IconButton(
@@ -165,15 +169,41 @@ class _PostCardState extends State<PostCard> {
         const SizedBox(height: 20),
         userDescription,
         const SizedBox(height: 10),
-        // Align(
-        //   alignment: Alignment.centerLeft,
-          // child: Text(
-          //   'View all ${widget.post} comments',
-          //   style: Theme.of(context).textTheme.bodySmall,
-          // ),
-        // ),
+        CommentsNumber(postId: widget.post.postId),
         const SizedBox(height: 40),
       ],
+    );
+  }
+}
+
+class CommentsNumber extends StatefulWidget {
+  final String postId;
+  const CommentsNumber({super.key, required this.postId});
+
+  @override
+  State<CommentsNumber> createState() => _CommentsNumberState();
+}
+
+class _CommentsNumberState extends State<CommentsNumber> {
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: GestureDetector(
+        onTap: () => GoRouter.of(context)
+            .push(CommentsScreen.routeName, extra: widget.postId),
+        child: StreamBuilder(
+            stream:
+                CommentService.getCommentsStreamFromPost(postId: widget.postId),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              int numberOfComments = snapshot.data?.docs.length ?? 0;
+              return Text(
+                'View all $numberOfComments comments',
+                style: Theme.of(context).textTheme.bodySmall,
+              );
+            }),
+      ),
     );
   }
 }

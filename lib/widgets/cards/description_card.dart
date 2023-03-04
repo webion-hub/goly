@@ -17,7 +17,7 @@ class DescriptionCard extends StatelessWidget {
             children: [
               Text(
                 "Description",
-                style: Theme.of(context).textTheme.subtitle2,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
               const SizedBox(height: 20),
               Text(text),

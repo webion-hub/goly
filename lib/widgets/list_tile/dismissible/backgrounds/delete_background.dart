@@ -8,7 +8,7 @@ class DeleteBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).errorColor,
+      color: Colors.red,
       alignment: Alignment.centerRight,
       padding: const EdgeInsets.only(right: 20),
       child: const Icon(

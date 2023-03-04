@@ -7,14 +7,14 @@ import 'package:uuid/uuid.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 class CommentService extends Service {
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getCommentsStreamFromPost({required String postId}) {
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getCommentsStreamFromPost(
+      {required String postId}) {
     return FirebaseFirestore.instance
         .collection('posts')
         .doc(postId)
         .collection('comments')
         .snapshots();
   }
-
 
   // Post comment
   static Future<String> postComment(String postId, String text, String uid,
