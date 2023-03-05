@@ -12,7 +12,7 @@ final CollectionReference _collection = _firestore.collection('posts');
 
 class PostService extends Service {
   static Stream<QuerySnapshot<Object?>> getPostStream() {
-    return _collection.snapshots();
+    return _collection.orderBy('datePublished', descending: true).snapshots();
   }
 
   static Future<String> uploadPost(String description, Uint8List file,
@@ -61,8 +61,6 @@ class PostService extends Service {
     }
     return res;
   }
-
-
 
   // Delete Post
   static Future<String> deletePost(String postId) async {
