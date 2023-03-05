@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:goly/models/post.dart';
-import 'package:goly/screens/main/discover/actions/comment_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';
+import 'package:goly/widgets/cards/post/action_post_card.dart';
 import 'package:goly/widgets/cards/post/comments_number.dart';
-import 'package:goly/widgets/cards/post/user_Section.dart';
-import 'package:goly/widgets/profile/user_image.dart';
+import 'package:goly/widgets/cards/post/user_post_description.dart';
+import 'package:goly/widgets/cards/post/user_section.dart';
 
 class PostCard extends StatefulWidget {
   final PostModel post;
@@ -75,72 +74,6 @@ class _PostCardState extends State<PostCard> {
       ),
     );
 
-    var actions = Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.comment),
-          onPressed: () {
-            GoRouter.of(context)
-                .push(CommentsScreen.routeName, extra: widget.post.postId);
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.send),
-          onPressed: () {},
-        ),
-        LikeAnimation(
-          isAnimating: widget.post.likes.contains(Utils.currentUid()),
-          child: IconButton(
-            icon: widget.post.likes.contains(Utils.currentUid())
-                ? const Icon(Icons.favorite, color: Colors.red)
-                : const Icon(Icons.favorite_border),
-            onPressed: () {
-              PostService.likePost(
-                widget.post.postId,
-                Utils.currentUid(),
-                widget.post.likes,
-              );
-            },
-          ),
-        ),
-        Expanded(
-            child: Align(
-          alignment: Alignment.centerRight,
-          child: IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () {},
-          ),
-        )),
-      ],
-    );
-
-    var userDescription = SizedBox(
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('${widget.post.likes.length} likes'),
-          const SizedBox(height: 10),
-          RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "${widget.post.username}: ",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextSpan(
-                  text: widget.post.description,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-
     return Column(
       children: [
         UserSection(
@@ -152,9 +85,16 @@ class _PostCardState extends State<PostCard> {
         const SizedBox(height: 20),
         imageSection,
         const SizedBox(height: 20),
-        actions,
+        ActionsPostCard(
+          postId: widget.post.postId,
+          likes: widget.post.likes,
+        ),
         const SizedBox(height: 20),
-        userDescription,
+        UserPostDescription(
+          username: widget.post.username,
+          description: widget.post.description,
+          likes: widget.post.likes,
+        ),
         const SizedBox(height: 10),
         CommentsNumber(postId: widget.post.postId),
         const SizedBox(height: 40),
