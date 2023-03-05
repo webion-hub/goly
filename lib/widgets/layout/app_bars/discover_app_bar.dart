@@ -26,10 +26,19 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.search),
         ),
       ],
-      bottom: const TabBar(
+      bottom: TabBar(
+        indicatorColor: Theme.of(context).colorScheme.primary,
         tabs: [
-          Tab(icon: Icon(Icons.diversity_3)),
-          Tab(icon: Icon(Icons.menu_book)),
+          Tab(
+              icon: Icon(
+            Icons.diversity_3,
+            color: Theme.of(context).colorScheme.primary,
+          )),
+          Tab(
+              icon: Icon(
+            Icons.menu_book,
+            color: Theme.of(context).colorScheme.primary,
+          )),
         ],
       ),
     );
