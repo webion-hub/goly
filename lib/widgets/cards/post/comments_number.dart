@@ -26,10 +26,12 @@ class _CommentsNumberState extends State<CommentsNumber> {
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               int numberOfComments = snapshot.data?.docs.length ?? 0;
-              return Text(
-                'View all $numberOfComments comments',
-                style: Theme.of(context).textTheme.bodySmall,
-              );
+              return numberOfComments == 0
+                  ? const SizedBox()
+                  : Text(
+                      'View all $numberOfComments comments',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    );
             }),
       ),
     );

@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:goly/models/post.dart';
+import 'package:goly/services/comment_service.dart';
 import 'package:goly/services/storage_service.dart';
 import 'package:uuid/uuid.dart';
 
@@ -66,6 +67,7 @@ class PostService extends Service {
     String res = "Some error occurred";
     try {
       await _firestore.collection('posts').doc(postId).delete();
+      await CommentService.deleteCommentsFromPost(postId: postId);
       res = 'success';
     } catch (err) {
       res = err.toString();

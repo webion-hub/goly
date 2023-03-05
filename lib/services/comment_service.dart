@@ -46,4 +46,22 @@ class CommentService extends Service {
     }
     return res;
   }
+
+  static Future<String> deleteCommentsFromPost({required String postId}) async {
+    String res = "Some error occurred";
+    try {
+      var snap = await _firestore
+          .collection('posts')
+          .doc(postId)
+          .collection('comments')
+          .get();
+      for (var doc in snap.docs) {
+        await doc.reference.delete();
+      }
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
 }

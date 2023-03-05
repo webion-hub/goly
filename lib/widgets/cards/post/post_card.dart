@@ -77,6 +77,8 @@ class _PostCardState extends State<PostCard> {
     return Column(
       children: [
         UserSection(
+          uid: widget.post.uid,
+          postId: widget.post.postId,
           userImage: widget.post.profImage,
           username: widget.post.username,
           goal: widget.post.goal,
