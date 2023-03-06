@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/screens/main/discover/actions/chat/chat_screen.dart';
+import 'package:goly/screens/main/chat/chat_screen.dart';
 
 class UserConversationCard extends StatelessWidget {
   final String userName;
   final String userPicture;
-  const UserConversationCard({super.key, required this.userName, required this.userPicture});
+  const UserConversationCard(
+      {super.key, required this.userName, required this.userPicture});
 
   @override
   Widget build(BuildContext context) {

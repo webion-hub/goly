@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
+import 'package:goly/screens/main/discover/actions/search/search_screen.dart';
 import 'package:goly/screens/main/discover/discover_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
@@ -28,79 +29,85 @@ class _PageShellState extends State<PageShell> {
       _page = page;
     });
   }
+
   addData() async {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
   }
+
   void navigationTapped(int page) {
     setState(() {
       _page = page;
     });
-    String url = '/';
-    switch (page) {
-      case 0:
-        url = DiscoverScreen.routeName;
-        break;
-      case 1:
-        url = GoalsScreen.routeName;
-        break;
-      case 2:
-        url = ProfileScreen.routeName;
-    }
-    GoRouter.of(context).go(url);
+
+    List<String> pagesRoute = [
+      DiscoverScreen.routeName,
+      SearchScreen.routeName,
+      GoalsScreen.routeName,
+      ProfileScreen.routeName
+    ];
+
+    GoRouter.of(context).go(pagesRoute[page]);
   }
 
   @override
   Widget build(BuildContext context) {
     var bottomNavigation = ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(2)),
-        child: Container(
-          color: Theme.of(context).hoverColor,
-          child: ClipRRect(
-            clipBehavior: Clip.antiAliasWithSaveLayer,            
-            child: CupertinoTabBar(
-              inactiveColor: Colors.transparent,
-              //height: 60,
-              backgroundColor: Colors.transparent,
-              border: Border.all(
-                style: BorderStyle.none
+      borderRadius: const BorderRadius.all(Radius.circular(2)),
+      child: Container(
+        color: Theme.of(context).hoverColor,
+        child: ClipRRect(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: CupertinoTabBar(
+            inactiveColor: Colors.transparent,
+            //height: 60,
+            backgroundColor: Colors.transparent,
+            border: Border.all(style: BorderStyle.none),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.tips_and_updates,
+                  color: (_page == 0)
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
+                ),
+                label: "Discover",
               ),
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.tips_and_updates,
-                    color: (_page == 0)
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondary,
-                  ),
-                  label: "Discover",
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search,
+                  color: (_page == 1)
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.flag_rounded,
-                    color: (_page == 1)
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondary,
-                  ),
-                  label: "Goals",
+                label: "Search",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.flag_rounded,
+                  color: (_page == 2)
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.person_rounded,
-                    color: (_page == 2)
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.secondary,
-                  ),
-                  label: "Profile",
+                label: "Goals",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person_rounded,
+                  color: (_page == 3)
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
                 ),
-              ],
-              onTap: navigationTapped,
-              currentIndex: _page,
-            ),
+                label: "Profile",
+              ),
+            ],
+            onTap: navigationTapped,
+            currentIndex: _page,
           ),
         ),
-      );
+      ),
+    );
     return Scaffold(
       body: SafeArea(child: widget.child),
       bottomNavigationBar: bottomNavigation,

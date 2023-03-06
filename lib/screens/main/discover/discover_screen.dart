@@ -16,31 +16,26 @@ class DiscoverScreen extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: const DiscoverAppBar(),
-          body: TabBarView(
-            children: [
-              StreamBuilder(
-                stream: PostService.getPostStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return customBuffering();
-                  }
-                  if (snapshot.data == null) {
-                    return const Text('Your feed is empty');
-                  }
-                  return ListView.builder(
-                    padding: Constants.pagePadding,
-                    itemBuilder: ((context, index) {
-                      return PostCard(
-                        post: PostModel.fromJson(snapshot.data?.docs[index]
-                            .data() as Map<String, dynamic>),
-                      );
-                    }),
-                    itemCount: snapshot.data!.size,
+          body: StreamBuilder(
+            stream: PostService.getPostStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return customBuffering();
+              }
+              if (snapshot.data == null) {
+                return const Text('Your feed is empty');
+              }
+              return ListView.builder(
+                padding: Constants.pagePadding,
+                itemBuilder: ((context, index) {
+                  return PostCard(
+                    post: PostModel.fromJson(snapshot.data?.docs[index].data()
+                        as Map<String, dynamic>),
                   );
-                },
-              ),
-              const Icon(Icons.book),
-            ],
+                }),
+                itemCount: snapshot.data!.size,
+              );
+            },
           ),
         ));
   }

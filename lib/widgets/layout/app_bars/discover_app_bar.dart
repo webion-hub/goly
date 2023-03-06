@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/discover/actions/add_post_screen.dart';
-import 'package:goly/screens/main/discover/actions/chat/recent_conversations_screen.dart';
+import 'package:goly/screens/main/chat/recent_conversations_screen.dart';
 import 'package:goly/screens/main/discover/actions/search/search_screen.dart';
 
 class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -26,21 +26,6 @@ class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.search),
         ),
       ],
-      bottom: TabBar(
-        indicatorColor: Theme.of(context).colorScheme.primary,
-        tabs: [
-          Tab(
-              icon: Icon(
-            Icons.diversity_3,
-            color: Theme.of(context).colorScheme.primary,
-          )),
-          Tab(
-              icon: Icon(
-            Icons.menu_book,
-            color: Theme.of(context).colorScheme.primary,
-          )),
-        ],
-      ),
     );
   }
 
