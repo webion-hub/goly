@@ -67,6 +67,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               )
-            : const Text('Discover'));
+            : const Text('resources'));
   }
 }
