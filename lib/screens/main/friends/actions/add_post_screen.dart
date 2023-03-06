@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/friends/friends_Screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
@@ -88,7 +88,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
           'Posted!',
         );
         clearImage();
-        
       } else {
         Utils.showSnackbBar(res);
       }
@@ -97,9 +96,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
         isLoading = false;
       });
       Utils.showSnackbBar(err.toString());
-    }
-    finally {
-      GoRouter.of(context).go(DiscoverScreen.routeName);
+    } finally {
+      GoRouter.of(context).go(FriendsScreen.routeName);
     }
   }
 
@@ -129,13 +127,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
       child: SizedBox(
         child: _file != null
             ? Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                fit: BoxFit.fitWidth,
-                alignment: FractionalOffset.topCenter,
-                image: MemoryImage(_file!),
-              )),
-            )
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  fit: BoxFit.fitWidth,
+                  alignment: FractionalOffset.topCenter,
+                  image: MemoryImage(_file!),
+                )),
+              )
             : Center(
                 child: IconButton(
                   icon: const Icon(

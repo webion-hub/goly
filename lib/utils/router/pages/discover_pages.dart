@@ -1,22 +1,18 @@
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/discover/actions/add_post_screen.dart';
+import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
 import 'package:goly/screens/main/chat/recent_conversations_screen.dart';
-import 'package:goly/screens/main/discover/actions/comment_screen.dart';
-import 'package:goly/screens/main/discover/actions/search/search_screen.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/friends/actions/comment_screen.dart';
+import 'package:goly/screens/main/friends/actions/search/search_screen.dart';
+import 'package:goly/screens/main/friends/friends_Screen.dart';
 
-final List<RouteBase> discoverPages = [
+final List<RouteBase> friendsPages = [
   GoRoute(
-    path: DiscoverScreen.routeName,
-    builder: (context, state) => const DiscoverScreen(),
+    path: FriendsScreen.routeName,
+    builder: (context, state) => const FriendsScreen(),
   ),
   GoRoute(
     path: RecentConversationsScreen.routeName,
     builder: (context, state) => const RecentConversationsScreen(),
-  ),
-  GoRoute(
-    path: SearchScreen.routeName,
-    builder: (context, state) => const SearchScreen(),
   ),
   GoRoute(
     path: AddPostScreen.routeName,

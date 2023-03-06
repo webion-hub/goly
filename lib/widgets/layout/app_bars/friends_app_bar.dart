@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/discover/actions/add_post_screen.dart';
+import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
 import 'package:goly/screens/main/chat/recent_conversations_screen.dart';
-import 'package:goly/screens/main/discover/actions/search/search_screen.dart';
+import 'package:goly/screens/main/friends/actions/search/search_screen.dart';
 
-class DiscoverAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DiscoverAppBar({super.key});
+class FriendsAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const FriendsAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

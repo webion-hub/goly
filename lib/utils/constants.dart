@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/friends/friends_Screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 
@@ -15,7 +15,7 @@ class Constants {
   static const webScreenSize = 600;
 
   static final List<Widget> homeScreenItems = [
-    const DiscoverScreen(),
+    const FriendsScreen(),
     const GoalsScreen(),
     ProfileScreen(
       profileId: FirebaseAuth.instance.currentUser!.uid,

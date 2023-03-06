@@ -7,9 +7,10 @@ import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/auth/error_screen.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
-import 'package:goly/screens/main/discover/discover_screen.dart';
+import 'package:goly/screens/main/friends/friends_Screen.dart';
 import 'package:goly/utils/router/pages/auth_pages.dart';
 import 'package:goly/utils/router/pages/discover_pages.dart';
+import 'package:goly/utils/router/pages/friends_pages.dart';
 import 'package:goly/utils/router/pages/goal_pages.dart';
 import 'package:goly/utils/router/pages/introduction_pages.dart';
 import 'package:goly/utils/router/pages/profile_pages.dart';
@@ -17,7 +18,7 @@ import 'package:goly/utils/router/pages/profile_pages.dart';
 final router = GoRouter(
   initialLocation: FirebaseAuth.instance.currentUser == null
       ? AuthScreen.routeName
-      : DiscoverScreen.routeName,
+      : FriendsScreen.routeName,
   errorPageBuilder: (context, state) => MaterialPage<void>(
     key: state.pageKey,
     child: ErrorScreen(error: state.error),
@@ -29,12 +30,15 @@ final router = GoRouter(
         GoRoute(
           path: '/',
           redirect: ((context, state) {
-            return DiscoverScreen.routeName;
+            return FriendsScreen.routeName;
           }),
         ),
         ...introductionPages,
         ...authPages,
-        ...discoverPages,
+
+        //Bottom navigation bar pages
+        ...friendsPages,
+        ...searchPages,
         ...goalPages,
         ...profilePages,
       ],

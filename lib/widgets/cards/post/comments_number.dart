@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/discover/actions/comment_screen.dart';
+import 'package:goly/screens/main/friends/actions/comment_screen.dart';
 import 'package:goly/services/comment_service.dart';
 
 class CommentsNumber extends StatefulWidget {
