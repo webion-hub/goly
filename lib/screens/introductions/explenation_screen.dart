@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/friends_Screen.dart';
+import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/utils/introductions.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';

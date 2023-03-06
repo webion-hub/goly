@@ -7,13 +7,13 @@ import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/auth/error_screen.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
-import 'package:goly/screens/main/friends/friends_Screen.dart';
+import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/utils/router/pages/auth_pages.dart';
-import 'package:goly/utils/router/pages/discover_pages.dart';
 import 'package:goly/utils/router/pages/friends_pages.dart';
 import 'package:goly/utils/router/pages/goal_pages.dart';
 import 'package:goly/utils/router/pages/introduction_pages.dart';
 import 'package:goly/utils/router/pages/profile_pages.dart';
+import 'package:goly/utils/router/pages/search_pages.dart';
 
 final router = GoRouter(
   initialLocation: FirebaseAuth.instance.currentUser == null

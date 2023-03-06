@@ -21,14 +21,10 @@ class FriendsAppBar extends StatelessWidget implements PreferredSizeWidget {
               GoRouter.of(context).push(RecentConversationsScreen.routeName),
           icon: const Icon(Icons.message_rounded),
         ),
-        IconButton(
-          onPressed: () => GoRouter.of(context).push(SearchScreen.routeName),
-          icon: const Icon(Icons.search),
-        ),
       ],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(90);
+  Size get preferredSize => const Size.fromHeight(60);
 }

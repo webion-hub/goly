@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/friends/friends_Screen.dart';
+import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';

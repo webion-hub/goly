@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/services/post_service.dart';

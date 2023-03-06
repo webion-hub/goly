@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/friends_Screen.dart';
+import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/services/auth_service.dart';
 import 'package:goly/widgets/auth/forgot_password.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';

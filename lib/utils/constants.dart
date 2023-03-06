@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goly/screens/main/friends/friends_Screen.dart';
+import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 
