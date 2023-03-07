@@ -6,6 +6,7 @@ import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/services/videos_service.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/cards/video_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -19,19 +20,9 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isShowUsers = false;
-  VideoCollection? _videos;
-
-  _getVideos() async {
-    _videos = await VideoService.getVideosFromSearch(search: 'meditation');
-    var thumbnails = _videos?.getThumnailInfo();
-    thumbnails?.forEach((element) {
-      print(element.title);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    _getVideos();
     return Scaffold(
         appBar: AppBar(
           title: Form(
@@ -80,6 +71,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               )
-            : const Text('resources'));
+            : SingleChildScrollView(
+                child: FutureBuilder<VideoCollection>(
+                    future:
+                        VideoService.getVideosFromSearch(search: 'meditation'),
+                    builder: (context, snapshot) {
+                      var thumbnails = snapshot.data?.getThumnailInfo();
+                      return Column(
+                        children: thumbnails
+                                ?.map((e) => VideoCard(video: e))
+                                .toList() ??
+                            [const SizedBox()],
+                      );
+                    }),
+              ));
   }
 }
