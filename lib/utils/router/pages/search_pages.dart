@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/actions/search/search_screen.dart';
+import 'package:goly/screens/main/search/search_screen.dart';
 
 final List<RouteBase> searchPages = [
   GoRoute(
