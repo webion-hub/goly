@@ -26,12 +26,11 @@ class CategoryService extends Service {
         .update(category.toJson());
   }
 
-  static Stream<DocumentSnapshot<Map<String, dynamic>>> getCategoriesStream(
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoriesStream(
       {String? userId}) {
     return _collection
         .doc(userId ?? Utils.currentUid())
         .collection('categories')
-        .doc()
         .snapshots();
   }
 
@@ -82,8 +81,9 @@ class CategoryService extends Service {
         .collection('goals')
         .snapshots();
   }
+
   static Future<QuerySnapshot<Map<String, dynamic>>> getCategoryGoals(
-      {required String categoryId}) async{
+      {required String categoryId}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')

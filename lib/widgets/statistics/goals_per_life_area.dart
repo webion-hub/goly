@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:goly/models/statistics.dart';
+import 'package:goly/services/statistic_service.dart';
+import 'package:goly/widgets/layout/indicators.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class GoalsPerLifeArea extends StatefulWidget {
-  const GoalsPerLifeArea({super.key});
+class GoalsPerLifeAreaPieChart extends StatefulWidget {
+  const GoalsPerLifeAreaPieChart({super.key});
 
   @override
-  State<GoalsPerLifeArea> createState() => _GoalsPerLifeAreaState();
+  State<GoalsPerLifeAreaPieChart> createState() =>
+      _GoalsPerLifeAreaPieChartState();
 }
 
-class _GoalsPerLifeAreaState extends State<GoalsPerLifeArea> {
-  late List<CategoryData> _chartData;
+class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
   late TooltipBehavior _tooltipBehavior;
+  List<GoalsPerLifeAreaModel> categoriesData = [];
   @override
   void initState() {
     super.initState();
-    _chartData = getChartData();
     _tooltipBehavior = TooltipBehavior(
       enable: true,
     );
@@ -22,40 +25,36 @@ class _GoalsPerLifeAreaState extends State<GoalsPerLifeArea> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SfCircularChart(
-        title: ChartTitle(text: "Number of goals per life area"),
-        legend: Legend(
-          isVisible: true,
-          overflowMode: LegendItemOverflowMode.wrap,
-        ),
-        tooltipBehavior: _tooltipBehavior,
-        series: <CircularSeries>[
-          PieSeries<CategoryData, String>(
-            dataSource: _chartData,
-            xValueMapper: (CategoryData data, _) => data.category,
-            yValueMapper: (CategoryData data, _) => data.goalsNumber,
-            dataLabelSettings: const DataLabelSettings(
-              isVisible: true,
+    return FutureBuilder(
+        future: StatisticService.getGoalsPerLifeArea(),
+        builder: (context, snapshot) {
+          if (snapshot.data == null) {
+            return buffering();
+          }
+          List<GoalsPerLifeAreaModel> data =
+              (snapshot.data as List<GoalsPerLifeAreaModel>);
+          return SafeArea(
+            child: SfCircularChart(
+              title: ChartTitle(text: "Number of goals per life area"),
+              legend: Legend(
+                isVisible: true,
+                overflowMode: LegendItemOverflowMode.wrap,
+              ),
+              tooltipBehavior: _tooltipBehavior,
+              series: <CircularSeries>[
+                PieSeries<GoalsPerLifeAreaModel, String>(
+                  dataSource: data,
+                  xValueMapper: (GoalsPerLifeAreaModel data, _) =>
+                      data.category,
+                  yValueMapper: (GoalsPerLifeAreaModel data, _) =>
+                      data.goalsNumber,
+                  dataLabelSettings: const DataLabelSettings(
+                    isVisible: true,
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    );
+          );
+        });
   }
-
-  List<CategoryData> getChartData() {
-    final List<CategoryData> chartData = [
-      CategoryData(category: "Work", goalsNumber: 80.0),
-      CategoryData(category: "Personal development", goalsNumber: 80.0),
-      CategoryData(category: "Finance", goalsNumber: 80.0),
-    ];
-    return chartData;
-  }
-}
-
-class CategoryData {
-  CategoryData({required this.category, required this.goalsNumber});
-  final String category;
-  final double goalsNumber;
 }
