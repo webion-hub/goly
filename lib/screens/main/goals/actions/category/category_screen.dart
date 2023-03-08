@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
-import 'package:goly/widgets/cards/action_card.dart';
-import 'package:goly/widgets/cards/description_card.dart';
+import 'package:goly/widgets/cards/goals/action_card.dart';
+import 'package:goly/widgets/cards/goals/description_card.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/models/category.dart';
@@ -17,24 +17,25 @@ class CategoryScreen extends StatelessWidget {
   static const String routeName = "/category";
   final String categoryId;
   const CategoryScreen({super.key, required this.categoryId});
-    void deleteCategory(BuildContext context) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AsyncConfirmationDialog(
-          title: 'Are you sure?',
-          message:
-              'Are you sure you want to delete this category? All goals inside it will be deleted',
-          noAction: () {
-            Navigator.of(ctx).pop();
-          },
-          yesAction: () async {
-            Navigator.of(ctx).pop();
-            await CategoryService.deleteCategory(categoryId: categoryId).then(
-                (value) => GoRouter.of(ctx).go(GoalsScreen.routeName));
-          },
-        ),
-      );
-    }
+  void deleteCategory(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AsyncConfirmationDialog(
+        title: 'Are you sure?',
+        message:
+            'Are you sure you want to delete this category? All goals inside it will be deleted',
+        noAction: () {
+          Navigator.of(ctx).pop();
+        },
+        yesAction: () async {
+          Navigator.of(ctx).pop();
+          await CategoryService.deleteCategory(categoryId: categoryId)
+              .then((value) => GoRouter.of(ctx).go(GoalsScreen.routeName));
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -49,14 +50,17 @@ class CategoryScreen extends StatelessWidget {
               child: Text('error'),
             );
           }
-          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
+          CategoryModel category =
+              CategoryModel.fromJson(categorySnapshot.data!.data()!);
 
           return Scaffold(
             appBar: AppBar(
               title: Text(category.name),
               actions: [
                 IconButton(
-                  onPressed: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameEdit, extra: category),
+                  onPressed: () => GoRouter.of(context).push(
+                      HandleCategoryScreen.routeNameEdit,
+                      extra: category),
                   icon: const Icon(Icons.edit),
                 ),
                 IconButton(
@@ -93,7 +97,8 @@ class CategoryScreen extends StatelessWidget {
                 ActionCard(
                   text: 'Add goal',
                   icon: Icons.add,
-                  action: () => GoRouter.of(context).push(HandleGoalScreen.routeNameAdd, extra: categoryId),
+                  action: () => GoRouter.of(context)
+                      .push(HandleGoalScreen.routeNameAdd, extra: categoryId),
                 ),
               ]),
             ),

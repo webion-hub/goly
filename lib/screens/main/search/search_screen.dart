@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/user.dart';
+import 'package:goly/models/video_collection.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/services/user_service.dart';
+import 'package:goly/services/videos_service.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/cards/video_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -17,6 +20,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isShowUsers = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +71,19 @@ class _SearchScreenState extends State<SearchScreen> {
                   );
                 },
               )
-            : const Text('resources'));
+            : SingleChildScrollView(
+                child: FutureBuilder<VideoCollection>(
+                    future:
+                        VideoService.getVideosFromSearch(search: 'meditation'),
+                    builder: (context, snapshot) {
+                      var thumbnails = snapshot.data?.getThumnailInfo();
+                      return Column(
+                        children: thumbnails
+                                ?.map((e) => VideoCard(video: e))
+                                .toList() ??
+                            [const SizedBox()],
+                      );
+                    }),
+              ));
   }
 }

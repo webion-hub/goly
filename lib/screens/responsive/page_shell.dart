@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/friends/actions/search/search_screen.dart';
+import 'package:goly/screens/main/search/search_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
