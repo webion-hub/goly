@@ -21,7 +21,6 @@ class VideoService {
     Uri uri = Uri.https(_baseURL, '/youtube/v3/search', parameters);
 
     http.Response response = await http.get(uri, headers: headers);
-    print(jsonDecode(response.body));
     return VideoCollection.fromJson(
         jsonDecode(response.body) as Map<String, dynamic>);
   }
