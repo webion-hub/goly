@@ -26,17 +26,13 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future:
-            StatisticService.getGoalsPerLifeArea(), //new feature to implement
+            StatisticService.getLifeAreaProgress(), //new feature to implement
         builder: (context, snapshot) {
           if (snapshot.data == null) {
             return buffering();
           }
-          List<LifeAreaProgressModel> data = [
-            LifeAreaProgressModel(
-                category: 'Life', percentageOfCompletition: 12.2),
-            LifeAreaProgressModel(
-                category: 'Love', percentageOfCompletition: 15.2),
-          ];
+          List<LifeAreaProgressModel> data =
+              (snapshot.data as List<LifeAreaProgressModel>);
           return SafeArea(
             child: SfCircularChart(
               title: ChartTitle(text: "Life area progress"),
@@ -47,6 +43,7 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
               tooltipBehavior: _tooltipBehavior,
               series: <CircularSeries>[
                 RadialBarSeries<LifeAreaProgressModel, String>(
+                  maximumValue: 1,
                   dataSource: data,
                   xValueMapper: (LifeAreaProgressModel data, _) =>
                       data.category,
