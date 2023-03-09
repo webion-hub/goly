@@ -40,10 +40,9 @@ class StatisticService extends Service {
         var category = CategoryModel.fromJson(e.data());
         var percentageOfCompletition =
             await CategoryService.getPercentageOfCompletition(category);
-        print(percentageOfCompletition);
         categoriesData.add(LifeAreaProgressModel(
           category: category.name,
-          percentageOfCompletition: percentageOfCompletition,
+          percentageOfCompletition: percentageOfCompletition * 100,
         ));
       });
       await Future.wait(futures);

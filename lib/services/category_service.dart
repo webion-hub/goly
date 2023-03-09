@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/models/goal.dart';
+import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/utils.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -108,12 +109,11 @@ class CategoryService extends Service {
         await CategoryService.getNumberofGoals(categoryId: category.id);
     final goalsFuture =
         await CategoryService.getCategoryGoals(categoryId: category.id);
-    var completed = 0;
-    goalsFuture.docs.forEach((e) {
+    var completed = 0.0;
+    for (var e in goalsFuture.docs) {
       final goal = GoalModel.fromJson(e.data());
-      completed += goal.completed ? 1 : 0;
-    });
-    print("completed: $completed, n: $numberOfGoals ");
+      completed += GoalService.getPercentageOfCompletition(goal);
+    }
     return completed / numberOfGoals;
   }
 }

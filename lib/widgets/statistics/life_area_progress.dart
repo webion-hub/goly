@@ -43,7 +43,7 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
               tooltipBehavior: _tooltipBehavior,
               series: <CircularSeries>[
                 RadialBarSeries<LifeAreaProgressModel, String>(
-                  maximumValue: 1,
+                  maximumValue: 100,
                   dataSource: data,
                   xValueMapper: (LifeAreaProgressModel data, _) =>
                       data.category,
