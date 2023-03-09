@@ -14,6 +14,9 @@ class StatisticScreen extends StatelessWidget {
           child: Column(
         children: const [
           GoalsPerLifeAreaPieChart(),
+          const SizedBox(height: 15),
+          const Divider(),
+          const SizedBox(height: 15),
           LifeAreaProgress(),
         ],
       )),

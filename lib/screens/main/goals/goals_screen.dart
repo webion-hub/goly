@@ -64,11 +64,6 @@ class _MainPageState extends State<GoalsScreen> {
                       action: () => GoRouter.of(context)
                           .push(HandleCategoryScreen.routeNameAdd),
                     ),
-                    const SizedBox(height: 40),
-                    Text(
-                      'Statistics',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
                   ],
                 );
               }),

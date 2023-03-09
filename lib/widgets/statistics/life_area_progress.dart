@@ -44,6 +44,7 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
               series: <CircularSeries>[
                 RadialBarSeries<LifeAreaProgressModel, String>(
                   maximumValue: 100,
+                  cornerStyle: CornerStyle.bothCurve,
                   dataSource: data,
                   xValueMapper: (LifeAreaProgressModel data, _) =>
                       data.category,
