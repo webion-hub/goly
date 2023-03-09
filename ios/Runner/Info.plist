@@ -50,10 +50,10 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>We need access to let you pick an image</string>
+		<string>Please grant photo gallery access</string>
 		<key>NSCameraUsageDescription</key>
-		<string>We need access to let you pick an image</string>
+		<string>Please grant camera access</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>We need access to let you pick an image</string>
+		<string>Please grant microphone access</string>
 	</dict>
 </plist>

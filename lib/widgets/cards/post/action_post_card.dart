@@ -25,10 +25,6 @@ class ActionsPostCard extends StatelessWidget {
             GoRouter.of(context).push(CommentsScreen.routeName, extra: postId);
           },
         ),
-        IconButton(
-          icon: const Icon(Icons.send),
-          onPressed: () {},
-        ),
         Expanded(
             child: Align(
           alignment: Alignment.centerRight,
