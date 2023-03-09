@@ -25,31 +25,23 @@ class ActionsPostCard extends StatelessWidget {
             GoRouter.of(context).push(CommentsScreen.routeName, extra: postId);
           },
         ),
-        IconButton(
-          icon: const Icon(Icons.send),
-          onPressed: () {},
-        ),
-        LikeAnimation(
-          isAnimating: likes.contains(Utils.currentUid()),
-          child: IconButton(
-            icon: likes.contains(Utils.currentUid())
-                ? const Icon(Icons.favorite, color: Colors.red)
-                : const Icon(Icons.favorite_border),
-            onPressed: () {
-              PostService.likePost(
-                postId,
-                Utils.currentUid(),
-                likes,
-              );
-            },
-          ),
-        ),
         Expanded(
             child: Align(
           alignment: Alignment.centerRight,
-          child: IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () {},
+          child: LikeAnimation(
+            isAnimating: likes.contains(Utils.currentUid()),
+            child: IconButton(
+              icon: likes.contains(Utils.currentUid())
+                  ? const Icon(Icons.favorite, color: Colors.red)
+                  : const Icon(Icons.favorite_border),
+              onPressed: () {
+                PostService.likePost(
+                  postId,
+                  Utils.currentUid(),
+                  likes,
+                );
+              },
+            ),
           ),
         )),
       ],

@@ -25,6 +25,10 @@ class UserService extends Service {
     return await documentReferencer.set(user.toJson());
   }
 
+  static Stream getUserStream({required String uid}) {
+    return FirebaseFirestore.instance.collection('users').doc(uid).snapshots();
+  }
+
   static Future<String> uploadUserImage(File image) async {
     String imageUrl = '';
     final ref = FirebaseStorage.instance
@@ -32,7 +36,7 @@ class UserService extends Service {
         .child('user_image')
         .child('$currentUid${p.extension(image.path)}');
 
-    await ref.putFile(image).then((p0) {
+    await ref.putFile(image).then((_) {
       ref.getDownloadURL().then((value) {
         imageUrl = value.toString();
       });
@@ -45,7 +49,7 @@ class UserService extends Service {
       DocumentSnapshot snap =
           await _firestore.collection('users').doc(uid).get();
       List following = (snap.data()! as dynamic)['following'];
-
+      print('UId: $uid, followId: $followId');
       if (following.contains(followId)) {
         await _firestore.collection('users').doc(followId).update({
           'followers': FieldValue.arrayRemove([uid])

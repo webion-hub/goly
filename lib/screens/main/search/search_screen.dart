@@ -5,7 +5,6 @@ import 'package:goly/models/video_collection.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/services/videos_service.dart';
-import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/cards/video_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
@@ -54,8 +53,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () => GoRouter.of(context).push(
-                            ProfileScreen.routeName,
-                            extra: Utils.currentUid()),
+                            ProfileScreen.otherUser,
+                            extra: users[index].id),
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage:

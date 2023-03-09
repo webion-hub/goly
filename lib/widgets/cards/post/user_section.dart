@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/profile/user_image.dart';
@@ -24,15 +26,28 @@ class UserSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            UserImage(imageUrl: userImage, width: 50),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(username, style: Theme.of(context).textTheme.bodyMedium),
-                const SizedBox(height: 5),
-                goal != null ? Text(goal!) : const SizedBox(),
-              ],
+            GestureDetector(
+              onTap: () {
+                if (uid == Utils.currentUid()) {
+                  GoRouter.of(context).go(ProfileScreen.routeName);
+                } else {
+                  GoRouter.of(context)
+                      .push(ProfileScreen.otherUser, extra: uid);
+                }
+              },
+              child: Row(children: [
+                UserImage(imageUrl: userImage, width: 50),
+                const SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(username,
+                        style: Theme.of(context).textTheme.bodyMedium),
+                    const SizedBox(height: 5),
+                    goal != null ? Text(goal!) : const SizedBox(),
+                  ],
+                ),
+              ]),
             ),
             uid == Utils.currentUid()
                 ? Expanded(
