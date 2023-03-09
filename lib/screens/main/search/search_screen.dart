@@ -54,8 +54,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () => GoRouter.of(context).push(
-                            ProfileScreen.routeName,
-                            extra: Utils.currentUid()),
+                            ProfileScreen.otherUser,
+                            extra: users[index].id),
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage:

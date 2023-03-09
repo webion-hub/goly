@@ -11,6 +11,11 @@ final List<RouteBase> profilePages = [
     builder: (context, state) => ProfileScreen(profileId: Utils.currentUid()),
   ),
   GoRoute(
+    path: ProfileScreen.otherUser,
+    builder: (context, state) =>
+        ProfileScreen(profileId: state.extra.toString()),
+  ),
+  GoRoute(
     path: HandleProfileScreen.routeNameSetUp,
     builder: (context, state) => HandleProfileScreen(uid: Utils.currentUid()),
   ),

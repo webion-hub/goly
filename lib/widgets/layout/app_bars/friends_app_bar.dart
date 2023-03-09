@@ -8,7 +8,7 @@ class FriendsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('Discover'),
+      title: const Text('Friends'),
       actions: [
         IconButton(
           onPressed: () => GoRouter.of(context).push(AddPostScreen.routeName),
