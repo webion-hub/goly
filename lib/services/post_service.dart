@@ -13,9 +13,11 @@ final CollectionReference _collection = _firestore.collection('posts');
 
 class PostService extends Service {
   static Stream<QuerySnapshot<Object?>> getPostStream(
-      //.where('uid', isLessThan: user.id)
+      //
       {required UserModel user}) {
-    return _collection.orderBy('datePublished', descending: true).snapshots();
+    return _collection.where('uid', whereIn: [...user.following, user.id])
+        //.orderBy('datePublished', descending: true)
+        .snapshots();
   }
 
   static Future<String> uploadPost(String description, Uint8List file,
