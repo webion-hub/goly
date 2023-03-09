@@ -79,11 +79,15 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
         user: UserModel(
           username: _usernameController.text,
           bio: _bioController.text,
+          following: widget.user == null ? [] : widget.user!.following,
+          followers: widget.user == null ? [] : widget.user!.followers,
           email: Utils.currentEmail().trim(),
           photoUrl: imageUrl ?? Constants.userImageDefault,
           id: Utils.currentUid(),
         ),
-      ).then((value) => widget.user == null ? GoRouter.of(context).go(ExplenationScreen.routeName) : GoRouter.of(context).go(ProfileScreen.routeName));
+      ).then((value) => widget.user == null
+          ? GoRouter.of(context).go(ExplenationScreen.routeName)
+          : GoRouter.of(context).go(ProfileScreen.routeName));
     } catch (e) {
       Utils.showSnackbBar(
           'An error has occurred updating your profile. Please try again');

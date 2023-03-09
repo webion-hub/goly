@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/follow_button.dart';
 import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
@@ -36,8 +37,8 @@ class UserProfile extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildStatColumn(20, 'Followings'),
-            buildStatColumn(20, 'Followers'),
+            buildStatColumn(user.following.length, 'Followings'),
+            buildStatColumn(user.followers.length, 'Followers'),
           ],
         ),
         const SizedBox(height: 20),
@@ -47,8 +48,10 @@ class UserProfile extends StatelessWidget {
                 icon: Icons.edit,
                 action: goToHandleProfileScreen)
             : FollowButton(
-                isAlreadyFollowing: true,
-                onPressed: () {},
+                isAlreadyFollowing: user.followers.contains(Utils.currentUid()),
+                onPressed: () async {
+                  await UserService.followUser(Utils.currentUid(), user.id);
+                },
               ),
         const SizedBox(height: 10),
         const Divider(),

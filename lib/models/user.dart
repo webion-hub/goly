@@ -9,6 +9,8 @@ class UserModel {
   String id;
   String bio;
   SettingsModel settings;
+  List<String> following;
+  List<String> followers;
 
   UserModel({
     required this.username,
@@ -17,15 +19,23 @@ class UserModel {
     required this.id,
     this.settings = SettingsModel.defaultSettings,
     this.bio = "",
+    required this.following,
+    required this.followers,
   });
 
   UserModel.fromJson(Map<String, dynamic> json)
-    : username = json['username'],
-      email = json['email'],
-      photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
-      bio = json['bio'],
-      id = json['id'],
-      settings = SettingsModel.fromJson(json['settings']);
+      : username = json['username'],
+        email = json['email'],
+        photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
+        bio = json['bio'],
+        id = json['id'],
+        following = ((json['following'] as List<dynamic>)
+            .map((s) => (s.toString()))
+            .toList()),
+        followers = ((json['followers'] as List<dynamic>)
+            .map((s) => (s.toString()))
+            .toList()),
+        settings = SettingsModel.fromJson(json['settings']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -34,6 +44,8 @@ class UserModel {
     data['photoUrl'] = photoUrl;
     data['id'] = id;
     data['bio'] = bio;
+    data['following'] = following.toList();
+    data['followers'] = followers.toList();
     data['settings'] = settings.toJson();
     return data;
   }

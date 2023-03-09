@@ -49,7 +49,7 @@ class UserService extends Service {
       DocumentSnapshot snap =
           await _firestore.collection('users').doc(uid).get();
       List following = (snap.data()! as dynamic)['following'];
-
+      print('UId: $uid, followId: $followId');
       if (following.contains(followId)) {
         await _firestore.collection('users').doc(followId).update({
           'followers': FieldValue.arrayRemove([uid])
