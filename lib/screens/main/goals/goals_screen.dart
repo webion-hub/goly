@@ -69,8 +69,6 @@ class _MainPageState extends State<GoalsScreen> {
                       'Statistics',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
-                    const GoalsPerLifeAreaPieChart(),
-                    const LifeAreaProgress(),
                   ],
                 );
               }),
