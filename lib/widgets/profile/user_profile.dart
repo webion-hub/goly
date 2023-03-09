@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/form/buttons/follow_button.dart';
 import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 import 'package:goly/models/user.dart';
@@ -29,13 +31,57 @@ class UserProfile extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(user.bio),
-        MainOutlinedButton(
-            label: const Text('Edit profile'),
-            icon: Icons.edit,
-            action: goToHandleProfileScreen),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            buildStatColumn(20, 'Post'),
+            buildStatColumn(20, 'Friends'),
+            buildStatColumn(20, 'Friends'),
+            buildStatColumn(20, 'Post'),
+          ],
+        ),
+        const SizedBox(height: 20),
+        user.id != Utils.currentUid()
+            ? MainOutlinedButton(
+                label: const Text('Edit profile'),
+                icon: Icons.edit,
+                action: goToHandleProfileScreen)
+            : FollowButton(
+                isAlreadyFollowing: true,
+                onPressed: () {},
+              ),
         const SizedBox(height: 10),
         const Divider(),
         const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Column buildStatColumn(int num, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          num.toString(),
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 4),
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: Colors.grey,
+            ),
+          ),
+        ),
       ],
     );
   }
