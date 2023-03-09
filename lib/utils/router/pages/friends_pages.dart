@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
-import 'package:goly/screens/main/chat/recent_conversations_screen.dart';
 import 'package:goly/screens/main/friends/actions/comment_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 
@@ -8,10 +7,6 @@ final List<RouteBase> friendsPages = [
   GoRoute(
     path: FriendsScreen.routeName,
     builder: (context, state) => const FriendsScreen(),
-  ),
-  GoRoute(
-    path: RecentConversationsScreen.routeName,
-    builder: (context, state) => const RecentConversationsScreen(),
   ),
   GoRoute(
     path: AddPostScreen.routeName,

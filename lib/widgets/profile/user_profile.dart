@@ -36,14 +36,12 @@ class UserProfile extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildStatColumn(20, 'Post'),
-            buildStatColumn(20, 'Friends'),
-            buildStatColumn(20, 'Friends'),
-            buildStatColumn(20, 'Post'),
+            buildStatColumn(20, 'Followings'),
+            buildStatColumn(20, 'Followers'),
           ],
         ),
         const SizedBox(height: 20),
-        user.id != Utils.currentUid()
+        user.id == Utils.currentUid()
             ? MainOutlinedButton(
                 label: const Text('Edit profile'),
                 icon: Icons.edit,
