@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:goly/models/post.dart';
+import 'package:goly/models/user.dart';
 import 'package:goly/services/comment_service.dart';
 import 'package:goly/services/storage_service.dart';
 import 'package:uuid/uuid.dart';
@@ -11,8 +12,12 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('posts');
 
 class PostService extends Service {
-  static Stream<QuerySnapshot<Object?>> getPostStream() {
-    return _collection.orderBy('datePublished', descending: true).snapshots();
+  static Stream<QuerySnapshot<Object?>> getPostStream(
+      //
+      {required UserModel user}) {
+    return _collection.where('uid', whereIn: [...user.following, user.id])
+        //.orderBy('datePublished', descending: true)
+        .snapshots();
   }
 
   static Future<String> uploadPost(String description, Uint8List file,

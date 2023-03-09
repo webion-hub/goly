@@ -37,10 +37,6 @@ class _PageShellState extends State<PageShell> {
   }
 
   void navigationTapped(int page) {
-    setState(() {
-      _page = page;
-    });
-
     List<String> pagesRoute = [
       FriendsScreen.routeName,
       SearchScreen.routeName,
@@ -49,6 +45,13 @@ class _PageShellState extends State<PageShell> {
     ];
 
     GoRouter.of(context).go(pagesRoute[page]);
+  }
+
+  Color getColor(String path) {
+    if (GoRouter.of(context).location == path) {
+      return Theme.of(context).colorScheme.primary;
+    }
+    return Theme.of(context).colorScheme.secondary;
   }
 
   @override
@@ -61,45 +64,24 @@ class _PageShellState extends State<PageShell> {
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: CupertinoTabBar(
             inactiveColor: Colors.transparent,
-            //height: 60,
             backgroundColor: Colors.transparent,
             border: Border.all(style: BorderStyle.none),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.diversity_3_rounded,
-                  color: (_page == 0)
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
-                ),
-                label: "Friends",
+                icon: Icon(Icons.diversity_3_rounded,
+                    color: getColor(FriendsScreen.routeName)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.search,
-                  color: (_page == 1)
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
-                ),
-                label: "Search",
+                icon:
+                    Icon(Icons.search, color: getColor(SearchScreen.routeName)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.flag_rounded,
-                  color: (_page == 2)
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
-                ),
-                label: "Goals",
+                icon: Icon(Icons.flag_rounded,
+                    color: getColor(GoalsScreen.routeName)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person_rounded,
-                  color: (_page == 3)
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
-                ),
-                label: "Profile",
+                icon: Icon(Icons.person_rounded,
+                    color: getColor(ProfileScreen.routeName)),
               ),
             ],
             onTap: navigationTapped,

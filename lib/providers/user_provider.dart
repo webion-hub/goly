@@ -4,7 +4,7 @@ import 'package:goly/services/auth_service.dart';
 
 class UserProvider with ChangeNotifier {
   UserModel? _user;
-  final  _authMethods = AuthService();
+  final _authMethods = AuthService();
 
   UserModel get getUser => _user!;
 

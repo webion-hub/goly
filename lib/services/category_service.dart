@@ -100,16 +100,4 @@ class CategoryService extends Service {
         .get()
         .then((value) => value);
   }
-
-  // static Future<double> getPercentageOfCompletition(
-  //     {required String categoryId}) async {
-  //   // CategoryModel? category;
-  //   // await getCategoryById(categoryId: categoryId).then((value) {
-  //   //   category = CategoryModel.fromJson(value.data()!);
-  //   // });
-  //   List<CategoryModel> goals;
-  //   await getCategoryGoals(categoryId: categoryId).then((value) {
-  //     value.docs.forEach((element) {goals.add(GoalModel.fromJson(element.))});
-  //   });
-  // }
 }

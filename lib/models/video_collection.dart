@@ -9,11 +9,12 @@ class ThumbnailInfo {
   String url;
   String thumnailImg;
   String description;
-  ThumbnailInfo(
-      {required this.title,
-      required this.url,
-      required this.thumnailImg,
-      required this.description});
+  ThumbnailInfo({
+    required this.title,
+    required this.url,
+    required this.thumnailImg,
+    required this.description,
+  });
 }
 
 class VideoCollection {
