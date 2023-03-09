@@ -10,6 +10,7 @@ import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
+import 'package:goly/widgets/statistics/life_area_progress.dart';
 
 class GoalsScreen extends StatefulWidget {
   static const routeName = '/goals';
@@ -63,12 +64,6 @@ class _MainPageState extends State<GoalsScreen> {
                       action: () => GoRouter.of(context)
                           .push(HandleCategoryScreen.routeNameAdd),
                     ),
-                    const SizedBox(height: 40),
-                    Text(
-                      'Statistics',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const GoalsPerLifeAreaPieChart(),
                   ],
                 );
               }),
