@@ -13,10 +13,10 @@ final CollectionReference _collection = _firestore.collection('posts');
 
 class PostService extends Service {
   static Stream<QuerySnapshot<Object?>> getPostStream(
-      //
       {required UserModel user}) {
-    return _collection.where('uid', whereIn: [...user.following, user.id])
-        //.orderBy('datePublished', descending: true)
+    return _collection
+        .where('uid', whereIn: [...user.following, user.id])
+        .orderBy('datePublished', descending: true)
         .snapshots();
   }
 
