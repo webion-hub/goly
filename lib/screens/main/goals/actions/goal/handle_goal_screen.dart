@@ -8,8 +8,8 @@ import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleGoalScreen extends StatefulWidget {
-  static String routeNameAdd = "/add-goal";
-  static String routeNameEdit = "/edit-goal";
+  static const String routeNameAdd = "/add-goal";
+  static const String routeNameEdit = "/edit-goal";
   final GoalModel? goal;
   final String categoryId;
   const HandleGoalScreen({super.key, this.goal, required this.categoryId});
@@ -19,9 +19,12 @@ class HandleGoalScreen extends StatefulWidget {
 }
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
-  late TextEditingController goalName =TextEditingController(text: widget.goal?.name ?? '');
-  late TextEditingController description = TextEditingController(text: widget.goal?.description ?? '');
-  late TextEditingController reward = TextEditingController(text: widget.goal?.reward ?? '');
+  late TextEditingController goalName =
+      TextEditingController(text: widget.goal?.name ?? '');
+  late TextEditingController description =
+      TextEditingController(text: widget.goal?.description ?? '');
+  late TextEditingController reward =
+      TextEditingController(text: widget.goal?.reward ?? '');
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
@@ -43,35 +46,38 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
       privateReward = value;
     });
   }
-    void addGoal() async {
-      if (widget.goal != null) {
-        GoalModel editedGoal = GoalModel(
-          id: widget.goal!.id,
-          name: goalName.text,
-          description: description.text,
-          reward: reward.text,
-          privateGoal: privateGoal,
-          privateDescription: privateDescription,
-          privateReward: privateReward,
-        );
-        await GoalService.editGoal(categoryId: widget.categoryId, goal: editedGoal)
-            .then((value) => Navigator.of(context).pop());
-      } else {
-        final id = await CategoryService.getNumberofGoals(
-            categoryId: widget.categoryId);
-        GoalModel newGoal = GoalModel(
-          id: id,
-          name: goalName.text,
-          description: description.text,
-          reward: reward.text,
-          privateGoal: privateGoal,
-          privateDescription: privateDescription,
-          privateReward: privateReward,
-        );
-        await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal)
-            .then((value) => Navigator.of(context).pop());
-      }
+
+  void addGoal() async {
+    if (widget.goal != null) {
+      GoalModel editedGoal = GoalModel(
+        id: widget.goal!.id,
+        name: goalName.text,
+        description: description.text,
+        reward: reward.text,
+        privateGoal: privateGoal,
+        privateDescription: privateDescription,
+        privateReward: privateReward,
+      );
+      await GoalService.editGoal(
+              categoryId: widget.categoryId, goal: editedGoal)
+          .then((value) => Navigator.of(context).pop());
+    } else {
+      final id =
+          await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
+      GoalModel newGoal = GoalModel(
+        id: id,
+        name: goalName.text,
+        description: description.text,
+        reward: reward.text,
+        privateGoal: privateGoal,
+        privateDescription: privateDescription,
+        privateReward: privateReward,
+      );
+      await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal)
+          .then((value) => Navigator.of(context).pop());
     }
+  }
+
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -90,21 +96,21 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFieldInput(
-                      textEditingController: goalName, 
-                      hintText: 'Name', 
+                      textEditingController: goalName,
+                      hintText: 'Name',
                       textInputType: TextInputType.text,
                       label: 'Name',
                     ),
                     TextFieldInput(
-                      textEditingController: description, 
-                      hintText: 'Description', 
+                      textEditingController: description,
+                      hintText: 'Description',
                       textInputType: TextInputType.multiline,
                       maxLines: 3,
                       label: 'Description',
                     ),
                     TextFieldInput(
-                      textEditingController: reward, 
-                      hintText: 'Reward', 
+                      textEditingController: reward,
+                      hintText: 'Reward',
                       textInputType: TextInputType.text,
                       maxLines: 3,
                       label: 'Reward',

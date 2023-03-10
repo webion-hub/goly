@@ -21,3 +21,9 @@ final List<RouteBase> friendsPages = [
     },
   ),
 ];
+
+const List<String> friendsPagesRoute = [
+  FriendsScreen.routeName,
+  AddPostScreen.routeName,
+  CommentsScreen.routeName
+];

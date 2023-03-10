@@ -6,6 +6,9 @@ import 'package:goly/screens/main/search/search_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:goly/utils/router/pages/friends_pages.dart';
+import 'package:goly/utils/router/pages/goal_pages.dart';
+import 'package:goly/utils/router/pages/profile_pages.dart';
 import 'package:provider/provider.dart';
 
 class PageShell extends StatefulWidget {
@@ -47,8 +50,8 @@ class _PageShellState extends State<PageShell> {
     GoRouter.of(context).go(pagesRoute[page]);
   }
 
-  Color getColor(String path) {
-    if (GoRouter.of(context).location == path) {
+  Color getColor(List<String> paths) {
+    if (paths.any((element) => element == GoRouter.of(context).location)) {
       return Theme.of(context).colorScheme.primary;
     }
     return Theme.of(context).colorScheme.secondary;
@@ -69,19 +72,19 @@ class _PageShellState extends State<PageShell> {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.diversity_3_rounded,
-                    color: getColor(FriendsScreen.routeName)),
+                    color: getColor(friendsPagesRoute)),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search,
+                    color: getColor([SearchScreen.routeName])),
               ),
               BottomNavigationBarItem(
                 icon:
-                    Icon(Icons.search, color: getColor(SearchScreen.routeName)),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.flag_rounded,
-                    color: getColor(GoalsScreen.routeName)),
+                    Icon(Icons.flag_rounded, color: getColor(goalsPagesRouter)),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_rounded,
-                    color: getColor(ProfileScreen.routeName)),
+                    color: getColor(profilePagesRoute)),
               ),
             ],
             onTap: navigationTapped,

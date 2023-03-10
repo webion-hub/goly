@@ -8,8 +8,8 @@ import 'package:goly/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class HandleCategoryScreen extends StatefulWidget {
-  static String routeNameEdit = "/handle-category";
-  static String routeNameAdd = "/add-category";
+  static const String routeNameEdit = "/handle-category";
+  static const String routeNameAdd = "/add-category";
   final CategoryModel? category;
   const HandleCategoryScreen({super.key, this.category});
 
@@ -21,9 +21,11 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
   late bool privateCategory = widget.category?.private ?? false;
   late bool privateDescription = widget.category?.privateDescription ?? false;
 
-  late TextEditingController categoryName = TextEditingController(text: widget.category?.name ?? '');
+  late TextEditingController categoryName =
+      TextEditingController(text: widget.category?.name ?? '');
 
-  late TextEditingController description = TextEditingController(text: widget.category?.description ?? '');
+  late TextEditingController description =
+      TextEditingController(text: widget.category?.description ?? '');
 
   void privateCategoryChange(bool value) {
     setState(() {
@@ -70,14 +72,14 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFieldInput(
-                      textEditingController: categoryName, 
-                      hintText: 'Name', 
-                      textInputType: TextInputType.text, 
+                      textEditingController: categoryName,
+                      hintText: 'Name',
+                      textInputType: TextInputType.text,
                       label: 'Name',
                     ),
                     TextFieldInput(
-                      textEditingController: description, 
-                      hintText: 'Description', 
+                      textEditingController: description,
+                      hintText: 'Description',
                       textInputType: TextInputType.multiline,
                       label: 'Description',
                     ),
