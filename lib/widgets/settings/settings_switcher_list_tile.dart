@@ -7,6 +7,7 @@ class SettingsSwitcherListTile extends StatefulWidget {
   final String? subtitle;
   final Function(bool) onChanged;
   final bool initialValue;
+  final bool inactive;
 
   const SettingsSwitcherListTile({
     super.key,
@@ -15,14 +16,26 @@ class SettingsSwitcherListTile extends StatefulWidget {
     required this.text,
     this.subtitle,
     required this.onChanged,
+    this.inactive = false,
   });
 
   @override
-  State<SettingsSwitcherListTile> createState() => _SettingsSwitcherListTileState();
+  State<SettingsSwitcherListTile> createState() =>
+      _SettingsSwitcherListTileState();
 }
 
 class _SettingsSwitcherListTileState extends State<SettingsSwitcherListTile> {
   late bool currentValue = widget.initialValue;
+  final MaterialStateProperty<Icon?> thumbIcon =
+      MaterialStateProperty.resolveWith<Icon?>(
+    (Set<MaterialState> states) {
+      // Thumb icon when the switch is selected.
+      if (states.contains(MaterialState.selected)) {
+        return const Icon(Icons.check);
+      }
+      return const Icon(Icons.close);
+    },
+  );
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,13 +53,16 @@ class _SettingsSwitcherListTileState extends State<SettingsSwitcherListTile> {
             widget.text,
           ),
           subtitle: widget.subtitle != null ? Text(widget.subtitle!) : null,
-          trailing: CupertinoSwitch(
-            onChanged: (value) {
-              widget.onChanged(value);
-              setState(() {
-                currentValue = value;
-              });
-            },
+          trailing: Switch(
+            thumbIcon: thumbIcon,
+            onChanged: widget.inactive
+                ? null
+                : (value) {
+                    widget.onChanged(value);
+                    setState(() {
+                      currentValue = value;
+                    });
+                  },
             value: currentValue,
           ),
         ),

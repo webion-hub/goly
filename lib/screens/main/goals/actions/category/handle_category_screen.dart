@@ -87,11 +87,14 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                         initialValue: privateCategory,
                         icon: Icons.lock,
                         text: "Private category",
-                        subtitle: "Makes private all the goals inside it",
+                        subtitle:
+                            "Makes private the description and all the goals inside it",
                         onChanged: privateCategoryChange),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
-                        initialValue: privateDescription,
+                        inactive: privateCategory,
+                        initialValue:
+                            privateCategory ? true : privateDescription,
                         icon: Icons.lock,
                         text: "Private description",
                         subtitle: "Makes private description",
