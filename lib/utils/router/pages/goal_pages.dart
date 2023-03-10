@@ -97,3 +97,17 @@ final List<RouteBase> goalPages = [
         );
       }),
 ];
+
+const List<String> goalsPagesRouter = [
+  GoalsScreen.routeName,
+  StatisticScreen.routeName,
+  HandleGoalScreen.routeNameAdd,
+  HandleCategoryScreen.routeNameAdd,
+  HandleCategoryScreen.routeNameEdit,
+  CategoryScreen.routeName,
+  GoalScreen.routeName,
+  HandleGoalScreen.routeNameEdit,
+  CategoryScreen.routeName,
+  HandleStepScreen.routeNameAdd,
+  HandleStepScreen.routeNameEdit
+];

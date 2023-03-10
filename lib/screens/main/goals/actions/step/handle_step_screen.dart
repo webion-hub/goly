@@ -8,8 +8,8 @@ import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/utils/constants.dart';
 
 class HandleStepScreen extends StatefulWidget {
-  static String routeNameAdd = "/add-step";
-  static String routeNameEdit = "/edit-step";
+  static const String routeNameAdd = "/add-step";
+  static const String routeNameEdit = "/edit-step";
   final StepModel? step;
   final int goalId;
   final String categoryId;
@@ -80,14 +80,14 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldInput(
-                textEditingController: stepName, 
-                hintText: 'Name', 
+                textEditingController: stepName,
+                hintText: 'Name',
                 textInputType: TextInputType.text,
                 label: 'Name',
               ),
               TextFieldInput(
-                textEditingController: reward, 
-                hintText: 'Reward', 
+                textEditingController: reward,
+                hintText: 'Reward',
                 textInputType: TextInputType.text,
                 label: 'Rew',
               ),

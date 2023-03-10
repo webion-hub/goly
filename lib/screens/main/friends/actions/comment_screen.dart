@@ -9,7 +9,7 @@ import 'package:goly/widgets/cards/comment_card.dart';
 import 'package:provider/provider.dart';
 
 class CommentsScreen extends StatefulWidget {
-  static String routeName = '/comment-screen';
+  static const String routeName = '/comment-screen';
   final String postId;
   const CommentsScreen({super.key, required this.postId});
 
@@ -18,8 +18,9 @@ class CommentsScreen extends StatefulWidget {
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  final TextEditingController commentEditingController = TextEditingController();
-    void postComment(String uid, String name, String profilePic) async {
+  final TextEditingController commentEditingController =
+      TextEditingController();
+  void postComment(String uid, String name, String profilePic) async {
     try {
       String res = await CommentService.postComment(
         widget.postId,
@@ -36,11 +37,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
         commentEditingController.text = "";
       });
     } catch (err) {
-       Utils.showSnackbBar(
+      Utils.showSnackbBar(
         err.toString(),
       );
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final UserModel user = Provider.of<UserProvider>(context).getUser;
@@ -64,7 +66,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (ctx, index) => CommentCard(
-              comment: CommentModel.fromSnap(snapshot.data!.docs[index]) ,
+              comment: CommentModel.fromSnap(snapshot.data!.docs[index]),
             ),
           );
         },
@@ -105,7 +107,8 @@ class _CommentsScreenState extends State<CommentsScreen> {
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   child: Text(
                     'Post',
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               )

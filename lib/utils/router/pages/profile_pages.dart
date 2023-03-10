@@ -33,3 +33,8 @@ final List<RouteBase> profilePages = [
     builder: (context, state) => const SettingsScreen(),
   ),
 ];
+const List<String> profilePagesRoute = [
+  ProfileScreen.routeName,
+  HandleProfileScreen.routeNameEdit,
+  SettingsScreen.routeName
+];

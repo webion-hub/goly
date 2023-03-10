@@ -3,7 +3,7 @@ import 'package:goly/widgets/statistics/goals_per_life_area.dart';
 import 'package:goly/widgets/statistics/life_area_progress.dart';
 
 class StatisticScreen extends StatelessWidget {
-  static String routeName = '/statistics';
+  static const String routeName = '/statistics';
   const StatisticScreen({super.key});
 
   @override
