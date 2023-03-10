@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:uuid/uuid.dart';
 
 class Constants {
   static String appName = "Goly";
@@ -25,4 +27,42 @@ class Constants {
   static IconData getLockerIcon({required bool private}) {
     return private ? Icons.lock_outline_rounded : Icons.lock_open_outlined;
   }
+
+  static final List<CategoryModel> defaultCategories = [
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Spirituality',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Nutrition',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Exercise',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Finances',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Career',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Relationships',
+        private: false,
+        privateDescription: false),
+    CategoryModel(
+        id: const Uuid().v1(),
+        name: 'Social life',
+        private: false,
+        privateDescription: false),
+  ];
 }

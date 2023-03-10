@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 import 'package:path/path.dart' as p;
 import 'package:goly/models/user.dart';
@@ -74,6 +75,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
     if (!isValid) {
       return;
     }
+    var router = GoRouter.of(context);
     try {
       await UserService.updateProfile(
         user: UserModel(
@@ -85,9 +87,13 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
           photoUrl: imageUrl ?? Constants.userImageDefault,
           id: Utils.currentUid(),
         ),
-      ).then((value) => widget.user == null
-          ? GoRouter.of(context).go(ExplenationScreen.routeName)
-          : GoRouter.of(context).go(ProfileScreen.routeName));
+      );
+      if (widget.user == null) {
+        await CategoryService.setDefaultCategories();
+        router.go(ExplenationScreen.routeName);
+      } else {
+        router.go(ProfileScreen.routeName);
+      }
     } catch (e) {
       Utils.showSnackbBar(
           'An error has occurred updating your profile. Please try again');
