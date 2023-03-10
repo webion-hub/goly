@@ -18,13 +18,13 @@ class _CustomAutocompleteState extends State<CustomAutocomplete> {
           if (!snapshot.hasData) {
             return buffering();
           }
-          List<String> _kOptions = snapshot.data!;
+          List<String> data = snapshot.data!;
           return Autocomplete<String>(
             optionsBuilder: (TextEditingValue textEditingValue) {
               if (textEditingValue.text == '') {
                 return const Iterable<String>.empty();
               }
-              return _kOptions.where((String option) {
+              return data.where((String option) {
                 return option.contains(textEditingValue.text.toLowerCase());
               });
             },

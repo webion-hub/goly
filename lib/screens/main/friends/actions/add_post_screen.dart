@@ -7,9 +7,7 @@ import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
-import 'package:goly/widgets/form/input/input_label.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
-import 'package:goly/widgets/layout/custom_autocomplete.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -169,9 +167,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     maxLines: 5,
                   ),
                   const SizedBox(height: 10),
-                  const InputLabel(text: 'Goal'),
-                  const SizedBox(height: 10),
-                  const CustomAutocomplete(),
                   TextFieldInput(
                     textEditingController: _goal,
                     hintText: 'Which goal is it about?',

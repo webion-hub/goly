@@ -133,7 +133,6 @@ class CategoryService extends Service {
     for (var e in categories) {
       data.add(e.name);
     }
-    print(data.length);
     return data;
   }
 }
