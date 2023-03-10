@@ -114,7 +114,7 @@ class CategoryService extends Service {
       final goal = GoalModel.fromJson(e.data());
       completed += GoalService.getPercentageOfCompletition(goal);
     }
-    return completed / numberOfGoals;
+    return numberOfGoals == 0 ? 0 : completed / numberOfGoals;
   }
 
   static Future getAllCategories() async {

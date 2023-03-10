@@ -11,10 +11,15 @@ import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings';
   const SettingsScreen({super.key});
 
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +40,18 @@ class SettingsScreen extends StatelessWidget {
                     icon: Icons.lock,
                     initialValue: settings.privateAccount,
                     onChanged: (bool value) {
-                      SettingsService.updateSettings(privateAccount: value);
+                      setState(() {
+                        SettingsService.updateSettings(privateAccount: value);
+                      });
                     },
                     text: "Private account",
                   ),
                   SettingsSwitcherListTile(
+                    inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateGoalsByDefault,
+                    initialValue: settings.privateAccount
+                        ? true
+                        : settings.privateGoalsByDefault,
                     onChanged: (bool value) {
                       SettingsService.updateSettings(
                           privateGoalsByDefault: value);
@@ -49,8 +59,11 @@ class SettingsScreen extends StatelessWidget {
                     text: "Private goal by default",
                   ),
                   SettingsSwitcherListTile(
+                    inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateRewardByDefault,
+                    initialValue: settings.privateAccount
+                        ? true
+                        : settings.privateRewardByDefault,
                     onChanged: (bool value) {
                       SettingsService.updateSettings(
                           privateRewardByDefault: value);
@@ -58,8 +71,11 @@ class SettingsScreen extends StatelessWidget {
                     text: "Private reward by default",
                   ),
                   SettingsSwitcherListTile(
+                    inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateDescriptionsByDefault,
+                    initialValue: settings.privateAccount
+                        ? true
+                        : settings.privateDescriptionsByDefault,
                     onChanged: (bool value) {
                       SettingsService.updateSettings(
                           privateDescriptionsByDefault: value);
