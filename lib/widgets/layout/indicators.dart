@@ -6,11 +6,13 @@ Widget buffering() {
 }
 
 Widget customBuffering() {
-  return Center(
-      child: Column(
-    children: [
-      Lottie.asset('assets/json/goal_loading.json'),
-      const Text('Loading...'),
-    ],
-  ));
+  return SafeArea(
+    child: Center(
+        child: Column(
+      children: [
+        Lottie.asset('assets/json/goal_loading.json', width: 300),
+        const Text('Loading...'),
+      ],
+    )),
+  );
 }

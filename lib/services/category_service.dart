@@ -117,11 +117,14 @@ class CategoryService extends Service {
     }
     return numberOfGoals == 0 ? 0 : completed / numberOfGoals;
   }
+
   static Future setDefaultCategories() async {
     final futures = Constants.defaultCategories.map((element) async {
       await addCategory(category: element);
     });
     return Future.wait(futures);
+  }
+
   static Future getAllCategories() async {
     return _collection.doc(Utils.currentUid()).collection('categories').get();
   }

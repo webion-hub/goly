@@ -15,11 +15,10 @@ class FriendsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: const FriendsAppBar(),
-          body: StreamBuilder(
+    return Scaffold(
+        appBar: const FriendsAppBar(),
+        body: SafeArea(
+          child: StreamBuilder(
               stream: UserService.getUserStream(uid: Utils.currentUid()),
               builder: (context, userSnapshot) {
                 if (userSnapshot.hasData == false) {
@@ -31,7 +30,7 @@ class FriendsScreen extends StatelessWidget {
                   stream: PostService.getPostStream(user: user),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return customBuffering();
+                      return SingleChildScrollView(child: customBuffering());
                     }
                     if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
                       return Center(

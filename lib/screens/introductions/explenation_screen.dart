@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/utils/introductions.dart';
 import 'package:introduction_screen/introduction_screen.dart';
