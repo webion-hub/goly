@@ -33,8 +33,12 @@ class FriendsScreen extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return customBuffering();
                     }
-                    if (snapshot.data == null) {
-                      return const Center(child: Text('Your feed is empty'));
+                    if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+                      return Center(
+                          child: Text(
+                        'Your feed is empty. Start following some people',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ));
                     }
                     return ListView.builder(
                       padding: Constants.pagePadding,

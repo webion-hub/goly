@@ -41,7 +41,8 @@ class CategoryCard extends StatelessWidget {
             onTap: (() => GoRouter.of(context)
                 .push(CategoryScreen.routeName, extra: category.id)),
             leading: const Icon(Icons.open_in_new),
-            subtitle: category.description != null
+            subtitle: category.description != null &&
+                    category.description!.isNotEmpty
                 ? Text(
                     category.description!
                         .substring(0, min(category.description!.length, 40)),

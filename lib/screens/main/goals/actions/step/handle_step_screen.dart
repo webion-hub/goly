@@ -99,7 +99,8 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                   onChanged: privateStepChange),
               const SizedBox(height: 20.0),
               SettingsSwitcherListTile(
-                  initialValue: privateReward,
+                  inactive: privateStep,
+                  initialValue: privateStep ? true : privateReward,
                   icon: Icons.lock,
                   text: "Private reward",
                   subtitle: "Makes reward private",

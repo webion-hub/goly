@@ -123,14 +123,16 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                         onChanged: privateGoalChange),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
-                        initialValue: privateDescription,
+                        inactive: privateGoal,
+                        initialValue: privateGoal ? true : privateDescription,
                         icon: Icons.lock,
                         text: "Private description",
                         subtitle: "Makes description private",
                         onChanged: privateDescriptionChange),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
-                        initialValue: privateReward,
+                        inactive: privateGoal,
+                        initialValue: privateGoal ? true : privateReward,
                         icon: Icons.lock,
                         text: "Private reward",
                         subtitle: "Makes reward private",

@@ -162,9 +162,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   TextFieldInput(
                     textEditingController: _descriptionController,
                     hintText: 'Write a caption',
-                    textInputType: TextInputType.text,
+                    textInputType: TextInputType.multiline,
                     label: 'Caption',
+                    maxLines: 5,
                   ),
+                  const SizedBox(height: 10),
                   TextFieldInput(
                     textEditingController: _goal,
                     hintText: 'Which goal is it about?',

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:goly/models/user.dart';
+import 'package:goly/providers/user_provider.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class HandleCategoryScreen extends StatefulWidget {
@@ -18,8 +21,10 @@ class HandleCategoryScreen extends StatefulWidget {
 }
 
 class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
+  late UserModel user = Provider.of<UserProvider>(context).getUser;
   late bool privateCategory = widget.category?.private ?? false;
-  late bool privateDescription = widget.category?.privateDescription ?? false;
+  late bool privateDescription = widget.category?.privateDescription ??
+      user.settings.privateDescriptionsByDefault;
 
   late TextEditingController categoryName =
       TextEditingController(text: widget.category?.name ?? '');
@@ -87,11 +92,14 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                         initialValue: privateCategory,
                         icon: Icons.lock,
                         text: "Private category",
-                        subtitle: "Makes private all the goals inside it",
+                        subtitle:
+                            "Makes private the description and all the goals inside it",
                         onChanged: privateCategoryChange),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
-                        initialValue: privateDescription,
+                        inactive: privateCategory,
+                        initialValue:
+                            privateCategory ? true : privateDescription,
                         icon: Icons.lock,
                         text: "Private description",
                         subtitle: "Makes private description",

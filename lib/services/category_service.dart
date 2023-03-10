@@ -117,11 +117,27 @@ class CategoryService extends Service {
     }
     return numberOfGoals == 0 ? 0 : completed / numberOfGoals;
   }
-
   static Future setDefaultCategories() async {
     final futures = Constants.defaultCategories.map((element) async {
       await addCategory(category: element);
     });
     return Future.wait(futures);
+  static Future getAllCategories() async {
+    return _collection.doc(Utils.currentUid()).collection('categories').get();
+  }
+
+  static Future<List<String>> getAllGoalsForAutocomplete() async {
+    List<String> data = [];
+
+    var categoriesFuture = await getAllCategories();
+    List<CategoryModel> categories = List.empty();
+    categoriesFuture.data?.docs.map((element) {
+      categories.add(CategoryModel.fromJson(element.data()));
+    });
+
+    for (var e in categories) {
+      data.add(e.name);
+    }
+    return data;
   }
 }
