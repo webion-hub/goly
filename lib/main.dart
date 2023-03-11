@@ -45,18 +45,4 @@ class MyApp extends StatelessWidget {
       }),
     );
   }
-  // return ChangeNotifierProvider(
-  //   create: (_) => ThemeNotifier(),
-  //   child: Consumer<ThemeNotifier>(
-  //     builder: (context, ThemeNotifier notifier, child) {
-  //       return MaterialApp.router(
-  //         routerConfig: router,
-  //         title: Constants.appName,
-  //         scaffoldMessengerKey: Utils.messangerKey,
-  //         debugShowCheckedModeBanner: false,
-  //         theme: notifier.dark ? DarkMode.theme : LightMode.theme,
-  //       );
-  //     },
-  //   ),
-  // );
 }
