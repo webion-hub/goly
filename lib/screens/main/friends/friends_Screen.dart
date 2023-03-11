@@ -24,6 +24,7 @@ class FriendsScreen extends StatelessWidget {
                 if (userSnapshot.hasData == false) {
                   return buffering();
                 }
+
                 UserModel user = UserModel.fromJson(
                     userSnapshot.data?.data() as Map<String, dynamic>);
                 return StreamBuilder(
