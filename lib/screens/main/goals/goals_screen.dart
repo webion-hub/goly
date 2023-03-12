@@ -31,6 +31,7 @@ class _MainPageState extends State<GoalsScreen> {
                   .collection('goals')
                   .doc(Utils.currentUid())
                   .collection('categories')
+                  .orderBy('name')
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
