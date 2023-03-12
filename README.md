@@ -17,4 +17,4 @@ The app also provides you with statistics related to your goals<br><br>
 
 <br><br>
 The app includes also settings so that you can manage the privacy and the dark/light mode of the app<br><br>
-<img width="416" alt="settings" src="https://user-images.githubusercontent.com/96247758/224574159-1d8fabeb-5322-4493-ad9b-2f5125e905e5.png">
+<img width="300" alt="settings" src="https://user-images.githubusercontent.com/96247758/224574159-1d8fabeb-5322-4493-ad9b-2f5125e905e5.png">
