@@ -125,22 +125,22 @@ class CategoryService extends Service {
     return Future.wait(futures);
   }
 
-  static Future getAllCategories() async {
+  static Future<QuerySnapshot<Map<String, dynamic>>> getAllCategories() async {
     return _collection.doc(Utils.currentUid()).collection('categories').get();
   }
 
-  static Future<List<String>> getAllGoalsForAutocomplete() async {
-    List<String> data = [];
+  // static Future<List<String>> getAllGoalsForAutocomplete() async {
+  //   List<String> data = [];
 
-    var categoriesFuture = await getAllCategories();
-    List<CategoryModel> categories = List.empty();
-    categoriesFuture.data?.docs.map((element) {
-      categories.add(CategoryModel.fromJson(element.data()));
-    });
+  //   var categoriesFuture = await getAllCategories();
+  //   List<CategoryModel> categories = List.empty();
+  //   categoriesFuture.data?.docs.map((element) {
+  //     categories.add(CategoryModel.fromJson(element.data()));
+  //   });
 
-    for (var e in categories) {
-      data.add(e.name);
-    }
-    return data;
-  }
+  //   for (var e in categories) {
+  //     data.add(e.name);
+  //   }
+  //   return data;
+  // }
 }

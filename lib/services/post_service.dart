@@ -20,8 +20,14 @@ class PostService extends Service {
         .snapshots();
   }
 
-  static Future<String> uploadPost(String description, Uint8List file,
-      String uid, String username, String profImage) async {
+  static Future<String> uploadPost({
+    required String description,
+    required Uint8List file,
+    required String uid,
+    required String username,
+    required String profImage,
+    required String? category,
+  }) async {
     // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "Some error occurred";
     try {
@@ -37,6 +43,7 @@ class PostService extends Service {
         datePublished: DateTime.now(),
         postUrl: photoUrl,
         profImage: profImage,
+        category: category,
       );
       _firestore.collection('posts').doc(postId).set(post.toJson());
       res = "success";

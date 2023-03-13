@@ -79,6 +79,7 @@ class UserService extends Service {
           'username',
           isGreaterThanOrEqualTo: searchText,
         )
+        .limit(5)
         .get();
   }
 }
