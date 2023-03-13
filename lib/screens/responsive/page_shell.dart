@@ -51,10 +51,12 @@ class _PageShellState extends State<PageShell> {
   }
 
   Color getColor(List<String> paths) {
-    if (paths.any((element) => element == GoRouter.of(context).location)) {
-      return Theme.of(context).colorScheme.primary;
-    }
-    return Theme.of(context).colorScheme.secondary;
+    final isSelectedPage =
+        paths.any((element) => element == GoRouter.of(context).location);
+
+    return isSelectedPage
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).focusColor;
   }
 
   @override

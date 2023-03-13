@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goly/widgets/layout/custom_divider.dart';
 
 class SettingsListTile extends StatelessWidget {
   final IconData icon;
@@ -35,14 +36,15 @@ class SettingsListTile extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color:
-                        Theme.of(context).colorScheme.primary.withOpacity(0.1)),
-                child: const Icon(Icons.chevron_right),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: const Icon(
+                  Icons.chevron_right,
+                ),
               )
             : null,
       ),
-      const Divider(),
+      const CustomDivider(),
     ]);
   }
 }

@@ -24,7 +24,7 @@ class GoalCard extends StatelessWidget {
                       radius: 16.0,
                       lineWidth: 4.0,
                       percent: GoalService.getPercentageOfCompletition(goal),
-                      progressColor: Colors.green,
+                      progressColor: Theme.of(context).primaryColor,
                     ),
                   ),
                   const SizedBox(

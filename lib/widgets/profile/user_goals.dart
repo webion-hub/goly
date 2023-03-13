@@ -45,8 +45,6 @@ class UserGoals extends StatelessWidget {
                         preferredSize: const Size.fromHeight(30.0),
                         child: TabBar(
                             isScrollable: true,
-                            unselectedLabelColor: Colors.white.withOpacity(0.3),
-                            indicatorColor: Colors.white,
                             tabs: categories
                                 .map((e) => Tab(
                                       child: Text(e.name),
@@ -55,8 +53,10 @@ class UserGoals extends StatelessWidget {
                   ),
                   body: TabBarView(
                       children: categories
-                          .map((e) => ProfileCategoryGoals(
-                                categoryId: e.id,
+                          .map((e) => SingleChildScrollView(
+                                child: ProfileCategoryGoals(
+                                  categoryId: e.id,
+                                ),
                               ))
                           .toList())),
             ),

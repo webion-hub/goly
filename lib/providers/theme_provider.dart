@@ -6,7 +6,7 @@ class ThemeProvider extends ChangeNotifier {
   final String key = 'theme';
   SharedPreferences? _prefs;
   bool _darkTheme = false;
-  
+
   bool get dark => _darkTheme;
 
   ThemeProvider() {

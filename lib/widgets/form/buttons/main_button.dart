@@ -16,13 +16,6 @@ class MainButton extends StatelessWidget {
       height: 45.0,
       width: double.infinity,
       child: ElevatedButton(
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(999),
-            ),
-          ),
-        ),
         focusNode: focusNode,
         onPressed: onPressed,
         child: Text(
