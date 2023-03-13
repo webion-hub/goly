@@ -129,6 +129,15 @@ class CategoryService extends Service {
     return _collection.doc(Utils.currentUid()).collection('categories').get();
   }
 
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getOrderedCategories() {
+    return FirebaseFirestore.instance
+        .collection('goals')
+        .doc(Utils.currentUid())
+        .collection('categories')
+        .orderBy('name')
+        .snapshots();
+  }
+
   // static Future<List<String>> getAllGoalsForAutocomplete() async {
   //   List<String> data = [];
 

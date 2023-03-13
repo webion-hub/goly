@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/app_bars/goals_app_bar.dart';
 import 'package:goly/widgets/cards/goals/action_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
@@ -27,12 +28,7 @@ class _MainPageState extends State<GoalsScreen> {
         body: SingleChildScrollView(
           padding: Constants.pagePadding,
           child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('goals')
-                  .doc(Utils.currentUid())
-                  .collection('categories')
-                  .orderBy('name')
-                  .snapshots(),
+              stream: CategoryService.getOrderedCategories(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return buffering();
