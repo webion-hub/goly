@@ -60,11 +60,13 @@ class _SignUpState extends State<SignUp> {
           child: Column(children: [
             TextFieldInput(
               hintText: "Email",
+              label: "Email",
               textInputType: TextInputType.emailAddress,
               textEditingController: _emailController,
             ),
             const SizedBox(height: 10.0),
             TextFieldInput(
+              label: "Password",
               hintText: "Password",
               isPass: true,
               textInputType: TextInputType.text,

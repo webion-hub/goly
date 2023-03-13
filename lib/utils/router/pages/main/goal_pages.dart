@@ -6,7 +6,6 @@ import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/screens/main/goals/actions/goal/handle_goal_screen.dart';
-import 'package:goly/screens/main/goals/actions/statistics_screen.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 
@@ -15,11 +14,6 @@ final List<RouteBase> goalPages = [
     path: GoalsScreen.routeName,
     builder: (context, state) => const GoalsScreen(),
   ),
-  GoRoute(
-      path: StatisticScreen.routeName,
-      builder: (context, state) {
-        return const StatisticScreen();
-      }),
   GoRoute(
       path: HandleGoalScreen.routeNameAdd,
       builder: (context, state) {
@@ -100,7 +94,6 @@ final List<RouteBase> goalPages = [
 
 const List<String> goalsPagesRouter = [
   GoalsScreen.routeName,
-  StatisticScreen.routeName,
   HandleGoalScreen.routeNameAdd,
   HandleCategoryScreen.routeNameAdd,
   HandleCategoryScreen.routeNameEdit,

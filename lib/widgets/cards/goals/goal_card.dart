@@ -17,37 +17,48 @@ class GoalCard extends StatelessWidget {
           width: double.infinity,
           child: Column(
             children: [
-              Row(
-                children: [
-                  FittedBox(
-                    child: CircularPercentIndicator(
-                      radius: 16.0,
-                      lineWidth: 4.0,
-                      percent: GoalService.getPercentageOfCompletition(goal),
-                      progressColor: Theme.of(context).primaryColor,
-                    ),
+              // Row(
+              ListTile(
+                title: Text(goal.name),
+                onTap: null,
+                leading: FittedBox(
+                  child: CircularPercentIndicator(
+                    radius: 16.0,
+                    lineWidth: 4.0,
+                    percent: GoalService.getPercentageOfCompletition(goal),
+                    progressColor: Theme.of(context).colorScheme.onPrimary,
                   ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text(goal.name),
-                ],
+                ),
+                subtitle: goal.reward != null ? Text(goal.reward!) : null,
               ),
               NoEditDescription(description: goal.description),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: goal.steps
-                        ?.map((e) => NoEditStepListTile(step: e))
-                        .toList() ??
-                    [],
-              ),
+              GoalCardSteps(goal: goal),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class GoalCardSteps extends StatelessWidget {
+  const GoalCardSteps({
+    super.key,
+    required this.goal,
+  });
+
+  final GoalModel goal;
+
+  @override
+  Widget build(BuildContext context) {
+    return goal.steps == null
+        ? const SizedBox()
+        : Column(children: [
+            const SizedBox(
+              height: 20,
+            ),
+            ...goal.steps!.map((e) => NoEditStepListTile(step: e)).toList(),
+          ]);
   }
 }
 

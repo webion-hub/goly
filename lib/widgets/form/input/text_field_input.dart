@@ -28,12 +28,13 @@ class TextFieldInput extends StatelessWidget {
     String? errorMessage;
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
-      borderSide: Divider.createBorderSide(context),
+      borderSide: const BorderSide(color: Colors.grey, width: 0.0),
+      //borderSide: Divider.createBorderSide(context),
     );
     return Column(
       children: [
         label != null ? InputLabel(text: label!) : const SizedBox(),
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         TextFormField(
           controller: textEditingController,
           maxLines: maxLines ?? 1,
@@ -54,6 +55,7 @@ class TextFieldInput extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             border: inputBorder,
+            //fillColor: Theme.of(context).colorScheme.onSecondary,
             focusedBorder: inputBorder,
             enabledBorder: inputBorder,
             filled: true,

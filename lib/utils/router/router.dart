@@ -9,11 +9,12 @@ import 'package:goly/screens/auth/error_screen.dart';
 import 'package:goly/screens/introductions/explenation_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/utils/router/pages/auth_pages.dart';
-import 'package:goly/utils/router/pages/friends_pages.dart';
-import 'package:goly/utils/router/pages/goal_pages.dart';
+import 'package:goly/utils/router/pages/main/add_pages.dart';
+import 'package:goly/utils/router/pages/main/friends_pages.dart';
+import 'package:goly/utils/router/pages/main/goal_pages.dart';
 import 'package:goly/utils/router/pages/introduction_pages.dart';
-import 'package:goly/utils/router/pages/profile_pages.dart';
-import 'package:goly/utils/router/pages/search_pages.dart';
+import 'package:goly/utils/router/pages/main/profile_pages.dart';
+import 'package:goly/utils/router/pages/main/statistics_pages.dart';
 
 final router = GoRouter(
   initialLocation: FirebaseAuth.instance.currentUser == null
@@ -38,8 +39,9 @@ final router = GoRouter(
 
         //Bottom navigation bar pages
         ...friendsPages,
-        ...searchPages,
         ...goalPages,
+        ...addPages,
+        ...statisticsPages,
         ...profilePages,
       ],
       builder: (context, state, child) {

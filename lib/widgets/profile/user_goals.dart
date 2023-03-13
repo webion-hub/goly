@@ -55,6 +55,7 @@ class UserGoals extends StatelessWidget {
                       children: categories
                           .map((e) => SingleChildScrollView(
                                 child: ProfileCategoryGoals(
+                                  uid: user.id,
                                   categoryId: e.id,
                                 ),
                               ))

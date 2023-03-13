@@ -170,7 +170,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post to'),
+        title: const Text('Post'),
       ),
       // POST FORM
       body: isLoading

@@ -15,7 +15,7 @@ class LightMode {
     primaryContainer: Color(0xFF81F8D0),
     onPrimaryContainer: Color(0xFF002117),
     secondary: Color(0xFF006878),
-    onSecondary: Color(0xFFFFFFFF),
+    onSecondary: Color.fromARGB(255, 234, 234, 234),
     secondaryContainer: Color(0xFFA6EEFF),
     onSecondaryContainer: Color(0xFF001F25),
     tertiary: Color(0xFF3F6375),
@@ -42,6 +42,7 @@ class LightMode {
     scrim: Color(0xFF000000),
   );
   static const appBarTheme = AppBarTheme(
+    surfaceTintColor: Colors.transparent,
     elevation: 0.0,
     backgroundColor: Colors.white,
     iconTheme: IconThemeData(color: Colors.black),

@@ -19,7 +19,7 @@ class DarkMode {
     onPrimary: Color(0xFF00382A),
     primaryContainer: Color(0xFF00513E),
     onPrimaryContainer: Color(0xFF81F8D0),
-    secondary: Color(0xFF53D7F1),
+    secondary: Color.fromARGB(255, 116, 169, 139),
     onSecondary: Color(0xFF00363F),
     secondaryContainer: Color(0xFF004E5B),
     onSecondaryContainer: Color(0xFFA6EEFF),
@@ -50,6 +50,7 @@ class DarkMode {
   static final appBarTheme = AppBarTheme(
     elevation: 0.0,
     backgroundColor: backgroundColor,
+    surfaceTintColor: Colors.transparent,
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),
