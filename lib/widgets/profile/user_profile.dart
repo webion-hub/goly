@@ -4,6 +4,7 @@ import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/follow_button.dart';
 import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
+import 'package:goly/widgets/profile/user_goals.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
@@ -56,6 +57,9 @@ class UserProfile extends StatelessWidget {
         const SizedBox(height: 10),
         const Divider(),
         const SizedBox(height: 10),
+        UserGoals(
+          user: user,
+        ),
       ],
     );
   }

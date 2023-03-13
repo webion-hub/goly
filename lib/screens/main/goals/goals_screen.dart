@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/app_bars/goals_app_bar.dart';
 import 'package:goly/widgets/cards/goals/action_card.dart';
 import 'package:goly/widgets/layout/indicators.dart';
@@ -8,7 +8,6 @@ import 'package:goly/widgets/list_tile/goals/category_list_tile.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:goly/utils/utils.dart';
 
 class GoalsScreen extends StatefulWidget {
   static const routeName = '/goals';
@@ -27,12 +26,7 @@ class _MainPageState extends State<GoalsScreen> {
         body: SingleChildScrollView(
           padding: Constants.pagePadding,
           child: StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('goals')
-                  .doc(Utils.currentUid())
-                  .collection('categories')
-                  .orderBy('name')
-                  .snapshots(),
+              stream: CategoryService.getOrderedCategories(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return buffering();

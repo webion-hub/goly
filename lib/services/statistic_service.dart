@@ -42,7 +42,8 @@ class StatisticService extends Service {
             await CategoryService.getPercentageOfCompletition(category);
         categoriesData.add(LifeAreaProgressModel(
           category: category.name,
-          percentageOfCompletition: percentageOfCompletition * 100,
+          percentageOfCompletition:
+              double.parse((percentageOfCompletition).toStringAsFixed(2)) * 100,
         ));
       });
       await Future.wait(futures);

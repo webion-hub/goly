@@ -72,9 +72,7 @@ class CategoryScreen extends StatelessWidget {
             body: SingleChildScrollView(
               padding: Constants.pagePadding,
               child: Column(children: [
-                category.description != null
-                    ? DescriptionCard(text: category.description!)
-                    : const SizedBox(),
+                DescriptionCard(text: category.description),
                 StreamBuilder(
                     stream: CategoryService.getCategoryGoalsStream(
                         categoryId: category.id),
