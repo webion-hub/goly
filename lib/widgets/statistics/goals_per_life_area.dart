@@ -34,25 +34,31 @@ class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
           List<GoalsPerLifeAreaModel> data =
               (snapshot.data as List<GoalsPerLifeAreaModel>);
           return SafeArea(
-            child: SfCircularChart(
-              title: ChartTitle(text: "Number of goals per life area"),
-              legend: Legend(
-                isVisible: true,
-                overflowMode: LegendItemOverflowMode.wrap,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.width + 100,
+              width: MediaQuery.of(context).size.width,
+              child: SfCircularChart(
+                title: ChartTitle(text: "Number of goals per life area"),
+                legend: Legend(
+                  position: LegendPosition.bottom,
+                  orientation: LegendItemOrientation.vertical,
+                  isVisible: true,
+                  overflowMode: LegendItemOverflowMode.wrap,
+                ),
+                tooltipBehavior: _tooltipBehavior,
+                series: <CircularSeries>[
+                  PieSeries<GoalsPerLifeAreaModel, String>(
+                    dataSource: data,
+                    xValueMapper: (GoalsPerLifeAreaModel data, _) =>
+                        data.category,
+                    yValueMapper: (GoalsPerLifeAreaModel data, _) =>
+                        data.goalsNumber,
+                    dataLabelSettings: const DataLabelSettings(
+                      isVisible: true,
+                    ),
+                  )
+                ],
               ),
-              tooltipBehavior: _tooltipBehavior,
-              series: <CircularSeries>[
-                PieSeries<GoalsPerLifeAreaModel, String>(
-                  dataSource: data,
-                  xValueMapper: (GoalsPerLifeAreaModel data, _) =>
-                      data.category,
-                  yValueMapper: (GoalsPerLifeAreaModel data, _) =>
-                      data.goalsNumber,
-                  dataLabelSettings: const DataLabelSettings(
-                    isVisible: true,
-                  ),
-                )
-              ],
             ),
           );
         });

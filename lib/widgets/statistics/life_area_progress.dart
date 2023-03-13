@@ -34,27 +34,37 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
           List<LifeAreaProgressModel> data =
               (snapshot.data as List<LifeAreaProgressModel>);
           return SafeArea(
-            child: SfCircularChart(
-              title: ChartTitle(text: "Life area progress"),
-              legend: Legend(
-                isVisible: true,
-                overflowMode: LegendItemOverflowMode.wrap,
-              ),
-              tooltipBehavior: _tooltipBehavior,
-              series: <CircularSeries>[
-                RadialBarSeries<LifeAreaProgressModel, String>(
-                  maximumValue: 100,
-                  cornerStyle: CornerStyle.bothCurve,
-                  dataSource: data,
-                  xValueMapper: (LifeAreaProgressModel data, _) =>
-                      data.category,
-                  yValueMapper: (LifeAreaProgressModel data, _) =>
-                      data.percentageOfCompletition,
-                  dataLabelSettings: const DataLabelSettings(
-                    isVisible: true,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.width + 100,
+              width: MediaQuery.of(context).size.width,
+              child: SfCircularChart(
+                title: ChartTitle(text: "Life area progress"),
+                legend: Legend(
+                  position: LegendPosition.bottom,
+                  orientation: LegendItemOrientation.vertical,
+                  isVisible: true,
+                  overflowMode: LegendItemOverflowMode.wrap,
+                ),
+                tooltipBehavior: _tooltipBehavior,
+                series: <CircularSeries>[
+                  RadialBarSeries<LifeAreaProgressModel, String>(
+                    maximumValue: 100,
+                    cornerStyle: CornerStyle.bothCurve,
+                    dataSource: data,
+                    xValueMapper: (LifeAreaProgressModel data, _) =>
+                        data.category,
+                    yValueMapper: (LifeAreaProgressModel data, _) =>
+                        data.percentageOfCompletition,
+                    dataLabelSettings: const DataLabelSettings(
+                      showCumulativeValues: true,
+                      useSeriesColor: true,
+                      isVisible: false,
+                    ),
+                    useSeriesColor: true,
+                    trackOpacity: 0.3,
                   ),
-                )
-              ],
+                ],
+              ),
             ),
           );
         });

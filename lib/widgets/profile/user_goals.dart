@@ -3,6 +3,7 @@ import 'package:goly/models/category.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/indicators.dart';
+import 'package:goly/widgets/profile/profile_category_goals.dart';
 
 class UserGoals extends StatelessWidget {
   final UserModel user;
@@ -23,10 +24,15 @@ class UserGoals extends StatelessWidget {
           for (var element in snapshot.data!.docs) {
             categories.add(CategoryModel.fromJson(element.data()));
           }
+          if (categories.isEmpty) {
+            return const Center(
+              child: Text('This user has no categories'),
+            );
+          }
           return SizedBox(
             height: MediaQuery.of(context).size.height - 160,
             child: DefaultTabController(
-              length: 7,
+              length: categories.length,
               child: Scaffold(
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
@@ -49,8 +55,8 @@ class UserGoals extends StatelessWidget {
                   ),
                   body: TabBarView(
                       children: categories
-                          .map((e) => Center(
-                                child: Text(e.name),
+                          .map((e) => ProfileCategoryGoals(
+                                categoryId: e.id,
                               ))
                           .toList())),
             ),
