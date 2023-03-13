@@ -81,7 +81,7 @@ class _PostCardState extends State<PostCard> {
           postId: widget.post.postId,
           userImage: widget.post.profImage,
           username: widget.post.username,
-          goal: widget.post.goal,
+          category: widget.post.category,
         ),
         //userSection,
         const SizedBox(height: 20),

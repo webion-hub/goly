@@ -10,7 +10,7 @@ class PostModel {
   final DateTime datePublished;
   final String postUrl;
   final String profImage;
-  final String? goal;
+  final String? category;
 
   const PostModel({
     required this.description,
@@ -20,7 +20,7 @@ class PostModel {
     required this.postId,
     required this.datePublished,
     required this.postUrl,
-    this.goal,
+    this.category,
     required this.profImage,
   });
 
@@ -36,7 +36,7 @@ class PostModel {
         username: snapshot["username"],
         postUrl: snapshot['postUrl'],
         profImage: snapshot['profImage'],
-        goal: snapshot['goal']);
+        category: snapshot['category']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -48,7 +48,7 @@ class PostModel {
         "datePublished": datePublished,
         'postUrl': postUrl,
         'profImage': profImage,
-        'goal': goal,
+        'category': category,
       };
 
   PostModel.fromJson(Map<String, dynamic> json)
@@ -60,5 +60,5 @@ class PostModel {
         username = json["username"],
         postUrl = json['postUrl'],
         profImage = json['profImage'],
-        goal = json['goal'];
+        category = json['category'];
 }

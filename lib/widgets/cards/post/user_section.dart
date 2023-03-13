@@ -10,12 +10,12 @@ class UserSection extends StatelessWidget {
   final String postId;
   final String userImage;
   final String username;
-  final String? goal;
+  final String? category;
   const UserSection({
     super.key,
     required this.userImage,
     required this.username,
-    this.goal,
+    this.category,
     required this.uid,
     required this.postId,
   });
@@ -44,7 +44,7 @@ class UserSection extends StatelessWidget {
                     Text(username,
                         style: Theme.of(context).textTheme.bodyMedium),
                     const SizedBox(height: 5),
-                    goal != null ? Text(goal!) : const SizedBox(),
+                    category != null ? Text(category!) : const SizedBox(),
                   ],
                 ),
               ]),

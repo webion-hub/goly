@@ -10,6 +10,7 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Goals'),
+      centerTitle: true,
       actions: [
         IconButton(
           onPressed: () => GoRouter.of(context).push(StatisticScreen.routeName),
