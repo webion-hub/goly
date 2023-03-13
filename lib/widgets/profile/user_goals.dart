@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/category.dart';
-import 'package:goly/screens/main/goals/actions/category/category_screen.dart';
+import 'package:goly/models/user.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/indicators.dart';
-import 'package:tab_container/tab_container.dart';
 
 class UserGoals extends StatelessWidget {
-  const UserGoals({super.key});
+  final UserModel user;
+  const UserGoals({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = [];
     return StreamBuilder(
-        stream: CategoryService.getCategoriesStream(),
+        stream: CategoryService.getOrderedCategories(uid: user.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return buffering();
@@ -29,6 +29,7 @@ class UserGoals extends StatelessWidget {
               length: 7,
               child: Scaffold(
                   appBar: AppBar(
+                    automaticallyImplyLeading: false,
                     centerTitle: true,
                     title: const Text(
                       'Categories',

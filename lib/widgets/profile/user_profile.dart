@@ -57,7 +57,9 @@ class UserProfile extends StatelessWidget {
         const SizedBox(height: 10),
         const Divider(),
         const SizedBox(height: 10),
-        const UserGoals(),
+        UserGoals(
+          user: user,
+        ),
       ],
     );
   }

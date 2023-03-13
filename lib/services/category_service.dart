@@ -129,10 +129,11 @@ class CategoryService extends Service {
     return _collection.doc(Utils.currentUid()).collection('categories').get();
   }
 
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getOrderedCategories() {
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getOrderedCategories(
+      {String? uid}) {
     return FirebaseFirestore.instance
         .collection('goals')
-        .doc(Utils.currentUid())
+        .doc(uid ?? Utils.currentUid())
         .collection('categories')
         .orderBy('name')
         .snapshots();
