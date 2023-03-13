@@ -73,6 +73,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   void postImage(String uid, String username, String profImage) async {
+    if (_file == null ||
+        selectedCategory == null ||
+        _descriptionController.text == "") {
+      Utils.showSnackbBar('Fill out all the fields');
+      return;
+    }
+
     setState(() {
       isLoading = true;
     });
@@ -191,9 +198,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       DropdownSearch<String>(
                         selectedItem: selectedCategory,
                         onChanged: (value) {
-                          setState(() {
-                            selectedCategory = value;
-                          });
+                          selectedCategory = value;
                         },
                         items: categories.map((e) => e.name).toList(),
                         dropdownDecoratorProps: const DropDownDecoratorProps(
