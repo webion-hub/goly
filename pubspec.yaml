@@ -47,7 +47,6 @@ dependencies:
   image_picker: ^0.8.6+1
   firebase_storage: ^11.0.10
   path: ^1.8.2
-  firebase_messaging: ^14.2.2
   cached_network_image: ^3.2.3
   percent_indicator: ^4.2.2
   dartdoc: ^6.1.5

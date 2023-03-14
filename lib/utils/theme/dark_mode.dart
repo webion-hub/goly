@@ -15,7 +15,7 @@ class DarkMode {
 
   static const darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
-    primary: Color(0xFF64DBB4),
+    primary: Color(0xFF006C53),
     onPrimary: Color(0xFF00382A),
     primaryContainer: Color(0xFF00513E),
     onPrimaryContainer: Color(0xFF81F8D0),
