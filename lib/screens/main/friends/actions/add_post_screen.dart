@@ -170,7 +170,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Post to'),
+        title: const Text('Post'),
       ),
       // POST FORM
       body: isLoading
@@ -192,6 +192,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   padding: Constants.pagePadding,
                   child: Column(
                     children: [
+                      const InputLabel(text: 'Image'),
+                      const SizedBox(height: 5),
                       imageContainer,
                       const SizedBox(height: 20),
                       const InputLabel(text: 'Category'),

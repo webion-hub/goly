@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('settings')),
+      appBar: AppBar(title: const Text('Settings')),
       body: FutureBuilder<SettingsModel>(
           future: SettingsService.getCurrentSettings(),
           builder: (context, snapshot) {

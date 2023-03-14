@@ -6,7 +6,8 @@ class MarkAsCompletedListTile extends StatefulWidget {
   final String categoryId;
   final GoalModel goal;
 
-  const MarkAsCompletedListTile({super.key, required this.categoryId, required this.goal});
+  const MarkAsCompletedListTile(
+      {super.key, required this.categoryId, required this.goal});
 
   @override
   State<MarkAsCompletedListTile> createState() =>
@@ -17,10 +18,9 @@ class _MarkAsCompletedListTileState extends State<MarkAsCompletedListTile> {
   void toggleGoalCompleted(bool? value) async {
     if (value != null) {
       widget.goal.completed = value;
-      await GoalService.toggleGoalCompleted(categoryId: widget.categoryId, goal: widget.goal, value: value);
-      setState(() {
-        
-      });
+      await GoalService.toggleGoalCompleted(
+          categoryId: widget.categoryId, goal: widget.goal, value: value);
+      setState(() {});
     }
   }
 

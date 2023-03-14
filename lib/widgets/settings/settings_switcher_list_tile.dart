@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goly/widgets/layout/custom_divider.dart';
 
 class SettingsSwitcherListTile extends StatefulWidget {
   final IconData icon;
@@ -65,7 +66,7 @@ class _SettingsSwitcherListTileState extends State<SettingsSwitcherListTile> {
             value: currentValue,
           ),
         ),
-        const Divider(),
+        const CustomDivider(),
       ],
     );
   }

@@ -47,7 +47,6 @@ dependencies:
   image_picker: ^0.8.6+1
   firebase_storage: ^11.0.10
   path: ^1.8.2
-  firebase_messaging: ^14.2.2
   cached_network_image: ^3.2.3
   percent_indicator: ^4.2.2
   dartdoc: ^6.1.5
@@ -105,10 +104,12 @@ flutter:
   assets:
     - ./assets/json/goal_loading.json
     - ./assets/images/appbar-logo.svg
+    - ./assets/images/appbar-logo.png
     - ./assets/images/logo-icon.png
     - ./assets/images/logo.png
     - ./assets/images/logo-black.png
     - assets/images/webion-logo.png
+    - assets/json/goal_loading.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

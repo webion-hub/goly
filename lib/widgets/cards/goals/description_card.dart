@@ -6,7 +6,7 @@ class DescriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return text == null
+    return text == null || text == ""
         ? const SizedBox()
         : SizedBox(
             width: double.infinity,

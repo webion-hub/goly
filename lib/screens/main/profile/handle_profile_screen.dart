@@ -10,7 +10,6 @@ import 'package:goly/models/user.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
-import 'package:goly/widgets/form/input/input_label.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
@@ -129,23 +128,18 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
                       widget.user?.photoUrl ?? Constants.userImageDefault,
                 ),
                 const SizedBox(height: 20.0),
-                const InputLabel(
-                  text: 'Username',
-                ),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 5.0),
                 TextFieldInput(
                     textEditingController: _usernameController,
                     hintText: 'Username',
+                    label: 'Username',
                     textInputType: TextInputType.text,
                     validation: Validations.validateUsername),
                 const SizedBox(height: 20.0),
-                const InputLabel(
-                  text: 'Bio',
-                ),
-                const SizedBox(height: 10.0),
                 TextFieldInput(
                   textEditingController: _bioController,
                   hintText: 'Bio',
+                  label: 'Bio',
                   textInputType: TextInputType.multiline,
                   validation: Validations.validateBio,
                   maxLines: 3,

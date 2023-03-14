@@ -53,7 +53,6 @@ class _StepListTileState extends State<StepListTile> {
             await StepService.editStep(
               categoryId: widget.categoryId,
               goalId: widget.goalId,
-              stepId: widget.step.id,
               step: widget.step,
             );
             setState(() {});

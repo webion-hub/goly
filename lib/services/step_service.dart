@@ -40,7 +40,6 @@ class StepService extends Service {
   static Future editStep({
     required String categoryId,
     required int goalId,
-    required int stepId,
     required StepModel step,
   }) async {
     final docref = _collection
@@ -52,7 +51,7 @@ class StepService extends Service {
     return _firestore.runTransaction((transaction) async {
       final snapshot = await transaction.get(docref);
       final goal = GoalModel.fromJson(snapshot.data()!);
-      goal.steps?[stepId] = step;
+      goal.steps?[step.id] = step;
       transaction.update(docref, goal.toJson());
     });
   }

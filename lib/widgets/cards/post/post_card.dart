@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/services/post_service.dart';
@@ -35,18 +36,14 @@ class _PostCardState extends State<PostCard> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          AspectRatio(
-            aspectRatio: 487 / 451,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  alignment: FractionalOffset.topCenter,
-                  image: NetworkImage(
-                    widget.post.postUrl,
-                  ),
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(18)),
+          FittedBox(
+            fit: BoxFit.fitHeight,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              child: CachedNetworkImage(
+                width: MediaQuery.of(context).size.width - 20,
+                imageUrl: widget.post.postUrl,
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
