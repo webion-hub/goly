@@ -56,11 +56,10 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
           .then((value) => Navigator.of(context).pop());
     } else {
       await StepService.editStep(
-              categoryId: widget.categoryId,
-              goalId: widget.goalId,
-              step: step,
-              stepId: 0)
-          .then((value) => Navigator.of(context).pop());
+        categoryId: widget.categoryId,
+        goalId: widget.goalId,
+        step: step,
+      ).then((value) => Navigator.of(context).pop());
     }
   }
 
@@ -89,7 +88,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                 textEditingController: reward,
                 hintText: 'Reward',
                 textInputType: TextInputType.text,
-                label: 'Rew',
+                label: 'Reward',
               ),
               SettingsSwitcherListTile(
                   initialValue: privateStep,

@@ -10,34 +10,39 @@ class GoalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              // Row(
-              ListTile(
-                title: Text(goal.name),
-                onTap: null,
-                leading: FittedBox(
-                  child: CircularPercentIndicator(
-                    radius: 16.0,
-                    lineWidth: 4.0,
-                    percent: GoalService.getPercentageOfCompletition(goal),
-                    progressColor: Theme.of(context).colorScheme.onPrimary,
-                  ),
+    return goal.privateGoal
+        ? const SizedBox()
+        : Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(goal.name),
+                      onTap: null,
+                      leading: FittedBox(
+                        child: CircularPercentIndicator(
+                          radius: 16.0,
+                          lineWidth: 4.0,
+                          percent:
+                              GoalService.getPercentageOfCompletition(goal),
+                          progressColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                      subtitle: GoalReward(
+                        goal: goal,
+                      ),
+                    ),
+                    NoEditDescription(goal: goal),
+                    GoalCardSteps(goal: goal),
+                  ],
                 ),
-                subtitle: goal.reward != null ? Text(goal.reward!) : null,
               ),
-              NoEditDescription(description: goal.description),
-              GoalCardSteps(goal: goal),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
   }
 }
 
@@ -62,24 +67,44 @@ class GoalCardSteps extends StatelessWidget {
   }
 }
 
-class NoEditDescription extends StatelessWidget {
-  const NoEditDescription({
+class GoalReward extends StatelessWidget {
+  const GoalReward({
     super.key,
-    required this.description,
+    required this.goal,
   });
 
-  final String? description;
+  final GoalModel goal;
 
   @override
   Widget build(BuildContext context) {
-    return description == null || description == ""
+    return goal.reward == null || goal.reward == "" || goal.privateReward
+        ? const SizedBox()
+        : Text(goal.reward!);
+  }
+}
+
+class NoEditDescription extends StatelessWidget {
+  const NoEditDescription({
+    super.key,
+    required this.goal,
+  });
+
+  final GoalModel goal;
+
+  @override
+  Widget build(BuildContext context) {
+    return goal.description == null ||
+            goal.description == "" ||
+            goal.privateDescription
         ? const SizedBox()
         : Column(
             children: [
               const SizedBox(
                 height: 20,
               ),
-              Align(alignment: Alignment.centerLeft, child: Text(description!)),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(goal.description!)),
             ],
           );
   }

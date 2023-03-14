@@ -27,6 +27,7 @@ class GoalModel {
       : name = json['name'],
         id = json['id'],
         description = json['description'],
+        reward = json['reward'],
         completed = json['completed'],
         steps = ((json['steps'] as List<dynamic>? ?? [])
             .map((s) => StepModel.fromJson(s))
@@ -40,6 +41,7 @@ class GoalModel {
       'name': name,
       'id': id,
       'description': description,
+      'reward': reward,
       'completed': completed,
       'privateGoal': privateGoal,
       'steps': steps?.map((step) => step.toJson()).toList() ?? [],

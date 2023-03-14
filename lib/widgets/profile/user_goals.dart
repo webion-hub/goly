@@ -22,15 +22,18 @@ class UserGoals extends StatelessWidget {
             return const Center(child: Text('There are no categories'));
           }
           for (var element in snapshot.data!.docs) {
-            categories.add(CategoryModel.fromJson(element.data()));
+            CategoryModel category = CategoryModel.fromJson(element.data());
+            if (!category.private) {
+              categories.add(category);
+            }
           }
           if (categories.isEmpty) {
             return const Center(
-              child: Text('This user has no categories'),
+              child: Text('This user has no categories or only empty ones'),
             );
           }
           return SizedBox(
-            height: MediaQuery.of(context).size.height - 160,
+            height: MediaQuery.of(context).size.height - 176,
             child: DefaultTabController(
               length: categories.length,
               child: Scaffold(
@@ -38,18 +41,21 @@ class UserGoals extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     centerTitle: true,
                     title: const Text(
-                      'Categories',
+                      'Public categories',
                       style: TextStyle(fontSize: 16.0),
                     ),
                     bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30.0),
-                        child: TabBar(
-                            isScrollable: true,
-                            tabs: categories
-                                .map((e) => Tab(
-                                      child: Text(e.name),
-                                    ))
-                                .toList())),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TabBar(
+                              isScrollable: true,
+                              tabs: categories
+                                  .map((e) => Tab(
+                                        child: Text(e.name),
+                                      ))
+                                  .toList()),
+                        )),
                   ),
                   body: TabBarView(
                       children: categories

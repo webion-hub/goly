@@ -18,16 +18,28 @@ class ProfileCategoryGoals extends StatelessWidget {
           if (!goalSnapshot.hasData) {
             return const Text('Start adding some data');
           }
+
+          List<GoalModel> goals = [];
+          for (var goal in goalSnapshot.data!.docs) {
+            goals.add(GoalModel.fromJson(
+              goal.data(),
+            ));
+          }
+          int numberOfPublicGoals =
+              goals.where((goal) => !goal.privateGoal).length;
+          if (numberOfPublicGoals == 0) {
+            return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Text('There are no public goals in this category'));
+          }
           return Column(
-              children: goalSnapshot.data!.docs
+              children: goals
                   .map(
-                    (e) => Column(
+                    (goal) => Column(
                       children: [
                         const SizedBox(height: 30),
                         GoalCard(
-                          goal: GoalModel.fromJson(
-                            e.data(),
-                          ),
+                          goal: goal,
                         ),
                       ],
                     ),
