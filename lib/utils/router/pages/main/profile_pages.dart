@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/user.dart';
+import 'package:goly/screens/main/profile/actions/report_screen.dart';
 import 'package:goly/screens/main/profile/actions/settings_screen.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
@@ -27,9 +28,14 @@ final List<RouteBase> profilePages = [
     path: SettingsScreen.routeName,
     builder: (context, state) => const SettingsScreen(),
   ),
+  GoRoute(
+    path: ReportScreen.routeName,
+    builder: (context, state) => const ReportScreen(),
+  ),
 ];
 const List<String> profilePagesRoute = [
   ProfileScreen.routeName,
   HandleProfileScreen.routeNameEdit,
-  SettingsScreen.routeName
+  SettingsScreen.routeName,
+  ReportScreen.routeName,
 ];

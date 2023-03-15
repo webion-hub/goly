@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class MainButton extends StatelessWidget {
   final String text;
   final FocusNode? focusNode;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
   const MainButton({
     super.key,
     required this.text,
-    this.onPressed,
+    required this.onPressed,
     this.focusNode,
   });
   @override

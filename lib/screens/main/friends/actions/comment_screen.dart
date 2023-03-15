@@ -44,6 +44,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    commentEditingController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final UserModel user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
