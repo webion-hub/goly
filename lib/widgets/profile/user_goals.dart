@@ -63,6 +63,7 @@ class UserGoals extends StatelessWidget {
                                 child: ProfileCategoryGoals(
                                   uid: user.id,
                                   categoryId: e.id,
+                                  categoryName: e.name,
                                 ),
                               ))
                           .toList())),

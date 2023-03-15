@@ -20,6 +20,14 @@ class PostService extends Service {
         .snapshots();
   }
 
+  static Stream<QuerySnapshot<Object?>> getPostStreamByCategory(
+      {required String uid, required String category}) {
+    return _collection
+        .where('uid', isEqualTo: uid)
+        .where('category', isEqualTo: category)
+        .snapshots();
+  }
+
   static Future<String> uploadPost({
     required String description,
     required Uint8List file,
