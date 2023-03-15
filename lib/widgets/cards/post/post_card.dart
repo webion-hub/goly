@@ -36,15 +36,12 @@ class _PostCardState extends State<PostCard> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          FittedBox(
-            fit: BoxFit.fitHeight,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              child: CachedNetworkImage(
-                width: MediaQuery.of(context).size.width - 20,
-                imageUrl: widget.post.postUrl,
-                fit: BoxFit.fitWidth,
-              ),
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(16)),
+            child: CachedNetworkImage(
+              width: MediaQuery.of(context).size.width - 20,
+              imageUrl: widget.post.postUrl,
+              fit: BoxFit.fitWidth,
             ),
           ),
           AnimatedOpacity(
