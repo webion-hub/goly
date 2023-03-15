@@ -7,7 +7,7 @@ import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 
 class SearchScreen extends StatefulWidget {
-  static String routeName = '/search';
+  static const String routeName = '/search';
   const SearchScreen({super.key});
 
   @override

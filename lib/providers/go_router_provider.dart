@@ -4,10 +4,10 @@ import 'package:flutter/foundation.dart';
 class GoRouterProvider extends ChangeNotifier {
   GoRouterProvider(Stream<dynamic> stream) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream()
-      .listen((dynamic _) => notifyListeners());
+    _subscription =
+        stream.asBroadcastStream().listen((dynamic _) => notifyListeners());
   }
-  
+
   late final StreamSubscription<dynamic> _subscription;
 
   @override

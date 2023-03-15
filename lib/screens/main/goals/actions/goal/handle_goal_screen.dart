@@ -57,7 +57,9 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
         privateGoal: privateGoal,
         privateDescription: privateDescription,
         privateReward: privateReward,
+        steps: widget.goal?.steps,
       );
+
       await GoalService.editGoal(
               categoryId: widget.categoryId, goal: editedGoal)
           .then((value) => Navigator.of(context).pop());

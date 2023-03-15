@@ -4,7 +4,8 @@ class ImageAndTitle extends StatelessWidget {
   final String title;
   final String? subtitle;
   final String image;
-  const ImageAndTitle( {super.key, required this.title, this.subtitle, required this.image});
+  const ImageAndTitle(
+      {super.key, required this.title, this.subtitle, required this.image});
 
   @override
   Widget build(BuildContext context) {

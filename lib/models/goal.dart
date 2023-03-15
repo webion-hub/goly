@@ -24,22 +24,24 @@ class GoalModel {
   });
 
   GoalModel.fromJson(Map<String, dynamic> json)
-    : name = json['name'],
-      id = json['id'],
-      description = json['description'],
-      completed = json['completed'],
-      steps = ((json['steps'] as List<dynamic>? ?? [])
-        .map((s) => StepModel.fromJson(s))
-        .toList()),
-      privateGoal = json['privateGoal'],
-      privateDescription = json['privateDescription'],
-      privateReward = json['privateReward'] ?? false;
+      : name = json['name'],
+        id = json['id'],
+        description = json['description'],
+        reward = json['reward'],
+        completed = json['completed'],
+        steps = ((json['steps'] as List<dynamic>? ?? [])
+            .map((s) => StepModel.fromJson(s))
+            .toList()),
+        privateGoal = json['privateGoal'],
+        privateDescription = json['privateDescription'],
+        privateReward = json['privateReward'] ?? false;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'name': name,
       'id': id,
       'description': description,
+      'reward': reward,
       'completed': completed,
       'privateGoal': privateGoal,
       'steps': steps?.map((step) => step.toJson()).toList() ?? [],

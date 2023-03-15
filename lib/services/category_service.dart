@@ -75,10 +75,12 @@ class CategoryService extends Service {
         .then((value) => value.size);
   }
 
-  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoryGoalsStream(
-      {required String categoryId}) {
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getCategoryGoalsStream({
+    required String categoryId,
+    String? uid,
+  }) {
     return _collection
-        .doc(Utils.currentUid())
+        .doc(uid ?? Utils.currentUid())
         .collection('categories')
         .doc(categoryId)
         .collection('goals')
@@ -138,19 +140,4 @@ class CategoryService extends Service {
         .orderBy('name')
         .snapshots();
   }
-
-  // static Future<List<String>> getAllGoalsForAutocomplete() async {
-  //   List<String> data = [];
-
-  //   var categoriesFuture = await getAllCategories();
-  //   List<CategoryModel> categories = List.empty();
-  //   categoriesFuture.data?.docs.map((element) {
-  //     categories.add(CategoryModel.fromJson(element.data()));
-  //   });
-
-  //   for (var e in categories) {
-  //     data.add(e.name);
-  //   }
-  //   return data;
-  // }
 }

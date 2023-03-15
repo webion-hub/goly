@@ -39,11 +39,11 @@ class _SignUpState extends State<SignUp> {
       await AuthService.signUpUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
-      ).then((value) =>
-          GoRouter.of(context).pushReplacement(HandleProfileScreen.routeNameSetUp));
+      ).then((value) => GoRouter.of(context)
+          .pushReplacement(HandleProfileScreen.routeNameSetUp));
     } on FirebaseAuthException catch (e) {
       Utils.showSnackbBar(e.message);
-     Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).popUntil((route) => route.isFirst);
     } finally {
       setState(() {
         isLoading = false;
@@ -60,11 +60,13 @@ class _SignUpState extends State<SignUp> {
           child: Column(children: [
             TextFieldInput(
               hintText: "Email",
+              label: "Email",
               textInputType: TextInputType.emailAddress,
               textEditingController: _emailController,
             ),
             const SizedBox(height: 10.0),
             TextFieldInput(
+              label: "Password",
               hintText: "Password",
               isPass: true,
               textInputType: TextInputType.text,

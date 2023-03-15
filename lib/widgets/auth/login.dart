@@ -60,12 +60,14 @@ class _LogInState extends State<LogIn> {
           child: Column(
             children: [
               TextFieldInput(
+                label: "Email",
                 hintText: "Email",
                 textInputType: TextInputType.emailAddress,
                 textEditingController: _emailController,
               ),
               const SizedBox(height: 10.0),
               TextFieldInput(
+                label: "Password",
                 hintText: "Password",
                 isPass: true,
                 textInputType: TextInputType.text,

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/utils/introductions.dart';
@@ -14,6 +14,11 @@ class ExplenationScreen extends StatelessWidget {
     return IntroductionScreen(
       pages: Introductions.welcome.map((e) {
         return PageViewModel(
+            decoration: PageDecoration(
+              bodyTextStyle: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).colorScheme.onBackground),
+            ),
             title: e.title,
             body: e.description,
             image: Center(

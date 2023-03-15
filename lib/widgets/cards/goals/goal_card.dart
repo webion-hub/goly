@@ -10,65 +10,101 @@ class GoalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  FittedBox(
-                    child: CircularPercentIndicator(
-                      radius: 16.0,
-                      lineWidth: 4.0,
-                      percent: GoalService.getPercentageOfCompletition(goal),
-                      progressColor: Colors.green,
+    return goal.privateGoal
+        ? const SizedBox()
+        : Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(goal.name),
+                      onTap: null,
+                      leading: FittedBox(
+                        child: CircularPercentIndicator(
+                          radius: 16.0,
+                          lineWidth: 4.0,
+                          percent:
+                              GoalService.getPercentageOfCompletition(goal),
+                          progressColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                        ),
+                      ),
+                      subtitle: GoalReward(
+                        goal: goal,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text(goal.name),
-                ],
+                    NoEditDescription(goal: goal),
+                    GoalCardSteps(goal: goal),
+                  ],
+                ),
               ),
-              NoEditDescription(description: goal.description),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                children: goal.steps
-                        ?.map((e) => NoEditStepListTile(step: e))
-                        .toList() ??
-                    [],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+  }
+}
+
+class GoalCardSteps extends StatelessWidget {
+  const GoalCardSteps({
+    super.key,
+    required this.goal,
+  });
+
+  final GoalModel goal;
+
+  @override
+  Widget build(BuildContext context) {
+    return goal.steps == null
+        ? const SizedBox()
+        : Column(children: [
+            const SizedBox(
+              height: 20,
+            ),
+            ...goal.steps!.map((e) => NoEditStepListTile(step: e)).toList(),
+          ]);
+  }
+}
+
+class GoalReward extends StatelessWidget {
+  const GoalReward({
+    super.key,
+    required this.goal,
+  });
+
+  final GoalModel goal;
+
+  @override
+  Widget build(BuildContext context) {
+    return goal.reward == null || goal.reward == "" || goal.privateReward
+        ? const SizedBox()
+        : Text(goal.reward!);
   }
 }
 
 class NoEditDescription extends StatelessWidget {
   const NoEditDescription({
     super.key,
-    required this.description,
+    required this.goal,
   });
 
-  final String? description;
+  final GoalModel goal;
 
   @override
   Widget build(BuildContext context) {
-    return description == null || description == ""
+    return goal.description == null ||
+            goal.description == "" ||
+            goal.privateDescription
         ? const SizedBox()
         : Column(
             children: [
               const SizedBox(
                 height: 20,
               ),
-              Align(alignment: Alignment.centerLeft, child: Text(description!)),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(goal.description!)),
             ],
           );
   }

@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/search/search_screen.dart';
+import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
+import 'package:goly/screens/main/goals/actions/statistics_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
-import 'package:goly/utils/router/pages/friends_pages.dart';
-import 'package:goly/utils/router/pages/goal_pages.dart';
-import 'package:goly/utils/router/pages/profile_pages.dart';
+import 'package:goly/utils/router/pages/main/add_pages.dart';
+import 'package:goly/utils/router/pages/main/friends_pages.dart';
+import 'package:goly/utils/router/pages/main/goal_pages.dart';
+import 'package:goly/utils/router/pages/main/profile_pages.dart';
+import 'package:goly/utils/router/pages/main/statistics_pages.dart';
 import 'package:provider/provider.dart';
 
 class PageShell extends StatefulWidget {
@@ -42,8 +45,9 @@ class _PageShellState extends State<PageShell> {
   void navigationTapped(int page) {
     List<String> pagesRoute = [
       FriendsScreen.routeName,
-      SearchScreen.routeName,
       GoalsScreen.routeName,
+      AddPostScreen.routeName,
+      StatisticScreen.routeName,
       ProfileScreen.routeName
     ];
 
@@ -51,10 +55,12 @@ class _PageShellState extends State<PageShell> {
   }
 
   Color getColor(List<String> paths) {
-    if (paths.any((element) => element == GoRouter.of(context).location)) {
-      return Theme.of(context).colorScheme.primary;
-    }
-    return Theme.of(context).colorScheme.secondary;
+    final isSelectedPage =
+        paths.any((element) => element == GoRouter.of(context).location);
+
+    return isSelectedPage
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).focusColor;
   }
 
   @override
@@ -75,12 +81,15 @@ class _PageShellState extends State<PageShell> {
                     color: getColor(friendsPagesRoute)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search,
-                    color: getColor([SearchScreen.routeName])),
-              ),
-              BottomNavigationBarItem(
                 icon:
                     Icon(Icons.flag_rounded, color: getColor(goalsPagesRouter)),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add, color: getColor(addPagesRoute)),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.insights_rounded,
+                    color: getColor(statisticsPagesRoute)),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_rounded,

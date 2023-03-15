@@ -38,9 +38,9 @@ class _GoalListTileState extends State<GoalListTile> {
                   Navigator.of(ctx).pop(false);
                 },
                 yesAction: () async {
-                  
                   await GoalService.deleteGoal(
-                      categoryId: widget.categoryId, goalId: widget.goal.id).then((value) => Navigator.of(ctx).pop());
+                          categoryId: widget.categoryId, goalId: widget.goal.id)
+                      .then((value) => Navigator.of(ctx).pop());
                 },
               )),
         );
@@ -49,15 +49,16 @@ class _GoalListTileState extends State<GoalListTile> {
         title: Text(widget.goal.name),
         onTap: gotoGoalScreen,
         leading: FittedBox(
-            child: CircularPercentIndicator(
-              radius: 16.0,
-              lineWidth: 4.0,
-              percent: GoalService.getPercentageOfCompletition(widget.goal),
-              progressColor: Colors.green,
-            ),
+          child: CircularPercentIndicator(
+            radius: 16.0,
+            lineWidth: 4.0,
+            percent: GoalService.getPercentageOfCompletition(widget.goal),
+            progressColor: Theme.of(context).colorScheme.onPrimary,
           ),
+        ),
         subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
-        trailing: Icon(Constants.getLockerIcon(private: widget.goal.privateGoal)),
+        trailing:
+            Icon(Constants.getLockerIcon(private: widget.goal.privateGoal)),
       ),
     );
   }

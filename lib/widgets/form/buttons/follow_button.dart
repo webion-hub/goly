@@ -18,9 +18,6 @@ class FollowButton extends StatelessWidget {
           color: isAlreadyFollowing
               ? Theme.of(context).colorScheme.onBackground.withAlpha(245)
               : Theme.of(context).colorScheme.primary,
-          border: Border.all(
-            color: Colors.black45,
-          ),
           borderRadius: BorderRadius.circular(999),
         ),
         alignment: Alignment.center,
@@ -29,7 +26,6 @@ class FollowButton extends StatelessWidget {
         child: Text(
           isAlreadyFollowing ? 'Unfollow' : 'Follow',
           style: const TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
