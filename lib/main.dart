@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
           create: (_) => UserProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ThemeProvider(),
+          create: (_) => ThemeProvider(initialDarkMode: false),
         ),
       ],
       child: Consumer<ThemeProvider>(

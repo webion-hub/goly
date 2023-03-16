@@ -5,12 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeProvider extends ChangeNotifier {
   final String key = 'theme';
   SharedPreferences? _prefs;
-  bool _darkTheme = false;
+  late bool _darkTheme;
 
   bool get dark => _darkTheme;
 
-  ThemeProvider() {
+  ThemeProvider({bool initialDarkMode = false}) {
     _loadfromPrefs();
+    _darkTheme = initialDarkMode;
   }
 
   toggleTheme() {
@@ -25,7 +26,7 @@ class ThemeProvider extends ChangeNotifier {
 
   _loadfromPrefs() async {
     await _initPrefs();
-    _darkTheme = _prefs!.getBool(key) ?? false;
+    _darkTheme = _prefs!.getBool(key) ?? _darkTheme;
     notifyListeners();
   }
 

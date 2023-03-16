@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/cards/goals/goal_card.dart';
+import 'package:goly/widgets/profile/user_category_posts.dart';
 
 class ProfileCategoryGoals extends StatelessWidget {
   final String categoryId;
   final String uid;
-  const ProfileCategoryGoals(
-      {super.key, required this.categoryId, required this.uid});
+  final String categoryName;
+  const ProfileCategoryGoals({
+    super.key,
+    required this.categoryId,
+    required this.uid,
+    required this.categoryName,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class ProfileCategoryGoals extends StatelessWidget {
             categoryId: categoryId, uid: uid),
         builder: (context, goalSnapshot) {
           if (!goalSnapshot.hasData) {
-            return const Text('Start adding some data');
+            return const Text('There are no categories');
           }
 
           List<GoalModel> goals = [];
@@ -27,24 +33,53 @@ class ProfileCategoryGoals extends StatelessWidget {
           }
           int numberOfPublicGoals =
               goals.where((goal) => !goal.privateGoal).length;
-          if (numberOfPublicGoals == 0) {
-            return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Text('There are no public goals in this category'));
-          }
+
           return Column(
-              children: goals
-                  .map(
-                    (goal) => Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        GoalCard(
-                          goal: goal,
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList());
+            children: [
+              ProfileCategoryGoalsSection(goals: goals),
+              UserCategoryPosts(uid: uid, categoryName: categoryName),
+            ],
+          );
         });
+  }
+}
+
+class ProfileCategoryGoalsSection extends StatelessWidget {
+  const ProfileCategoryGoalsSection({
+    super.key,
+    required this.goals,
+  });
+
+  final List<GoalModel> goals;
+
+  @override
+  Widget build(BuildContext context) {
+    int numberOfPublicGoals = goals.where((goal) => !goal.privateGoal).length;
+    return Column(
+      children: [
+        const SizedBox(height: 15),
+        Text(
+          'Goals',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 15),
+        numberOfPublicGoals == 0
+            ? const Text('There are no public goals in this category')
+            : const SizedBox(),
+        const SizedBox(height: 15),
+        ...goals
+            .map(
+              (goal) => Column(
+                children: [
+                  GoalCard(
+                    goal: goal,
+                  ),
+                  const SizedBox(height: 30),
+                ],
+              ),
+            )
+            .toList(),
+      ],
+    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LightMode {
   static ThemeData theme = ThemeData.light().copyWith(
       useMaterial3: true,
+      appBarTheme: appBarTheme,
       scaffoldBackgroundColor: Colors.white,
       colorScheme:
           lightColorScheme // ColorScheme.fromSeed(seedColor: Colors.teal),

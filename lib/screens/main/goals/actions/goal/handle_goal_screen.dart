@@ -19,11 +19,11 @@ class HandleGoalScreen extends StatefulWidget {
 }
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
-  late TextEditingController goalName =
+  late final TextEditingController _goalName =
       TextEditingController(text: widget.goal?.name ?? '');
-  late TextEditingController description =
+  late final TextEditingController _description =
       TextEditingController(text: widget.goal?.description ?? '');
-  late TextEditingController reward =
+  late final TextEditingController _reward =
       TextEditingController(text: widget.goal?.reward ?? '');
   bool privateGoal = false;
   bool privateDescription = false;
@@ -47,13 +47,21 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
     });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _goalName.dispose();
+    _description.dispose();
+    _reward.dispose();
+  }
+
   void addGoal() async {
     if (widget.goal != null) {
       GoalModel editedGoal = GoalModel(
         id: widget.goal!.id,
-        name: goalName.text,
-        description: description.text,
-        reward: reward.text,
+        name: _goalName.text,
+        description: _description.text,
+        reward: _reward.text,
         privateGoal: privateGoal,
         privateDescription: privateDescription,
         privateReward: privateReward,
@@ -68,9 +76,9 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
           await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
       GoalModel newGoal = GoalModel(
         id: id,
-        name: goalName.text,
-        description: description.text,
-        reward: reward.text,
+        name: _goalName.text,
+        description: _description.text,
+        reward: _reward.text,
         privateGoal: privateGoal,
         privateDescription: privateDescription,
         privateReward: privateReward,
@@ -98,20 +106,20 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFieldInput(
-                      textEditingController: goalName,
+                      textEditingController: _goalName,
                       hintText: 'Name',
                       textInputType: TextInputType.text,
                       label: 'Name',
                     ),
                     TextFieldInput(
-                      textEditingController: description,
+                      textEditingController: _description,
                       hintText: 'Description',
                       textInputType: TextInputType.multiline,
                       maxLines: 3,
                       label: 'Description',
                     ),
                     TextFieldInput(
-                      textEditingController: reward,
+                      textEditingController: _reward,
                       hintText: 'Reward',
                       textInputType: TextInputType.text,
                       maxLines: 3,
