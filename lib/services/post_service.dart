@@ -12,16 +12,19 @@ final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _collection = _firestore.collection('posts');
 
 class PostService extends Service {
-  static Stream<QuerySnapshot<Object?>> getPostStream(
-      {required UserModel user}) {
+  static Stream<QuerySnapshot<Object?>> getPostStream({
+    required UserModel user,
+  }) {
     return _collection
         .where('uid', whereIn: [...user.following, user.id])
         .orderBy('datePublished', descending: true)
         .snapshots();
   }
 
-  static Stream<QuerySnapshot<Object?>> getPostStreamByCategory(
-      {required String uid, required String category}) {
+  static Stream<QuerySnapshot<Object?>> getPostStreamByCategory({
+    required String uid,
+    required String category,
+  }) {
     return _collection
         .where('uid', isEqualTo: uid)
         .where('category', isEqualTo: category)
