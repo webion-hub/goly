@@ -8,7 +8,7 @@ import 'package:goly/utils/theme/light_mode.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-//TODO:Add report a bug screen
+
 //TODO: Check exception
 //TODO: Change icon
 //TODO: ADD tips on search screen

@@ -69,10 +69,10 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo-black.png"
+  image_path: "assets/images/icon.png"
 
 flutter_native_splash:
-  image: "assets/images/logo-black.png"
+  image: "assets/images/splash.png"
   color: "#ffffff"
 
 dev_dependencies:
@@ -103,13 +103,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - ./assets/json/goal_loading.json
-    - ./assets/images/appbar-logo.svg
-    - ./assets/images/appbar-logo.png
-    - ./assets/images/logo-icon.png
-    - ./assets/images/logo.png
-    - ./assets/images/logo-black.png
-    - assets/images/webion-logo.png
-    - assets/json/goal_loading.json
+    - ./assets/images/icon.png
+    - ./assets/images/splash.png
+    - ./assets/images/welcome.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

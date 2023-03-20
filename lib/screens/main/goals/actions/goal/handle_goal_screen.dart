@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
@@ -25,6 +26,8 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
       TextEditingController(text: widget.goal?.description ?? '');
   late final TextEditingController _reward =
       TextEditingController(text: widget.goal?.reward ?? '');
+  late final TextEditingController _priority =
+      TextEditingController(text: widget.goal?.priority.toString() ?? '1');
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
@@ -53,6 +56,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
     _goalName.dispose();
     _description.dispose();
     _reward.dispose();
+    _priority.dispose();
   }
 
   void addGoal() async {
@@ -124,6 +128,21 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       textInputType: TextInputType.text,
                       maxLines: 3,
                       label: 'Reward',
+                    ),
+                    TextFieldInput(
+                      textEditingController: _priority,
+                      hintText: 'Priority',
+                      textInputType: TextInputType.number,
+                      label: 'Priority (1 to 10)',
+                      validation: (input) {
+                        final isDigitsOnly = int.tryParse(input ?? '');
+                        return isDigitsOnly == null
+                            ? 'Input needs to be digits only'
+                            : null;
+                      },
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                     ),
                     SettingsSwitcherListTile(
                         initialValue: privateGoal,

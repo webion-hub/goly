@@ -36,7 +36,7 @@ class FriendsScreen extends StatelessWidget {
                     if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
                       return Center(
                           child: Text(
-                        'Your feed is empty. Start following some people',
+                        'Your feed is empty. Start follow your friends',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ));
                     }
@@ -44,8 +44,10 @@ class FriendsScreen extends StatelessWidget {
                       padding: Constants.pagePadding,
                       itemBuilder: ((context, index) {
                         return PostCard(
-                          post: PostModel.fromJson(snapshot.data?.docs[index]
-                              .data() as Map<String, dynamic>),
+                          post: PostModel.fromJson(
+                            snapshot.data?.docs[index].data()
+                                as Map<String, dynamic>,
+                          ),
                         );
                       }),
                       itemCount: snapshot.data!.size,

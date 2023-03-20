@@ -72,6 +72,7 @@ class _LogInState extends State<LogIn> {
                 isPass: true,
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
+                onFieldSubmitted: () => logIn(),
               ),
             ],
           ),

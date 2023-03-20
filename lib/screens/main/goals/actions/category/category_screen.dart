@@ -46,9 +46,7 @@ class CategoryScreen extends StatelessWidget {
           }
           if (!categorySnapshot.hasData ||
               categorySnapshot.data?.data() == null) {
-            return const Center(
-              child: Text('error'),
-            );
+            return buffering();
           }
           CategoryModel category =
               CategoryModel.fromJson(categorySnapshot.data!.data()!);

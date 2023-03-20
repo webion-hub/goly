@@ -52,14 +52,6 @@ class _ReportScreenState extends State<ReportScreen> {
           padding: Constants.pagePadding,
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Send us a message',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-              const SizedBox(height: 20),
               Text(
                 'We appreciate your feedback! \nIf you encounter any bugs or have suggestions on how we can improve the app, please let us know. \nYour opinion is valuable to us as we strive to create the best possible user experience. \n\nThank you for helping us build a great app!',
                 style: Theme.of(context).textTheme.bodyMedium,

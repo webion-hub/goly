@@ -10,6 +10,7 @@ class GoalModel {
   bool privateDescription;
   bool privateReward;
   List<StepModel>? steps;
+  int priority;
 
   GoalModel({
     required this.name,
@@ -21,6 +22,7 @@ class GoalModel {
     this.privateGoal = true,
     this.privateDescription = true,
     this.privateReward = true,
+    this.priority = 1,
   });
 
   GoalModel.fromJson(Map<String, dynamic> json)
@@ -34,6 +36,7 @@ class GoalModel {
             .toList()),
         privateGoal = json['privateGoal'],
         privateDescription = json['privateDescription'],
+        priority = json['priority'],
         privateReward = json['privateReward'] ?? false;
 
   Map<String, dynamic> toJson() {
@@ -46,6 +49,7 @@ class GoalModel {
       'privateGoal': privateGoal,
       'steps': steps?.map((step) => step.toJson()).toList() ?? [],
       'privateDescription': privateDescription,
+      'priority': priority,
     };
   }
 }

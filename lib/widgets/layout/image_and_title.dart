@@ -13,7 +13,7 @@ class ImageAndTitle extends StatelessWidget {
       children: [
         SizedBox(height: MediaQuery.of(context).size.height / 25),
         SizedBox(
-          height: 140.0,
+          height: 100.0,
           width: MediaQuery.of(context).size.width,
           child: Image.asset(image),
         ),

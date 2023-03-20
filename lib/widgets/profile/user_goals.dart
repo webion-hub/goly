@@ -40,10 +40,10 @@ class UserGoals extends StatelessWidget {
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
                     centerTitle: true,
-                    title: const Text(
-                      'Public categories',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
+                    // title: const Text(
+                    //   'Public categories',
+                    //   style: TextStyle(fontSize: 16.0),
+                    // ),
                     bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30.0),
                         child: Padding(
