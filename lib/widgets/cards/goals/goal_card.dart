@@ -28,8 +28,7 @@ class GoalCard extends StatelessWidget {
                           lineWidth: 4.0,
                           percent:
                               GoalService.getPercentageOfCompletition(goal),
-                          progressColor:
-                              Theme.of(context).colorScheme.onPrimary,
+                          progressColor: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       subtitle: GoalReward(

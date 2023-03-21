@@ -11,15 +11,16 @@ class DescriptionCard extends StatelessWidget {
         : SizedBox(
             width: double.infinity,
             child: Card(
-              color: Theme.of(context).canvasColor,
+              elevation: 1,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Description",
-                      style: Theme.of(context).textTheme.labelMedium,
+                      "Description:",
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                     const SizedBox(height: 20),
                     Text(text!),
