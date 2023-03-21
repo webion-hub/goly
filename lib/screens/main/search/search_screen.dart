@@ -32,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         title: Form(
           child: TextFormField(
+            autofocus: true,
             controller: searchController,
             decoration:
                 const InputDecoration(labelText: 'Search for a user...'),
@@ -73,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 );
               },
             )
-          : const Text('tips'),
+          : const Text(''),
       // SingleChildScrollView(
       //     child: FutureBuilder<VideoCollection>(
       //         future:

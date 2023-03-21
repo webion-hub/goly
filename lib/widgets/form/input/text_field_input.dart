@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:goly/widgets/form/input/input_label.dart';
 
 class TextFieldInput extends StatelessWidget {
@@ -10,6 +11,8 @@ class TextFieldInput extends StatelessWidget {
   final String? Function(String?)? validation;
   final FocusNode? nextFocus;
   final String? label;
+  final List<TextInputFormatter>? inputFormatters;
+  final VoidCallback? onFieldSubmitted;
 
   const TextFieldInput({
     Key? key,
@@ -21,6 +24,8 @@ class TextFieldInput extends StatelessWidget {
     this.validation,
     this.nextFocus,
     this.label,
+    this.inputFormatters,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -29,7 +34,6 @@ class TextFieldInput extends StatelessWidget {
     final inputBorder = OutlineInputBorder(
       borderRadius: BorderRadius.circular(12),
       borderSide: const BorderSide(color: Colors.grey, width: 0.0),
-      //borderSide: Divider.createBorderSide(context),
     );
     return Column(
       children: [
@@ -40,8 +44,10 @@ class TextFieldInput extends StatelessWidget {
           maxLines: maxLines ?? 1,
           keyboardType: textInputType,
           obscureText: isPass,
-          onFieldSubmitted: (_) =>
-              FocusScope.of(context).requestFocus(nextFocus),
+          inputFormatters: const [],
+          onFieldSubmitted: (_) => onFieldSubmitted != null
+              ? onFieldSubmitted!()
+              : FocusScope.of(context).requestFocus(nextFocus),
           validator: (value) {
             if (validation == null) {
               return null;
@@ -55,10 +61,9 @@ class TextFieldInput extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             border: inputBorder,
-            //fillColor: Theme.of(context).colorScheme.onSecondary,
             focusedBorder: inputBorder,
             enabledBorder: inputBorder,
-            filled: true,
+            filled: false,
             contentPadding: const EdgeInsets.all(16),
           ),
         ),

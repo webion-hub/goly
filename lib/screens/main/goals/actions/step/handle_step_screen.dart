@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/services/step_service.dart';
+import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
@@ -21,6 +22,7 @@ class HandleStepScreen extends StatefulWidget {
 }
 
 class _HandleStepScreenState extends State<HandleStepScreen> {
+  final formKey = GlobalKey<FormState>();
   late TextEditingController stepName =
       TextEditingController(text: widget.step?.name ?? '');
   late TextEditingController reward =
@@ -41,6 +43,10 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
   }
 
   void addStep() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
     var numberOfSteps = await GoalService.getNumberOfSteps(
         categoryId: widget.categoryId, goalId: widget.goalId);
     StepModel step = StepModel(
@@ -65,8 +71,6 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.step != null ? 'Edit step' : 'Add step'),
@@ -83,6 +87,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                 hintText: 'Name',
                 textInputType: TextInputType.text,
                 label: 'Name',
+                validation: Validations.validateNotEmpty,
               ),
               TextFieldInput(
                 textEditingController: reward,

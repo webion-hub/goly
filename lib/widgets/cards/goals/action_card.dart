@@ -17,6 +17,8 @@ class ActionCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => action(),
         child: Card(
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+          elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
@@ -28,7 +30,9 @@ class ActionCard extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  Text(text),
+                  Text(
+                    text,
+                  ),
                 ],
               ),
             ),

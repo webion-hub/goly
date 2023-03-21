@@ -31,8 +31,6 @@ class ProfileCategoryGoals extends StatelessWidget {
               goal.data(),
             ));
           }
-          int numberOfPublicGoals =
-              goals.where((goal) => !goal.privateGoal).length;
 
           return Column(
             children: [

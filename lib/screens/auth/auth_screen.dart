@@ -32,7 +32,7 @@ class _AuthScreenState extends State<AuthScreen> {
               ImageAndTitle(
                 title: authType,
                 subtitle: isLogin ? "Welcome back" : "Welcome",
-                image: 'assets/images/logo-icon.png',
+                image: 'assets/images/welcome.png',
               ),
               isLogin
                   ? LogIn(onClickedSignup: toggle)

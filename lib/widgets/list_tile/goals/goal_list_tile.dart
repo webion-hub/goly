@@ -53,7 +53,7 @@ class _GoalListTileState extends State<GoalListTile> {
             radius: 16.0,
             lineWidth: 4.0,
             percent: GoalService.getPercentageOfCompletition(widget.goal),
-            progressColor: Theme.of(context).colorScheme.onPrimary,
+            progressColor: Theme.of(context).colorScheme.primary,
           ),
         ),
         subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,

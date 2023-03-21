@@ -71,6 +71,7 @@ class _SignUpState extends State<SignUp> {
               isPass: true,
               textInputType: TextInputType.text,
               textEditingController: _passwordController,
+              onFieldSubmitted: () => signUp(),
             ),
           ]),
         ),

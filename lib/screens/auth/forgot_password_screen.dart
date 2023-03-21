@@ -49,9 +49,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Rceive an emal to reset your password'),
-              const SizedBox(height: 20),
+              Text(
+                'Insert your email to reset your password',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 30),
               TextFieldInput(
+                  label: 'Email',
                   textEditingController: _emailController,
                   hintText: 'Email',
                   textInputType: TextInputType.emailAddress),

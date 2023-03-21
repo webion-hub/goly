@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
       appBar:
           profileId == Utils.currentUid() ? const ProfileAppBar() : AppBar(),
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         padding: Constants.pagePadding,
         child: StreamBuilder(
             stream: UserService.getUserStream(uid: profileId),
