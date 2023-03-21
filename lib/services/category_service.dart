@@ -84,6 +84,7 @@ class CategoryService extends Service {
         .collection('categories')
         .doc(categoryId)
         .collection('goals')
+        .orderBy('priority', descending: true)
         .snapshots();
   }
 

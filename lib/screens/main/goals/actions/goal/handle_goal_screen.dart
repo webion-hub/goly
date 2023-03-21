@@ -73,6 +73,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
         description: _description.text,
         reward: _reward.text,
         privateGoal: privateGoal,
+        priority: int.tryParse(_priority.text) ?? 1,
         privateDescription: privateDescription,
         privateReward: privateReward,
         steps: widget.goal?.steps,
@@ -90,6 +91,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
         description: _description.text,
         reward: _reward.text,
         privateGoal: privateGoal,
+        priority: int.tryParse(_priority.text) ?? 1,
         privateDescription: privateDescription,
         privateReward: privateReward,
       );
