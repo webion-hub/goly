@@ -40,10 +40,10 @@ class UserGoals extends StatelessWidget {
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
                     centerTitle: true,
-                    // title: const Text(
-                    //   'Public categories',
-                    //   style: TextStyle(fontSize: 16.0),
-                    // ),
+                    title: const Text(
+                      'Public categories',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
                     bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(30.0),
                         child: Padding(
@@ -59,12 +59,10 @@ class UserGoals extends StatelessWidget {
                   ),
                   body: TabBarView(
                       children: categories
-                          .map((e) => SingleChildScrollView(
-                                child: ProfileCategoryGoals(
-                                  uid: user.id,
-                                  categoryId: e.id,
-                                  categoryName: e.name,
-                                ),
+                          .map((e) => ProfileCategoryGoals(
+                                uid: user.id,
+                                categoryId: e.id,
+                                categoryName: e.name,
                               ))
                           .toList())),
             ),

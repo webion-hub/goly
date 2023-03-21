@@ -11,23 +11,15 @@ class FollowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return OutlinedButton(
       onPressed: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: isAlreadyFollowing
-              ? Theme.of(context).colorScheme.onBackground.withAlpha(245)
-              : Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(999),
-        ),
-        alignment: Alignment.center,
-        width: 250,
-        height: 36,
-        child: Text(
-          isAlreadyFollowing ? 'Unfollow' : 'Follow',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+      style: OutlinedButton.styleFrom().copyWith(
+          minimumSize: const MaterialStatePropertyAll(Size.fromHeight(40))),
+      child: Text(
+        isAlreadyFollowing ? 'Unfollow' : 'Follow',
+        style: const TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

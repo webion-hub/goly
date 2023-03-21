@@ -22,39 +22,62 @@ class UserProfile extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(
-          width: 140,
-          height: 140,
-          child: UserImage(imageUrl: user.photoUrl),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          user.username,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 10),
-        Text(user.bio),
-        const SizedBox(height: 20),
         Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildStatColumn(user.following.length, 'Followings'),
-            buildStatColumn(user.followers.length, 'Followers'),
+            Column(
+              children: [
+                SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: UserImage(imageUrl: user.photoUrl),
+                ),
+              ],
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      buildStatColumn(user.following.length, 'Followings'),
+                      buildStatColumn(user.followers.length, 'Followers'),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  user.id == Utils.currentUid()
+                      ? MainOutlinedButton(
+                          fullWidth: true,
+                          text: 'Edit profile',
+                          icon: Icons.edit,
+                          action: goToHandleProfileScreen,
+                        )
+                      : FollowButton(
+                          isAlreadyFollowing:
+                              user.followers.contains(Utils.currentUid()),
+                          onPressed: () async {
+                            await UserService.followUser(
+                                Utils.currentUid(), user.id);
+                          },
+                        ),
+                ],
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 20),
-        user.id == Utils.currentUid()
-            ? MainOutlinedButton(
-                label: const Text('Edit profile'),
-                icon: Icons.edit,
-                action: goToHandleProfileScreen)
-            : FollowButton(
-                isAlreadyFollowing: user.followers.contains(Utils.currentUid()),
-                onPressed: () async {
-                  await UserService.followUser(Utils.currentUid(), user.id);
-                },
-              ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            user.username,
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+        const SizedBox(height: 10),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(user.bio),
+        ),
         const SizedBox(height: 10),
         const CustomDivider(),
         const SizedBox(height: 10),

@@ -17,6 +17,8 @@ class GoalScreen extends StatelessWidget {
   final String categoryId;
   const GoalScreen({super.key, required this.categoryId, required this.goalId});
 
+  void reorder(int oldIndex, int newIndex) {}
+
   @override
   Widget build(BuildContext context) {
     void goToHandleGoal(GoalModel goal) {
@@ -83,8 +85,20 @@ class GoalScreen extends StatelessWidget {
                           goal: g,
                         )
                       : const SizedBox(),
-                  ...?g.steps?.map((step) => StepListTile(
-                      step: step, categoryId: categoryId, goalId: goalId)),
+                  ReorderableListView(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    onReorder: reorder,
+                    children: [
+                      ...?g.steps?.map((step) => Container(
+                            key: ValueKey(step.id),
+                            child: StepListTile(
+                                step: step,
+                                categoryId: categoryId,
+                                goalId: goalId),
+                          )),
+                    ],
+                  ),
                   ActionCard(
                     text: 'Add step',
                     icon: Icons.add,
