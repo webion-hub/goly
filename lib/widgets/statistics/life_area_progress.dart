@@ -38,7 +38,7 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
               height: MediaQuery.of(context).size.width + 100,
               width: MediaQuery.of(context).size.width,
               child: SfCircularChart(
-                title: ChartTitle(text: "Life area progress"),
+                title: ChartTitle(text: "Category progress"),
                 legend: Legend(
                   position: LegendPosition.bottom,
                   orientation: LegendItemOrientation.vertical,

@@ -24,14 +24,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
-      body: FutureBuilder<SettingsModel>(
+      body: FutureBuilder<SettingsModel?>(
           future: SettingsService.getCurrentSettings(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return buffering();
             }
+            if (!snapshot.hasData) {
+              return const Center(child: Text('Error network'));
+            }
             SettingsModel settings = snapshot.data!;
-
             return SingleChildScrollView(
               padding: Constants.pagePadding,
               child: Column(

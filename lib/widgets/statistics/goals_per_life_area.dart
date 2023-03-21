@@ -38,7 +38,7 @@ class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
               height: MediaQuery.of(context).size.width + 100,
               width: MediaQuery.of(context).size.width,
               child: SfCircularChart(
-                title: ChartTitle(text: "Number of goals per life area"),
+                title: ChartTitle(text: "Number of goals per category"),
                 legend: Legend(
                   position: LegendPosition.bottom,
                   orientation: LegendItemOrientation.vertical,

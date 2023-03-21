@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/providers/user_provider.dart';
+import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
@@ -21,6 +22,7 @@ class HandleCategoryScreen extends StatefulWidget {
 }
 
 class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
+  final formKey = GlobalKey<FormState>();
   late UserModel user = Provider.of<UserProvider>(context).getUser;
   late bool privateCategory = widget.category?.private ?? false;
   late bool privateDescription = widget.category?.privateDescription ??
@@ -46,8 +48,11 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     void handleCategory() async {
+      final isValid = formKey.currentState!.validate();
+      if (!isValid) {
+        return;
+      }
       CategoryModel c = CategoryModel(
         id: widget.category?.id ?? const Uuid().v1(),
         name: categoryName.text,
@@ -81,11 +86,13 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                       hintText: 'Name',
                       textInputType: TextInputType.text,
                       label: 'Name',
+                      validation: Validations.validateNotEmpty,
                     ),
                     TextFieldInput(
                       textEditingController: description,
                       hintText: 'Description',
                       textInputType: TextInputType.multiline,
+                      maxLines: 5,
                       label: 'Description',
                     ),
                     SettingsSwitcherListTile(

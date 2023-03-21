@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
@@ -20,6 +21,7 @@ class HandleGoalScreen extends StatefulWidget {
 }
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
+  final formKey = GlobalKey<FormState>();
   late final TextEditingController _goalName =
       TextEditingController(text: widget.goal?.name ?? '');
   late final TextEditingController _description =
@@ -60,6 +62,10 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   }
 
   void addGoal() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
     if (widget.goal != null) {
       GoalModel editedGoal = GoalModel(
         id: widget.goal!.id,
@@ -94,7 +100,6 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.goal != null ? 'Edit goal' : 'Add goal'),
@@ -114,6 +119,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       hintText: 'Name',
                       textInputType: TextInputType.text,
                       label: 'Name',
+                      validation: Validations.validateNotEmpty,
                     ),
                     TextFieldInput(
                       textEditingController: _description,
@@ -126,7 +132,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       textEditingController: _reward,
                       hintText: 'Reward',
                       textInputType: TextInputType.text,
-                      maxLines: 3,
+                      maxLines: 1,
                       label: 'Reward',
                     ),
                     TextFieldInput(
@@ -134,12 +140,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       hintText: 'Priority',
                       textInputType: TextInputType.number,
                       label: 'Priority (1 to 10)',
-                      validation: (input) {
-                        final isDigitsOnly = int.tryParse(input ?? '');
-                        return isDigitsOnly == null
-                            ? 'Input needs to be digits only'
-                            : null;
-                      },
+                      validation: Validations.validatePriority,
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly,
                       ],

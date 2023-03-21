@@ -9,10 +9,6 @@ import 'package:goly/utils/utils.dart';
 import 'package:goly/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-//TODO: Check exception
-//TODO: Change icon
-//TODO: ADD tips on search screen
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

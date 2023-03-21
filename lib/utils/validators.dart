@@ -31,4 +31,19 @@ class Validations {
     }
     return null;
   }
+
+  static String? validatePriority(String? value) {
+    int? parsedValue = int.tryParse(value ?? '');
+    if (parsedValue == null || parsedValue < 1 || parsedValue > 10) {
+      return 'The priority must be between 1 and 10';
+    }
+    return null;
+  }
+
+  static String? validateNotEmpty(String? value) {
+    if (value == null || value.isEmpty || value.trim() == "") {
+      return 'The field can\'t be empty';
+    }
+    return null;
+  }
 }
