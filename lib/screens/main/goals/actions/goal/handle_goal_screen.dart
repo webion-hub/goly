@@ -36,7 +36,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
-  DateTime? expirationDate;
+  late DateTime? expirationDate = widget.goal?.expirationDate;
   void privateGoalChange(bool value) {
     setState(() {
       privateGoal = value;
@@ -59,10 +59,12 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
     await showCalendarDatePicker2Dialog(
       context: context,
       config: CalendarDatePicker2WithActionButtonsConfig(
-          firstDate: DateTime.now(), lastDate: DateTime(2030)),
+          firstDate: DateTime.now(),
+          lastDate: DateTime((DateTime.now().year + 10))),
       dialogSize: const Size(325, 400),
       initialValue: [DateTime.now()],
     ).then((value) => expirationDate = value?.first);
+    setState(() {});
   }
 
   @override

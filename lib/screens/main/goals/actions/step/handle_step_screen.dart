@@ -1,3 +1,4 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
@@ -5,8 +6,10 @@ import 'package:goly/services/step_service.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
+import 'package:goly/widgets/list_tile/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:intl/intl.dart';
 
 class HandleStepScreen extends StatefulWidget {
   static const String routeNameAdd = "/add-step";
@@ -27,6 +30,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
       TextEditingController(text: widget.step?.name ?? '');
   late TextEditingController reward =
       TextEditingController(text: widget.step?.reward ?? '');
+  late DateTime? expirationDate = widget.step?.expirationDate;
   bool privateStep = false;
   bool privateReward = false;
 
@@ -42,6 +46,18 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
     });
   }
 
+  void _showDatePicker() async {
+    await showCalendarDatePicker2Dialog(
+      context: context,
+      config: CalendarDatePicker2WithActionButtonsConfig(
+          firstDate: DateTime.now(),
+          lastDate: DateTime((DateTime.now().year + 10))),
+      dialogSize: const Size(325, 400),
+      initialValue: [DateTime.now()],
+    ).then((value) => expirationDate = value?.first);
+    setState(() {});
+  }
+
   void addStep() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
@@ -55,6 +71,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
       reward: reward.text,
       privateStep: privateStep,
       privateReward: privateReward,
+      expirationDate: expirationDate,
     );
     if (widget.step == null) {
       await StepService.addStepToGoal(
@@ -94,6 +111,14 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                 hintText: 'Reward',
                 textInputType: TextInputType.text,
                 label: 'Reward',
+              ),
+              SettingsListTile(
+                icon: Icons.date_range_outlined,
+                text: expirationDate == null
+                    ? 'Set an expiration date'
+                    : 'Expiration date: ${DateFormat.yMd().format(expirationDate!)}',
+                onTap: _showDatePicker,
+                ifTrailing: false,
               ),
               SettingsSwitcherListTile(
                   initialValue: privateStep,

@@ -1,3 +1,5 @@
+import 'package:goly/utils/utils.dart';
+
 class StepModel {
   int id;
   String name;
@@ -5,6 +7,7 @@ class StepModel {
   bool completed;
   bool privateStep;
   bool privateReward;
+  DateTime? expirationDate;
 
   StepModel({
     required this.id,
@@ -13,6 +16,7 @@ class StepModel {
     this.completed = false,
     this.privateStep = false,
     this.privateReward = false,
+    this.expirationDate,
   });
 
   StepModel.fromJson(Map<String, dynamic> json)
@@ -21,6 +25,7 @@ class StepModel {
         reward = json['reward'],
         completed = json['completed'],
         privateStep = json['privateStep'],
+        expirationDate = Utils.dateTimeToTimeStamp(json['expirationDate']),
         privateReward = json['privateReward'];
 
   Map<String, dynamic> toJson() {
@@ -30,6 +35,7 @@ class StepModel {
     data['reward'] = reward;
     data['completed'] = completed;
     data['privateStep'] = privateStep;
+    data['expirationDate'] = expirationDate;
     data['privateReward'] = privateReward;
 
     return data;
