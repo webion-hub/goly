@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/services/step_service.dart';
+import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
 import 'package:goly/widgets/list_tile/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:intl/intl.dart';
 
 class HandleStepScreen extends StatefulWidget {
   static const String routeNameAdd = "/add-step";
@@ -116,7 +116,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
                 icon: Icons.date_range_outlined,
                 text: expirationDate == null
                     ? 'Set an expiration date'
-                    : 'Expiration date: ${DateFormat.yMd().format(expirationDate!)}',
+                    : 'Expiration date: ${Utils.formatDate(expirationDate!)}',
                 onTap: _showDatePicker,
                 ifTrailing: false,
               ),

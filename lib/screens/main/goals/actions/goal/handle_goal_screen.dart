@@ -1,6 +1,7 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
@@ -10,7 +11,6 @@ import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
-import 'package:intl/intl.dart';
 
 class HandleGoalScreen extends StatefulWidget {
   static const String routeNameAdd = "/add-goal";
@@ -168,7 +168,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       icon: Icons.date_range_outlined,
                       text: expirationDate == null
                           ? 'Set an expiration date'
-                          : 'Expiration date: ${DateFormat.yMd().format(expirationDate!)}',
+                          : 'Expiration date: ${Utils.formatDate(expirationDate!)}',
                       onTap: _showDatePicker,
                       ifTrailing: false,
                     ),
