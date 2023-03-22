@@ -1,4 +1,5 @@
 import 'package:goly/models/step.dart';
+import 'package:goly/utils/utils.dart';
 
 class GoalModel {
   int id;
@@ -9,21 +10,22 @@ class GoalModel {
   bool privateGoal;
   bool privateDescription;
   bool privateReward;
+  DateTime? expirationDate;
   List<StepModel>? steps;
   int priority;
 
-  GoalModel({
-    required this.name,
-    required this.id,
-    this.description,
-    this.steps,
-    this.reward,
-    this.completed = false,
-    this.privateGoal = true,
-    this.privateDescription = true,
-    this.privateReward = true,
-    this.priority = 1,
-  });
+  GoalModel(
+      {required this.name,
+      required this.id,
+      this.description,
+      this.steps,
+      this.reward,
+      this.completed = false,
+      this.privateGoal = true,
+      this.privateDescription = true,
+      this.privateReward = true,
+      this.priority = 1,
+      this.expirationDate});
 
   GoalModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],
@@ -37,6 +39,7 @@ class GoalModel {
         privateGoal = json['privateGoal'],
         privateDescription = json['privateDescription'],
         priority = json['priority'],
+        expirationDate = Utils.dateTimeToTimeStamp(json['expirationDate']),
         privateReward = json['privateReward'] ?? false;
 
   Map<String, dynamic> toJson() {

@@ -31,6 +31,9 @@ class Utils {
   }
 
   static dateTimeToTimeStamp(dynamic date) {
+    if (date == null) {
+      return null;
+    }
     return DateTime.parse((date as Timestamp).toDate().toString());
   }
 }

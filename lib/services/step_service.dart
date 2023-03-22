@@ -71,4 +71,12 @@ class StepService extends Service {
       'steps': FieldValue.arrayRemove([step.toJson()])
     });
   }
+
+  // static Future switchStepsPosiiton({
+  //   required String categoryId,
+  //   required int goalId,
+  //   required int stepIndex1,
+  //   required int stepIndex2,
+  // }) async {
+  //    editStep(categoryId: categoryId, goalId: goalId, step: )
 }
