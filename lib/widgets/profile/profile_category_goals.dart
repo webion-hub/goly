@@ -34,7 +34,7 @@ class ProfileCategoryGoals extends StatelessWidget {
 
           return ListView(
             shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
               ProfileCategoryGoalsSection(goals: goals),
               UserCategoryPosts(uid: uid, categoryName: categoryName),

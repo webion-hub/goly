@@ -5,7 +5,6 @@ import 'package:goly/widgets/layout/app_bars/profile_app_bar.dart';
 import 'package:goly/widgets/layout/indicators.dart';
 import 'package:goly/widgets/profile/user_profile.dart';
 import 'package:goly/models/user.dart';
-import 'package:goly/utils/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/me';
@@ -18,19 +17,16 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar:
           profileId == Utils.currentUid() ? const ProfileAppBar() : AppBar(),
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        padding: Constants.pagePadding,
-        child: StreamBuilder(
-            stream: UserService.getUserStream(uid: profileId),
-            builder: (context, snapshot) {
-              if (snapshot.data?.data() == null) {
-                return buffering();
-              }
-              UserModel user = UserModel.fromJson(
-                  snapshot.data?.data() as Map<String, dynamic>);
-              return UserProfile(user: user);
-            }),
+      body: StreamBuilder(
+        stream: UserService.getUserStream(uid: profileId),
+        builder: (context, snapshot) {
+          if (snapshot.data?.data() == null) {
+            return buffering();
+          }
+          UserModel user =
+              UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
+          return UserProfile(user: user);
+        },
       ),
     );
   }

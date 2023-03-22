@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/models/category.dart';
+import 'package:goly/services/category_service.dart';
 import 'package:goly/services/user_service.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/follow_button.dart';
 import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
 import 'package:goly/widgets/layout/custom_divider.dart';
-import 'package:goly/widgets/profile/user_goals.dart';
+import 'package:goly/widgets/layout/indicators.dart';
+import 'package:goly/widgets/profile/profile_category_goals.dart';
 import 'package:goly/widgets/profile/user_image.dart';
 import 'package:goly/models/user.dart';
 import 'package:goly/screens/main/profile/handle_profile_screen.dart';
@@ -16,11 +20,12 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<CategoryModel> categories = [];
     void goToHandleProfileScreen() {
       GoRouter.of(context).push(HandleProfileScreen.routeNameEdit, extra: user);
     }
 
-    return Column(
+    var publicProfileInformations = Column(
       children: [
         Row(
           children: [
@@ -81,11 +86,73 @@ class UserProfile extends StatelessWidget {
         const SizedBox(height: 10),
         const CustomDivider(),
         const SizedBox(height: 10),
-        UserGoals(
-          user: user,
+        const Text(
+          'Public categories',
+          style: TextStyle(fontSize: 16.0),
         ),
       ],
     );
+    return StreamBuilder(
+        stream: CategoryService.getOrderedCategories(uid: user.id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return buffering();
+          }
+          if (snapshot.data == null) {
+            return publicProfileInformations;
+          }
+          for (var element in snapshot.data!.docs) {
+            CategoryModel category = CategoryModel.fromJson(element.data());
+            if (!category.private) {
+              categories.add(category);
+            }
+          }
+          if (categories.isEmpty) {
+            return const Center(
+              child: Text('This user has no public categories'),
+            );
+          }
+          return DefaultTabController(
+            length: categories.length,
+            child: NestedScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return [
+                  SliverAppBar(
+                    collapsedHeight: 280,
+                    expandedHeight: 280,
+                    flexibleSpace: Padding(
+                      padding: Constants.pagePadding,
+                      child: publicProfileInformations,
+                    ),
+                  ),
+                  SliverPersistentHeader(
+                    floating: true,
+                    pinned: true,
+                    delegate: MyDelegate(
+                      tabBar: TabBar(
+                        isScrollable: true,
+                        tabs: categories
+                            .map((e) => Tab(
+                                  child: Text(e.name),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                  )
+                ];
+              },
+              body: TabBarView(
+                  children: categories
+                      .map((e) => ProfileCategoryGoals(
+                            uid: user.id,
+                            categoryId: e.id,
+                            categoryName: e.name,
+                          ))
+                      .toList()),
+            ),
+          );
+        });
   }
 
   Column buildStatColumn(int num, String label) {
@@ -111,6 +178,28 @@ class UserProfile extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class MyDelegate extends SliverPersistentHeaderDelegate {
+  TabBar tabBar;
+  MyDelegate({required this.tabBar});
+  @override
+  double get minExtent => tabBar.preferredSize.height;
+  @override
+  double get maxExtent => tabBar.preferredSize.height;
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: tabBar,
     );
   }
 }
