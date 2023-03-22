@@ -4,6 +4,7 @@ import 'package:goly/models/goal.dart';
 import 'package:goly/screens/main/goals/actions/goal/goal_screen.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/dialogs/async_confirmation_dialog.dart';
 import 'package:goly/widgets/list_tile/dismissible/dismissible_list_title.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -56,7 +57,9 @@ class _GoalListTileState extends State<GoalListTile> {
             progressColor: Theme.of(context).colorScheme.primary,
           ),
         ),
-        subtitle: widget.goal.reward != null ? Text(widget.goal.reward!) : null,
+        subtitle: widget.goal.expirationDate != null
+            ? Text(Utils.formatDate(widget.goal.expirationDate!))
+            : null,
         trailing:
             Icon(Constants.getLockerIcon(private: widget.goal.privateGoal)),
       ),

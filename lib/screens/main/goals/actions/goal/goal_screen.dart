@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
@@ -16,6 +17,8 @@ class GoalScreen extends StatelessWidget {
   final int goalId;
   final String categoryId;
   const GoalScreen({super.key, required this.categoryId, required this.goalId});
+
+  void reorder(int oldIndex, int newIndex) {}
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +86,21 @@ class GoalScreen extends StatelessWidget {
                           goal: g,
                         )
                       : const SizedBox(),
-                  ...?g.steps?.map((step) => StepListTile(
-                      step: step, categoryId: categoryId, goalId: goalId)),
+                  ListView(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    children: [
+                      ...?g.steps
+                          ?.orderBy((element) => element.expirationDate)
+                          .map((step) => Container(
+                                key: ValueKey(step.id),
+                                child: StepListTile(
+                                    step: step,
+                                    categoryId: categoryId,
+                                    goalId: goalId),
+                              )),
+                    ],
+                  ),
                   ActionCard(
                     text: 'Add step',
                     icon: Icons.add,

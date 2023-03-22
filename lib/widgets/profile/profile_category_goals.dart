@@ -32,7 +32,9 @@ class ProfileCategoryGoals extends StatelessWidget {
             ));
           }
 
-          return Column(
+          return ListView(
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
             children: [
               ProfileCategoryGoalsSection(goals: goals),
               UserCategoryPosts(uid: uid, categoryName: categoryName),
