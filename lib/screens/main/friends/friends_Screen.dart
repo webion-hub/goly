@@ -25,8 +25,7 @@ class FriendsScreen extends StatelessWidget {
                   return buffering();
                 }
 
-                UserModel user = UserModel.fromJson(
-                    userSnapshot.data?.data() as Map<String, dynamic>);
+                UserModel user = UserModel.fromJson(userSnapshot.data?.data() as Map<String, dynamic>);
                 return StreamBuilder(
                   stream: PostService.getPostStream(user: user),
                   builder: (context, snapshot) {
@@ -45,8 +44,7 @@ class FriendsScreen extends StatelessWidget {
                       itemBuilder: ((context, index) {
                         return PostCard(
                           post: PostModel.fromJson(
-                            snapshot.data?.docs[index].data()
-                                as Map<String, dynamic>,
+                            snapshot.data?.docs[index].data() as Map<String, dynamic>,
                           ),
                         );
                       }),

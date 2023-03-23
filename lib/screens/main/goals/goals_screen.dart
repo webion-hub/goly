@@ -35,7 +35,9 @@ class _MainPageState extends State<GoalsScreen> {
                   return const Text('Start adding some categories');
                 }
                 snapshot.data?.docs.map((element) {
-                  categories.add(CategoryModel.fromJson(element.data()));
+                  categories.add(
+                    CategoryModel.fromJson(element.data()),
+                  );
                 });
 
                 return Column(
@@ -54,8 +56,7 @@ class _MainPageState extends State<GoalsScreen> {
                     ActionCard(
                       text: "Add category",
                       icon: Icons.add,
-                      action: () => GoRouter.of(context)
-                          .push(HandleCategoryScreen.routeNameAdd),
+                      action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
                     ),
                   ],
                 );

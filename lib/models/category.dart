@@ -1,11 +1,11 @@
 class CategoryModel {
-  String id;
-  String name;
-  String? description;
-  bool private;
-  bool privateDescription;
+  final String id;
+  final String name;
+  final String? description;
+  final bool private;
+  final bool privateDescription;
 
-  CategoryModel({
+  const CategoryModel({
     required this.id,
     required this.name,
     required this.private,

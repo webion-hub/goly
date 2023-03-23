@@ -1,13 +1,13 @@
 import 'package:goly/utils/utils.dart';
 
 class StepModel {
-  int id;
-  String name;
-  String? reward;
+  final int id;
+  final String name;
+  final String? reward;
   bool completed;
-  bool privateStep;
-  bool privateReward;
-  DateTime? expirationDate;
+  final bool privateStep;
+  final bool privateReward;
+  final DateTime? expirationDate;
 
   StepModel({
     required this.id,

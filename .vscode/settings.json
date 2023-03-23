@@ -1,4 +1,10 @@
 {
   "editor.formatOnSave": true,
-  "eslint.codeActionsOnSave.rules": null
+  "eslint.codeActionsOnSave.rules": null,
+  "dart.lineLength": 130,
+  "[dart]": {
+    "editor.rulers": [
+      130
+    ],
+  }
 }

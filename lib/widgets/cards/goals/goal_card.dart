@@ -27,8 +27,7 @@ class GoalCard extends StatelessWidget {
                         child: CircularPercentIndicator(
                           radius: 16.0,
                           lineWidth: 4.0,
-                          percent:
-                              GoalService.getPercentageOfCompletition(goal),
+                          percent: GoalService.getPercentageOfCompletition(goal),
                           progressColor: Theme.of(context).colorScheme.primary,
                         ),
                       ),
@@ -98,9 +97,7 @@ class GoalExpirationDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return goal.expirationDate == null
-        ? const SizedBox()
-        : Text(Utils.formatDate(goal.expirationDate!));
+    return goal.expirationDate == null ? const SizedBox() : Text(Utils.formatDate(goal.expirationDate!));
   }
 }
 
@@ -114,9 +111,7 @@ class NoEditDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return goal.description == null ||
-            goal.description == "" ||
-            goal.privateDescription
+    return goal.description == null || goal.description == "" || goal.privateDescription
         ? const SizedBox()
         : Column(
             children: [

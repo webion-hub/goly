@@ -37,8 +37,7 @@ class _PageShellState extends State<PageShell> {
   }
 
   addData() async {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
+    UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
   }
 
@@ -55,12 +54,9 @@ class _PageShellState extends State<PageShell> {
   }
 
   Color getColor(List<String> paths) {
-    final isSelectedPage =
-        paths.any((element) => element == GoRouter.of(context).location);
+    final isSelectedPage = paths.any((element) => element == GoRouter.of(context).location);
 
-    return isSelectedPage
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).focusColor;
+    return isSelectedPage ? Theme.of(context).colorScheme.primary : Theme.of(context).focusColor;
   }
 
   @override
@@ -77,23 +73,19 @@ class _PageShellState extends State<PageShell> {
             border: Border.all(style: BorderStyle.none),
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.diversity_3_rounded,
-                    color: getColor(friendsPagesRoute)),
+                icon: Icon(Icons.diversity_3_rounded, color: getColor(friendsPagesRoute)),
               ),
               BottomNavigationBarItem(
-                icon:
-                    Icon(Icons.flag_rounded, color: getColor(goalsPagesRouter)),
+                icon: Icon(Icons.flag_rounded, color: getColor(goalsPagesRouter)),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.add, color: getColor(addPagesRoute)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.insights_rounded,
-                    color: getColor(statisticsPagesRoute)),
+                icon: Icon(Icons.insights_rounded, color: getColor(statisticsPagesRoute)),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_rounded,
-                    color: getColor(profilePagesRoute)),
+                icon: Icon(Icons.person_rounded, color: getColor(profilePagesRoute)),
               ),
             ],
             onTap: navigationTapped,

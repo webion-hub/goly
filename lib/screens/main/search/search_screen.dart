@@ -34,8 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: TextFormField(
             autofocus: true,
             controller: searchController,
-            decoration:
-                const InputDecoration(labelText: 'Search for a user...'),
+            decoration: const InputDecoration(labelText: 'Search for a user...'),
             onChanged: (String _) {
               setState(() {
                 isShowUsers = true;
@@ -46,14 +45,15 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: isShowUsers
           ? FutureBuilder(
-              future:
-                  UserService.searchUsers(searchText: searchController.text),
+              future: UserService.searchUsers(searchText: searchController.text),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return customBuffering();
                 }
                 List<UserModel> users = snapshot.data!.docs
-                    .map((e) => UserModel.fromJson(e.data()))
+                    .map(
+                      (e) => UserModel.fromJson(e.data()),
+                    )
                     .toList();
                 return ListView.builder(
                   itemCount: users.length,

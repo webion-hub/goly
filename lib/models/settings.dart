@@ -22,8 +22,7 @@ class SettingsModel {
       : privateAccount = json['privateAccount'] as dynamic,
         privateGoalsByDefault = json['privateGoalsByDefault'] as dynamic,
         privateRewardByDefault = json['privateRewardByDefault'] as dynamic,
-        privateDescriptionsByDefault =
-            json['privateDescriptionsByDefault'] as dynamic;
+        privateDescriptionsByDefault = json['privateDescriptionsByDefault'] as dynamic;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

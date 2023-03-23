@@ -18,8 +18,7 @@ class CommentsScreen extends StatefulWidget {
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  final TextEditingController commentEditingController =
-      TextEditingController();
+  final TextEditingController commentEditingController = TextEditingController();
   void postComment(String uid, String name, String profilePic) async {
     try {
       String res = await CommentService.postComment(
@@ -61,8 +60,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
       ),
       body: StreamBuilder(
         stream: CommentService.getCommentsStreamFromPost(postId: widget.postId),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -81,8 +79,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
       bottomNavigationBar: SafeArea(
         child: Container(
           height: kToolbarHeight,
-          margin:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          margin: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           padding: const EdgeInsets.only(left: 16, right: 8),
           child: Row(
             children: [
@@ -114,12 +111,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   user.photoUrl,
                 ),
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   child: Text(
                     'Post',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                    style: TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                 ),
               )

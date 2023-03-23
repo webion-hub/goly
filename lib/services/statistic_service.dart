@@ -16,8 +16,7 @@ class StatisticService extends Service {
         .then((categories) async {
       final futures = categories.docs.map((e) async {
         var category = CategoryModel.fromJson(e.data());
-        var numberOfGoals =
-            await CategoryService.getNumberofGoals(categoryId: category.id);
+        var numberOfGoals = await CategoryService.getNumberofGoals(categoryId: category.id);
         categoriesData.add(GoalsPerLifeAreaModel(
           category: category.name,
           goalsNumber: numberOfGoals,
@@ -38,12 +37,10 @@ class StatisticService extends Service {
         .then((categories) async {
       final futures = categories.docs.map((e) async {
         var category = CategoryModel.fromJson(e.data());
-        var percentageOfCompletition =
-            await CategoryService.getPercentageOfCompletition(category);
+        var percentageOfCompletition = await CategoryService.getPercentageOfCompletition(category);
         categoriesData.add(LifeAreaProgressModel(
           category: category.name,
-          percentageOfCompletition:
-              double.parse((percentageOfCompletition).toStringAsFixed(2)) * 100,
+          percentageOfCompletition: double.parse((percentageOfCompletition).toStringAsFixed(2)) * 100,
         ));
       });
       await Future.wait(futures);

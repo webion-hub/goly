@@ -5,12 +5,13 @@ class MainOutlinedButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback action;
   final bool fullWidth;
-  const MainOutlinedButton(
-      {super.key,
-      required this.text,
-      required this.icon,
-      required this.action,
-      this.fullWidth = false});
+  const MainOutlinedButton({
+    super.key,
+    required this.text,
+    required this.icon,
+    required this.action,
+    this.fullWidth = false,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -23,8 +23,7 @@ class GoalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void goToHandleGoal(GoalModel goal) {
-      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit,
-          extra: {'categoryId': categoryId, 'goal': goal});
+      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
     void deleteGoal(int goalId) {
@@ -32,28 +31,24 @@ class GoalScreen extends StatelessWidget {
         context: context,
         builder: (context) => AsyncConfirmationDialog(
           title: 'Are you sure?',
-          message:
-              'Are you sure you want to delete this goal? All goals steps it will be deleted',
+          message: 'Are you sure you want to delete this goal? All goals steps it will be deleted',
           noAction: () {
             Navigator.of(context).pop();
           },
           yesAction: () async {
             Navigator.of(context).pop();
-            await GoalService.deleteGoal(categoryId: categoryId, goalId: goalId)
-                .then((value) => GoRouter.of(context).pop());
+            await GoalService.deleteGoal(categoryId: categoryId, goalId: goalId).then((value) => GoRouter.of(context).pop());
           },
         ),
       );
     }
 
     void goToHandleStep() async {
-      GoRouter.of(context).push(HandleStepScreen.routeNameAdd,
-          extra: {'categoryId': categoryId, 'goalId': goalId});
+      GoRouter.of(context).push(HandleStepScreen.routeNameAdd, extra: {'categoryId': categoryId, 'goalId': goalId});
     }
 
     return StreamBuilder(
-        stream: GoalService.getGoalStreamFromId(
-            categoryId: categoryId, goalId: goalId),
+        stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
         builder: (context, snapshot) {
           if (snapshot.data == null || snapshot.data!.data() == null) {
             return const Text('Error');
@@ -77,9 +72,7 @@ class GoalScreen extends StatelessWidget {
               padding: Constants.pagePadding,
               child: Column(
                 children: [
-                  g.description != null && g.description!.isNotEmpty
-                      ? DescriptionCard(text: g.description!)
-                      : const SizedBox(),
+                  g.description != null && g.description!.isNotEmpty ? DescriptionCard(text: g.description!) : const SizedBox(),
                   g.steps!.isEmpty
                       ? MarkAsCompletedListTile(
                           categoryId: categoryId,
@@ -90,15 +83,14 @@ class GoalScreen extends StatelessWidget {
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     children: [
-                      ...?g.steps
-                          ?.orderBy((element) => element.expirationDate)
-                          .map((step) => Container(
-                                key: ValueKey(step.id),
-                                child: StepListTile(
-                                    step: step,
-                                    categoryId: categoryId,
-                                    goalId: goalId),
-                              )),
+                      ...?g.steps?.orderBy((element) => element.expirationDate).map((step) => Container(
+                            key: ValueKey(step.id),
+                            child: StepListTile(
+                              step: step,
+                              categoryId: categoryId,
+                              goalId: goalId,
+                            ),
+                          )),
                     ],
                   ),
                   ActionCard(

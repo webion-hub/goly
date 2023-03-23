@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget {
           create: (_) => ThemeProvider(initialDarkMode: false),
         ),
       ],
-      child: Consumer<ThemeProvider>(
-          builder: (context, ThemeProvider notifier, child) {
+      child: Consumer<ThemeProvider>(builder: (context, ThemeProvider notifier, child) {
         return MaterialApp.router(
           routerConfig: router,
           title: Constants.appName,

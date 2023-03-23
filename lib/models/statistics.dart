@@ -5,8 +5,7 @@ class GoalsPerLifeAreaModel {
 }
 
 class LifeAreaProgressModel {
-  LifeAreaProgressModel(
-      {required this.category, required this.percentageOfCompletition});
+  LifeAreaProgressModel({required this.category, required this.percentageOfCompletition});
   final String category;
   final double percentageOfCompletition;
 }

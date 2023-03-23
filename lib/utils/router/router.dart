@@ -17,9 +17,7 @@ import 'package:goly/utils/router/pages/main/profile_pages.dart';
 import 'package:goly/utils/router/pages/main/statistics_pages.dart';
 
 final router = GoRouter(
-  initialLocation: FirebaseAuth.instance.currentUser == null
-      ? AuthScreen.routeName
-      : FriendsScreen.routeName,
+  initialLocation: FirebaseAuth.instance.currentUser == null ? AuthScreen.routeName : FriendsScreen.routeName,
   errorPageBuilder: (context, state) => MaterialPage<void>(
     key: state.pageKey,
     child: ErrorScreen(error: state.error),
