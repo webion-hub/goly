@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:goly/models/video_collection.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 
 class VideoCard extends StatelessWidget {
   final ThumbnailInfo video;
@@ -11,9 +11,9 @@ class VideoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Future<void> goToVideo() async {
       Uri url = Uri.parse(video.url);
-      if (!await launchUrl(url)) {
-        throw Exception('Could not launch $url');
-      }
+      // if (!await launchUrl(url)) {
+      //   throw Exception('Could not launch $url');
+      // }
     }
 
     return GestureDetector(
