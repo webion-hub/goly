@@ -15,20 +15,14 @@ class PostService extends Service {
   static Stream<QuerySnapshot<Object?>> getPostStream({
     required UserModel user,
   }) {
-    return _collection
-        .where('uid', whereIn: [...user.following, user.id])
-        .orderBy('datePublished', descending: true)
-        .snapshots();
+    return _collection.where('uid', whereIn: [...user.following, user.id]).orderBy('datePublished', descending: true).snapshots();
   }
 
   static Stream<QuerySnapshot<Object?>> getPostStreamByCategory({
     required String uid,
     required String category,
   }) {
-    return _collection
-        .where('uid', isEqualTo: uid)
-        .where('category', isEqualTo: category)
-        .snapshots();
+    return _collection.where('uid', isEqualTo: uid).where('category', isEqualTo: category).snapshots();
   }
 
   static Future<String> uploadPost({
@@ -39,11 +33,9 @@ class PostService extends Service {
     required String profImage,
     required String? category,
   }) async {
-    // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "Some error occurred";
     try {
-      String photoUrl =
-          await StorageMethods().uploadImageToStorage('posts', file, true);
+      String photoUrl = await StorageMethods().uploadImageToStorage('posts', file, true);
       String postId = const Uuid().v1(); // creates unique id based on time
       PostModel post = PostModel(
         description: description,

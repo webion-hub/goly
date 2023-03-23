@@ -58,11 +58,9 @@ class UserProfile extends StatelessWidget {
                           action: goToHandleProfileScreen,
                         )
                       : FollowButton(
-                          isAlreadyFollowing:
-                              user.followers.contains(Utils.currentUid()),
+                          isAlreadyFollowing: user.followers.contains(Utils.currentUid()),
                           onPressed: () async {
-                            await UserService.followUser(
-                                Utils.currentUid(), user.id);
+                            await UserService.followUser(Utils.currentUid(), user.id);
                           },
                         ),
                 ],
@@ -195,8 +193,7 @@ class MyDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
       child: tabBar,

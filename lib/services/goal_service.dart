@@ -15,8 +15,7 @@ class GoalService extends Service {
     required String categoryId,
     required GoalModel goal,
   }) async {
-    var numberOfGoals =
-        await CategoryService.getNumberofGoals(categoryId: categoryId);
+    var numberOfGoals = await CategoryService.getNumberofGoals(categoryId: categoryId);
 
     return await _collection
         .doc(Utils.currentUid())
@@ -27,8 +26,7 @@ class GoalService extends Service {
         .set(goal.toJson());
   }
 
-  static Future editGoal(
-      {required String categoryId, required GoalModel goal}) async {
+  static Future editGoal({required String categoryId, required GoalModel goal}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -38,8 +36,7 @@ class GoalService extends Service {
         .update(goal.toJson());
   }
 
-  static Future deleteGoal(
-      {required String categoryId, required int goalId}) async {
+  static Future deleteGoal({required String categoryId, required int goalId}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -49,8 +46,7 @@ class GoalService extends Service {
         .delete();
   }
 
-  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalStreamFromId(
-      {required String categoryId, required int goalId}) {
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> getGoalStreamFromId({required String categoryId, required int goalId}) {
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -60,8 +56,7 @@ class GoalService extends Service {
         .snapshots();
   }
 
-  static Future<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId(
-      {required String categoryId, required int goalId}) async {
+  static Future<DocumentSnapshot<Map<String, dynamic>>> getGoalFromId({required String categoryId, required int goalId}) async {
     return await _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -71,8 +66,7 @@ class GoalService extends Service {
         .get();
   }
 
-  static Future<int> getNumberOfSteps(
-      {required String categoryId, required int goalId}) async {
+  static Future<int> getNumberOfSteps({required String categoryId, required int goalId}) async {
     return _collection
         .doc(Utils.currentUid())
         .collection('categories')
@@ -83,10 +77,7 @@ class GoalService extends Service {
         .then((value) => GoalModel.fromJson(value.data()!).steps!.length);
   }
 
-  static Future toggleGoalCompleted(
-      {required String categoryId,
-      required GoalModel goal,
-      required bool value}) async {
+  static Future toggleGoalCompleted({required String categoryId, required GoalModel goal, required bool value}) async {
     goal.completed = value;
     return await GoalService.editGoal(categoryId: categoryId, goal: goal);
   }

@@ -32,10 +32,8 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
   bool isLoading = false;
   late String? imageUrl = widget.user?.photoUrl;
   final formKey = GlobalKey<FormState>();
-  late final _usernameController =
-      TextEditingController(text: widget.user?.username ?? '');
-  late final _bioController =
-      TextEditingController(text: widget.user?.bio ?? '');
+  late final _usernameController = TextEditingController(text: widget.user?.username ?? '');
+  late final _bioController = TextEditingController(text: widget.user?.bio ?? '');
   String? errorMessage;
 
   @override
@@ -50,18 +48,14 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
       isLoading = true;
     });
 
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('user_image')
-        .child('${widget.uid}${p.extension(image.path)}');
+    final ref = FirebaseStorage.instance.ref().child('user_image').child('${widget.uid}${p.extension(image.path)}');
 
     ref.putFile(image).then((p0) {
       ref.getDownloadURL().then((value) {
         imageUrl = value.toString();
       });
     }).onError((error, stackTrace) {
-      Utils.showSnackbBar(
-          'An error has occurred uploading the image. Please try again');
+      Utils.showSnackbBar('An error has occurred uploading the image. Please try again');
     }).whenComplete(() {
       setState(() {
         isLoading = false;
@@ -94,8 +88,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
         router.go(ProfileScreen.routeName);
       }
     } catch (e) {
-      Utils.showSnackbBar(
-          'An error has occurred updating your profile. Please try again');
+      Utils.showSnackbBar('An error has occurred updating your profile. Please try again');
     }
   }
 
@@ -116,16 +109,13 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  widget.user != null
-                      ? 'Edit user information'
-                      : 'Set up your profile',
+                  widget.user != null ? 'Edit user information' : 'Set up your profile',
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 20.0),
                 UserImagePicker(
                   imagePickFn: pickedImage,
-                  imagePath:
-                      widget.user?.photoUrl ?? Constants.userImageDefault,
+                  imagePath: widget.user?.photoUrl ?? Constants.userImageDefault,
                 ),
                 const SizedBox(height: 20.0),
                 const SizedBox(height: 5.0),
@@ -145,9 +135,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
                   maxLines: 3,
                 ),
                 const SizedBox(height: 20.0),
-                isLoading
-                    ? buffering()
-                    : MainButton(text: "Set up", onPressed: setUp),
+                isLoading ? buffering() : MainButton(text: "Set up", onPressed: setUp),
               ],
             ),
           ),

@@ -18,13 +18,10 @@ class _CommentsNumberState extends State<CommentsNumber> {
     return Align(
       alignment: Alignment.centerLeft,
       child: GestureDetector(
-        onTap: () => GoRouter.of(context)
-            .push(CommentsScreen.routeName, extra: widget.postId),
+        onTap: () => GoRouter.of(context).push(CommentsScreen.routeName, extra: widget.postId),
         child: StreamBuilder(
-            stream:
-                CommentService.getCommentsStreamFromPost(postId: widget.postId),
-            builder: (context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            stream: CommentService.getCommentsStreamFromPost(postId: widget.postId),
+            builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               int numberOfComments = snapshot.data?.docs.length ?? 0;
               return numberOfComments == 0
                   ? const SizedBox()

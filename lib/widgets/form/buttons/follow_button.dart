@@ -14,7 +14,10 @@ class FollowButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom().copyWith(
-          minimumSize: const MaterialStatePropertyAll(Size.fromHeight(40))),
+        minimumSize: const MaterialStatePropertyAll(
+          Size.fromHeight(40),
+        ),
+      ),
       child: Text(
         isAlreadyFollowing ? 'Unfollow' : 'Follow',
         style: const TextStyle(

@@ -15,16 +15,14 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          profileId == Utils.currentUid() ? const ProfileAppBar() : AppBar(),
+      appBar: profileId == Utils.currentUid() ? const ProfileAppBar() : AppBar(),
       body: StreamBuilder(
         stream: UserService.getUserStream(uid: profileId),
         builder: (context, snapshot) {
           if (snapshot.data?.data() == null) {
             return buffering();
           }
-          UserModel user =
-              UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
+          UserModel user = UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
           return UserProfile(user: user);
         },
       ),

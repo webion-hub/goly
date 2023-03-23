@@ -14,18 +14,21 @@ class ExplenationScreen extends StatelessWidget {
     return IntroductionScreen(
       pages: Introductions.welcome.map((e) {
         return PageViewModel(
-            decoration: PageDecoration(
-              bodyTextStyle: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context).colorScheme.onBackground),
+          decoration: PageDecoration(
+            bodyTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).colorScheme.onBackground,
             ),
-            title: e.title,
-            body: e.description,
-            image: Center(
-                child: Icon(
+          ),
+          title: e.title,
+          body: e.description,
+          image: Center(
+            child: Icon(
               e.icon,
               size: 70,
-            )));
+            ),
+          ),
+        );
       }).toList(),
       showSkipButton: true,
       showNextButton: false,

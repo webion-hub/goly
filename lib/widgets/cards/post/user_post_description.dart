@@ -27,14 +27,11 @@ class UserPostDescription extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "$username: ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.inverseSurface),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.inverseSurface),
                 ),
                 TextSpan(
                   text: description,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.inverseSurface),
+                  style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface),
                 ),
               ],
             ),

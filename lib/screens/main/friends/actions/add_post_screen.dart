@@ -73,9 +73,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   void postImage(String uid, String username, String profImage) async {
-    if (_file == null ||
-        selectedCategory == null ||
-        _descriptionController.text == "") {
+    if (_file == null || selectedCategory == null || _descriptionController.text == "") {
       Utils.showSnackbBar('Fill out all the fields');
       return;
     }
@@ -87,12 +85,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
     try {
       // upload to storage and db
       String res = await PostService.uploadPost(
-          description: _descriptionController.text,
-          file: _file!,
-          uid: uid,
-          username: username,
-          profImage: profImage,
-          category: selectedCategory);
+        description: _descriptionController.text,
+        file: _file!,
+        uid: uid,
+        username: username,
+        profImage: profImage,
+        category: selectedCategory,
+      );
       if (res == "success") {
         setState(() {
           isLoading = false;
@@ -128,9 +127,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   bool validateForm() {
-    return selectedCategory != null &&
-        _descriptionController.text != "" &&
-        _file != null;
+    return selectedCategory != null && _descriptionController.text != "" && _file != null;
   }
 
   @override
@@ -142,8 +139,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     var imageContainer = Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withAlpha(100)),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withAlpha(100)),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: SizedBox(

@@ -15,8 +15,7 @@ class AsyncConfirmationDialog extends StatefulWidget {
   });
 
   @override
-  State<AsyncConfirmationDialog> createState() =>
-      _AsyncConfirmationDialogState();
+  State<AsyncConfirmationDialog> createState() => _AsyncConfirmationDialogState();
 }
 
 class _AsyncConfirmationDialogState extends State<AsyncConfirmationDialog> {

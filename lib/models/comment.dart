@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/utils/utils.dart';
 
 class CommentModel {
-  String id;
-  DateTime datePublished;
-  String name;
-  String profilePic;
-  String text;
-  String uid;
+  final String id;
+  final DateTime datePublished;
+  final String name;
+  final String profilePic;
+  final String text;
+  final String uid;
 
-  CommentModel({
+  const CommentModel({
     required this.id,
     required this.datePublished,
     required this.name,

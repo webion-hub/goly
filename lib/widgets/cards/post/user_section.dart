@@ -31,8 +31,7 @@ class UserSection extends StatelessWidget {
                 if (uid == Utils.currentUid()) {
                   GoRouter.of(context).go(ProfileScreen.routeName);
                 } else {
-                  GoRouter.of(context)
-                      .push(ProfileScreen.otherUser, extra: uid);
+                  GoRouter.of(context).push(ProfileScreen.otherUser, extra: uid);
                 }
               },
               child: Row(children: [
@@ -41,8 +40,7 @@ class UserSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(username,
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Text(username, style: Theme.of(context).textTheme.bodyMedium),
                     const SizedBox(height: 5),
                     category != null ? Text(category!) : const SizedBox(),
                   ],
@@ -61,8 +59,7 @@ class UserSection extends StatelessWidget {
                             builder: (context) {
                               return Dialog(
                                 child: ListView(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                    padding: const EdgeInsets.symmetric(vertical: 16),
                                     shrinkWrap: true,
                                     children: [
                                       'Delete',
@@ -70,10 +67,7 @@ class UserSection extends StatelessWidget {
                                         .map(
                                           (e) => InkWell(
                                               child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12,
-                                                        horizontal: 16),
+                                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                                                 child: Text(e),
                                               ),
                                               onTap: () {

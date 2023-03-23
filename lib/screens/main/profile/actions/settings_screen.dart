@@ -51,42 +51,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   SettingsSwitcherListTile(
                     inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateAccount
-                        ? true
-                        : settings.privateGoalsByDefault,
+                    initialValue: settings.privateAccount ? true : settings.privateGoalsByDefault,
                     onChanged: (bool value) {
-                      SettingsService.updateSettings(
-                          privateGoalsByDefault: value);
+                      SettingsService.updateSettings(privateGoalsByDefault: value);
                     },
                     text: "Private goal by default",
                   ),
                   SettingsSwitcherListTile(
                     inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateAccount
-                        ? true
-                        : settings.privateRewardByDefault,
+                    initialValue: settings.privateAccount ? true : settings.privateRewardByDefault,
                     onChanged: (bool value) {
-                      SettingsService.updateSettings(
-                          privateRewardByDefault: value);
+                      SettingsService.updateSettings(privateRewardByDefault: value);
                     },
                     text: "Private reward by default",
                   ),
                   SettingsSwitcherListTile(
                     inactive: settings.privateAccount,
                     icon: Icons.lock,
-                    initialValue: settings.privateAccount
-                        ? true
-                        : settings.privateDescriptionsByDefault,
+                    initialValue: settings.privateAccount ? true : settings.privateDescriptionsByDefault,
                     onChanged: (bool value) {
-                      SettingsService.updateSettings(
-                          privateDescriptionsByDefault: value);
+                      SettingsService.updateSettings(privateDescriptionsByDefault: value);
                     },
                     text: "Private description by default",
                   ),
                   Consumer(
-                    builder: (context, ThemeProvider notifier, child) =>
-                        SettingsSwitcherListTile(
+                    builder: (context, ThemeProvider notifier, child) => SettingsSwitcherListTile(
                       icon: Icons.dark_mode,
                       initialValue: notifier.dark,
                       onChanged: (bool value) {

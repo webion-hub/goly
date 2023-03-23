@@ -34,23 +34,21 @@ class VideoCollection {
   PageInfo? pageInfo;
   List<Item>? items;
 
-  factory VideoCollection.fromRawJson(String str) =>
-      VideoCollection.fromJson(json.decode(str));
+  factory VideoCollection.fromRawJson(String str) => VideoCollection.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory VideoCollection.fromJson(Map<String, dynamic> json) =>
-      VideoCollection(
+  factory VideoCollection.fromJson(Map<String, dynamic> json) => VideoCollection(
         kind: json["kind"],
         etag: json["etag"],
         nextPageToken: json["nextPageToken"],
         regionCode: json["regionCode"],
-        pageInfo: json["pageInfo"] == null
-            ? null
-            : PageInfo.fromJson(json["pageInfo"]),
+        pageInfo: json["pageInfo"] == null ? null : PageInfo.fromJson(json["pageInfo"]),
         items: json["items"] == null
             ? []
-            : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
+            : List<Item>.from(
+                json["items"]!.map((x) => Item.fromJson(x)),
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,9 +57,7 @@ class VideoCollection {
         "nextPageToken": nextPageToken,
         "regionCode": regionCode,
         "pageInfo": pageInfo?.toJson(),
-        "items": items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toJson())),
+        "items": items == null ? [] : List<dynamic>.from(items!.map((x) => x.toJson())),
       };
 
   List<ThumbnailInfo> getThumnailInfo() {
@@ -71,15 +67,8 @@ class VideoCollection {
       String url = 'https://www.youtube.com/watch?v=${e.id?.videoId}';
       String? thumnailImg = e.snippet?.thumbnails?.medium?.url;
       String? description = e.snippet?.description;
-      if (title != null &&
-          e.id?.videoId != null &&
-          thumnailImg != null &&
-          description != null) {
-        thumnails.add(ThumbnailInfo(
-            title: title,
-            url: url,
-            thumnailImg: thumnailImg,
-            description: description));
+      if (title != null && e.id?.videoId != null && thumnailImg != null && description != null) {
+        thumnails.add(ThumbnailInfo(title: title, url: url, thumnailImg: thumnailImg, description: description));
       }
     });
     return thumnails;
@@ -107,8 +96,7 @@ class Item {
         kind: itemKindValues.map[json["kind"]]!,
         etag: json["etag"],
         id: json["id"] == null ? null : Id.fromJson(json["id"]),
-        snippet:
-            json["snippet"] == null ? null : Snippet.fromJson(json["snippet"]),
+        snippet: json["snippet"] == null ? null : Snippet.fromJson(json["snippet"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -149,8 +137,7 @@ final idKindValues = EnumValues({"youtube#video": IdKind.youtubeVideo});
 
 enum ItemKind { youtubeSearchResult }
 
-final itemKindValues =
-    EnumValues({"youtube#searchResult": ItemKind.youtubeSearchResult});
+final itemKindValues = EnumValues({"youtube#searchResult": ItemKind.youtubeSearchResult});
 
 class Snippet {
   Snippet({
@@ -178,21 +165,14 @@ class Snippet {
   String toRawJson() => json.encode(toJson());
 
   factory Snippet.fromJson(Map<String, dynamic> json) => Snippet(
-        publishedAt: json["publishedAt"] == null
-            ? null
-            : DateTime.parse(json["publishedAt"]),
+        publishedAt: json["publishedAt"] == null ? null : DateTime.parse(json["publishedAt"]),
         channelId: json["channelId"],
         title: json["title"],
         description: json["description"],
-        thumbnails: json["thumbnails"] == null
-            ? null
-            : Thumbnails.fromJson(json["thumbnails"]),
+        thumbnails: json["thumbnails"] == null ? null : Thumbnails.fromJson(json["thumbnails"]),
         channelTitle: json["channelTitle"],
-        liveBroadcastContent:
-            liveBroadcastContentValues.map[json["liveBroadcastContent"]],
-        publishTime: json["publishTime"] == null
-            ? null
-            : DateTime.parse(json["publishTime"]),
+        liveBroadcastContent: liveBroadcastContentValues.map[json["liveBroadcastContent"]],
+        publishTime: json["publishTime"] == null ? null : DateTime.parse(json["publishTime"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -202,16 +182,14 @@ class Snippet {
         "description": description,
         "thumbnails": thumbnails?.toJson(),
         "channelTitle": channelTitle,
-        "liveBroadcastContent":
-            liveBroadcastContentValues.reverse[liveBroadcastContent],
+        "liveBroadcastContent": liveBroadcastContentValues.reverse[liveBroadcastContent],
         "publishTime": publishTime?.toIso8601String(),
       };
 }
 
 enum LiveBroadcastContent { none }
 
-final liveBroadcastContentValues =
-    EnumValues({"none": LiveBroadcastContent.none});
+final liveBroadcastContentValues = EnumValues({"none": LiveBroadcastContent.none});
 
 class Thumbnails {
   Thumbnails({
@@ -224,16 +202,13 @@ class Thumbnails {
   Default? medium;
   Default? high;
 
-  factory Thumbnails.fromRawJson(String str) =>
-      Thumbnails.fromJson(json.decode(str));
+  factory Thumbnails.fromRawJson(String str) => Thumbnails.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
   factory Thumbnails.fromJson(Map<String, dynamic> json) => Thumbnails(
-        thumbnailsDefault:
-            json["default"] == null ? null : Default.fromJson(json["default"]),
-        medium:
-            json["medium"] == null ? null : Default.fromJson(json["medium"]),
+        thumbnailsDefault: json["default"] == null ? null : Default.fromJson(json["default"]),
+        medium: json["medium"] == null ? null : Default.fromJson(json["medium"]),
         high: json["high"] == null ? null : Default.fromJson(json["high"]),
       );
 
@@ -281,8 +256,7 @@ class PageInfo {
   int? totalResults;
   int? resultsPerPage;
 
-  factory PageInfo.fromRawJson(String str) =>
-      PageInfo.fromJson(json.decode(str));
+  factory PageInfo.fromRawJson(String str) => PageInfo.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 

@@ -12,12 +12,10 @@ class MessageService extends Service {
     return _collection.doc(Utils.currentUid()).snapshots();
   }
 
-  static Future sendMessage(
-      {required MessageModel m, required String receiverId}) async {
-    return FirebaseFirestore.instance
-        .collection('chat')
-        .doc(m.senderUid)
-        .collection(receiverId)
-        .add(m.toJson());
+  static Future sendMessage({
+    required MessageModel m,
+    required String receiverId,
+  }) async {
+    return FirebaseFirestore.instance.collection('chat').doc(m.senderUid).collection(receiverId).add(m.toJson());
   }
 }

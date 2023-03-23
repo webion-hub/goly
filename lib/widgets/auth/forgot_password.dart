@@ -12,8 +12,7 @@ class ForgotPassword extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(right: 10.0),
         child: InkWell(
-          onTap: () =>
-              GoRouter.of(context).push(ForgotPasswordScreen.routeName),
+          onTap: () => GoRouter.of(context).push(ForgotPasswordScreen.routeName),
           child: const SizedBox(
             child: SizedBox(
               width: 130,

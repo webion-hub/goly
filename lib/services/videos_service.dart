@@ -6,8 +6,7 @@ import 'package:http/http.dart' as http;
 
 class VideoService {
   static const _baseURL = 'www.googleapis.com';
-  static Future<VideoCollection> getVideosFromSearch(
-      {required String search}) async {
+  static Future<VideoCollection> getVideosFromSearch({required String search}) async {
     Map<String, dynamic> parameters = {
       'part': 'snippet',
       'maxResults': '10',
@@ -21,7 +20,6 @@ class VideoService {
     Uri uri = Uri.https(_baseURL, '/youtube/v3/search', parameters);
 
     http.Response response = await http.get(uri, headers: headers);
-    return VideoCollection.fromJson(
-        jsonDecode(response.body) as Map<String, dynamic>);
+    return VideoCollection.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
   }
 }

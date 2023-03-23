@@ -17,8 +17,7 @@ class HandleStepScreen extends StatefulWidget {
   final StepModel? step;
   final int goalId;
   final String categoryId;
-  const HandleStepScreen(
-      {super.key, this.step, required this.categoryId, required this.goalId});
+  const HandleStepScreen({super.key, this.step, required this.categoryId, required this.goalId});
 
   @override
   State<HandleStepScreen> createState() => _HandleStepScreenState();
@@ -26,10 +25,8 @@ class HandleStepScreen extends StatefulWidget {
 
 class _HandleStepScreenState extends State<HandleStepScreen> {
   final formKey = GlobalKey<FormState>();
-  late TextEditingController stepName =
-      TextEditingController(text: widget.step?.name ?? '');
-  late TextEditingController reward =
-      TextEditingController(text: widget.step?.reward ?? '');
+  late TextEditingController stepName = TextEditingController(text: widget.step?.name ?? '');
+  late TextEditingController reward = TextEditingController(text: widget.step?.reward ?? '');
   late DateTime? expirationDate = widget.step?.expirationDate;
   bool privateStep = false;
   bool privateReward = false;
@@ -50,8 +47,11 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
     await showCalendarDatePicker2Dialog(
       context: context,
       config: CalendarDatePicker2WithActionButtonsConfig(
-          firstDate: DateTime.now(),
-          lastDate: DateTime((DateTime.now().year + 10))),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(
+          (DateTime.now().year + 10),
+        ),
+      ),
       dialogSize: const Size(325, 400),
       initialValue: [DateTime.now()],
     ).then((value) => expirationDate = value?.first);
@@ -63,8 +63,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
     if (!isValid) {
       return;
     }
-    var numberOfSteps = await GoalService.getNumberOfSteps(
-        categoryId: widget.categoryId, goalId: widget.goalId);
+    var numberOfSteps = await GoalService.getNumberOfSteps(categoryId: widget.categoryId, goalId: widget.goalId);
     StepModel step = StepModel(
       id: widget.step?.id ?? numberOfSteps,
       name: stepName.text,
@@ -74,8 +73,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
       expirationDate: expirationDate,
     );
     if (widget.step == null) {
-      await StepService.addStepToGoal(
-              categoryId: widget.categoryId, goalId: widget.goalId, step: step)
+      await StepService.addStepToGoal(categoryId: widget.categoryId, goalId: widget.goalId, step: step)
           .then((value) => Navigator.of(context).pop());
     } else {
       await StepService.editStep(
@@ -114,9 +112,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
               ),
               SettingsListTile(
                 icon: Icons.date_range_outlined,
-                text: expirationDate == null
-                    ? 'Set an expiration date'
-                    : 'Expiration date: ${Utils.formatDate(expirationDate!)}',
+                text: expirationDate == null ? 'Set an expiration date' : 'Expiration date: ${Utils.formatDate(expirationDate!)}',
                 onTap: _showDatePicker,
                 ifTrailing: false,
               ),

@@ -2,17 +2,17 @@ import 'package:goly/models/step.dart';
 import 'package:goly/utils/utils.dart';
 
 class GoalModel {
-  int id;
-  String name;
-  String? description;
-  String? reward;
+  final int id;
+  final String name;
+  final String? description;
+  final String? reward;
   bool completed;
-  bool privateGoal;
-  bool privateDescription;
-  bool privateReward;
-  DateTime? expirationDate;
-  List<StepModel>? steps;
-  int priority;
+  final bool privateGoal;
+  final bool privateDescription;
+  final bool privateReward;
+  final DateTime? expirationDate;
+  final List<StepModel>? steps;
+  final int priority;
 
   GoalModel(
       {required this.name,
@@ -33,9 +33,7 @@ class GoalModel {
         description = json['description'],
         reward = json['reward'],
         completed = json['completed'],
-        steps = ((json['steps'] as List<dynamic>? ?? [])
-            .map((s) => StepModel.fromJson(s))
-            .toList()),
+        steps = ((json['steps'] as List<dynamic>? ?? []).map((s) => StepModel.fromJson(s)).toList()),
         privateGoal = json['privateGoal'],
         privateDescription = json['privateDescription'],
         priority = json['priority'],
