@@ -51,7 +51,7 @@ class GoalScreen extends StatelessWidget {
         stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
         builder: (context, snapshot) {
           if (snapshot.data == null || snapshot.data!.data() == null) {
-            return const Text('Error');
+            return const Text('');
           }
           GoalModel g = GoalModel.fromJson(snapshot.data!.data()!);
           return Scaffold(
@@ -82,16 +82,18 @@ class GoalScreen extends StatelessWidget {
                   ListView(
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
-                    children: [
-                      ...?g.steps?.orderBy((element) => element.expirationDate).map((step) => Container(
-                            key: ValueKey(step.id),
-                            child: StepListTile(
-                              step: step,
-                              categoryId: categoryId,
-                              goalId: goalId,
-                            ),
-                          )),
-                    ],
+                    children: g.steps
+                            ?.orderBy((e) => e.expirationDate ?? DateTime.utc(4000))
+                            .map((step) => Container(
+                                  key: ValueKey(step.id),
+                                  child: StepListTile(
+                                    step: step,
+                                    categoryId: categoryId,
+                                    goalId: goalId,
+                                  ),
+                                ))
+                            .toList() ??
+                        [],
                   ),
                   ActionCard(
                     text: 'Add step',

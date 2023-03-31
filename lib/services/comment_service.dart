@@ -19,7 +19,7 @@ class CommentService extends Service {
         String commentId = const Uuid().v1();
         _firestore.collection('posts').doc(postId).collection('comments').doc(commentId).set(CommentModel(
               id: commentId,
-              datePublished: DateTime.now(),
+              datePublished: DateTime.now().toUtc(),
               name: name,
               profilePic: profilePic,
               text: text,
