@@ -53,7 +53,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 30),
-              TextFieldInput(label: 'Email', textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
+              TextFieldInput(
+                label: 'Email',
+                textEditingController: _emailController,
+                hintText: 'Email',
+                textInputType: TextInputType.emailAddress,
+              ),
               const SizedBox(height: 30),
               MainButton(
                 onPressed: resetPassword,

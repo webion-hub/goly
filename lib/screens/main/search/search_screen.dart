@@ -29,66 +29,47 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Form(
-          child: TextFormField(
-            autofocus: true,
-            controller: searchController,
-            decoration: const InputDecoration(labelText: 'Search for a user...'),
-            onChanged: (String _) {
-              setState(() {
-                isShowUsers = true;
-              });
-            },
+        appBar: AppBar(
+          title: Form(
+            child: TextFormField(
+              autofocus: true,
+              controller: searchController,
+              decoration: const InputDecoration(labelText: 'Search for a user...'),
+              onChanged: (String _) {
+                setState(() {
+                  isShowUsers = true;
+                });
+              },
+            ),
           ),
         ),
-      ),
-      body: isShowUsers
-          ? FutureBuilder(
-              future: UserService.searchUsers(searchText: searchController.text),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return customBuffering();
-                }
-                List<UserModel> users = snapshot.data!.docs
-                    .map(
-                      (e) => UserModel.fromJson(e.data()),
-                    )
-                    .toList();
-                return ListView.builder(
-                  itemCount: users.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () => goToProfile(users[index].id),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(users[index].photoUrl),
-                          radius: 16,
+        body: isShowUsers
+            ? FutureBuilder(
+                future: UserService.searchUsers(searchText: searchController.text),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return customBuffering();
+                  }
+                  List<UserModel> users = snapshot.data!.docs.map((e) => UserModel.fromJson(e.data())).toList();
+                  return ListView.builder(
+                    itemCount: users.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () => goToProfile(users[index].id),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(users[index].photoUrl),
+                            radius: 16,
+                          ),
+                          title: Text(
+                            users[index].username,
+                          ),
                         ),
-                        title: Text(
-                          users[index].username,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            )
-          : const Text(''),
-      // SingleChildScrollView(
-      //     child: FutureBuilder<VideoCollection>(
-      //         future:
-      //             VideoService.getVideosFromSearch(search: 'meditation'),
-      //         builder: (context, snapshot) {
-      //           var thumbnails = snapshot.data?.getThumnailInfo();
-      //           return Column(
-      //             children: thumbnails
-      //                     ?.map((e) => VideoCard(video: e))
-      //                     .toList() ??
-      //                 [const SizedBox()],
-      //           );
-      //         }),
-      //   ),
-    );
+                      );
+                    },
+                  );
+                },
+              )
+            : const Text(''));
   }
 }

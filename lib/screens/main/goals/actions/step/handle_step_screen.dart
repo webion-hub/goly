@@ -53,7 +53,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
         ),
       ),
       dialogSize: const Size(325, 400),
-      initialValue: [DateTime.now()],
+      value: [DateTime.now()],
     ).then((value) => expirationDate = value?.first);
     setState(() {});
   }

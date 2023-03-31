@@ -27,11 +27,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: FutureBuilder<SettingsModel?>(
           future: SettingsService.getCurrentSettings(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+            if (snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData) {
               return buffering();
-            }
-            if (!snapshot.hasData) {
-              return const Center(child: Text('Error network'));
             }
             SettingsModel settings = snapshot.data!;
             return SingleChildScrollView(

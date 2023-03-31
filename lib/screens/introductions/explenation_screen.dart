@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/utils/introductions.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ExplenationScreen extends StatelessWidget {
   static const routeName = '/introduction';
@@ -34,14 +33,7 @@ class ExplenationScreen extends StatelessWidget {
       showNextButton: false,
       skip: const Text("Skip"),
       done: const Text("Done"),
-      onDone: () async {
-        try {
-          final prefs = await SharedPreferences.getInstance();
-          prefs.setBool('introductionDone', true);
-        } finally {
-          GoRouter.of(context).go(GoalsScreen.routeName);
-        }
-      },
+      onDone: () => GoRouter.of(context).go(GoalsScreen.routeName),
     );
   }
 }

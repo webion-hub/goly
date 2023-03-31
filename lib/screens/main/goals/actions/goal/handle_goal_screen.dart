@@ -57,7 +57,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
       config:
           CalendarDatePicker2WithActionButtonsConfig(firstDate: DateTime.now(), lastDate: DateTime((DateTime.now().year + 10))),
       dialogSize: const Size(325, 400),
-      initialValue: [DateTime.now()],
+      value: [DateTime.now()],
     ).then((value) => expirationDate = value?.first);
     setState(() {});
   }
