@@ -43,7 +43,7 @@ class PostService extends Service {
         username: username,
         likes: [],
         postId: postId,
-        datePublished: DateTime.now(),
+        datePublished: DateTime.now().toUtc(),
         postUrl: photoUrl,
         profImage: profImage,
         category: category,
