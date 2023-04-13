@@ -31,10 +31,7 @@ class UserService extends Service {
 
   static Future<String> uploadUserImage(File image) async {
     String imageUrl = '';
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('user_image')
-        .child('$currentUid${p.extension(image.path)}');
+    final ref = FirebaseStorage.instance.ref().child('user_image').child('$currentUid${p.extension(image.path)}');
 
     await ref.putFile(image).then((_) {
       ref.getDownloadURL().then((value) {
@@ -46,8 +43,7 @@ class UserService extends Service {
 
   static Future<void> followUser(String uid, String followId) async {
     try {
-      DocumentSnapshot snap =
-          await _firestore.collection('users').doc(uid).get();
+      DocumentSnapshot snap = await _firestore.collection('users').doc(uid).get();
       List following = (snap.data()! as dynamic)['following'];
       if (following.contains(followId)) {
         await _firestore.collection('users').doc(followId).update({
@@ -71,15 +67,14 @@ class UserService extends Service {
     }
   }
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> searchUsers(
-      {required String searchText}) async {
+  static Future<QuerySnapshot<Map<String, dynamic>>> searchUsers({required String searchText}) async {
     return await FirebaseFirestore.instance
-        .collection('users')
-        .where(
-          'username',
-          isGreaterThanOrEqualTo: searchText,
-        )
-        .limit(5)
-        .get();
+      .collection('users')
+      .where(
+        'username',
+        isGreaterThanOrEqualTo: searchText,
+      )
+      .limit(5)
+      .get();
   }
 }

@@ -16,19 +16,13 @@ class PostService extends Service {
     required UserModel user,
   }) {
     return _collection
-        .where('uid', whereIn: [...user.following, user.id])
-        .orderBy('datePublished', descending: true)
-        .snapshots();
+      .where('uid', whereIn: [...user.following, user.id])
+      .orderBy('datePublished', descending: true)
+      .snapshots();
   }
 
-  static Stream<QuerySnapshot<Object?>> getPostStreamByCategory({
-    required String uid,
-    required String category,
-  }) {
-    return _collection
-        .where('uid', isEqualTo: uid)
-        .where('category', isEqualTo: category)
-        .snapshots();
+  static Stream<QuerySnapshot<Object?>> getPostStreamByCategory({required String uid, required String category,}) {
+    return _collection.where('uid', isEqualTo: uid).where('category', isEqualTo: category).snapshots();
   }
 
   static Future<String> uploadPost({
@@ -39,11 +33,9 @@ class PostService extends Service {
     required String profImage,
     required String? category,
   }) async {
-    // asking uid here because we dont want to make extra calls to firebase auth when we can just get from our state management
     String res = "Some error occurred";
     try {
-      String photoUrl =
-          await StorageMethods().uploadImageToStorage('posts', file, true);
+      String photoUrl = await StorageMethods().uploadImageToStorage('posts', file, true);
       String postId = const Uuid().v1(); // creates unique id based on time
       PostModel post = PostModel(
         description: description,
@@ -51,7 +43,7 @@ class PostService extends Service {
         username: username,
         likes: [],
         postId: postId,
-        datePublished: DateTime.now(),
+        datePublished: DateTime.now().toUtc(),
         postUrl: photoUrl,
         profImage: profImage,
         category: category,
@@ -68,12 +60,10 @@ class PostService extends Service {
     String res = "Some error occurred";
     try {
       if (likes.contains(uid)) {
-        // if the likes list contains the user uid, we need to remove it
         _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayRemove([uid])
         });
       } else {
-        // else we need to add uid to the likes array
         _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayUnion([uid])
         });
@@ -85,7 +75,6 @@ class PostService extends Service {
     return res;
   }
 
-  // Delete Post
   static Future<String> deletePost(String postId) async {
     String res = "Some error occurred";
     try {
