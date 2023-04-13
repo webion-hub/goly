@@ -77,6 +77,7 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
         .then((value) => Navigator.of(context).pop());
     } else {
       await StepService.editStep(
+        
         categoryId: widget.categoryId,
         goalId: widget.goalId,
         step: step,

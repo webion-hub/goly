@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/actions/comment_screen.dart';
+import 'package:goly/screens/main/feed/actions/comment_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/animations/like_animation.dart';

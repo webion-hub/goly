@@ -1,13 +1,13 @@
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/friends/actions/comment_screen.dart';
-import 'package:goly/screens/main/friends/friends_screen.dart';
+import 'package:goly/screens/main/feed/actions/comment_screen.dart';
+import 'package:goly/screens/main/feed/feed_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/screens/main/search/search_screen.dart';
 
 final List<RouteBase> friendsPages = [
   GoRoute(
-    path: FriendsScreen.routeName,
-    builder: (context, state) => const FriendsScreen(),
+    path: FeedScreen.routeName,
+    builder: (context, state) => const FeedScreen(),
   ),
   GoRoute(
     path: CommentsScreen.routeName,
@@ -29,7 +29,7 @@ final List<RouteBase> friendsPages = [
 ];
 
 const List<String> friendsPagesRoute = [
-  FriendsScreen.routeName,
+  FeedScreen.routeName,
   CommentsScreen.routeName,
   SearchScreen.routeName,
   ProfileScreen.otherUser,

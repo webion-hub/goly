@@ -7,7 +7,7 @@ import 'package:goly/screens/auth/auth_screen.dart';
 import 'package:goly/screens/auth/forgot_password_screen.dart';
 import 'package:goly/screens/auth/error_screen.dart';
 import 'package:goly/screens/introductions/explanation_screen.dart';
-import 'package:goly/screens/main/friends/friends_screen.dart';
+import 'package:goly/screens/main/feed/feed_screen.dart';
 import 'package:goly/utils/router/pages/auth_pages.dart';
 import 'package:goly/utils/router/pages/main/add_pages.dart';
 import 'package:goly/utils/router/pages/main/friends_pages.dart';
@@ -19,7 +19,7 @@ import 'package:goly/utils/router/pages/main/statistics_pages.dart';
 final router = GoRouter(
   initialLocation: FirebaseAuth.instance.currentUser == null
       ? AuthScreen.routeName
-      : FriendsScreen.routeName,
+      : FeedScreen.routeName,
   errorPageBuilder: (context, state) => MaterialPage<void>(
     key: state.pageKey,
     child: ErrorScreen(error: state.error),
@@ -31,7 +31,7 @@ final router = GoRouter(
         GoRoute(
           path: '/',
           redirect: ((context, state) {
-            return FriendsScreen.routeName;
+            return FeedScreen.routeName;
           }),
         ),
         ...introductionPages,

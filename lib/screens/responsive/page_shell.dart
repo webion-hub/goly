@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
+import 'package:goly/screens/main/feed/actions/add_post_screen.dart';
 import 'package:goly/screens/main/statistics/statistics_screen.dart';
-import 'package:goly/screens/main/friends/friends_screen.dart';
+import 'package:goly/screens/main/feed/feed_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/utils/router/pages/main/add_pages.dart';
@@ -43,7 +43,7 @@ class _PageShellState extends State<PageShell> {
 
   void navigationTapped(int page) {
     List<String> pagesRoute = [
-      FriendsScreen.routeName,
+      FeedScreen.routeName,
       GoalsScreen.routeName,
       AddPostScreen.routeName,
       StatisticsScreen.routeName,

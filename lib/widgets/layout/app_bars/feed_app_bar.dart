@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/search/search_screen.dart';
 
-class FriendsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const FriendsAppBar({super.key});
+class FeedAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const FeedAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

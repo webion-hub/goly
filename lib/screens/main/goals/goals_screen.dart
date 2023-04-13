@@ -63,5 +63,6 @@ class _MainPageState extends State<GoalsScreen> {
           }),
         )
     );
+    
   }
 }

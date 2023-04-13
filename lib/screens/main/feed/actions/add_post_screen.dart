@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/providers/user_provider.dart';
-import 'package:goly/screens/main/friends/friends_screen.dart';
+import 'package:goly/screens/main/feed/feed_screen.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -29,8 +29,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Uint8List? _file;
   bool isLoading = false;
   String? selectedCategory;
-  final TextEditingController _descriptionController = TextEditingController();
-  final TextEditingController _goal = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _goal = TextEditingController();
 
   _selectImage(BuildContext parentContext) async {
     return showDialog(
@@ -40,25 +40,27 @@ class _AddPostScreenState extends State<AddPostScreen> {
           title: const Text('Create a Post'),
           children: <Widget>[
             SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Take a photo'),
-                onPressed: () async {
-                  Navigator.pop(context);
-                  Uint8List file = await Utils.pickImage(ImageSource.camera);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
+              padding: const EdgeInsets.all(20),
+              child: const Text('Take a photo'),
+              onPressed: () async {
+                Navigator.pop(context);
+                Uint8List file = await Utils.pickImage(ImageSource.camera);
+                setState(() {
+                  _file = file;
+                });
+              }
+            ),
             SimpleDialogOption(
-                padding: const EdgeInsets.all(20),
-                child: const Text('Choose from Gallery'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await Utils.pickImage(ImageSource.gallery);
-                  setState(() {
-                    _file = file;
-                  });
-                }),
+              padding: const EdgeInsets.all(20),
+              child: const Text('Choose from Gallery'),
+              onPressed: () async {
+                Navigator.of(context).pop();
+                Uint8List file = await Utils.pickImage(ImageSource.gallery);
+                setState(() {
+                  _file = file;
+                });
+              }
+            ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20),
               child: const Text("Cancel"),
@@ -73,9 +75,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   void postImage(String uid, String username, String profImage) async {
-    if (_file == null ||
-        selectedCategory == null ||
-        _descriptionController.text == "") {
+    if (_file == null || selectedCategory == null || _descriptionController.text == "") {
       Utils.showSnackbBar('Fill out all the fields');
       return;
     }
@@ -87,12 +87,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
     try {
       // upload to storage and db
       String res = await PostService.uploadPost(
-          description: _descriptionController.text,
-          file: _file!,
-          uid: uid,
-          username: username,
-          profImage: profImage,
-          category: selectedCategory);
+        description: _descriptionController.text,
+        file: _file!,
+        uid: uid,
+        username: username,
+        profImage: profImage,
+        category: selectedCategory,
+      );
       if (res == "success") {
         setState(() {
           isLoading = false;
@@ -110,7 +111,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       });
       Utils.showSnackbBar(err.toString());
     } finally {
-      GoRouter.of(context).go(FriendsScreen.routeName);
+      GoRouter.of(context).go(FeedScreen.routeName);
     }
   }
 
@@ -128,9 +129,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
   bool validateForm() {
-    return selectedCategory != null &&
-        _descriptionController.text != "" &&
-        _file != null;
+    return selectedCategory != null && _descriptionController.text != "" && _file != null;
   }
 
   @override
@@ -142,8 +141,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     var imageContainer = Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        border: Border.all(
-            color: Theme.of(context).colorScheme.outline.withAlpha(100)),
+        border: Border.all(color: Theme.of(context).colorScheme.outline.withAlpha(100)),
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: SizedBox(
