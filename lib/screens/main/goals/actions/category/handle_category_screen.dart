@@ -27,9 +27,8 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
   late bool privateCategory = widget.category?.private ?? false;
   late bool privateDescription = widget.category?.privateDescription ?? user.settings.privateDescriptionsByDefault;
 
-  late TextEditingController categoryName = TextEditingController(text: widget.category?.name ?? '');
-
-  late TextEditingController description = TextEditingController(text: widget.category?.description ?? '');
+  late final categoryName = TextEditingController(text: widget.category?.name ?? '');
+  late final description = TextEditingController(text: widget.category?.description ?? '');
 
   void privateCategoryChange(bool value) {
     setState(() {
@@ -89,19 +88,21 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                       label: 'Description',
                     ),
                     SettingsSwitcherListTile(
-                        initialValue: privateCategory,
-                        icon: Icons.lock,
-                        text: "Private category",
-                        subtitle: "Makes private the description and all the goals inside it",
-                        onChanged: privateCategoryChange),
+                      initialValue: privateCategory,
+                      icon: Icons.lock,
+                      text: "Private category",
+                      subtitle: "Makes private the description and all the goals inside it",
+                      onChanged: privateCategoryChange
+                    ),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
-                        inactive: privateCategory,
-                        initialValue: privateCategory ? true : privateDescription,
-                        icon: Icons.lock,
-                        text: "Private description",
-                        subtitle: "Makes private description",
-                        onChanged: privateDescriptionChange),
+                      inactive: privateCategory,
+                      initialValue: privateCategory ? true : privateDescription,
+                      icon: Icons.lock,
+                      text: "Private description",
+                      subtitle: "Makes private description",
+                      onChanged: privateDescriptionChange
+                    ),
                     const SizedBox(height: 20.0),
                     MainButton(
                       text: widget.category != null ? 'Update category' : 'Add category',

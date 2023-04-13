@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/screens/main/friends/actions/add_post_screen.dart';
-import 'package:goly/screens/main/goals/actions/statistics_screen.dart';
+import 'package:goly/screens/main/statistics/statistics_screen.dart';
 import 'package:goly/screens/main/friends/friends_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
@@ -46,7 +46,7 @@ class _PageShellState extends State<PageShell> {
       FriendsScreen.routeName,
       GoalsScreen.routeName,
       AddPostScreen.routeName,
-      StatisticScreen.routeName,
+      StatisticsScreen.routeName,
       ProfileScreen.routeName
     ];
 

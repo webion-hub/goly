@@ -22,45 +22,46 @@ class _MainPageState extends State<GoalsScreen> {
   Widget build(BuildContext context) {
     List<CategoryModel> categories = List.empty();
     return Scaffold(
-        appBar: const GoalsAppBar(),
-        body: SingleChildScrollView(
-          padding: Constants.pagePadding,
-          child: StreamBuilder(
-              stream: CategoryService.getOrderedCategories(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return buffering();
-                }
-                if (snapshot.data == null) {
-                  return const Text('Start adding some categories');
-                }
-                snapshot.data?.docs.map((element) {
-                  categories.add(
-                    CategoryModel.fromJson(element.data()),
-                  );
-                });
+      appBar: const GoalsAppBar(),
+      body: SingleChildScrollView(
+        padding: Constants.pagePadding,
+        child: StreamBuilder(
+          stream: CategoryService.getOrderedCategories(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return buffering();
+            }
+            if (snapshot.data == null) {
+              return const Text('Start adding some categories');
+            }
+            snapshot.data?.docs.map((element) {
+              categories.add(
+                CategoryModel.fromJson(element.data()),
+              );
+            });
 
-                return Column(
-                  children: [
-                    Text(
-                      'Categories',
-                      style: Theme.of(context).textTheme.titleLarge,
+            return Column(
+              children: [
+                Text(
+                  'Categories',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                ...?snapshot.data?.docs.map(
+                  (e) => CategoryCard(
+                    category: CategoryModel.fromJson(
+                      e.data(),
                     ),
-                    ...?snapshot.data?.docs.map(
-                      (e) => CategoryCard(
-                        category: CategoryModel.fromJson(
-                          e.data(),
-                        ),
-                      ),
-                    ),
-                    ActionCard(
-                      text: "Add category",
-                      icon: Icons.add,
-                      action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
-                    ),
-                  ],
-                );
-              }),
-        ));
+                  ),
+                ),
+                ActionCard(
+                  text: "Add category",
+                  icon: Icons.add,
+                  action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
+                ),
+              ],
+            );
+          }),
+        )
+    );
   }
 }

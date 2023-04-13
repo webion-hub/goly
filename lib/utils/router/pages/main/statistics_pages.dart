@@ -1,14 +1,14 @@
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/main/goals/actions/statistics_screen.dart';
+import 'package:goly/screens/main/statistics/statistics_screen.dart';
 
 final List<RouteBase> statisticsPages = [
   GoRoute(
-      path: StatisticScreen.routeName,
+      path: StatisticsScreen.routeName,
       builder: (context, state) {
-        return const StatisticScreen();
+        return const StatisticsScreen();
       }),
 ];
 
 const List<String> statisticsPagesRoute = [
-  StatisticScreen.routeName,
+  StatisticsScreen.routeName,
 ];

@@ -37,66 +37,69 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: CategoryService.getCategoryStream(categoryId: categoryId),
-        builder: (context, categorySnapshot) {
-          if (categorySnapshot.connectionState == ConnectionState.waiting) {
-            return buffering();
-          }
-          if (!categorySnapshot.hasData || categorySnapshot.data?.data() == null) {
-            return buffering();
-          }
-          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
+      stream: CategoryService.getCategoryStream(categoryId: categoryId),
+      builder: (context, categorySnapshot) {
+        if (categorySnapshot.connectionState == ConnectionState.waiting) {
+          return buffering();
+        }
+        if (!categorySnapshot.hasData || categorySnapshot.data?.data() == null) {
+          return const Text('There is no data');
+        }
+        CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
 
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(category.name),
-              actions: [
-                IconButton(
-                  onPressed: () => GoRouter.of(context).push(
-                    HandleCategoryScreen.routeNameEdit,
-                    extra: category,
-                  ),
-                  icon: const Icon(Icons.edit),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(category.name),
+            actions: [
+              IconButton(
+                onPressed: () => GoRouter.of(context).push(
+                  HandleCategoryScreen.routeNameEdit,
+                  extra: category,
                 ),
-                IconButton(
-                  onPressed: () => deleteCategory(context),
-                  icon: const Icon(Icons.delete),
+                icon: const Icon(Icons.edit),
+              ),
+              IconButton(
+                onPressed: () => deleteCategory(context),
+                icon: const Icon(Icons.delete),
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            padding: Constants.pagePadding,
+            child: Column(children: [
+              DescriptionCard(text: category.description),
+              StreamBuilder(
+                stream: CategoryService.getCategoryGoalsStream(categoryId: category.id),
+                builder: (context, goalSnapshot) {
+                  if(goalSnapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox();
+                  }
+                  if (!goalSnapshot.hasData) {
+                    return const Text('Start adding some goals');
+                  }
+                  return Column(
+                    children: goalSnapshot.data!.docs
+                      .map(
+                        (e) => GoalListTile(
+                          categoryId: category.id,
+                          goal: GoalModel.fromJson(
+                            e.data(),
+                          ),
+                        ),
+                      )
+                      .toList());
+                }),
+              ActionCard(
+                text: 'Add goal',
+                icon: Icons.add,
+                action: () => GoRouter.of(context).push(
+                  HandleGoalScreen.routeNameAdd,
+                  extra: categoryId,
                 ),
-              ],
-            ),
-            body: SingleChildScrollView(
-              padding: Constants.pagePadding,
-              child: Column(children: [
-                DescriptionCard(text: category.description),
-                StreamBuilder(
-                    stream: CategoryService.getCategoryGoalsStream(categoryId: category.id),
-                    builder: (context, goalSnapshot) {
-                      if (!goalSnapshot.hasData) {
-                        return const Text('Start adding some data');
-                      }
-                      return Column(
-                          children: goalSnapshot.data!.docs
-                              .map(
-                                (e) => GoalListTile(
-                                  categoryId: category.id,
-                                  goal: GoalModel.fromJson(
-                                    e.data(),
-                                  ),
-                                ),
-                              )
-                              .toList());
-                    }),
-                ActionCard(
-                  text: 'Add goal',
-                  icon: Icons.add,
-                  action: () => GoRouter.of(context).push(
-                    HandleGoalScreen.routeNameAdd,
-                    extra: categoryId,
-                  ),
-                ),
-              ]),
-            ),
-          );
-        });
+              ),
+            ]),
+          ),
+        );
+      });
   }
 }
