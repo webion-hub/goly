@@ -1,3 +1,4 @@
+import 'package:darq/darq.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:goly/screens/main/goals/actions/step/handle_step_screen.dart';
@@ -17,11 +18,12 @@ class GoalScreen extends StatelessWidget {
   final String categoryId;
   const GoalScreen({super.key, required this.categoryId, required this.goalId});
 
+  void reorder(int oldIndex, int newIndex) {}
+
   @override
   Widget build(BuildContext context) {
     void goToHandleGoal(GoalModel goal) {
-      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit,
-          extra: {'categoryId': categoryId, 'goal': goal});
+      GoRouter.of(context).push(HandleGoalScreen.routeNameEdit, extra: {'categoryId': categoryId, 'goal': goal});
     }
 
     void deleteGoal(int goalId) {
@@ -29,31 +31,27 @@ class GoalScreen extends StatelessWidget {
         context: context,
         builder: (context) => AsyncConfirmationDialog(
           title: 'Are you sure?',
-          message:
-              'Are you sure you want to delete this goal? All goals steps it will be deleted',
+          message: 'Are you sure you want to delete this goal? All goals steps it will be deleted',
           noAction: () {
             Navigator.of(context).pop();
           },
           yesAction: () async {
             Navigator.of(context).pop();
-            await GoalService.deleteGoal(categoryId: categoryId, goalId: goalId)
-                .then((value) => GoRouter.of(context).pop());
+            await GoalService.deleteGoal(categoryId: categoryId, goalId: goalId).then((value) => GoRouter.of(context).pop());
           },
         ),
       );
     }
 
     void goToHandleStep() async {
-      GoRouter.of(context).push(HandleStepScreen.routeNameAdd,
-          extra: {'categoryId': categoryId, 'goalId': goalId});
+      GoRouter.of(context).push(HandleStepScreen.routeNameAdd, extra: {'categoryId': categoryId, 'goalId': goalId});
     }
 
     return StreamBuilder(
-        stream: GoalService.getGoalStreamFromId(
-            categoryId: categoryId, goalId: goalId),
+        stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
         builder: (context, snapshot) {
           if (snapshot.data == null || snapshot.data!.data() == null) {
-            return const Text('Error');
+            return const Text('');
           }
           GoalModel g = GoalModel.fromJson(snapshot.data!.data()!);
           return Scaffold(
@@ -74,17 +72,29 @@ class GoalScreen extends StatelessWidget {
               padding: Constants.pagePadding,
               child: Column(
                 children: [
-                  g.description != null && g.description!.isNotEmpty
-                      ? DescriptionCard(text: g.description!)
-                      : const SizedBox(),
+                  g.description != null && g.description!.isNotEmpty ? DescriptionCard(text: g.description!) : const SizedBox(),
                   g.steps!.isEmpty
                       ? MarkAsCompletedListTile(
                           categoryId: categoryId,
                           goal: g,
                         )
                       : const SizedBox(),
-                  ...?g.steps?.map((step) => StepListTile(
-                      step: step, categoryId: categoryId, goalId: goalId)),
+                  ListView(
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    children: g.steps
+                            ?.orderBy((e) => e.expirationDate ?? DateTime.utc(4000))
+                            .map((step) => Container(
+                                  key: ValueKey(step.id),
+                                  child: StepListTile(
+                                    step: step,
+                                    categoryId: categoryId,
+                                    goalId: goalId,
+                                  ),
+                                ))
+                            .toList() ??
+                        [],
+                  ),
                   ActionCard(
                     text: 'Add step',
                     icon: Icons.add,

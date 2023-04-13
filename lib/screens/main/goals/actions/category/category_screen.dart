@@ -22,15 +22,13 @@ class CategoryScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AsyncConfirmationDialog(
         title: 'Are you sure?',
-        message:
-            'Are you sure you want to delete this category? All goals inside it will be deleted',
+        message: 'Are you sure you want to delete this category? All goals inside it will be deleted',
         noAction: () {
           Navigator.of(ctx).pop();
         },
         yesAction: () async {
           Navigator.of(ctx).pop();
-          await CategoryService.deleteCategory(categoryId: categoryId)
-              .then((value) => GoRouter.of(ctx).go(GoalsScreen.routeName));
+          await CategoryService.deleteCategory(categoryId: categoryId).then((value) => GoRouter.of(ctx).go(GoalsScreen.routeName));
         },
       ),
     );
@@ -44,12 +42,10 @@ class CategoryScreen extends StatelessWidget {
           if (categorySnapshot.connectionState == ConnectionState.waiting) {
             return buffering();
           }
-          if (!categorySnapshot.hasData ||
-              categorySnapshot.data?.data() == null) {
+          if (!categorySnapshot.hasData || categorySnapshot.data?.data() == null) {
             return buffering();
           }
-          CategoryModel category =
-              CategoryModel.fromJson(categorySnapshot.data!.data()!);
+          CategoryModel category = CategoryModel.fromJson(categorySnapshot.data!.data()!);
 
           return Scaffold(
             appBar: AppBar(
@@ -57,8 +53,9 @@ class CategoryScreen extends StatelessWidget {
               actions: [
                 IconButton(
                   onPressed: () => GoRouter.of(context).push(
-                      HandleCategoryScreen.routeNameEdit,
-                      extra: category),
+                    HandleCategoryScreen.routeNameEdit,
+                    extra: category,
+                  ),
                   icon: const Icon(Icons.edit),
                 ),
                 IconButton(
@@ -72,8 +69,7 @@ class CategoryScreen extends StatelessWidget {
               child: Column(children: [
                 DescriptionCard(text: category.description),
                 StreamBuilder(
-                    stream: CategoryService.getCategoryGoalsStream(
-                        categoryId: category.id),
+                    stream: CategoryService.getCategoryGoalsStream(categoryId: category.id),
                     builder: (context, goalSnapshot) {
                       if (!goalSnapshot.hasData) {
                         return const Text('Start adding some data');
@@ -93,8 +89,10 @@ class CategoryScreen extends StatelessWidget {
                 ActionCard(
                   text: 'Add goal',
                   icon: Icons.add,
-                  action: () => GoRouter.of(context)
-                      .push(HandleGoalScreen.routeNameAdd, extra: categoryId),
+                  action: () => GoRouter.of(context).push(
+                    HandleGoalScreen.routeNameAdd,
+                    extra: categoryId,
+                  ),
                 ),
               ]),
             ),

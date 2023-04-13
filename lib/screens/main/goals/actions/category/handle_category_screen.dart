@@ -25,14 +25,11 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
   final formKey = GlobalKey<FormState>();
   late UserModel user = Provider.of<UserProvider>(context).getUser;
   late bool privateCategory = widget.category?.private ?? false;
-  late bool privateDescription = widget.category?.privateDescription ??
-      user.settings.privateDescriptionsByDefault;
+  late bool privateDescription = widget.category?.privateDescription ?? user.settings.privateDescriptionsByDefault;
 
-  late TextEditingController categoryName =
-      TextEditingController(text: widget.category?.name ?? '');
+  late TextEditingController categoryName = TextEditingController(text: widget.category?.name ?? '');
 
-  late TextEditingController description =
-      TextEditingController(text: widget.category?.description ?? '');
+  late TextEditingController description = TextEditingController(text: widget.category?.description ?? '');
 
   void privateCategoryChange(bool value) {
     setState(() {
@@ -61,16 +58,12 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
         privateDescription: privateDescription,
       );
 
-      widget.category == null
-          ? CategoryService.addCategory(category: c)
-          : CategoryService.editCategory(category: c);
+      widget.category == null ? CategoryService.addCategory(category: c) : CategoryService.editCategory(category: c);
       Navigator.of(context).pop();
     }
 
     return Scaffold(
-      appBar: AppBar(
-          title:
-              Text(widget.category != null ? 'Edit category' : 'Add category')),
+      appBar: AppBar(title: Text(widget.category != null ? 'Edit category' : 'Add category')),
       body: SingleChildScrollView(
         child: Column(children: [
           Center(
@@ -99,23 +92,19 @@ class _HandleCategoryScreenState extends State<HandleCategoryScreen> {
                         initialValue: privateCategory,
                         icon: Icons.lock,
                         text: "Private category",
-                        subtitle:
-                            "Makes private the description and all the goals inside it",
+                        subtitle: "Makes private the description and all the goals inside it",
                         onChanged: privateCategoryChange),
                     const SizedBox(height: 20.0),
                     SettingsSwitcherListTile(
                         inactive: privateCategory,
-                        initialValue:
-                            privateCategory ? true : privateDescription,
+                        initialValue: privateCategory ? true : privateDescription,
                         icon: Icons.lock,
                         text: "Private description",
                         subtitle: "Makes private description",
                         onChanged: privateDescriptionChange),
                     const SizedBox(height: 20.0),
                     MainButton(
-                      text: widget.category != null
-                          ? 'Update category'
-                          : 'Add category',
+                      text: widget.category != null ? 'Update category' : 'Add category',
                       onPressed: handleCategory,
                     ),
                   ],

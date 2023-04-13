@@ -1,8 +1,11 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
 import 'package:goly/widgets/form/input/text_field_input.dart';
+import 'package:goly/widgets/list_tile/settings/settings_list_tile.dart';
 import 'package:goly/widgets/settings/settings_switcher_list_tile.dart';
 import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
@@ -22,18 +25,14 @@ class HandleGoalScreen extends StatefulWidget {
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
   final formKey = GlobalKey<FormState>();
-  late final TextEditingController _goalName =
-      TextEditingController(text: widget.goal?.name ?? '');
-  late final TextEditingController _description =
-      TextEditingController(text: widget.goal?.description ?? '');
-  late final TextEditingController _reward =
-      TextEditingController(text: widget.goal?.reward ?? '');
-  late final TextEditingController _priority =
-      TextEditingController(text: widget.goal?.priority.toString() ?? '1');
+  late final TextEditingController _goalName = TextEditingController(text: widget.goal?.name ?? '');
+  late final TextEditingController _description = TextEditingController(text: widget.goal?.description ?? '');
+  late final TextEditingController _reward = TextEditingController(text: widget.goal?.reward ?? '');
+  late final TextEditingController _priority = TextEditingController(text: widget.goal?.priority.toString() ?? '1');
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
-
+  late DateTime? expirationDate = widget.goal?.expirationDate;
   void privateGoalChange(bool value) {
     setState(() {
       privateGoal = value;
@@ -50,6 +49,17 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
     setState(() {
       privateReward = value;
     });
+  }
+
+  void _showDatePicker() async {
+    await showCalendarDatePicker2Dialog(
+      context: context,
+      config:
+          CalendarDatePicker2WithActionButtonsConfig(firstDate: DateTime.now(), lastDate: DateTime((DateTime.now().year + 10))),
+      dialogSize: const Size(325, 400),
+      value: [DateTime.now()],
+    ).then((value) => expirationDate = value?.first);
+    setState(() {});
   }
 
   @override
@@ -77,14 +87,12 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
         privateDescription: privateDescription,
         privateReward: privateReward,
         steps: widget.goal?.steps,
+        expirationDate: expirationDate,
       );
 
-      await GoalService.editGoal(
-              categoryId: widget.categoryId, goal: editedGoal)
-          .then((value) => Navigator.of(context).pop());
+      await GoalService.editGoal(categoryId: widget.categoryId, goal: editedGoal).then((value) => Navigator.of(context).pop());
     } else {
-      final id =
-          await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
+      final id = await CategoryService.getNumberofGoals(categoryId: widget.categoryId);
       GoalModel newGoal = GoalModel(
         id: id,
         name: _goalName.text,
@@ -94,9 +102,9 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
         priority: int.tryParse(_priority.text) ?? 1,
         privateDescription: privateDescription,
         privateReward: privateReward,
+        expirationDate: expirationDate,
       );
-      await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal)
-          .then((value) => Navigator.of(context).pop());
+      await GoalService.addGoal(categoryId: widget.categoryId, goal: newGoal).then((value) => Navigator.of(context).pop());
     }
   }
 
@@ -146,6 +154,14 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly,
                       ],
+                    ),
+                    SettingsListTile(
+                      icon: Icons.date_range_outlined,
+                      text: expirationDate == null
+                          ? 'Set an expiration date'
+                          : 'Expiration date: ${Utils.formatDate(expirationDate!)}',
+                      onTap: _showDatePicker,
+                      ifTrailing: false,
                     ),
                     SettingsSwitcherListTile(
                         initialValue: privateGoal,

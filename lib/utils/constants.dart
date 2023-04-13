@@ -26,34 +26,40 @@ class Constants {
 
   static final List<CategoryModel> defaultCategories = [
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Financial',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Financial',
+      private: false,
+      privateDescription: false,
+    ),
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Career',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Career',
+      private: false,
+      privateDescription: false
+    ),
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Spiritual',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Spiritual',
+      private: false,
+      privateDescription: false
+    ),
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Personal life',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Personal life',
+      private: false,
+      privateDescription: false
+    ),
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Health & Fitness',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Health & Fitness',
+      private: false,
+      privateDescription: false
+    ),
     CategoryModel(
-        id: const Uuid().v1(),
-        name: 'Familial',
-        private: false,
-        privateDescription: false),
+      id: const Uuid().v1(),
+      name: 'Familial',
+      private: false,
+      privateDescription: false
+    ),
   ];
 }

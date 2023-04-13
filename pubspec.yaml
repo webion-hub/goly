@@ -65,6 +65,7 @@ dependencies:
   url_launcher: ^6.1.10
   dropdown_search: ^5.0.6
   tab_container: ^2.0.0
+  calendar_date_picker2: ^0.5.1
 
 flutter_icons:
   android: true

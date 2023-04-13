@@ -37,8 +37,7 @@ class _PageShellState extends State<PageShell> {
   }
 
   addData() async {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
+    UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
     await userProvider.refreshUser();
   }
 

@@ -9,10 +9,15 @@ import 'package:goly/models/category.dart';
 import 'package:goly/screens/main/goals/actions/category/handle_category_screen.dart';
 import 'package:goly/utils/constants.dart';
 
-class GoalsScreen extends StatelessWidget {
+class GoalsScreen extends StatefulWidget {
   static const routeName = '/goals';
   const GoalsScreen({super.key});
 
+  @override
+  State<GoalsScreen> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<GoalsScreen> {
   @override
   Widget build(BuildContext context) {
     List<CategoryModel> categories = List.empty();
@@ -30,7 +35,9 @@ class GoalsScreen extends StatelessWidget {
                   return const Text('Start adding some categories');
                 }
                 snapshot.data?.docs.map((element) {
-                  categories.add(CategoryModel.fromJson(element.data()));
+                  categories.add(
+                    CategoryModel.fromJson(element.data()),
+                  );
                 });
 
                 return Column(
@@ -49,8 +56,7 @@ class GoalsScreen extends StatelessWidget {
                     ActionCard(
                       text: "Add category",
                       icon: Icons.add,
-                      action: () => GoRouter.of(context)
-                          .push(HandleCategoryScreen.routeNameAdd),
+                      action: () => GoRouter.of(context).push(HandleCategoryScreen.routeNameAdd),
                     ),
                   ],
                 );

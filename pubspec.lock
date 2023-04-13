@@ -145,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  calendar_date_picker2:
+    dependency: "direct main"
+    description:
+      name: calendar_date_picker2
+      sha256: "3b7cc0548312d513a12ecf7c2a378a118e9bfed322f823a6862e2e851f286042"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   change_notifier:
     dependency: "direct main"
     description:
