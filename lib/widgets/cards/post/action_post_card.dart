@@ -32,8 +32,8 @@ class ActionsPostCard extends StatelessWidget {
             isAnimating: likes.contains(Utils.currentUid()),
             child: IconButton(
               icon: likes.contains(Utils.currentUid())
-                  ? const Icon(Icons.favorite, color: Colors.red)
-                  : const Icon(Icons.favorite_border),
+                ? const Icon(Icons.favorite, color: Colors.red)
+                : const Icon(Icons.favorite_border),
               onPressed: () {
                 PostService.likePost(
                   postId,

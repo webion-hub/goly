@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 class LightMode {
   static ThemeData theme = ThemeData.light().copyWith(
-      useMaterial3: true,
-      appBarTheme: appBarTheme,
-      scaffoldBackgroundColor: Colors.white,
-      colorScheme:
-          lightColorScheme // ColorScheme.fromSeed(seedColor: Colors.teal),
-      );
+    useMaterial3: true,
+    appBarTheme: appBarTheme,
+    scaffoldBackgroundColor: Colors.white,
+    colorScheme: lightColorScheme ,
+  );
 
   static const lightColorScheme = ColorScheme(
     brightness: Brightness.light,
@@ -42,6 +41,7 @@ class LightMode {
     outlineVariant: Color(0xFFBFC9C3),
     scrim: Color(0xFF000000),
   );
+  
   static const appBarTheme = AppBarTheme(
     surfaceTintColor: Colors.transparent,
     elevation: 0.0,

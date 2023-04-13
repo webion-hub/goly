@@ -1,11 +1,11 @@
 class CategoryModel {
-  String id;
-  String name;
-  String? description;
-  bool private;
-  bool privateDescription;
+  final String id;
+  final String name;
+  final String? description;
+  final bool private;
+  final bool privateDescription;
 
-  CategoryModel({
+  const CategoryModel({
     required this.id,
     required this.name,
     required this.private,
@@ -14,11 +14,11 @@ class CategoryModel {
   });
 
   CategoryModel.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
-        description = json['description'],
-        private = json['private'],
-        privateDescription = json['privateDescription'] ?? false;
+    : id = json['id'],
+      name = json['name'],
+      description = json['description'],
+      private = json['private'],
+      privateDescription = json['privateDescription'] ?? false;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

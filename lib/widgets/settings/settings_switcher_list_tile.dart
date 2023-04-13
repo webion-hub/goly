@@ -56,13 +56,13 @@ class _SettingsSwitcherListTileState extends State<SettingsSwitcherListTile> {
           trailing: Switch(
             thumbIcon: thumbIcon,
             onChanged: widget.inactive
-                ? null
-                : (value) {
-                    widget.onChanged(value);
-                    setState(() {
-                      currentValue = value;
-                    });
-                  },
+              ? null
+              : (value) {
+                  widget.onChanged(value);
+                  setState(() {
+                    currentValue = value;
+                  });
+                },
             value: currentValue,
           ),
         ),

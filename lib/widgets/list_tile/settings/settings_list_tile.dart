@@ -26,10 +26,7 @@ class SettingsListTile extends StatelessWidget {
           ),
           child: Icon(icon),
         ),
-        title: Text(
-          text,
-          style: const TextStyle(color: Colors.red),
-        ),
+        title: Text(text),
         onTap: onTap,
         trailing: ifTrailing
             ? Container(

@@ -28,37 +28,37 @@ class PostModel {
     var snapshot = snap.data() as Map<String, dynamic>;
 
     return PostModel(
-        description: snapshot["description"],
-        uid: snapshot["uid"],
-        likes: snapshot["likes"],
-        postId: snapshot["postId"],
-        datePublished: snapshot["datePublished"],
-        username: snapshot["username"],
-        postUrl: snapshot['postUrl'],
-        profImage: snapshot['profImage'],
-        category: snapshot['category']);
+      description: snapshot["description"],
+      uid: snapshot["uid"],
+      likes: snapshot["likes"],
+      postId: snapshot["postId"],
+      datePublished: snapshot["datePublished"],
+      username: snapshot["username"],
+      postUrl: snapshot['postUrl'],
+      profImage: snapshot['profImage'],
+      category: snapshot['category']);
   }
 
   Map<String, dynamic> toJson() => {
-        "description": description,
-        "uid": uid,
-        "likes": likes,
-        "username": username,
-        "postId": postId,
-        "datePublished": datePublished,
-        'postUrl': postUrl,
-        'profImage': profImage,
-        'category': category,
-      };
+    "description": description,
+    "uid": uid,
+    "likes": likes,
+    "username": username,
+    "postId": postId,
+    "datePublished": datePublished,
+    'postUrl': postUrl,
+    'profImage': profImage,
+    'category': category,
+  };
 
   PostModel.fromJson(Map<String, dynamic> json)
-      : description = json["description"],
-        uid = json["uid"],
-        likes = (json['likes'] as List<dynamic>),
-        postId = json["postId"],
-        datePublished = Utils.dateTimeToTimeStamp(json['datePublished']),
-        username = json["username"],
-        postUrl = json['postUrl'],
-        profImage = json['profImage'],
-        category = json['category'];
+    : description = json["description"],
+      uid = json["uid"],
+      likes = (json['likes'] as List<dynamic>),
+      postId = json["postId"],
+      datePublished = Utils.dateTimeToTimeStamp(json['datePublished']),
+      username = json["username"],
+      postUrl = json['postUrl'],
+      profImage = json['profImage'],
+      category = json['category'];
 }

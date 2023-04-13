@@ -40,20 +40,16 @@ class ReportModel {
 
   String toJson() => json.encode(toMap());
 
-  factory ReportModel.fromJson(String source) =>
-      ReportModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ReportModel.fromJson(String source) => ReportModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'ReportModel(uid: $uid, errorType: $errorType, message: $message)';
+  String toString() => 'ReportModel(uid: $uid, errorType: $errorType, message: $message)';
 
   @override
   bool operator ==(covariant ReportModel other) {
     if (identical(this, other)) return true;
 
-    return other.uid == uid &&
-        other.errorType == errorType &&
-        other.message == message;
+    return other.uid == uid && other.errorType == errorType && other.message == message;
   }
 
   @override

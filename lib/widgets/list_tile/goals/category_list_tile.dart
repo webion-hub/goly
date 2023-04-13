@@ -22,18 +22,18 @@ class CategoryCard extends StatelessWidget {
             return showDialog(
               context: context,
               builder: ((ctx) => AsyncConfirmationDialog(
-                    title: 'Are you sure?',
-                    message:
-                        'Do you want to remove this category and all the goals inside it?',
-                    noAction: () {
-                      Navigator.of(ctx).pop(false);
-                    },
-                    yesAction: () async {
-                      Navigator.of(ctx).pop();
-                      await CategoryService.deleteCategory(
-                          categoryId: category.id);
-                    },
-                  )),
+                title: 'Are you sure?',
+                message:
+                    'Do you want to remove this category and all the goals inside it?',
+                noAction: () {
+                  Navigator.of(ctx).pop(false);
+                },
+                yesAction: () async {
+                  Navigator.of(ctx).pop();
+                  await CategoryService.deleteCategory(
+                      categoryId: category.id);
+                },
+              )),
             );
           },
           child: ListTile(

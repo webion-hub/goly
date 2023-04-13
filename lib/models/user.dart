@@ -1,18 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:goly/models/settings.dart';
-import 'package:goly/utils/constants.dart';
 
 class UserModel {
-  String username;
-  String email;
-  String photoUrl;
-  String id;
-  String bio;
-  SettingsModel settings;
-  List<String> following;
-  List<String> followers;
+  final String username;
+  final String email;
+  final String photoUrl;
+  final String id;
+  final String bio;
+  final SettingsModel settings;
+  final List<String> following;
+  final List<String> followers;
 
-  UserModel({
+  const UserModel({
     required this.username,
     required this.email,
     required this.photoUrl,
@@ -24,18 +23,14 @@ class UserModel {
   });
 
   UserModel.fromJson(Map<String, dynamic> json)
-      : username = json['username'],
-        email = json['email'],
-        photoUrl = json['photoUrl'] ?? Constants.userImageDefault,
-        bio = json['bio'],
-        id = json['id'],
-        following = ((json['following'] as List<dynamic>)
-            .map((s) => (s.toString()))
-            .toList()),
-        followers = ((json['followers'] as List<dynamic>)
-            .map((s) => (s.toString()))
-            .toList()),
-        settings = SettingsModel.fromJson(json['settings']);
+    : username = json['username'],
+      email = json['email'],
+      photoUrl = json['photoUrl'],
+      bio = json['bio'],
+      id = json['id'],
+      following = ((json['following'] as List<dynamic>).map((s) => (s.toString())).toList()),
+      followers = ((json['followers'] as List<dynamic>).map((s) => (s.toString())).toList()),
+      settings = SettingsModel.fromJson(json['settings']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

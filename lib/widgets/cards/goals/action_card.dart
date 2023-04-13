@@ -27,12 +27,8 @@ class ActionCard extends StatelessWidget {
               child: Row(
                 children: [
                   Icon(icon),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    text,
-                  ),
+                  const SizedBox(width: 20),
+                  Text(text),
                 ],
               ),
             ),

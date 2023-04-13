@@ -31,8 +31,7 @@ class UserSection extends StatelessWidget {
                 if (uid == Utils.currentUid()) {
                   GoRouter.of(context).go(ProfileScreen.routeName);
                 } else {
-                  GoRouter.of(context)
-                      .push(ProfileScreen.otherUser, extra: uid);
+                  GoRouter.of(context).push(ProfileScreen.otherUser, extra: uid);
                 }
               },
               child: Row(children: [
@@ -41,8 +40,7 @@ class UserSection extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(username,
-                        style: Theme.of(context).textTheme.bodyMedium),
+                    Text(username, style: Theme.of(context).textTheme.bodyMedium),
                     const SizedBox(height: 5),
                     category != null ? Text(category!) : const SizedBox(),
                   ],
@@ -50,48 +48,44 @@ class UserSection extends StatelessWidget {
               ]),
             ),
             uid == Utils.currentUid()
-                ? Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () {
-                          showDialog(
-                            useRootNavigator: false,
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: ListView(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
-                                    shrinkWrap: true,
-                                    children: [
-                                      'Delete',
-                                    ]
-                                        .map(
-                                          (e) => InkWell(
-                                              child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 12,
-                                                        horizontal: 16),
-                                                child: Text(e),
-                                              ),
-                                              onTap: () {
-                                                PostService.deletePost(postId);
-                                                // remove the dialog box
-                                                Navigator.of(context).pop();
-                                              }),
-                                        )
-                                        .toList()),
-                              );
-                            },
-                          );
-                        },
-                        icon: const Icon(Icons.more_vert),
-                      ),
+              ? Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: () {
+                        showDialog(
+                          useRootNavigator: false,
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: ListView(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  shrinkWrap: true,
+                                  children: [
+                                    'Delete',
+                                  ]
+                                    .map(
+                                      (e) => InkWell(
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                            child: Text(e),
+                                          ),
+                                          onTap: () {
+                                            PostService.deletePost(postId);
+                                            // remove the dialog box
+                                            Navigator.of(context).pop();
+                                          }),
+                                    )
+                                    .toList()),
+                            );
+                          },
+                        );
+                      },
+                      icon: const Icon(Icons.more_vert),
                     ),
-                  )
-                : Container(),
+                  ),
+                )
+              : Container(),
           ],
         ),
       ],

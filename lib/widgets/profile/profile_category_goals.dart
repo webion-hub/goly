@@ -32,7 +32,9 @@ class ProfileCategoryGoals extends StatelessWidget {
             ));
           }
 
-          return Column(
+          return ListView(
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
             children: [
               ProfileCategoryGoalsSection(goals: goals),
               UserCategoryPosts(uid: uid, categoryName: categoryName),
@@ -62,21 +64,21 @@ class ProfileCategoryGoalsSection extends StatelessWidget {
         ),
         const SizedBox(height: 15),
         numberOfPublicGoals == 0
-            ? const Text('There are no public goals in this category')
-            : const SizedBox(),
+          ? const Text('There are no public goals in this category')
+          : const SizedBox(),
         const SizedBox(height: 15),
         ...goals
-            .map(
-              (goal) => Column(
-                children: [
-                  GoalCard(
-                    goal: goal,
-                  ),
-                  const SizedBox(height: 30),
-                ],
-              ),
-            )
-            .toList(),
+          .map(
+            (goal) => Column(
+              children: [
+                GoalCard(
+                  goal: goal,
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          )
+          .toList(),
       ],
     );
   }

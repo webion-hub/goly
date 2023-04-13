@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/models/step.dart';
+import 'package:goly/utils/utils.dart';
 
 class NoEditStepListTile extends StatelessWidget {
   final StepModel step;
@@ -14,7 +15,9 @@ class NoEditStepListTile extends StatelessWidget {
         step.name,
         style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface),
       ),
-      subtitle: step.reward != "" ? Text(step.reward!) : null,
+      subtitle: step.expirationDate != null
+        ? Text(Utils.formatDate(step.expirationDate!))
+        : null,
       controlAffinity: ListTileControlAffinity.leading,
     );
   }
