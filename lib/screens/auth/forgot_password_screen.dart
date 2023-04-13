@@ -27,8 +27,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     try {
       var nav = Navigator.of(context);
 
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
       Utils.showSnackbBar('Password Reset Email Sent');
 
       nav.popUntil((route) => route.isFirst);
@@ -54,11 +53,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 30),
-              TextFieldInput(
-                  label: 'Email',
-                  textEditingController: _emailController,
-                  hintText: 'Email',
-                  textInputType: TextInputType.emailAddress),
+              TextFieldInput(label: 'Email', textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
               const SizedBox(height: 30),
               MainButton(
                 onPressed: resetPassword,

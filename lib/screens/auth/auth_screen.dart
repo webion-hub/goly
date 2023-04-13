@@ -16,8 +16,8 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   bool isLogin = true;
   void toggle() => setState(() {
-        isLogin = !isLogin;
-      });
+    isLogin = !isLogin;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +34,10 @@ class _AuthScreenState extends State<AuthScreen> {
                 subtitle: isLogin ? "Welcome back" : "Welcome",
                 image: 'assets/images/welcome.png',
               ),
-              isLogin
-                  ? LogIn(onClickedSignup: toggle)
-                  : SignUp(onClickedSignup: toggle),
+              isLogin ? LogIn(onClickedSignup: toggle) : SignUp(onClickedSignup: toggle),
               const SizedBox(height: 20),
               RichTextWithAction(
-                  text: isLogin
-                      ? 'Don\'t have an account?'
-                      : 'Already have an account?',
-                  actionText: isLogin ? 'Sign up' : 'Log in',
-                  action: toggle)
+                  text: isLogin ? 'Don\'t have an account?' : 'Already have an account?', actionText: isLogin ? 'Sign up' : 'Log in', action: toggle)
             ],
           ),
         ),

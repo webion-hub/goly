@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/introductions/explenation_screen.dart';
+import 'package:goly/screens/introductions/explanation_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/widgets/layout/indicators.dart';
@@ -89,7 +89,7 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
       );
       if (widget.user == null) {
         await CategoryService.setDefaultCategories();
-        router.go(ExplenationScreen.routeName);
+        router.go(ExplanationScreen.routeName);
       } else {
         router.go(ProfileScreen.routeName);
       }

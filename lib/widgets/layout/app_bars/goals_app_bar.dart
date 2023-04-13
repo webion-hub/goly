@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:goly/screens/introductions/explenation_screen.dart';
+import 'package:goly/screens/introductions/explanation_screen.dart';
 
 class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GoalsAppBar({super.key});
@@ -12,7 +12,7 @@ class GoalsAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       actions: [
         IconButton(
-          onPressed: () => GoRouter.of(context).go(ExplenationScreen.routeName),
+          onPressed: () => GoRouter.of(context).go(ExplanationScreen.routeName),
           icon: const Icon(Icons.question_mark_rounded),
         ),
       ],
