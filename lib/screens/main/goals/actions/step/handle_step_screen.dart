@@ -74,13 +74,14 @@ class _HandleStepScreenState extends State<HandleStepScreen> {
     );
     if (widget.step == null) {
       await StepService.addStepToGoal(categoryId: widget.categoryId, goalId: widget.goalId, step: step)
-          .then((value) => Navigator.of(context).pop());
+        .then((value) => Navigator.of(context).pop());
     } else {
       await StepService.editStep(
         categoryId: widget.categoryId,
         goalId: widget.goalId,
         step: step,
-      ).then((value) => Navigator.of(context).pop());
+      )
+      .then((value) => Navigator.of(context).pop());
     }
   }
 

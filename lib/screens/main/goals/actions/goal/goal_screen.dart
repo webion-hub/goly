@@ -51,7 +51,7 @@ class GoalScreen extends StatelessWidget {
         stream: GoalService.getGoalStreamFromId(categoryId: categoryId, goalId: goalId),
         builder: (context, snapshot) {
           if (snapshot.data == null || snapshot.data!.data() == null) {
-            return const Text('');
+            return const Text('There are no goals');
           }
           GoalModel g = GoalModel.fromJson(snapshot.data!.data()!);
           return Scaffold(
@@ -74,26 +74,26 @@ class GoalScreen extends StatelessWidget {
                 children: [
                   g.description != null && g.description!.isNotEmpty ? DescriptionCard(text: g.description!) : const SizedBox(),
                   g.steps!.isEmpty
-                      ? MarkAsCompletedListTile(
-                          categoryId: categoryId,
-                          goal: g,
-                        )
-                      : const SizedBox(),
+                    ? MarkAsCompletedListTile(
+                        categoryId: categoryId,
+                        goal: g,
+                      )
+                    : const SizedBox(),
                   ListView(
                     shrinkWrap: true,
                     physics: const ClampingScrollPhysics(),
                     children: g.steps
-                            ?.orderBy((e) => e.expirationDate ?? DateTime.utc(4000))
-                            .map((step) => Container(
-                                  key: ValueKey(step.id),
-                                  child: StepListTile(
-                                    step: step,
-                                    categoryId: categoryId,
-                                    goalId: goalId,
-                                  ),
-                                ))
-                            .toList() ??
-                        [],
+                      ?.orderBy((e) => e.expirationDate ?? DateTime.utc(4000))
+                      .map((step) => Container(
+                            key: ValueKey(step.id),
+                            child: StepListTile(
+                              step: step,
+                              categoryId: categoryId,
+                              goalId: goalId,
+                            ),
+                          ))
+                      .toList() 
+                    ?? [],
                   ),
                   ActionCard(
                     text: 'Add step',

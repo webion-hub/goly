@@ -25,10 +25,10 @@ class HandleGoalScreen extends StatefulWidget {
 
 class _HandleGoalScreenState extends State<HandleGoalScreen> {
   final formKey = GlobalKey<FormState>();
-  late final TextEditingController _goalName = TextEditingController(text: widget.goal?.name ?? '');
-  late final TextEditingController _description = TextEditingController(text: widget.goal?.description ?? '');
-  late final TextEditingController _reward = TextEditingController(text: widget.goal?.reward ?? '');
-  late final TextEditingController _priority = TextEditingController(text: widget.goal?.priority.toString() ?? '1');
+  late final _goalName = TextEditingController(text: widget.goal?.name ?? '');
+  late final _description = TextEditingController(text: widget.goal?.description ?? '');
+  late final _reward = TextEditingController(text: widget.goal?.reward ?? '');
+  late final _priority = TextEditingController(text: widget.goal?.priority.toString() ?? '1');
   bool privateGoal = false;
   bool privateDescription = false;
   bool privateReward = false;
@@ -54,8 +54,7 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   void _showDatePicker() async {
     await showCalendarDatePicker2Dialog(
       context: context,
-      config:
-          CalendarDatePicker2WithActionButtonsConfig(firstDate: DateTime.now(), lastDate: DateTime((DateTime.now().year + 10))),
+      config: CalendarDatePicker2WithActionButtonsConfig(firstDate: DateTime.now(), lastDate: DateTime((DateTime.now().year + 10))),
       dialogSize: const Size(325, 400),
       value: [DateTime.now()],
     ).then((value) => expirationDate = value?.first);
