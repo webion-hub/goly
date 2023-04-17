@@ -65,9 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           backgroundImage: NetworkImage(users[index].photoUrl),
                           radius: 16,
                         ),
-                        title: Text(
-                          users[index].username,
-                        ),
+                        title: Text(users[index].username),
                       ),
                     );
                   },

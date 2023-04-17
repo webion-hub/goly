@@ -74,11 +74,11 @@ class _ReportScreenState extends State<ReportScreen> {
                   validation: Validations.validateNotEmpty,
                 ),
                 isLoading
-                    ? buffering()
-                    : MainButton(
-                        text: 'Send',
-                        onPressed: sendMessage,
-                      ),
+                  ? buffering()
+                  : MainButton(
+                      text: 'Send',
+                      onPressed: sendMessage,
+                    ),
               ],
             ),
           )),

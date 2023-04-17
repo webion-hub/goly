@@ -34,10 +34,11 @@ class FeedScreen extends StatelessWidget {
                   }
                   if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
                     return Center(
-                        child: Text(
-                      'Your feed is empty. Start follow your friends',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ));
+                      child: Text(
+                        'Your feed is empty. Start follow your friends',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    );
                   }
                   return ListView.builder(
                     padding: Constants.pagePadding,

@@ -84,13 +84,20 @@ class UserProfile extends StatelessWidget {
         const SizedBox(height: 10),
         const CustomDivider(),
         const SizedBox(height: 10),
-        const Text(
-          'Public categories',
-          style: TextStyle(fontSize: 16.0),
-        ),
+        user.settings.privateAccount 
+          ? const ListTile(
+            title: Text('This user is private'),
+            leading: Icon(Icons.lock),
+          ) 
+          : const Text(
+              'Public categories',
+              style: TextStyle(fontSize: 16.0),
+            ),
       ],
     );
-    return StreamBuilder(
+    return user.settings.privateAccount 
+      ?  publicProfileInformations
+      : StreamBuilder(
         stream: CategoryService.getOrderedCategories(uid: user.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -110,15 +117,15 @@ class UserProfile extends StatelessWidget {
               child: Text('This user has no public categories'),
             );
           }
-          return DefaultTabController(
+          return  DefaultTabController(
             length: categories.length,
             child: NestedScrollView(
               physics: const NeverScrollableScrollPhysics(),
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
-                    collapsedHeight: 280,
-                    expandedHeight: 280,
+                    collapsedHeight: 300,
+                    expandedHeight: 300,
                     flexibleSpace: Padding(
                       padding: Constants.pagePadding,
                       child: publicProfileInformations,
