@@ -25,8 +25,8 @@ class HandleStepScreen extends StatefulWidget {
 
 class _HandleStepScreenState extends State<HandleStepScreen> {
   final formKey = GlobalKey<FormState>();
-  late TextEditingController stepName = TextEditingController(text: widget.step?.name ?? '');
-  late TextEditingController reward = TextEditingController(text: widget.step?.reward ?? '');
+  late final stepName = TextEditingController(text: widget.step?.name ?? '');
+  late final reward = TextEditingController(text: widget.step?.reward ?? '');
   late DateTime? expirationDate = widget.step?.expirationDate;
   bool privateStep = false;
   bool privateReward = false;

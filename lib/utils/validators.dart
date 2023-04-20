@@ -10,7 +10,7 @@ class Validations {
 
   static String? validateEmail(String? value, [bool isRequried = true]) {
     if (value!.isEmpty && isRequried) return 'Email is required.';
-    final RegExp nameExp = RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
+    final nameExp = RegExp(r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$");
     if (!nameExp.hasMatch(value) && isRequried) {
       return 'Invalid email address';
     }

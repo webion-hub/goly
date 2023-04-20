@@ -45,8 +45,9 @@ class TextFieldInput extends StatelessWidget {
           keyboardType: textInputType,
           obscureText: isPass,
           inputFormatters: const [],
-          onFieldSubmitted: (_) =>
-              onFieldSubmitted != null ? onFieldSubmitted!() : FocusScope.of(context).requestFocus(nextFocus),
+          onFieldSubmitted: (_) => onFieldSubmitted != null 
+            ? onFieldSubmitted!() 
+            : FocusScope.of(context).requestFocus(nextFocus),
           validator: (value) {
             if (validation == null) {
               return null;

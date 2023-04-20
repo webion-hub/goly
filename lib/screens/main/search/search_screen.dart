@@ -15,7 +15,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final TextEditingController searchController = TextEditingController();
+  final searchController = TextEditingController();
   bool isShowUsers = false;
   void goToProfile(String id) {
     final router = GoRouter.of(context);

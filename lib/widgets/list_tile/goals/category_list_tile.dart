@@ -44,8 +44,7 @@ class CategoryCard extends StatelessWidget {
             subtitle: category.description != null &&
                     category.description!.isNotEmpty
                 ? Text(
-                    category.description!
-                        .substring(0, min(category.description!.length, 40)),
+                    category.description!.substring(0, min(category.description!.length, 40)),
                   )
                 : null,
             trailing: Icon(

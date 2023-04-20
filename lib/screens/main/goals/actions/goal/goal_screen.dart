@@ -73,7 +73,7 @@ class GoalScreen extends StatelessWidget {
               child: Column(
                 children: [
                   g.description != null && g.description!.isNotEmpty ? DescriptionCard(text: g.description!) : const SizedBox(),
-                  g.steps!.isEmpty
+                  g.steps == null || g.steps!.isEmpty
                     ? MarkAsCompletedListTile(
                         categoryId: categoryId,
                         goal: g,

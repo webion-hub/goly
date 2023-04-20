@@ -8,8 +8,7 @@ class GoalsPerLifeAreaPieChart extends StatefulWidget {
   const GoalsPerLifeAreaPieChart({super.key});
 
   @override
-  State<GoalsPerLifeAreaPieChart> createState() =>
-      _GoalsPerLifeAreaPieChartState();
+  State<GoalsPerLifeAreaPieChart> createState() => _GoalsPerLifeAreaPieChartState();
 }
 
 class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
@@ -31,8 +30,7 @@ class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
           if (snapshot.data == null) {
             return buffering();
           }
-          List<GoalsPerLifeAreaModel> data =
-              (snapshot.data as List<GoalsPerLifeAreaModel>);
+          List<GoalsPerLifeAreaModel> data = (snapshot.data as List<GoalsPerLifeAreaModel>);
           return SafeArea(
             child: SizedBox(
               height: MediaQuery.of(context).size.width + 100,
@@ -49,10 +47,8 @@ class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
                 series: <CircularSeries>[
                   PieSeries<GoalsPerLifeAreaModel, String>(
                     dataSource: data,
-                    xValueMapper: (GoalsPerLifeAreaModel data, _) =>
-                        data.category,
-                    yValueMapper: (GoalsPerLifeAreaModel data, _) =>
-                        data.goalsNumber,
+                    xValueMapper: (GoalsPerLifeAreaModel data, _) => data.category,
+                    yValueMapper: (GoalsPerLifeAreaModel data, _) => data.goalsNumber,
                     dataLabelSettings: const DataLabelSettings(
                       isVisible: true,
                     ),

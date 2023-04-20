@@ -74,7 +74,7 @@ class GoalService extends Service {
       .collection('goals')
       .doc(goalId.toString())
       .get()
-      .then((value) => GoalModel.fromJson(value.data()!).steps!.length);
+      .then((value) => GoalModel.fromJson(value.data()!).steps?.length ?? 0);
   }
 
   static Future toggleGoalCompleted({required String categoryId, required GoalModel goal, required bool value}) async {
@@ -87,7 +87,7 @@ class GoalService extends Service {
       return goal.completed ? 1 : 0;
     }
 
-    final totalSteps = goal.steps!.length;
+    final totalSteps = goal.steps?.length ?? 0;
     final stepCount = goal.steps!.where((e) => e.completed).count();
 
     return stepCount / totalSteps;

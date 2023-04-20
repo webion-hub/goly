@@ -63,7 +63,7 @@ class GoalCardSteps extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          ...goal.steps!.map((e) => NoEditStepListTile(step: e)).toList(),
+          ...goal.steps?.map((e) => NoEditStepListTile(step: e)).toList() ?? [],
         ]);
   }
 }

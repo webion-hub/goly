@@ -18,7 +18,7 @@ class CommentsScreen extends StatefulWidget {
 }
 
 class _CommentsScreenState extends State<CommentsScreen> {
-  final TextEditingController commentEditingController = TextEditingController();
+  final commentEditingController = TextEditingController();
   void postComment(String uid, String name, String profilePic) async {
     try {
       String res = await CommentService.postComment(
@@ -61,12 +61,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
       body: StreamBuilder(
         stream: CommentService.getCommentsStreamFromPost(postId: widget.postId),
         builder: (context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting || snapshot.data == null) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-
+          
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (ctx, index) => CommentCard(

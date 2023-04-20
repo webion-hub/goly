@@ -31,8 +31,7 @@ class _LifeAreaProgressState extends State<LifeAreaProgress> {
           if (snapshot.data == null) {
             return buffering();
           }
-          List<LifeAreaProgressModel> data =
-              (snapshot.data as List<LifeAreaProgressModel>);
+          List<LifeAreaProgressModel> data = (snapshot.data as List<LifeAreaProgressModel>);
           return SafeArea(
             child: SizedBox(
               height: MediaQuery.of(context).size.width + 100,
