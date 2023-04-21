@@ -1,6 +1,7 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:goly/providers/user_provider.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/utils/validators.dart';
 import 'package:goly/widgets/form/buttons/main_button.dart';
@@ -11,6 +12,7 @@ import 'package:goly/models/goal.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/goal_service.dart';
 import 'package:goly/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class HandleGoalScreen extends StatefulWidget {
   static const String routeNameAdd = "/add-goal";
@@ -29,9 +31,10 @@ class _HandleGoalScreenState extends State<HandleGoalScreen> {
   late final _description = TextEditingController(text: widget.goal?.description ?? '');
   late final _reward = TextEditingController(text: widget.goal?.reward ?? '');
   late final _priority = TextEditingController(text: widget.goal?.priority.toString() ?? '1');
-  bool privateGoal = false;
-  bool privateDescription = false;
-  bool privateReward = false;
+  late final UserProvider userProvider = Provider.of<UserProvider>(context);
+  late bool privateGoal = widget.goal?.privateGoal ?? userProvider.getUser.settings.privateGoalsByDefault;
+  late bool privateDescription = widget.goal?.privateDescription ?? userProvider.getUser.settings.privateDescriptionsByDefault;
+  late bool privateReward = widget.goal?.privateReward ?? userProvider.getUser.settings.privateRewardByDefault;
   late DateTime? expirationDate = widget.goal?.expirationDate;
   void privateGoalChange(bool value) {
     setState(() {
