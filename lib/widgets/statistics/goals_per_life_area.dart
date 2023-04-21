@@ -28,7 +28,7 @@ class _GoalsPerLifeAreaPieChartState extends State<GoalsPerLifeAreaPieChart> {
         future: StatisticService.getGoalsPerLifeArea(),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            return buffering();
+            return const SizedBox();
           }
           List<GoalsPerLifeAreaModel> data = (snapshot.data as List<GoalsPerLifeAreaModel>);
           return SafeArea(
