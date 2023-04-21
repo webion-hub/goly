@@ -79,7 +79,7 @@ class UserProfile extends StatelessWidget {
         const SizedBox(height: 10),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(user.bio),
+          child: Text(user.bio, maxLines: 4, ),
         ),
         const SizedBox(height: 10),
         const CustomDivider(),

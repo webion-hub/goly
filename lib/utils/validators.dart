@@ -25,8 +25,8 @@ class Validations {
   }
 
   static String? validateBio(String? value) {
-    if (value!.length > 100) {
-      return 'The bio musst be less than 100 characters';
+    if (value!.length > 100 ||  '\n'.allMatches(value).length> 2) {
+      return 'The bio musst be less than 100 characters and less than 4 lines.';
     }
     return null;
   }
