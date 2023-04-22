@@ -37,7 +37,9 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               isLogin ? LogIn(onClickedSignup: toggle) : SignUp(onClickedSignup: toggle),
               const SizedBox(height: 20),
-              const GoogleSignInButton(),
+              const Text('Or'),
+              const SizedBox(height: 20),
+              GoogleSignInButton(logIn: isLogin),
 
               RichTextWithAction(
                 text: isLogin ? 'Don\'t have an account?' : 'Already have an account?', 
