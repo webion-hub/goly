@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:goly/providers/connectivity_provider.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/screens/main/feed/actions/add_post_screen.dart';
 import 'package:goly/screens/main/statistics/statistics_screen.dart';
 import 'package:goly/screens/main/feed/feed_screen.dart';
 import 'package:goly/screens/main/goals/goals_screen.dart';
 import 'package:goly/screens/main/profile/profile_screen.dart';
+import 'package:goly/screens/no_connection_screen.dart';
 import 'package:goly/utils/router/pages/main/add_pages.dart';
 import 'package:goly/utils/router/pages/main/friends_pages.dart';
 import 'package:goly/utils/router/pages/main/goal_pages.dart';
@@ -101,9 +103,18 @@ class _PageShellState extends State<PageShell> {
         ),
       ),
     );
-    return Scaffold(
-      body: SafeArea(child: widget.child),
-      bottomNavigationBar: bottomNavigation,
+     return Consumer<ConnectivityProvider>(
+      builder: (context, provider, child) {
+        if (provider.isConnected) {
+          return Scaffold(
+            body: SafeArea(child: widget.child),
+            bottomNavigationBar: bottomNavigation,
+          );
+        } else {
+          return const NoConnectionPage();
+        }
+      },
     );
+    
   }
 }

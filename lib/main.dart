@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:goly/providers/connectivity_provider.dart';
 import 'package:goly/providers/user_provider.dart';
 import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/router/router.dart';
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ThemeProvider(initialDarkMode: false),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ConnectivityProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(
