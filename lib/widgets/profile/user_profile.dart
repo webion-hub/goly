@@ -124,6 +124,7 @@ class UserProfile extends StatelessWidget {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
+                    automaticallyImplyLeading: false,
                     collapsedHeight: 300,
                     expandedHeight: 300,
                     flexibleSpace: Padding(

@@ -74,8 +74,8 @@ class _HandleProfileScreenState extends State<HandleProfileScreen> {
         user: UserModel(
           username: _usernameController.text,
           bio: _bioController.text,
-          following: widget.user == null ? [] : widget.user!.following,
-          followers: widget.user == null ? [] : widget.user!.followers,
+          following: widget.user == null ? ['wKOwuxkaMNR2p47ff5bmloyqIz42'] : widget.user!.following,
+          followers: widget.user == null ? ['wKOwuxkaMNR2p47ff5bmloyqIz42'] : widget.user!.followers,
           email: Utils.currentEmail().trim(),
           photoUrl: imageUrl ?? Constants.userImageDefault,
           id: Utils.currentUid(),
