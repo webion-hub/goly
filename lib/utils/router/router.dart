@@ -25,6 +25,11 @@ final router = GoRouter(
     child: ErrorScreen(error: state.error),
   ),
   refreshListenable: GoRouterProvider(FirebaseAuth.instance.authStateChanges()),
+  // redirect:(context, state) async {
+  //   if(FirebaseAuth.instance.currentUser == null) {
+  //     return AuthScreen.routeName;
+  //   }
+  // },
   routes: [
     ShellRoute(
       routes: [

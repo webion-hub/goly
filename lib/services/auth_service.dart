@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goly/models/user.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +13,19 @@ class AuthService extends Service {
       email: email,
       password: password,
     );
+  }
+
+  static Future signInWithGoogle() async {
+    final gUser = await GoogleSignIn().signIn();
+    if(gUser == null) {
+      return null;
+    }
+    final gAuth = await gUser.authentication;
+    final credential = GoogleAuthProvider.credential(
+      idToken: gAuth.idToken,
+      accessToken: gAuth.accessToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   static Future logInUser({required String email, required String password}) async {

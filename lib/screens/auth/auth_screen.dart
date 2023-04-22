@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goly/widgets/auth/rich_text_with_action.dart';
 import 'package:goly/widgets/auth/signup.dart';
 import 'package:goly/widgets/auth/login.dart';
+import 'package:goly/widgets/form/buttons/google_sign_in_button.dart';
 import 'package:goly/widgets/layout/image_and_title.dart';
 import 'package:goly/utils/constants.dart';
 
@@ -36,6 +37,8 @@ class _AuthScreenState extends State<AuthScreen> {
               ),
               isLogin ? LogIn(onClickedSignup: toggle) : SignUp(onClickedSignup: toggle),
               const SizedBox(height: 20),
+              const GoogleSignInButton(),
+
               RichTextWithAction(
                 text: isLogin ? 'Don\'t have an account?' : 'Already have an account?', 
                 actionText: isLogin ? 'Sign up' : 'Log in', action: toggle,

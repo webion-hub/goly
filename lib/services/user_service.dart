@@ -28,6 +28,15 @@ class UserService extends Service {
   static Stream getUserStream({required String uid}) {
     return FirebaseFirestore.instance.collection('users').doc(uid).snapshots();
   }
+  static Future<bool> isUserSet({required String uid}) async {
+    final usersRef = FirebaseFirestore.instance.collection('users').doc(uid);
+    final doc = await usersRef.get();
+    if (doc.exists) {
+      return true;
+    }
+    return false;
+
+  }
 
   static Future<String> uploadUserImage(File image) async {
     String imageUrl = '';

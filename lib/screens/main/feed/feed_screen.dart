@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:goly/models/post.dart';
 import 'package:goly/models/user.dart';
+import 'package:goly/screens/main/profile/handle_profile_screen.dart';
 import 'package:goly/services/post_service.dart';
 import 'package:goly/services/user_service.dart';
 import 'package:goly/utils/constants.dart';
@@ -15,6 +17,7 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: const FeedAppBar(),
         body: SafeArea(
@@ -24,8 +27,10 @@ class FeedScreen extends StatelessWidget {
               if (userSnapshot.hasData == false) {
                 return buffering();
               }
-
-              UserModel user = UserModel.fromJson(userSnapshot.data?.data() as Map<String, dynamic>);
+              if(userSnapshot.data?.data() == null) {
+                GoRouter.of(context).pushReplacement(HandleProfileScreen.routeNameSetUp);
+              }
+              UserModel? user = UserModel.fromJson(userSnapshot.data?.data() as Map<String, dynamic>);
               return StreamBuilder(
                 stream: PostService.getPostStream(user: user),
                 builder: (context, snapshot) {

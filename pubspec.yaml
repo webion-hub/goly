@@ -67,6 +67,7 @@ dependencies:
   tab_container: ^2.0.0
   calendar_date_picker2: ^0.5.1
   connectivity: ^3.0.6
+  google_sign_in: ^6.1.0
 
 flutter_icons:
   android: true
@@ -108,6 +109,7 @@ flutter:
     - ./assets/images/icon.png
     - ./assets/images/splash.png
     - ./assets/images/welcome.png
+    - ./assets/images/google_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
