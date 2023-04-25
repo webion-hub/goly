@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goly/services/user_service.dart';
+import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/layout/app_bars/profile_app_bar.dart';
 import 'package:goly/widgets/layout/indicators.dart';
@@ -23,7 +24,10 @@ class ProfileScreen extends StatelessWidget {
             return buffering();
           }
           final user = UserModel.fromJson(snapshot.data?.data() as Map<String, dynamic>);
-          return UserProfile(user: user);
+          return Padding(
+            padding: Constants.pagePadding,
+            child: UserProfile(user: user),
+          );
         },
       ),
     );

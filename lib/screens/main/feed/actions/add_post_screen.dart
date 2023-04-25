@@ -156,13 +156,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 )),
               )
             : Center(
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.upload,
-                  ),
-                  onPressed: () => _selectImage(context),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.upload,
                 ),
+                onPressed: () => _selectImage(context),
               ),
+            ),
       ),
     );
 

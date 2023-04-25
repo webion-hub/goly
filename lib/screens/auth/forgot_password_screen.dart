@@ -41,25 +41,33 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Forgot Password')),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: Constants.pagePadding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Insert your email to reset your password',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 30),
-              TextFieldInput(label: 'Email', textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
-              const SizedBox(height: 30),
-              MainButton(
-                onPressed: resetPassword,
-                text: 'Reset password',
-              ),
-            ],
+      body: Padding(
+        padding: Constants.pagePadding,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Insert your email to reset your password',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                  Form(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 30),
+                      TextFieldInput(label: 'Email', textEditingController: _emailController, hintText: 'Email', textInputType: TextInputType.emailAddress),
+                      const SizedBox(height: 30),
+                      MainButton(
+                        onPressed: resetPassword,
+                        text: 'Reset password',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

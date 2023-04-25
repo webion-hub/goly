@@ -42,11 +42,13 @@ bool _isSigningIn = false;
                 await AuthService.signInWithGoogle()
                   .then((value) async {
                     final router = GoRouter.of(context);
-                    final isUserSet = await UserService.isUserSet(uid: FirebaseAuth.instance.currentUser!.uid);
-                    if(isUserSet) {
-                      router.go(FeedScreen.routeName);
-                    } else {
-                      router.go(HandleProfileScreen.routeNameSetUp);
+                    if(FirebaseAuth.instance.currentUser != null) {
+                      final isUserSet = await UserService.isUserSet(uid: FirebaseAuth.instance.currentUser!.uid);
+                      if(isUserSet) {
+                        router.go(FeedScreen.routeName);
+                      } else {
+                        router.go(HandleProfileScreen.routeNameSetUp);
+                      }
                     }
                   });
         
