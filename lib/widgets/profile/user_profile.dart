@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:goly/models/category.dart';
 import 'package:goly/services/category_service.dart';
 import 'package:goly/services/user_service.dart';
-import 'package:goly/utils/constants.dart';
 import 'package:goly/utils/utils.dart';
 import 'package:goly/widgets/form/buttons/follow_button.dart';
 import 'package:goly/widgets/form/buttons/main_outlined_button.dart';
@@ -127,10 +126,7 @@ class UserProfile extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     collapsedHeight: 300,
                     expandedHeight: 300,
-                    flexibleSpace: Padding(
-                      padding: Constants.pagePadding,
-                      child: publicProfileInformations,
-                    ),
+                    flexibleSpace: publicProfileInformations,
                   ),
                   SliverPersistentHeader(
                     floating: true,
